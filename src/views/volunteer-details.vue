@@ -19,9 +19,7 @@
         </section>
       </section>
     </section>
-    <section>
-        
-    </section>
+    <section></section>
     </main>
   </section>
 </template>
