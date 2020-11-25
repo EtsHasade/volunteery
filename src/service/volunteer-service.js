@@ -1,5 +1,5 @@
-
 import httpService from './http-service.js'
+import { utilService } from '../service/utils/util.service.js'
 
 export const volunteerService = {
     query,
@@ -7,11 +7,13 @@ export const volunteerService = {
     remove,
     save,
     getEmptyVolunteer,
-    getSortList
+    getSortList,
+    timeAgo,
+    makeId
 }
 
 function getById(id) {
-    return httpService.get(`volunteer/${id}`)
+    return httpService.get(`eventi/${id}`)
 }
 
 async function getSortList(sortBy) {
@@ -21,12 +23,12 @@ async function getSortList(sortBy) {
 
 // function query(q = '', delay = 0) {
 function query() {
-    return httpService.get('volunteer')
+    return httpService.get('eventi')
 }
 
 function remove(volunteerId) {
     // eventBusService.$emit(SHOW_MSG, { txt: `${volunteerId} Removed Succefully`, type: 'success' });
-    return httpService.delete(`volunteer/${volunteerId}`)
+    return httpService.delete(`eventi/${volunteerId}`)
 }
 
 function save(volunteer) {
@@ -37,19 +39,39 @@ function save(volunteer) {
 function _add(volunteer) {
     volunteer.createdAt = Date.now()
         // eventBusService.$emit(SHOW_MSG, { txt: `${volunteer.name} Added Succefully`, type: 'success' });
-    return httpService.post(`volunteer`, volunteer)
+    return httpService.post(`eventi`, volunteer)
 }
 
 function _update(volunteer) {
     volunteer.updateAt = Date.now()
-    return httpService.put(`volunteer/${volunteer._id}`, volunteer)
+    return httpService.put(`eventi/${volunteer._id}`, volunteer)
 }
 
 function getEmptyVolunteer() {
     return {
-        name: '',
-        price: null,
-        type: '',
-        inStock: true,
+        title: '',
+        desc: '',
+        startAt: null,
+        endAt: null,
+        location: {
+            lat: null,
+            lng: null,
+            country: '',
+            address: '',
+        },
+        imgUrls: [],
+        capacity: null,
+        tags: [],
+        neededs: [],
+        members: [],
+        reviews: []
     }
+}
+
+function timeAgo(time) {
+    return utilService.timeAgo(time)
+}
+
+function makeId(length = 5) {
+    return utilService.makeId(length)
 }

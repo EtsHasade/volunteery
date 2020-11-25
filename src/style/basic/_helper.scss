@@ -6,3 +6,37 @@ ul.clean-list {
         list-style-type: none;
     }
 }
+
+.flex {
+    display: flex;
+}
+
+.column {
+    flex-direction: column;
+}
+
+.center {
+    align-items: center;
+    justify-content: center;
+}
+
+.text-center {
+    text-align: center;
+}
+
+.wrap {
+    flex-wrap: wrap;
+}
+
+.mrg5 {
+    margin: 5px
+}
+
+.mini-img {
+    border-radius: 50%;
+    width: 100px;
+}
+
+.squre-img {
+    width: 100px;
+}

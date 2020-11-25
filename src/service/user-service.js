@@ -1,6 +1,6 @@
 import httpService from './http-service.js'
 
-export default {
+export const userService = {
     login,
     logout,
     signup,
@@ -9,12 +9,15 @@ export default {
     remove,
     update
 }
+
 function getUsers() {
     return httpService.get('user')
 }
+
 function getById(userId) {
     return httpService.get(`user/${userId}`)
 }
+
 function remove(userId) {
     return httpService.delete(`user/${userId}`)
 }
