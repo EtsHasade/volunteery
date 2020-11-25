@@ -1,5 +1,5 @@
-import { eventBusService, SHOW_MSG } from '../services/eventBus.service.js'
-import HttpService from './HttpService'
+
+import httpService from './http-service.js'
 
 export const volunteerService = {
     query,
@@ -11,7 +11,7 @@ export const volunteerService = {
 }
 
 function getById(id) {
-    return HttpService.get(`volunteer/${id}`)
+    return httpService.get(`volunteer/${id}`)
 }
 
 async function getSortList(sortBy) {
@@ -19,13 +19,14 @@ async function getSortList(sortBy) {
     return volunteers.sort((a, b) => (a[sortBy] > b[sortBy]) ? 1 : ((b[sortBy] > a[sortBy]) ? -1 : 0));
 }
 
-function query(q = '', delay = 0) {
-    return HttpService.get('volunteer')
+// function query(q = '', delay = 0) {
+function query() {
+    return httpService.get('volunteer')
 }
 
 function remove(volunteerId) {
     // eventBusService.$emit(SHOW_MSG, { txt: `${volunteerId} Removed Succefully`, type: 'success' });
-    return HttpService.delete(`volunteer/${volunteerId}`)
+    return httpService.delete(`volunteer/${volunteerId}`)
 }
 
 function save(volunteer) {
@@ -36,12 +37,12 @@ function save(volunteer) {
 function _add(volunteer) {
     volunteer.createdAt = Date.now()
         // eventBusService.$emit(SHOW_MSG, { txt: `${volunteer.name} Added Succefully`, type: 'success' });
-    return HttpService.post(`volunteer`, volunteer)
+    return httpService.post(`volunteer`, volunteer)
 }
 
 function _update(volunteer) {
     volunteer.updateAt = Date.now()
-    return HttpService.put(`volunteer/${volunteer._id}`, volunteer)
+    return httpService.put(`volunteer/${volunteer._id}`, volunteer)
 }
 
 function getEmptyVolunteer() {
