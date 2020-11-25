@@ -4,6 +4,8 @@ ul.clean-list {
     padding: 0;
     li {
         list-style-type: none;
+        margin: 0;
+        padding: 0;
     }
 }
 
@@ -12,6 +14,12 @@ ul.clean-list {
 }
 
 .column {
+    flex-direction: column;
+}
+
+// for last helper
+.flex-column {
+    display: flex;
     flex-direction: column;
 }
 

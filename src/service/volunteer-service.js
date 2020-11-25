@@ -1,6 +1,7 @@
 import httpService from './http-service.js'
 import { utilService } from '../service/utils/util.service.js'
 
+const VOLUNTEER_COLECTION_KEY = 'eventi';
 export const volunteerService = {
     query,
     getById,
@@ -13,7 +14,7 @@ export const volunteerService = {
 }
 
 function getById(id) {
-    return httpService.get(`eventi/${id}`)
+    return httpService.get(`${VOLUNTEER_COLECTION_KEY}/${id}`)
 }
 
 async function getSortList(sortBy) {
@@ -23,12 +24,12 @@ async function getSortList(sortBy) {
 
 // function query(q = '', delay = 0) {
 function query() {
-    return httpService.get('eventi')
+    return httpService.get(VOLUNTEER_COLECTION_KEY)
 }
 
 function remove(volunteerId) {
     // eventBusService.$emit(SHOW_MSG, { txt: `${volunteerId} Removed Succefully`, type: 'success' });
-    return httpService.delete(`eventi/${volunteerId}`)
+    return httpService.delete(`${VOLUNTEER_COLECTION_KEY}/${volunteerId}`)
 }
 
 function save(volunteer) {
@@ -39,12 +40,12 @@ function save(volunteer) {
 function _add(volunteer) {
     volunteer.createdAt = Date.now()
         // eventBusService.$emit(SHOW_MSG, { txt: `${volunteer.name} Added Succefully`, type: 'success' });
-    return httpService.post(`eventi`, volunteer)
+    return httpService.post(VOLUNTEER_COLECTION_KEY, volunteer)
 }
 
 function _update(volunteer) {
     volunteer.updateAt = Date.now()
-    return httpService.put(`eventi/${volunteer._id}`, volunteer)
+    return httpService.put(`${VOLUNTEER_COLECTION_KEY}/${volunteer._id}`, volunteer)
 }
 
 function getEmptyVolunteer() {

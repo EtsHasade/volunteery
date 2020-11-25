@@ -1,7 +1,7 @@
 <template>
-  <header>
+  <header class="full">
     <div class="logo">
-      <img src="" alt="" class="logo-img" />
+      <img src="" alt="" class="logo-img " />
     </div>
     <nav>
       <router-link to="/">Home</router-link> |
