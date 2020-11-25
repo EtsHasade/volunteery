@@ -1,6 +1,6 @@
 <template>
   <header class="app-header full main-container">
-    <div class="flex">
+    <div class="flex space-between">
     <div class="logo">
       <img src="@/assets/logo.svg" alt="" class="logo-img " />
     </div>
