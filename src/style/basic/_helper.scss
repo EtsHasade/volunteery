@@ -4,6 +4,17 @@ ul.clean-list {
     padding: 0;
     li{
         list-style-type: none;
+        margin: 0;
+        padding: 0;
     }
 
+}
+
+.flex{
+    display: flex;
+}
+
+.flex-column{
+    display: flex;
+    flex-direction: column;
 }
