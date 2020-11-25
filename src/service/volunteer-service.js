@@ -1,5 +1,5 @@
-
 import httpService from './http-service.js'
+import { utilService } from '../service/utils/util.service.js'
 
 const VOLUNTEER_COLECTION_KEY = 'eventi';
 export const volunteerService = {
@@ -8,7 +8,9 @@ export const volunteerService = {
     remove,
     save,
     getEmptyVolunteer,
-    getSortList
+    getSortList,
+    timeAgo,
+    makeId
 }
 
 function getById(id) {
@@ -48,9 +50,29 @@ function _update(volunteer) {
 
 function getEmptyVolunteer() {
     return {
-        name: '',
-        price: null,
-        type: '',
-        inStock: true,
+        title: '',
+        desc: '',
+        startAt: null,
+        endAt: null,
+        location: {
+            lat: null,
+            lng: null,
+            country: '',
+            address: '',
+        },
+        imgUrls: [],
+        capacity: null,
+        tags: [],
+        neededs: [],
+        members: [],
+        reviews: []
     }
+}
+
+function timeAgo(time) {
+    return utilService.timeAgo(time)
+}
+
+function makeId(length = 5) {
+    return utilService.makeId(length)
 }
