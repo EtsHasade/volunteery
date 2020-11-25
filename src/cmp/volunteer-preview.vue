@@ -7,7 +7,7 @@
         <img class="org-logo" :src="eventi.byOrg.imgUrl" alt="" />
         <h4>{{ eventi.byOrg.name }}</h4>
       </div>
-      <h6>🟢🟢🟢⚪⚪</h6>
+      <rate-stars></rate-stars>
     </div>
     <div class="eventi-label">
       <h3>{{ eventi.title }}</h3>
@@ -23,11 +23,16 @@
 </template>
 
 <script>
+import rateStars from './element-ui/rate-stars'
+
 export default {
   name: "volunteerPreview",
   props: {
     eventi: Object,
   },
+  components:{
+      rateStars
+  }
 };
 </script>
 
