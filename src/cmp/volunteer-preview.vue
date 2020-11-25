@@ -4,7 +4,8 @@
     <img src="@/assets/img/650085_47717403.jpg" alt="" />
     <div class="org-details">
       <div class="flex">
-        <img class="org-logo" :src="eventi.byOrg.imgUrl" alt="" />
+        <avatar :username="eventi.byOrg.name"></avatar>
+        <!-- <img class="org-logo" :src="eventi.byOrg.imgUrl" alt="" /> -->
         <h4>{{ eventi.byOrg.name }}</h4>
       </div>
       <rate-stars></rate-stars>
@@ -23,7 +24,8 @@
 </template>
 
 <script>
-import rateStars from './element-ui/rate-stars'
+import avatar from 'vue-avatar';
+import rateStars from './element-ui/rate-stars';
 
 export default {
   name: "volunteerPreview",
@@ -31,7 +33,8 @@ export default {
     eventi: Object,
   },
   components:{
-      rateStars
+      rateStars,
+      avatar
   }
 };
 </script>
