@@ -2,7 +2,6 @@
 <main>
     <volunteer-filter></volunteer-filter>
     <volunteer-list></volunteer-list>
-    <h2>DEV</h2>
 </main>
   
 </template>
