@@ -2,7 +2,7 @@
   <section v-if="volunteer" class="volunteer-details">
     <section class="volunteer-imgs">
       <img
-        class="volunteer-img squre-img"
+        class="volunteer-img"
         v-for="(img, idx) in volunteer.imgUrls"
         :key="idx"
         :src="img"
@@ -12,7 +12,8 @@
       <section class="details flex column">
         <h2>{{ volunteer.title }}</h2>
         <section class="mini-org">
-          <img class="img-org mini-img" :src="volunteer.byOrg.imgUrl" alt="" />
+          <avatar :src="volunteer.byOrg.imgUrl" />
+          <!-- <img class="img-org mini-img" :src="volunteer.byOrg.imgUrl" alt="" /> -->
           <span>By {{ volunteer.byOrg.name }}</span>
         </section>
         <span
@@ -57,7 +58,8 @@
           >
             <span class="review-rate">Rate: {{ review.rate }}</span>
             <section class="content-review">
-              <img class="img-review mini-img" :src="review.author.imgUrl" />
+              <avatar :src="review.author.imgUrl"></avatar>
+              <!-- <img class="img-review mini-img" :src="review.author.imgUrl" /> -->
               <span class="time mrg5">{{ timeToPresent(review.createdAt) }}</span>
               <span class="name-review mrg5">{{ review.author.fullName }}</span>
               <span class="txt-review">{{ review.txt }}</span>
@@ -84,9 +86,9 @@
         <button class="join-btn" @click="addMember">{{ textBtn }}</button>
         <section class="members">
           <span class="flex center">Members</span>
-          <section class="members-imgs flex wrap center">
-            <img
-              class="member-img mini-img"
+          <section class="members-imgs flex wrap">
+            <avatar
+              class="member-img"
               v-for="member in volunteer.members"
               :key="member._id"
               :src="member.imgUrl"
@@ -102,6 +104,8 @@
 <script>
 import { volunteerService } from '../service/volunteer-service.js';
 import { userService } from '../service/user-service.js';
+import avatar from "vue-avatar";
+
 export default {
   name: 'volunteer-details',
   data() {
@@ -172,6 +176,9 @@ export default {
     // if (this.volunteer.endAt) {
     //   this.endDate = `${new Date(this.volunteer.endAt).getDate()}.${new Date(this.volunteer.endAt).getMonth() + 1}.${new Date(this.volunteer.endAt).getFullYear()}`
     // }
+  },
+  components: {
+    avatar
   }
 }
 </script>
