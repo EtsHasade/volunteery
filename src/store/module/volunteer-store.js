@@ -3,7 +3,8 @@ import { volunteerService } from '../../service/volunteer-service.js'
 export const volunteerStore = {
     state: {
         volunteers: [],
-        tags: ['Animal', 'Children', 'Food', 'Needy', 'COVID-19']
+        tags: ['Animal', 'Children', 'Food', 'Needy', 'COVID-19'],
+        neededs: ['Doctors', 'Field Manager', 'Chef'],
     },
     getters: {
         volunteersForDisplay(state) {
@@ -11,7 +12,10 @@ export const volunteerStore = {
         },
         tags(state) {
             return state.tags
-        }
+        },
+        neededs(state) {
+            return state.neededs
+        },
     },
     mutations: {
         setVolunteers(state, { volunteers }) {

@@ -54,6 +54,7 @@ function getEmptyVolunteer() {
         desc: '',
         startAt: null,
         endAt: null,
+        rate: 0,
         location: {
             lat: null,
             lng: null,
@@ -65,7 +66,13 @@ function getEmptyVolunteer() {
         tags: [],
         neededs: [],
         members: [],
-        reviews: []
+        reviews: [],
+        byOrg: {
+            _id: "5d6f6552j3kk8,2m2jh",
+            name: "Save worlds",
+            rate: 4,
+            imgUrl: "https://images.unsplash.com/photo-1606335221768-18e3dac0e879?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1050&q=80"
+        },
     }
 }
 
