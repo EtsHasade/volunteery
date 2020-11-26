@@ -20,7 +20,8 @@
           >{{ volunteer.location.address }},
           {{ volunteer.location.country }}</span
         >
-        <span v-if="volunteer.reviews.length">{{ volunteer.rate }} Stars</span>
+        <rate-stars v-if="volunteer.reviews.length" v-model="volunteer.rate" />
+        <!-- <span v-if="volunteer.reviews.length">{{ volunteer.rate }} Stars</span> -->
         <span v-else>{{ msg }}</span>
         <span>Tags:</span>
         <section class="tags flex wrap">
@@ -70,14 +71,15 @@
           @submit.prevent="addReview"
           class="add-review flex center text-center"
         >
-          <input
+          <!-- <input
             type="number"
             v-model="reviewToEdit.rate"
             name="review-rate"
             placeholder="enter rate"
             max="5"
             min="1"
-          />
+          /> -->
+          <rate-stars-enable v-model="reviewToEdit.rate" />
           <input type="text" v-model="reviewToEdit.txt" name="review" />
           <button>Add review</button>
         </form>
@@ -105,6 +107,8 @@
 import { volunteerService } from '../service/volunteer-service.js';
 import { userService } from '../service/user-service.js';
 import avatar from "vue-avatar";
+import rateStars from '../cmp/element-ui/rate-stars';
+import rateStarsEnable from '../cmp/element-ui/rate-stars-enable';
 
 export default {
   name: 'volunteer-details',
@@ -178,7 +182,9 @@ export default {
     // }
   },
   components: {
-    avatar
+    avatar,
+    rateStars,
+    rateStarsEnable
   }
 }
 </script>

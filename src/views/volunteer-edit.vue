@@ -1,88 +1,47 @@
 <template>
-  <section class="volunteer-edit">
-    <h3>volu edit</h3>
-    <form class="flex column" @submit.prevent="addVolunteer">
-      <input
-        type="text"
+  <section class="volunteer-edit flex column center text-center small-container ">
+    <h2>Create new volunteer</h2>
+    <form class="flex column center" @submit.prevent="addVolunteer">
+      <el-input
         placeholder="Volunteer title"
         v-model="volunteerToEdit.title"
-      />
-      <textarea
-        v-model="volunteerToEdit.desc"
+        clearable
+      >
+      </el-input>
+      <el-input
+        type="textarea"
+        :rows="2"
         placeholder="tell us about your volunteer"
-        name="desc"
-        cols="20"
-        rows="10"
-      ></textarea>
-      <!-- <label>
-          Start date
-          <input type="date" v-model="volunteerToEdit.startAt" range="5" placeholder="Start at">
-        </label> -->
+        v-model="volunteerToEdit.desc"
+      >
+      </el-input>
       <section class="dates">
         <div class="block">
-          <span class="demonstration">Default</span>
           <el-date-picker
-          lang="eng"
+            lang="eng"
             v-model="dates"
             type="datetimerange"
-            range-separator="To"
             start-placeholder="Start date"
             end-placeholder="End date"
           >
           </el-date-picker>
         </div>
       </section>
-      <!-- <label>
-          *End date
-          <input type="date" v-model="volunteerToEdit.endAt" placeholder="End at">
-        </label> -->
-      <input
-        type="text"
+      <el-input
+        placeholder="Volunteer Country"
         v-model="volunteerToEdit.location.country"
-        placeholder="Country"
+        clearable
       />
-      <input
-        type="text"
+      <el-input
+        placeholder="Volunteer Address"
         v-model="volunteerToEdit.location.address"
-        placeholder="Specific address"
+        clearable
       />
-      <input
-        type="number"
-        v-model="volunteerToEdit.capacity"
-        placeholder="Limit of members"
-      />
-      <label>
-        Select tag
-        <select v-model="volunteerToEdit.tags[0]">
-          <option value="Fun">Fun</option>
-          <option value="Animal">Animal</option>
-          <option value="Food">Food</option>
-        </select>
-      </label>
-        <!-- <el-select
-          v-model="volunteerToEdit.tags"
-          multiple
-          collapse-tags
-          style="margin-left: 20px;"
-          placeholder="Select">
-          <el-option
-            v-for="item in options"
-            :key="item.value"
-            :label="item.label"
-            :value="item.value">
-          </el-option>
-        </el-select> -->
-
+      Limit of members
+      <el-input-number v-model="volunteerToEdit.capacity" :min="1" ></el-input-number>
       <select-multi v-model="volunteerToEdit.tags" :items="tags"></select-multi>
-      <label>
-        Select needed roles
-        <select v-model="volunteerToEdit.neededs[0]">
-          <option value="Doctor">Fun</option>
-          <option value="Animal">Animal</option>
-          <option value="Food">Food</option>
-        </select>
-      </label>
-      <button>add</button>
+      <select-multi v-model="volunteerToEdit.tags" :items="neededs"></select-multi>
+      <el-button @click="addVolunteer">add</el-button>
     </form>
   </section>
 </template>
@@ -125,32 +84,19 @@ export default {
       value1: [new Date(2000, 10, 10, 10, 10), new Date(2000, 10, 11, 10, 10)],
       value2: '',
       dates: null,
-      tags: this.$store.getters.tags
-        //       options: [{
-        //   value: 'Option1',
-        //   label: 'Option1'
-        // }, {
-        //   value: 'Option2',
-        //   label: 'Option2'
-        // }, {
-        //   value: 'Option3',
-        //   label: 'Option3'
-        // }, {
-        //   value: 'Option4',
-        //   label: 'Option4'
-        // }, {
-        //   value: 'Option5',
-        //   label: 'Option5'
-        // }],
-
+      tags: this.$store.getters.tags,
+      neededs: this.$store.getters.neededs
     }
   },
   methods: {
     addVolunteer() {
+      console.log('hi');
+      if(!this.volunteerToEdit.imgUrls.length) this.volunteerToEdit.imgUrls.push('https://maestroselectronics.com/wp-content/uploads/2017/12/No_Image_Available.jpg','https://maestroselectronics.com/wp-content/uploads/2017/12/No_Image_Available.jpg','https://maestroselectronics.com/wp-content/uploads/2017/12/No_Image_Available.jpg')
       this.volunteerToEdit.startAt = this.dates[0].getTime
       this.volunteerToEdit.endAt = this.dates[1].getTime
-      volunteerService.add(this.volunteerToEdit)
+      volunteerService.save(this.volunteerToEdit)
       this.volunteerToEdit = volunteerService.getEmptyVolunteer()
+      this.$router.push('/')
     }
   },
   created() {

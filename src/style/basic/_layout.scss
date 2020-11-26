@@ -28,3 +28,11 @@
     grid-template-columns: repeat(auto-fit, minmax(120px, 190px));
     gap: 1rem;
 }
+
+.small-container {
+    display: grid;
+    grid-template-columns: minmax(2rem, 1fr) minmax(auto, 500px) minmax(2rem, 1fr);
+    >* {
+        grid-column: 2;
+    }
+}
