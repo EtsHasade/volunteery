@@ -4,14 +4,13 @@
       v-model="value"  
       show-score
       text-color="#ff9900"
-      score-template="{value} points"
+      score-template="{value} stars"
     >
     </el-rate>
   </div>
 </template>
 
 <script>
-// disabled
 
 export default {
   props:{

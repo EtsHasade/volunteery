@@ -5,7 +5,7 @@
       disabled
       show-score
       text-color="#ff9900"
-      score-template="{value} points"
+      score-template="{value} stars"
     >
     </el-rate>
   </div>

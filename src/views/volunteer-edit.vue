@@ -30,10 +30,7 @@
         </div>
       </section>
       <el-input
-        placeholder="Volunteer Country"
-        v-model="volunteerToEdit.location.country"
-        clearable
-      />
+placeholder="Volunteer Country" v-model="volunteerToEdit.location.country" clearable/>
       <el-input
         placeholder="Volunteer Address"
         v-model="volunteerToEdit.location.address"
