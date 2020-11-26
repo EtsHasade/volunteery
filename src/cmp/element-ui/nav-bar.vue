@@ -6,9 +6,7 @@
   mode="horizontal"
   :router="true"
   @select="handleSelect"
-  background-color= $clr2
-  text-color= $clr7
-  active-text-color= $clr6>
+  >
   <el-menu-item index="/">Home</el-menu-item>
   <el-menu-item index="/volunteer-app">Volunteerys</el-menu-item>
   <el-menu-item index="/volunteer-edit">Create</el-menu-item>
