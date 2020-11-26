@@ -12,7 +12,7 @@
       <section class="details flex column">
         <h2>{{ volunteer.title }}</h2>
         <section class="mini-org">
-          <avatar  :src="volunteer.byOrg.imgUrl" />
+          <avatar :src="volunteer.byOrg.imgUrl" />
           <!-- <img class="img-org mini-img" :src="volunteer.byOrg.imgUrl" alt="" /> -->
           <span>By {{ volunteer.byOrg.name }}</span>
         </section>
@@ -35,7 +35,9 @@
         <span>Limit: {{ volunteer.capacity }} members</span>
         <section class="dates flex column">
           <span>date start: {{ timeToPresent(volunteer.startAt) }}</span>
-          <span v-if="volunteer.endAt">date end: {{ timeToPresent(volunteer.endAt) }}</span>
+          <span v-if="volunteer.endAt"
+            >date end: {{ timeToPresent(volunteer.endAt) }}</span
+          >
         </section>
         <section class="neededs">
           <span>We need for this volunteer:</span>
@@ -50,47 +52,43 @@
           </ul>
         </section>
         <span>{{ volunteer.desc }}</span>
-        <span class="text-center">Reviews</span>
+        <span class="text-center mrg5">Reviews</span>
+        <form
+          @submit.prevent="addReview"
+          class="add-review flex center text-center"
+        >
+          <el-input type="text" v-model="reviewToEdit.txt" name="review" />
+          <el-button>Add review</el-button>
+          <rate-stars-enable v-model="reviewToEdit.rate" />
+        </form>
+
         <section class="reviews flex column">
           <section
-            class="review flex"
+            class="review flex column mrg5"
             v-for="review in volunteer.reviews"
             :key="review._id"
           >
-            <span class="review-rate">Rate: {{ review.rate }}</span>
-            <section class="content-review">
+            <section class="details-review flex">
               <avatar :src="review.author.imgUrl"></avatar>
-              <!-- <img class="img-review mini-img" :src="review.author.imgUrl" /> -->
-              <span class="time mrg5">{{ timeToPresent(review.createdAt) }}</span>
+              <rate-stars v-model="review.rate" class="review-rate" />
+            </section>
+            <section class="content-review flex center text-center">
+              <span class="time mrg5">{{
+                timeToPresent(review.createdAt)
+              }}</span>
               <span class="name-review mrg5">{{ review.author.fullName }}</span>
               <span class="txt-review">{{ review.txt }}</span>
             </section>
           </section>
         </section>
-        <form
-          @submit.prevent="addReview"
-          class="add-review flex center text-center"
-        >
-          <!-- <input
-            type="number"
-            v-model="reviewToEdit.rate"
-            name="review-rate"
-            placeholder="enter rate"
-            max="5"
-            min="1"
-          /> -->
-          <rate-stars-enable v-model="reviewToEdit.rate" />
-          <input type="text" v-model="reviewToEdit.txt" name="review" />
-          <button>Add review</button>
-        </form>
       </section>
-      <section class="status-details">
-        <button class="join-btn" @click="addMember">{{ textBtn }}</button>
+      <section class="status-details text-center">
+        <el-button class="join-btn" @click="addMember">{{ textBtn }}</el-button>
         <section class="members">
           <span class="flex center">Members</span>
           <section class="members-imgs flex wrap">
             <avatar
-              class="member-img"
+              class="member-img mrg5"
               v-for="member in volunteer.members"
               :key="member._id"
               :src="member.imgUrl"

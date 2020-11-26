@@ -26,7 +26,7 @@
       <div class="eventi-label">
         <h3>{{ eventi.title }}</h3>
         <div class="eventi-date flex">
-          <h6>{{ new Date(eventi.startsAt).toLocaleDateString() }} |</h6>
+          <h6>{{ new Date(eventi.startAt).toLocaleDateString() }} |</h6>
           <h6>{{ eventi.location.country }}</h6>
         </div>
       </div>
