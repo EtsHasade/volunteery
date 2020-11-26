@@ -98,6 +98,7 @@
             />
           </section>
         </section>
+      <router-link type="success" class="el-button el-button--success" :to="'/volunteer-edit/'+volunteer._id">Edit</router-link>
       </section>
     </main>
   </section>

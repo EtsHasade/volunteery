@@ -31,7 +31,7 @@ const routes = [{
         component: orgCreate
     },
     {
-        path: '/volunteer-edit',
+        path: '/volunteer-edit/:_id?',
         name: 'volunteerEdit',
         component: volunteerEdit
     },

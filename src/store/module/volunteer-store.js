@@ -60,7 +60,11 @@ export const volunteerStore = {
         async setSortVolunteers({ commit }, { sortBy }) {
             console.log(sortBy);
             const volunteers = await volunteerService.getSortList(sortBy)
-            commit({ type: 'setVolunteers', volunteers })
+            commit({ type:'setVolunteers', volunteers })
+        },
+        async getVolunteerById(context,{_id}) {
+            console.log("🚀 ~ file: volunteer-store.js ~ line 66 ~ getVolunteerById ~ _id", _id)
+            return await volunteerService.getById(_id)
         }
     }
 }

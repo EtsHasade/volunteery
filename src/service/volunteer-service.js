@@ -14,6 +14,7 @@ export const volunteerService = {
 }
 
 function getById(id) {
+    console.log("🚀 ~ file: volunteer-service.js ~ line 17 ~ getById ~ id", id)
     return httpService.get(`${VOLUNTEER_COLECTION_KEY}/${id}`)
 }
 
