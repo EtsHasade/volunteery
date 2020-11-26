@@ -4,6 +4,7 @@
     <div class="logo">
       <img src="@/assets/logo.svg" alt="" class="logo-img " />
     </div>
+<<<<<<< HEAD
     <!-- <nav>
       <router-link to="/">Home</router-link> |
       <router-link to="/volunteer-app">Volunteers</router-link> |
@@ -13,6 +14,9 @@
     <nav>
       <navbar></navbar>
     </nav>
+=======
+    <navbar></navbar>
+>>>>>>> d7176de641010e78bad63a852db947874d6b632c
     </div>
   </header>
 </template>
