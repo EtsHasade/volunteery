@@ -8,7 +8,7 @@
         <!-- <img class="org-logo" :src="eventi.byOrg.imgUrl" alt="" /> -->
         <h4>{{ eventi.byOrg.name }}</h4>
       </div>
-      <rate-stars v-model="rate" ></rate-stars>
+      <rate-stars v-model="orgRate" ></rate-stars>
     </div>
     <div class="eventi-label">
       <h3>{{ eventi.title }}</h3>
@@ -34,19 +34,21 @@ export default {
   },
   data() {
     return {
-      rate: 2,
+      orgRate: 2,
     };
   },
   created() {
     this.orgRate = JSON.parse(JSON.stringify(this.eventi.byOrg.rate));
+    console.log('init org rate', this.orgRate);
+    
   },
   components: {
     rateStars,
     avatar,
   },
   watch:{
-    rate: function(newRate){
-      console.log('rate:' ,newRate);
+    orgRate: function(newRate){
+      console.log('orgRate:' ,newRate);
       
     }
   }
