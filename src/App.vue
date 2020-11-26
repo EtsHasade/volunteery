@@ -1,5 +1,5 @@
 <template>
-  <div id="app">
+  <div id="app" class="main-container">
     <app-header></app-header>
     <router-view />
     <app-footer></app-footer>
@@ -7,8 +7,10 @@
 </template>
 
 <script>
+import '@/style/main.scss'
 import appHeader from "@/cmp/app-header";
 import appFooter from "@/cmp/app-footer";
+
 
 export default {
   name: "volunteerApp",

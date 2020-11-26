@@ -1,0 +1,18 @@
+.main-container{
+    display: grid;
+    grid-template-columns: 1fr $main-width 1fr;
+
+    >*{
+        grid-column: 2;
+    }
+
+    .full {
+        grid-column: 1/-1;
+    }
+}
+
+.card-list{
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(120px,190px));
+    gap: 1rem;
+}

@@ -1,0 +1,24 @@
+.app-header{
+    background-color: #545c64;
+    border-bottom: solid 1px #e6e6e6;
+
+
+    .logo{
+        width: 220px;
+        display: inline-block;
+        align-items: center;
+        position: relative;
+
+
+        .logo-img{
+            position: absolute;
+            top: 0px;
+        }
+ 
+    }
+
+
+    .el-menu.el-menu--horizontal {
+        border-bottom: none;
+    }
+}
