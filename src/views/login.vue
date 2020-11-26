@@ -4,17 +4,21 @@
         <section class="login">
             <h3>Login</h3>
             <form @submit.prevent="login">
-                <input type="text" name="username" v-model="loginCred.username" placeholder="Username" />
-                <input type="password" name="password" v-model="loginCred.password" placeholder="Password" />
+                <br><input type="text" class="in username" name="username" v-model="loginCred.username" placeholder="Username" /><br>
+                <br><input type="password" class="in password" name="password" v-model="loginCred.password" placeholder="Password" /><br>
                 <button>Login</button>
             </form>
         </section>        
         <section class="signup">
             <h3>Sign-up</h3>
             <form @submit.prevent="signup">
-                <input type="text" name="username" v-model="signupCred.username" placeholder="Username" />
-                <input type="password" name="password" v-model="signupCred.password" placeholder="Password" />
-                <input type="email" name="email" v-model="signupCred.email" placeholder="baba@gmail.com" />
+                <br><input type="text" class="in username" name="username" v-model="signupCred.username" placeholder="Username" /><br>
+                <br><input type="password" class="in password" name="password" v-model="signupCred.password" placeholder="Password" /><br>
+                <br><input type="email" class="in email" name="email" v-model="signupCred.email" placeholder="baba@gmail.com" /><br>
+                <br><input type="tel" class="in phone" name="phone" v-model="signupCred.tel" placeholder="012-345-6789"/><br>
+                <br><select-multi class="in skill"></select-multi><br>
+                <br><select-multi class="in fav"></select-multi><br>
+                <br><gender-selector class="in "></gender-selector><br>
                 <button type="button" @click="signup">Sign</button>
           </form>
         </section>
@@ -23,6 +27,8 @@
 </template>
 
 <script>
+import selectMulti from '@/cmp/element-ui/select-multi';
+import genderSelector from '@/cmp/element-ui/gender-selector';
 
     export default {
         name: 'Login',
@@ -30,8 +36,12 @@
             return {
                 loginCred: {},
                 signupCred: {},
-                 msg: '',
+                msg: '',
             }
+        },
+        components: {
+            selectMulti,
+            genderSelector
         },
         methods: {
             async login() {
