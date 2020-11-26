@@ -1,0 +1,13 @@
+.login {
+    form {
+        & .el-input__inner {
+            color: $clr6;
+            text-align: center;
+            background-color: $clr4;
+            margin-bottom: rem(7px);
+            &::placeholder {
+                color: $clr6;
+            }
+        }
+    }
+}

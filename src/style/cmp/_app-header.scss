@@ -1,18 +1,44 @@
 .app-header {
     background-color: $clr1;
-    border-bottom: solid 1px #e6e6e6;
-    margin-bottom: 10px;
+    border-bottom   : solid 1px #e6e6e6;
+    margin-bottom   : 10px;
+    color           : $clr6;
+
     .logo {
-        width: 220px;
-        display: inline-block;
+        width      : 220px;
+        display    : inline-block;
         align-items: center;
-        position: relative;
+        position   : relative;
+
         .logo-img {
             position: absolute;
-            top: 0px;
+            top     : 0px;
         }
     }
-    .el-menu.el-menu--horizontal {
+    .el-menu--horizontal>.el-menu-item{
         border-bottom: none;
     }
+    .el-menu.el-menu--horizontal {
+        border-bottom   : none;
+        background-color: inherit;
+        color           : $clr6;
+
+        .el-menu-item,
+        &>.el-submenu .el-submenu__title,
+        & * {
+            color: inherit;
+
+            &:hover {
+                background-color: inherit;
+                color           : $clr6;
+            }
+        }
+
+        >*:hover {
+            box-shadow: inset 0 -3px 0 $clr5;
+        }
+    }
+
+
+
 }

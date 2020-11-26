@@ -1,28 +1,34 @@
 <template>
-    <div class="login-page">
+    <section class="login flex column center text-center small-container">
         <h2>{{msg}}</h2>
         <section class="login">
             <h3>Login</h3>
             <form @submit.prevent="login">
-                <br><input type="text" class="in username" name="username" v-model="loginCred.username" placeholder="Username" /><br>
-                <br><input type="password" class="in password" name="password" v-model="loginCred.password" placeholder="Password" /><br>
+                <el-input v-model="loginCred.username" placeholder="Username"  clearable></el-input>
+                <el-input v-model="loginCred.password" placeholder="Password" clearable></el-input>
+                <!-- <br><input type="text" class="in username" name="username" v-model="loginCred.username" placeholder="Username" /><br>
+                <br><input type="password" class="in password" name="password" v-model="loginCred.password" placeholder="Password" /><br> -->
                 <button>Login</button>
             </form>
         </section>        
         <section class="signup">
             <h3>Sign-up</h3>
             <form @submit.prevent="signup">
-                <br><input type="text" class="in username" name="username" v-model="signupCred.username" placeholder="Username" /><br>
-                <br><input type="password" class="in password" name="password" v-model="signupCred.password" placeholder="Password" /><br>
-                <br><input type="email" class="in email" name="email" v-model="signupCred.email" placeholder="baba@gmail.com" /><br>
-                <br><input type="tel" class="in phone" name="phone" v-model="signupCred.tel" placeholder="012-345-6789"/><br>
-                <br><select-multi class="in skill"></select-multi><br>
-                <br><select-multi class="in fav"></select-multi><br>
+                <el-input v-model="signupCred.username" placeholder="Username"  clearable></el-input>
+                <el-input v-model="signupCred.password" placeholder="Password" clearable></el-input>
+                <el-input v-model="signupCred.email" placeholder="baba@gmail.com" clearable></el-input>
+                <el-input v-model="signupCred.tel" placeholder="012-345-6789" clearable></el-input>
+                <!-- <br><input type="text" class="in username" name="username" v-model="signupCred.username" placeholder="Username" /><br>
+                <br><input type="password" class="in password" name="password" v-model="signupCred.password" placeholder="Password" /><br> -->
+                <!-- <br><input type="email" class="in email" name="email" v-model="signupCred.email" placeholder="baba@gmail.com" /><br>
+                <br><input type="tel" class="in phone" name="phone" v-model="signupCred.tel" placeholder="012-345-6789"/><br> -->
+                <br><select-multi v-model="signupCred.skill" :items="neededs"></select-multi><br>
+                <br><select-multi v-model="signupCred.fav" :items="tags"></select-multi><br>
                 <br><gender-selector class="in "></gender-selector><br>
                 <button type="button" @click="signup">Sign</button>
           </form>
         </section>
-    </div>
+    </section>
     
 </template>
 
@@ -30,6 +36,7 @@
 import selectMulti from '@/cmp/element-ui/select-multi';
 import genderSelector from '@/cmp/element-ui/gender-selector';
 
+// import { userService } from '../service/user-service.js';
     export default {
         name: 'Login',
         data() {
@@ -37,11 +44,14 @@ import genderSelector from '@/cmp/element-ui/gender-selector';
                 loginCred: {},
                 signupCred: {},
                 msg: '',
+                tags: this.$store.getters.tags,
+                neededs: this.$store.getters.neededs
             }
         },
         components: {
             selectMulti,
-            genderSelector
+            genderSelector,
+            // userService
         },
         methods: {
             async login() {
