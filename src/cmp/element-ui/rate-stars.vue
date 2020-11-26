@@ -2,6 +2,7 @@
   <div class="rate-stars">
     <el-rate
       v-model="value"  
+      disabled
       show-score
       text-color="#ff9900"
       score-template="{value} points"
@@ -15,7 +16,7 @@
 
 export default {
   props:{
-    value: Number
+    value: Number,
   },
   watch:{
     value: function(newValue){
