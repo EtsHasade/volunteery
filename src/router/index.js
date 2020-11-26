@@ -2,6 +2,7 @@ import Vue from 'vue';
 import VueRouter from 'vue-router';
 import homePage from '../views/home-page';
 import volunteerApp from '../views/volunteer-app';
+import orgApp from '../views/org-app';
 import volunteerEdit from '../views/volunteer-edit';
 import login from '../views/login';
 import volunteerDetails from '../views/volunteer-details'
@@ -17,6 +18,11 @@ const routes = [{
         path: '/volunteer-app',
         name: 'volunteerApp',
         component: volunteerApp
+    },
+    {
+        path: '/org-app',
+        name: 'orgApp',
+        component: orgApp
     },
     {
         path: '/volunteer-edit',
