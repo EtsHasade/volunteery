@@ -3,7 +3,7 @@ import VueRouter from 'vue-router';
 import homePage from '../views/home-page';
 import volunteerApp from '../views/volunteer-app';
 import orgApp from '../views/org-app';
-import orgCreate from '../views/org-create';
+import orgEdit from '../views/org-edit';
 import volunteerEdit from '../views/volunteer-edit';
 import login from '../views/login';
 import volunteerDetails from '../views/volunteer-details'
@@ -26,9 +26,9 @@ const routes = [{
         component: orgApp
     },
     {
-        path: '/org-create',
-        name: 'orgCreate',
-        component: orgCreate
+        path: '/org-edit',
+        name: 'orgEdit',
+        component: orgEdit
     },
     {
         path: '/volunteer-edit/:_id?',
