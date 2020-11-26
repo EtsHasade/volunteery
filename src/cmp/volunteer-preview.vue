@@ -1,14 +1,22 @@
 
 <template>
   <li class="volunteer-preview card-preview flex-column">
-    <img :src="eventi.imgUrls[0]" alt="" />
+    <div class="img-squer-container">
+      <img :src="eventi.imgUrls[0]" alt="" />
+    </div>
+    <div class="preview-details">
+
     <div class="org-details">
       <div class="flex">
-        <avatar :username="eventi.byOrg.name" :src="eventi.byOrg.imgUrl"></avatar>
+        <avatar
+          style="{background-position: center; background-size: cover;}"
+          :username="eventi.byOrg.name"
+          :src="eventi.byOrg.imgUrl"
+        ></avatar>
         <!-- <img class="org-logo" :src="eventi.byOrg.imgUrl" alt="" /> -->
         <h4>{{ eventi.byOrg.name }}</h4>
       </div>
-      <rate-stars v-model="orgRate" :disabled="true" ></rate-stars>
+      <rate-stars v-model="orgRate" :disabled="true"></rate-stars>
     </div>
     <div class="eventi-label">
       <h3>{{ eventi.title }}</h3>
@@ -19,6 +27,7 @@
     </div>
     <div class="eventi-floor">
       <h4>{{ eventi.members.length }}/{{ eventi.capacity }} 👨‍👨‍👦</h4>
+    </div>
     </div>
   </li>
 </template>
@@ -39,19 +48,17 @@ export default {
   },
   created() {
     this.orgRate = JSON.parse(JSON.stringify(this.eventi.byOrg.rate));
-    console.log('init org rate', this.orgRate);
-    
+    console.log("init org rate", this.orgRate);
   },
   components: {
     rateStars,
     avatar,
   },
-  watch:{
-    orgRate: function(newRate){
-      console.log('orgRate:' ,newRate);
-      
-    }
-  }
+  watch: {
+    orgRate: function (newRate) {
+      console.log("orgRate:", newRate);
+    },
+  },
 };
 </script>
 

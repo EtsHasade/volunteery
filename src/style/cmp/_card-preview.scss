@@ -1,3 +1,28 @@
 .card-preview{
     cursor: pointer;
+    box-shadow: $clr7 0 2px 4px ;
+
+    .img-squer-container {
+        width: 100%;
+        padding-top: 70%; /* 1:1 Aspect Ratio */
+        position: relative; /* If you want text inside of it */
+        background-color: rgb(184, 88, 88);
+
+        img {
+        height: 100%;
+        object-fit: cover;
+         position: absolute;
+         top: 0;
+         left: 0;
+         bottom: 0;
+         right: 0;
+       }
+
+      }
+
+      .preview-details{
+          padding: 0.5rem;
+      }
+      
+    
 }

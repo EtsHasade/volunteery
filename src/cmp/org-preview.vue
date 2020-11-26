@@ -1,7 +1,11 @@
 
 <template>
   <li class="volunteer-preview card-preview flex-column">
+    <div class="img-squer-container">
     <img :src="org.imgUrl" alt="" />
+    </div>
+    <div class="preview-details">
+
     <div class="org-details">
         <h4 class="org-name">{{org.name}}</h4>
       <div class="flex">
@@ -11,6 +15,7 @@
       <h6 class="org-goals">{{org.goals}}</h6>
       <rate-stars v-model="rate" ></rate-stars>
       <h6 class="org-volunteers">{{orgNumEventis}} Volunteery events</h6>
+    </div>
     </div>
   </li>
 </template>
