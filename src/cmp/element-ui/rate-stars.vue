@@ -14,10 +14,8 @@
 // disabled
 
 export default {
-  data() {
-    return {
-      value: 0
-    };
+  props:{
+    value: Number
   },
   watch:{
     value: function(newValue){
