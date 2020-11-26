@@ -2,19 +2,8 @@
   <section class="volunteer-edit flex column center text-center small-container ">
     <h2>Create new volunteer</h2>
     <form class="flex column center" @submit.prevent="addVolunteer">
-      <el-input
-        placeholder="Volunteer title"
-        v-model="volunteerToEdit.title"
-        clearable
-      >
-      </el-input>
-      <el-input
-        type="textarea"
-        :rows="2"
-        placeholder="tell us about your volunteer"
-        v-model="volunteerToEdit.desc"
-      >
-      </el-input>
+      <el-input placeholder="Volunteer title" v-model="volunteerToEdit.title" clearable></el-input>
+      <el-input type="textarea" :rows="2" placeholder="tell us about your volunteer" v-model="volunteerToEdit.desc"></el-input>
       <section class="dates">
         <div class="block">
           <el-date-picker
@@ -28,10 +17,7 @@
         </div>
       </section>
       <el-input
-        placeholder="Volunteer Country"
-        v-model="volunteerToEdit.location.country"
-        clearable
-      />
+placeholder="Volunteer Country" v-model="volunteerToEdit.location.country" clearable/>
       <el-input
         placeholder="Volunteer Address"
         v-model="volunteerToEdit.location.address"
