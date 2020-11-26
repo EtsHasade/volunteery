@@ -1,5 +1,5 @@
 <template>
-    <section class="org-create flex column center text-center small-container ">
+    <section class="org-create flex column center text-center small-container">
         <h2>Add new orgaziation</h2>
         <form @submit.prevent="createOrg">
             <el-input placeholder="orgaziation name" v-model="orgCred.name" clearable></el-input>
