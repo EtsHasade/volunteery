@@ -4,7 +4,7 @@
     <img src="@/assets/img/650085_47717403.jpg" alt="" />
     <div class="org-details">
       <div class="flex">
-        <avatar :username="eventi.byOrg.name"></avatar>
+        <avatar :username="eventi.byOrg.name" :src="eventi.byOrg.imgUrl"></avatar>
         <!-- <img class="org-logo" :src="eventi.byOrg.imgUrl" alt="" /> -->
         <h4>{{ eventi.byOrg.name }}</h4>
       </div>
