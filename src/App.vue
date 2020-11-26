@@ -1,8 +1,14 @@
 <template>
   <div id="app" class="main-container">
-    <app-header></app-header>
-    <router-view />
-    <app-footer></app-footer>
+    <header class="full">
+      <app-header></app-header>
+    </header>
+    <main>
+      <router-view />
+    </main>
+    <footer class="full">
+      <app-footer></app-footer>
+    </footer>
   </div>
 </template>
 
