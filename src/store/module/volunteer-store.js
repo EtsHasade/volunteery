@@ -3,11 +3,15 @@ import { volunteerService } from '../../service/volunteer-service.js'
 export const volunteerStore = {
     state: {
         volunteers: [],
+        tags: ['Animal', 'Children', 'Food', 'Needy', 'COVID-19']
     },
     getters: {
         volunteersForDisplay(state) {
             return state.volunteers
         },
+        tags(state) {
+            return state.tags
+        }
     },
     mutations: {
         setVolunteers(state, { volunteers }) {

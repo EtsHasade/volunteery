@@ -4,9 +4,9 @@
     <img src="@/assets/img/650085_47717403.jpg" alt="" />
     <div class="org-details">
       <div class="flex">
-        <avatar :username="eventi.byOrg.name" :src="eventi.byOrg.imgUrl"></avatar>
+        <avatar :username="org.name"></avatar>
         <!-- <img class="org-logo" :src="eventi.byOrg.imgUrl" alt="" /> -->
-        <h4>{{ eventi.byOrg.name }}</h4>
+        <h4>{{org.name}}</h4>
       </div>
       <rate-stars v-model="rate" ></rate-stars>
     </div>
