@@ -4,25 +4,13 @@
     <div class="logo">
       <img src="@/assets/logo.svg" alt="" class="logo-img " />
     </div>
-<<<<<<< HEAD
-    <!-- <nav>
-      <router-link to="/">Home</router-link> |
-      <router-link to="/volunteer-app">Volunteers</router-link> |
-      <router-link to="/volunteer-edit">Create Volunteer</router-link> |
-      <router-link to="/login">Login</router-link> |
-    </nav> -->
-    <nav>
-      <navbar></navbar>
-    </nav>
-=======
     <navbar></navbar>
->>>>>>> d7176de641010e78bad63a852db947874d6b632c
     </div>
   </header>
 </template>
 
 <script>
-import navbar from './element-ui/nav-bar'
+import navbar from './element-ui/nav-bar';
 
 export default {
   name: 'app-header',
