@@ -1,9 +1,9 @@
 <template>
 <section>
-  <h3>volu list</h3>
-  <ul class="volunteer-list clean-list card-list">
+  <ul v-if="orgs" class="org-list clean-list card-list">
     <org-preview v-for="org in orgs" :key="org._id"  :org="org"/>
   </ul> 
+  <div v-else>LOADING...</div>
 </section>
 </template>
 

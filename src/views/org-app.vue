@@ -13,12 +13,12 @@ export default {
   name: "orgApp",
   computed: {
     orgsToShow() {
-      return this.$store.getters.orgsForDisplay
-    }
+      return this.$store.getters.orgsForDisplay;
+    },
   },
-  created(){
-      this.$store.dispatch({type: 'setOrgs'})
-      this.$store.dispatch({type: 'setVolunteers'})
+  created() {
+    this.$store.dispatch({ type: "setVolunteers" });
+    this.$store.dispatch({ type: "setOrgs" });
   },
   components: {
     // orgFilter,

@@ -1,8 +1,9 @@
 
 <template>
-  <li class="volunteer-preview card-preview flex-column">
+  <li v-if="org" class="volunteer-preview card-preview flex-column">
     <div class="img-squer-container">
-    <img :src="org.imgUrl" alt="" />
+    <img v-show="imgLoad" @load="imgLoad = true" :src="org.imgUrl" alt="" />
+    <div v-if="!imgLoad" class="loading flex center">LOADING...</div>
     </div>
     <div class="preview-details">
 
@@ -30,15 +31,16 @@ export default {
   },
   data() {
     return {
-      rate: 2
-
+      rate: 2,
+      imgLoad: false
     };
   },
   computed:{
   orgNumEventis(){
     const orgEventis = this.$store.getters.volunteersForDisplay.filter(eventi=>{
-      return eventi.byOrg._id === this.org._id;
-
+      if (eventi.byOrg){
+        return eventi.byOrg._id === this.org._id;
+      }
     });
     console.log("🚀 ~ file: org-preview.vue ~ line 37 ~ orgNumEventis ~ orgEentis", orgEventis)
     return orgEventis.length
@@ -47,6 +49,8 @@ export default {
   },
   created() {
     this.orgRate = JSON.parse(JSON.stringify(this.org.rate));
+    console.log('org', this.org);
+    
 
   },
   components: {
