@@ -18,6 +18,7 @@ export default {
   },
   created(){
       this.$store.dispatch({type: 'setOrgs'})
+      this.$store.dispatch({type: 'setVolunteers'})
   },
   components: {
     // orgFilter,
