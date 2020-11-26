@@ -28,7 +28,7 @@
 <script>
 export default {
   props: {
-      tags: Array
+      items: Array
   },
   data() {
     return {
@@ -37,9 +37,8 @@ export default {
     }
   },
   created() {
-      console.log(this.tags);
-      this.options = this.tags.map(tag=> {
-      return {value: tag, label: tag}
+      this.options = this.items.map(item=> {
+      return {value: item, label: item}
       })
   },
   watch: {

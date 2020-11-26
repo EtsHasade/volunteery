@@ -11,7 +11,7 @@
 import orgPreview from './org-preview';
 
 export default {
-  name: 'volunteerList',
+  name: 'orgList',
   props:{
     orgs: Array
   },

@@ -73,7 +73,7 @@
           </el-option>
         </el-select> -->
 
-      <select-multi v-model="volunteerToEdit.tags" :tags="tags"></select-multi>
+      <select-multi v-model="volunteerToEdit.tags" :items="tags"></select-multi>
       <label>
         Select needed roles
         <select v-model="volunteerToEdit.neededs[0]">

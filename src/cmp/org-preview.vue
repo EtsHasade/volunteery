@@ -1,48 +1,51 @@
 
 <template>
-  <li class="volunteer-preview flex-column">
-    <img src="@/assets/img/650085_47717403.jpg" alt="" />
+  <li class="volunteer-preview card-preview flex-column">
+    <img :src="org.imgUrl" alt="" />
     <div class="org-details">
+        <h4 class="org-name">{{org.name}}</h4>
       <div class="flex">
-        <avatar :username="org.name"></avatar>
-        <!-- <img class="org-logo" :src="eventi.byOrg.imgUrl" alt="" /> -->
-        <h4>{{org.name}}</h4>
+        <h6 class="org-mini-details">{{org.admin.fullName}}</h6>
+        <h6 class="org-mini-details">{{ org.country }}</h6>
       </div>
+      <h6 class="org-goals">{{org.goals}}</h6>
       <rate-stars v-model="rate" ></rate-stars>
-    </div>
-    <div class="eventi-label">
-      <h3>{{ eventi.title }}</h3>
-      <div class="eventi-date flex">
-        <h6>{{ new Date(eventi.startsAt).toLocaleDateString() }} |</h6>
-        <h6>{{ eventi.location.country }}</h6>
-      </div>
-    </div>
-    <div class="eventi-floor">
-      <h4>{{ eventi.members.length }}/{{ eventi.capacity }} 👨‍👨‍👦</h4>
+      <h6 class="org-volunteers">{{orgNumEventis}} Volunteery events</h6>
     </div>
   </li>
 </template>
 
 <script>
-import avatar from "vue-avatar";
 import rateStars from "./element-ui/rate-stars";
 
 export default {
-  name: "volunteerPreview",
+  name: "orgPreview",
   props: {
-    eventi: Object,
+    org: Object,
   },
   data() {
     return {
-      rate: 2,
+      rate: 2
+
     };
   },
+  computed:{
+  orgNumEventis(){
+    const orgEventis = this.$store.getters.volunteersForDisplay.filter(eventi=>{
+      return eventi.byOrg._id === this.org._id;
+
+    });
+    console.log("🚀 ~ file: org-preview.vue ~ line 37 ~ orgNumEventis ~ orgEentis", orgEventis)
+    return orgEventis.length
+    
+  }
+  },
   created() {
-    this.orgRate = JSON.parse(JSON.stringify(this.eventi.byOrg.rate));
+    this.orgRate = JSON.parse(JSON.stringify(this.org.rate));
+
   },
   components: {
     rateStars,
-    avatar,
   },
   watch:{
     rate: function(newRate){

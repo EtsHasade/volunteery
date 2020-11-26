@@ -1,14 +1,14 @@
 
 <template>
-  <li class="volunteer-preview flex-column">
-    <img src="@/assets/img/650085_47717403.jpg" alt="" />
+  <li class="volunteer-preview card-preview flex-column">
+    <img :src="eventi.imgUrls[0]" alt="" />
     <div class="org-details">
       <div class="flex">
         <avatar :username="eventi.byOrg.name" :src="eventi.byOrg.imgUrl"></avatar>
         <!-- <img class="org-logo" :src="eventi.byOrg.imgUrl" alt="" /> -->
         <h4>{{ eventi.byOrg.name }}</h4>
       </div>
-      <rate-stars v-model="rate" ></rate-stars>
+      <rate-stars v-model="orgRate" :disabled="true" ></rate-stars>
     </div>
     <div class="eventi-label">
       <h3>{{ eventi.title }}</h3>
@@ -34,19 +34,21 @@ export default {
   },
   data() {
     return {
-      rate: 2,
+      orgRate: 2,
     };
   },
   created() {
     this.orgRate = JSON.parse(JSON.stringify(this.eventi.byOrg.rate));
+    console.log('init org rate', this.orgRate);
+    
   },
   components: {
     rateStars,
     avatar,
   },
   watch:{
-    rate: function(newRate){
-      console.log('rate:' ,newRate);
+    orgRate: function(newRate){
+      console.log('orgRate:' ,newRate);
       
     }
   }

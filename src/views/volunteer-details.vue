@@ -2,7 +2,7 @@
   <section v-if="volunteer" class="volunteer-details">
     <section class="volunteer-imgs">
       <img
-        class="volunteer-img squre-img"
+        class="volunteer-img"
         v-for="(img, idx) in volunteer.imgUrls"
         :key="idx"
         :src="img"
@@ -12,14 +12,16 @@
       <section class="details flex column">
         <h2>{{ volunteer.title }}</h2>
         <section class="mini-org">
-          <img class="img-org mini-img" :src="volunteer.byOrg.imgUrl" alt="" />
+          <avatar :src="volunteer.byOrg.imgUrl" />
+          <!-- <img class="img-org mini-img" :src="volunteer.byOrg.imgUrl" alt="" /> -->
           <span>By {{ volunteer.byOrg.name }}</span>
         </section>
         <span
           >{{ volunteer.location.address }},
           {{ volunteer.location.country }}</span
         >
-        <span>{{ avgRates }} Stars</span>
+        <span v-if="volunteer.reviews.length">{{ volunteer.rate }} Stars</span>
+        <span v-else>{{ msg }}</span>
         <span>Tags:</span>
         <section class="tags flex wrap">
           <span
@@ -30,9 +32,9 @@
           >
         </section>
         <span>Limit: {{ volunteer.capacity }} members</span>
-        <section class="dates flex">
-          <span>date start: {{ volunteer.startAt }}</span> -
-          <span v-if="volunteer.endAt">date end: {{ volunteer.endAt }}</span>
+        <section class="dates flex column">
+          <span>date start: {{ timeToPresent(volunteer.startAt) }}</span>
+          <span v-if="volunteer.endAt">date end: {{ timeToPresent(volunteer.endAt) }}</span>
         </section>
         <section class="neededs">
           <span>We need for this volunteer:</span>
@@ -56,8 +58,9 @@
           >
             <span class="review-rate">Rate: {{ review.rate }}</span>
             <section class="content-review">
-              <img class="img-review mini-img" :src="review.author.imgUrl" />
-              <span class="time mrg5">{{ review.createdAt }}</span>
+              <avatar :src="review.author.imgUrl"></avatar>
+              <!-- <img class="img-review mini-img" :src="review.author.imgUrl" /> -->
+              <span class="time mrg5">{{ timeToPresent(review.createdAt) }}</span>
               <span class="name-review mrg5">{{ review.author.fullName }}</span>
               <span class="txt-review">{{ review.txt }}</span>
             </section>
@@ -80,12 +83,12 @@
         </form>
       </section>
       <section class="status-details">
-        <button class="join-btn" @click="addMember">{{textBtn}}</button>
+        <button class="join-btn" @click="addMember">{{ textBtn }}</button>
         <section class="members">
           <span class="flex center">Members</span>
-          <section class="members-imgs flex wrap center">
-            <img
-              class="member-img mini-img"
+          <section class="members-imgs flex wrap">
+            <avatar
+              class="member-img"
               v-for="member in volunteer.members"
               :key="member._id"
               :src="member.imgUrl"
@@ -101,6 +104,8 @@
 <script>
 import { volunteerService } from '../service/volunteer-service.js';
 import { userService } from '../service/user-service.js';
+import avatar from "vue-avatar";
+
 export default {
   name: 'volunteer-details',
   data() {
@@ -109,29 +114,30 @@ export default {
       reviewToEdit: { author: {}, txt: '', rate: 5 },
       miniLoggedinUser: null,
       miniVolunteer: null,
-      textBtn: 'Join us!'
+      textBtn: 'Join us!',
+      msg: 'no Rates',
       //   avgRate: null
       //   startDate: null,
       //   endDate: null
     }
   },
-  computed: {
+  methods: {
+    timeToPresent(time) {
+      return volunteerService.timeAgo(time)
+    },
     avgRates() {
-      if (this.volunteer.reviews.length === 0) return 'no Rates'
-      if (this.volunteer.reviews.length === 1) return this.volunteer.reviews[0].rate
+      if (this.volunteer.reviews.length === 1) {
+        this.volunteer.rate = this.volunteer.reviews[0].rate
+      }
       var sum = 0
       this.volunteer.reviews.forEach(review => {
         sum += review.rate
       })
-      return sum / this.volunteer.reviews.length
-    }
-    //   timeToPresent(time) {
-    //      return volunteerService.timeAgo(time)
-    //   }
-  },
-  methods: {
+      this.volunteer.rate = sum / this.volunteer.reviews.length
+      // return sum / this.volunteer.reviews.length
+    },
     async addMember() {
-      if(this.volunteer.members.find(member => member._id === this.miniLoggedinUser._id)) return 
+      if (this.volunteer.members.find(member => member._id === this.miniLoggedinUser._id)) return
       //   const user = JSON.parse(JSON.stringify(this.$store.getters.loggedinUser))
       const user = await userService.getById('u101')
       this.volunteer.members.push(this.miniLoggedinUser)
@@ -148,7 +154,7 @@ export default {
       this.volunteer.reviews.push(this.reviewToEdit)
       volunteerService.save(JSON.parse(JSON.stringify(this.volunteer)))
       this.reviewToEdit = { author: {}, txt: '', rate: 5 }
-      //   this.getAvgRate()
+      this.avgRates()
     },
     // getAvgRate() {
     //     this.avgRate = [...this.volunteer.reviews].reduce((a, b) => (a.rate + b.rate)) / this.volunteer.reviews.length
@@ -165,11 +171,14 @@ export default {
     const user = await userService.getById('u101')
     const { _id, fullName, imgUrl } = user
     this.miniLoggedinUser = { _id, fullName, imgUrl }
-    // this.getAvgRate()
+    this.avgRates()
     // this.startDate = `${new Date(this.volunteer.startAt).getDate()}.${new Date(this.volunteer.startAt).getMonth() + 1}.${new Date(this.volunteer.startAt).getFullYear()}`
     // if (this.volunteer.endAt) {
     //   this.endDate = `${new Date(this.volunteer.endAt).getDate()}.${new Date(this.volunteer.endAt).getMonth() + 1}.${new Date(this.volunteer.endAt).getFullYear()}`
     // }
+  },
+  components: {
+    avatar
   }
 }
 </script>
