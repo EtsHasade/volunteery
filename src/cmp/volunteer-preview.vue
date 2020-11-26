@@ -1,6 +1,6 @@
 
 <template>
-  <li class="volunteer-preview card-preview flex-column">
+  <li class="volunteer-preview card-preview flex-column" @click="openDetails">
     <div class="img-squer-container">
       <img v-show="imgLoad" @load="imgLoad = true" :src="eventi.imgUrls[0]" alt="" />
       <div v-if="!imgLoad" class="loading flex center">LOADING...</div>
@@ -65,6 +65,11 @@ export default {
       console.log("orgRate:", newRate);
     },
   },
+  methods:{
+    openDetails(){
+      this.$router.push(`/volunteer-details/${this.eventi._id}`)
+    }
+  }
 };
 </script>
 

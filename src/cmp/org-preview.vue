@@ -1,22 +1,21 @@
 
 <template>
-  <li v-if="org" class="volunteer-preview card-preview flex-column">
+  <li v-if="org" class="volunteer-preview card-preview flex-column" @click="openDetails">
     <div class="img-squer-container">
-    <img v-show="imgLoad" @load="imgLoad = true" :src="org.imgUrl" alt="" />
-    <div v-if="!imgLoad" class="loading flex center">LOADING...</div>
+      <img v-show="imgLoad" @load="imgLoad = true" :src="org.imgUrl" alt="" />
+      <div v-if="!imgLoad" class="loading flex center">LOADING...</div>
     </div>
     <div class="preview-details">
-
-    <div class="org-details">
-        <h4 class="org-name">{{org.name}}</h4>
-      <div class="flex">
-        <h6 class="org-mini-details">{{org.admin.fullName}}</h6>
-        <h6 class="org-mini-details">{{ org.country }}</h6>
+      <div class="org-details">
+        <h4 class="org-name">{{ org.name }}</h4>
+        <div class="flex">
+          <h6 class="org-mini-details">{{ org.admin.fullName }}</h6>
+          <h6 class="org-mini-details">{{ org.country }}</h6>
+        </div>
+        <h6 class="org-goals">{{ org.goals }}</h6>
+        <rate-stars v-model="rate"></rate-stars>
+        <h6 class="org-volunteers">{{ orgNumEventis }} Volunteery events</h6>
       </div>
-      <h6 class="org-goals">{{org.goals}}</h6>
-      <rate-stars v-model="rate" ></rate-stars>
-      <h6 class="org-volunteers">{{orgNumEventis}} Volunteery events</h6>
-    </div>
     </div>
   </li>
 </template>
@@ -32,36 +31,42 @@ export default {
   data() {
     return {
       rate: 2,
-      imgLoad: false
+      imgLoad: false,
     };
   },
-  computed:{
-  orgNumEventis(){
-    const orgEventis = this.$store.getters.volunteersForDisplay.filter(eventi=>{
-      if (eventi.byOrg){
-        return eventi.byOrg._id === this.org._id;
-      }
-    });
-    console.log("🚀 ~ file: org-preview.vue ~ line 37 ~ orgNumEventis ~ orgEentis", orgEventis)
-    return orgEventis.length
-    
-  }
+  computed: {
+    orgNumEventis() {
+      const orgEventis = this.$store.getters.volunteersForDisplay.filter(
+        (eventi) => {
+          if (eventi.byOrg) {
+            return eventi.byOrg._id === this.org._id;
+          }
+        }
+      );
+      console.log(
+        "🚀 ~ file: org-preview.vue ~ line 37 ~ orgNumEventis ~ orgEentis",
+        orgEventis
+      );
+      return orgEventis.length;
+    },
   },
   created() {
     this.orgRate = JSON.parse(JSON.stringify(this.org.rate));
-    console.log('org', this.org);
-    
-
+    console.log("org", this.org);
   },
   components: {
     rateStars,
   },
-  watch:{
-    rate: function(newRate){
-      console.log('rate:' ,newRate);
-      
-    }
-  }
+  watch: {
+    rate: function (newRate) {
+      console.log("rate:", newRate);
+    },
+  },
+  methods: {
+    openDetails() {
+      this.$router.push(`/org-details/${this.org._id}`);
+    },
+  },
 };
 </script>
 
