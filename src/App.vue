@@ -1,14 +1,14 @@
 <template>
   <div id="app" class="main-container">
+    <!-- <header class="full"> -->
       <app-header></app-header>
-    <!-- <header class="full">
-    </header> -->
+    <!-- </header> -->
     <main>
       <router-view />
     </main>
-    <footer class="full">
+    <!-- <footer class="full"> -->
       <app-footer></app-footer>
-    </footer>
+    <!-- </footer> -->
   </div>
 </template>
 
