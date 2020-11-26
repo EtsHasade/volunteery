@@ -4,6 +4,7 @@ import homePage from '../views/home-page';
 import volunteerApp from '../views/volunteer-app';
 import volunteerEdit from '../views/volunteer-edit';
 import login from '../views/login';
+import volunteerDetails from '../views/volunteer-details'
 
 Vue.use(VueRouter)
 
@@ -27,7 +28,12 @@ const routes = [{
         name: 'login',
         component: login
     },
+    {
 
+        path: '/volunteer-details/:volunteerId',
+        name: 'volunteerDetails',
+        component: volunteerDetails
+    },
 
 ]
 

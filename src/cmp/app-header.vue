@@ -1,5 +1,5 @@
 <template>
-  <header class="app-header full main-container">
+  <header class="app-header main-container">
     <div class="flex space-between">
     <div class="logo">
       <img src="@/assets/logo.svg" alt="" class="logo-img " />

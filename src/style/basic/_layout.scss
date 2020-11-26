@@ -1,18 +1,30 @@
-.main-container{
+.main-container {
     display: grid;
-    grid-template-columns: 1fr $main-width 1fr;
-
-    >*{
+    grid-template-columns: minmax(2rem, 1fr) minmax(auto, 1200px) minmax(2rem, 1fr);
+    >* {
         grid-column: 2;
     }
-
+    // & header {
+    //     grid-row: 1;
+    // }
+    // & main {
+    //     grid-row: 2;
+    // }
+    // & footer {
+    //     grid-row: 3;
+    // }
     .full {
         grid-column: 1/-1;
     }
 }
 
-.card-list{
+#app {
+    min-height: 100vh;
+    grid-template-rows: auto 1fr;
+}
+
+.card-list {
     display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(120px,190px));
+    grid-template-columns: repeat(auto-fit, minmax(120px, 190px));
     gap: 1rem;
 }
