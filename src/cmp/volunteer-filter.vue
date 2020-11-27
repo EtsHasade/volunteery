@@ -1,6 +1,6 @@
 
 <template>
-  <section class="volunteer-filter flex center">
+  <section class="volunteer-filter flex center mb10">
     <form class="flex center" @click.prevent="emitFilter">
       <el-input
         placeholder="Search By Title"

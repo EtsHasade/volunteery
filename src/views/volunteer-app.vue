@@ -1,6 +1,11 @@
 <template>
   <main>
     <volunteer-filter @doFilter="setFilter"></volunteer-filter>
+    <section class="btns-tags flex center mb10">
+      <el-button @click="filterBy = {byTitle: '',byTags: ['COVID-19']}">COVID-19</el-button>
+      <el-button @click="filterBy = {byTitle: '',byTags: ['animals']}">Animals</el-button>
+      <el-button @click="filterBy = {byTitle: '',byTags: ['Needy']}">Needy</el-button>
+    </section>
     <volunteer-list :eventis="eventisToShow"></volunteer-list>
   </main>
 </template>
