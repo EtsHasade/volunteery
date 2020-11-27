@@ -1,57 +1,35 @@
 <template>
-  <section v-if="volunteer" class="volunteer-details">
-    <section class="volunteer-imgs">
+  <section v-if="org" class="org-details">
+    <section class="org-imgs">
       <img
-        class="volunteer-img"
-        v-for="(img, idx) in volunteer.imgUrls"
+        class="org-img"
+        v-for="(img, idx) in org.imgUrls"
         :key="idx"
         :src="img"
       />
     </section>
     <main class="flex">
       <section class="details flex column">
-        <h2>{{ volunteer.title }}</h2>
-        <section class="mini-org">
-          <avatar :src="volunteer.byOrg.imgUrls" />
-          <!-- <img class="img-org mini-img" :src="volunteer.byOrg.imgUrl" alt="" /> -->
-          <span>By {{ volunteer.byOrg.name }}</span>
+        <h2>{{ org.name }}</h2>
+        <h3>Goals:</h3>
+        <h4>{{org.goals}}</h4>
+        <h3>Country: {{ org.country }}</h3>
+        <section class="mini-user">
+          <avatar :src="org.admin.imgUrl" />
+          <span>Admin: {{ org.admin.name }}</span>
         </section>
-        <span
-          >{{ volunteer.location.address }},
-          {{ volunteer.location.country }}</span
-        >
-        <rate-stars v-if="volunteer.reviews.length" v-model="volunteer.rate" />
-        <!-- <span v-if="volunteer.reviews.length">{{ volunteer.rate }} Stars</span> -->
+        <rate-stars v-if="org.reviews.length" v-model="org.rate" />
         <span v-else>{{ msg }}</span>
         <span>Tags:</span>
         <section class="tags flex wrap">
           <span
             class="tag text-center mrg5"
-            v-for="(tag, idx) in volunteer.tags"
+            v-for="(tag, idx) in org.tags"
             :key="idx"
             >{{ tag }}</span
           >
         </section>
-        <span>Limit: {{ volunteer.capacity }} members</span>
-        <section class="dates flex column">
-          <span>date start: {{ timeToPresent(volunteer.startAt) }}</span>
-          <span v-if="volunteer.endAt"
-            >date end: {{ timeToPresent(volunteer.endAt) }}</span
-          >
-        </section>
-        <section class="neededs">
-          <span>We need for this volunteer:</span>
-          <ul class="needed-content clean-list flex wrap">
-            <li
-              class="needed text-center mrg5"
-              v-for="(needed, idx) in volunteer.neededs"
-              :key="idx"
-            >
-              {{ needed }}
-            </li>
-          </ul>
-        </section>
-        <span>{{ volunteer.desc }}</span>
+        <span>{{ org.desc }}</span>
         <span class="text-center mrg5">Reviews</span>
         <form
           @submit.prevent="addReview"
@@ -65,7 +43,7 @@
         <section class="reviews flex column">
           <section
             class="review flex column mrg5"
-            v-for="review in volunteer.reviews"
+            v-for="review in org.reviews"
             :key="review._id"
           >
             <section class="details-review flex">
@@ -89,34 +67,34 @@
           <section class="members-imgs flex wrap">
             <avatar
               class="member-img mrg5"
-              v-for="member in volunteer.members"
+              v-for="member in org.members"
               :key="member._id"
               :src="member.imgUrl"
               :title="member.fullName"
             />
           </section>
         </section>
-      <router-link type="success" class="el-button el-button--success" :to="'/volunteer-edit/'+volunteer._id">Edit</router-link>
+      <router-link type="success" class="el-button el-button--success" :to="'/org-edit/'+org._id">Edit</router-link>
       </section>
     </main>
   </section>
 </template>
 
 <script>
-import { volunteerService } from '../service/volunteer-service.js';
+import { orgService } from '../service/org-service.js';
 import { userService } from '../service/user-service.js';
 import avatar from "vue-avatar";
 import rateStars from '../cmp/element-ui/rate-stars';
 import rateStarsEnable from '../cmp/element-ui/rate-stars-enable';
 
 export default {
-  name: 'volunteer-details',
+  name: 'org-details',
   data() {
     return {
-      volunteer: null,
+      org: null,
       reviewToEdit: { author: {}, txt: '', rate: 5 },
       miniLoggedinUser: null,
-      miniVolunteer: null,
+      miniOrg: null,
       textBtn: 'Join us!',
       msg: 'no Rates',
       //   avgRate: null
@@ -126,58 +104,58 @@ export default {
   },
   methods: {
     timeToPresent(time) {
-      return volunteerService.timeAgo(time)
+      return orgService.timeAgo(time)
     },
     avgRates() {
-      if (this.volunteer.reviews.length === 1) {
-        this.volunteer.rate = this.volunteer.reviews[0].rate
+      if (this.org.reviews.length === 1) {
+        this.org.rate = this.org.reviews[0].rate
       }
       var sum = 0
-      this.volunteer.reviews.forEach(review => {
+      this.org.reviews.forEach(review => {
         sum += review.rate
       })
-      this.volunteer.rate = sum / this.volunteer.reviews.length
-      // return sum / this.volunteer.reviews.length
+      this.org.rate = sum / this.org.reviews.length
+      // return sum / this.org.reviews.length
     },
     async addMember() {
-      if (this.volunteer.members.find(member => member._id === this.miniLoggedinUser._id)) return
+      if (this.org.members.find(member => member._id === this.miniLoggedinUser._id)) return
       //   const user = JSON.parse(JSON.stringify(this.$store.getters.loggedinUser))
       const user = await userService.getById('u101')
-      this.volunteer.members.push(this.miniLoggedinUser)
-      volunteerService.save(JSON.parse(JSON.stringify(this.volunteer)))
-      user.events.push(JSON.parse(JSON.stringify(this.miniVolunteer)))
+      this.org.members.push(this.miniLoggedinUser)
+      orgService.save(JSON.parse(JSON.stringify(this.org)))
+      user.events.push(JSON.parse(JSON.stringify(this.miniOrg)))
       userService.update(user)
       this.textBtn = 'Your already join'
     },
     addReview() {
       this.reviewToEdit.rate = Number(this.reviewToEdit.rate)
       this.reviewToEdit.createdAt = Date.now()
-      this.reviewToEdit._id = volunteerService.makeId()
+      this.reviewToEdit._id = orgService.makeId()
       this.reviewToEdit.author = JSON.parse(JSON.stringify(this.miniLoggedinUser))
-      this.volunteer.reviews.push(this.reviewToEdit)
-      volunteerService.save(JSON.parse(JSON.stringify(this.volunteer)))
+      this.org.reviews.push(this.reviewToEdit)
+      orgService.save(JSON.parse(JSON.stringify(this.org)))
       this.reviewToEdit = { author: {}, txt: '', rate: 5 }
       this.avgRates()
     },
     // getAvgRate() {
-    //     this.avgRate = [...this.volunteer.reviews].reduce((a, b) => (a.rate + b.rate)) / this.volunteer.reviews.length
+    //     this.avgRate = [...this.org.reviews].reduce((a, b) => (a.rate + b.rate)) / this.org.reviews.length
     //     console.log(this.avgRate);
     // }
 
   },
   async created() {
-    const id = this.$route.params.volunteerId
-    const volunteer = await volunteerService.getById(id)
-    this.volunteer = JSON.parse(JSON.stringify(volunteer))
-    this.miniVolunteer = { _id: volunteer._id, title: volunteer.title, imgUrl: volunteer.imgUrls[0] }
+    const id = this.$route.params.orgId
+    const org = await orgService.getById(id)
+    this.org = JSON.parse(JSON.stringify(org))
+    this.miniOrg = { _id: org._id, title: org.title, imgUrl: org.imgUrls[0] }
     // const user = JSON.parse(JSON.stringify(this.$store.getters.loggedinUser))
     const user = await userService.getById('u101')
     const { _id, fullName, imgUrl } = user
     this.miniLoggedinUser = { _id, fullName, imgUrl }
     this.avgRates()
-    // this.startDate = `${new Date(this.volunteer.startAt).getDate()}.${new Date(this.volunteer.startAt).getMonth() + 1}.${new Date(this.volunteer.startAt).getFullYear()}`
-    // if (this.volunteer.endAt) {
-    //   this.endDate = `${new Date(this.volunteer.endAt).getDate()}.${new Date(this.volunteer.endAt).getMonth() + 1}.${new Date(this.volunteer.endAt).getFullYear()}`
+    // this.startDate = `${new Date(this.org.startAt).getDate()}.${new Date(this.org.startAt).getMonth() + 1}.${new Date(this.org.startAt).getFullYear()}`
+    // if (this.org.endAt) {
+    //   this.endDate = `${new Date(this.org.endAt).getDate()}.${new Date(this.org.endAt).getMonth() + 1}.${new Date(this.org.endAt).getFullYear()}`
     // }
   },
   components: {

@@ -6,7 +6,8 @@ import orgApp from '../views/org-app';
 import orgEdit from '../views/org-edit';
 import volunteerEdit from '../views/volunteer-edit';
 import login from '../views/login';
-import volunteerDetails from '../views/volunteer-details'
+import volunteerDetails from '../views/volunteer-details';
+import orgDetails from '../views/org-details';
 
 Vue.use(VueRouter)
 
@@ -44,6 +45,11 @@ const routes = [{
         path: '/volunteer-details/:volunteerId',
         name: 'volunteerDetails',
         component: volunteerDetails
+    },
+    {
+        path: '/org-details/:orgId',
+        name: 'orgDetails',
+        component: orgDetails
     },
 
 ]
