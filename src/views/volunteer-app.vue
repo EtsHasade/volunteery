@@ -27,16 +27,18 @@ export default {
         volunteersFilter = volunteersFilter.filter(volunteer => volunteer.title.toLowerCase().includes(txt));
       }
       if (this.filterBy.byTags.length) {
-        var filterTags = []
+        var volunteersfilterTags = []
         this.filterBy.byTags.forEach(tag => {
-        console.log(tag);
-        filterTags += volunteersFilter.map(volunteer => {
-          console.log(volunteer.tags.includes(tag));
-          return volunteer.tags.includes(tag)
+          var volunteersfilterTag = []
+          volunteersFilter.forEach(volunteer => {
+            if (volunteer.tags.includes(tag)) {
+              volunteersfilterTag.push(volunteer)
+            }
+          })
+          volunteersfilterTags = volunteersfilterTags.concat(volunteersfilterTag)
+          console.log(volunteersfilterTags);
         })
-        console.log(filterTags);
-        volunteersFilter = JSON.parse(JSON.stringify(filterTags))
-        })
+        volunteersFilter = JSON.parse(JSON.stringify(volunteersfilterTags))
       }
       return volunteersFilter
     }

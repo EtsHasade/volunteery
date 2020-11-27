@@ -1,15 +1,13 @@
 
 <template>
-  <section class="volunteer-filter">
-    <h3>volu filter</h3>
-    <form @click.prevent="emitFilter">
-      <input
-        type="text"
+  <section class="volunteer-filter flex center">
+    <form class="flex center" @click.prevent="emitFilter">
+      <el-input
         placeholder="Search By Title"
         v-model="filterBy.byTitle"
         @input="emitFilter"
       />
-      <select-multi v-model="filterBy.byTags" :items="tags" />
+      <select-multi v-model="filterBy.byTags" @input="emitFilter" :items="tags" />
     </form>
   </section>
 </template>
@@ -27,6 +25,7 @@ export default {
   },
   methods: {
     emitFilter() {
+      console.log('emit');
       if (this.debounce) clearTimeout(this.debounce);
       this.debounce = setTimeout(() => {
         this.$emit("doFilter", JSON.parse(JSON.stringify(this.filterBy)));

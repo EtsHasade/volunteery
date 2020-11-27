@@ -12,7 +12,7 @@
       <section class="details flex column">
         <h2>{{ volunteer.title }}</h2>
         <section class="mini-org">
-          <avatar :src="volunteer.byOrg.imgUrls" />
+          <avatar :src="volunteer.byOrg.imgUrl" />
           <!-- <img class="img-org mini-img" :src="volunteer.byOrg.imgUrl" alt="" /> -->
           <span>By {{ volunteer.byOrg.name }}</span>
         </section>
