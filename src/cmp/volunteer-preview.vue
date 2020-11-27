@@ -1,10 +1,11 @@
 
 <template>
-  <li class="volunteer-preview card-preview flex-column" @click="openDetails">
+  <li class="volunteer-preview card-preview flex-column"  @click="openDetails">
     <div class="img-squer-container">
       <img v-show="imgLoad" @load="imgLoad = true" :src="eventi.imgUrls[0]" alt="" />
       <div v-if="!imgLoad" class="loading flex center">LOADING...</div>
     </div>
+    <!-- <div class="preview-details" :style="`background-image: url('${eventi.imgUrls[0]}'); transform: scaleY(-1);`"> -->
     <div class="preview-details">
       <div class="org-details">
         <div class="flex">

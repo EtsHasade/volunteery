@@ -13,7 +13,7 @@
   <el-submenu index="2">
     <template slot="title">Organizations</template>
     <el-menu-item index="/org-app">Show all</el-menu-item>
-    <el-menu-item index="/org-create">Create</el-menu-item> 
+    <el-menu-item index="/org-edit">Create</el-menu-item> 
   </el-submenu>
   <el-menu-item index="3" disabled>User</el-menu-item>
   <el-menu-item index="/login">Login</el-menu-item>

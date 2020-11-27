@@ -1,28 +1,43 @@
-.card-preview{
-    cursor: pointer;
-    box-shadow: $clr7 0 2px 4px ;
+.card-preview {
+    cursor       : pointer;
+    box-shadow   : $clr7 0 2px 4px;
+    border-radius: 8px;
 
     .img-squer-container {
-        width: 100%;
-        padding-top: 70%; /* 1:1 Aspect Ratio */
-        position: relative; /* If you want text inside of it */
+        width           : 100%;
+        padding-top     : 70%;
+        /* 1            :1 Aspect Ratio */
+        position        : relative;
+        /* If you want text inside of it */
         background-color: #ece6e6;
 
         img {
-        height: 100%;
-        object-fit: cover;
-         position: absolute;
-         top: 0;
-         left: 0;
-         bottom: 0;
-         right: 0;
-       }
+            border-top-left-radius : 8px;
+            border-top-right-radius: 8px;
+            height                 : 100%;
+            object-fit             : cover;
+            position               : absolute;
+            top                    : 0;
+            left                   : 0;
+            bottom                 : 0;
+            right                  : 0;
+        }
 
-      }
+    }
 
-      .preview-details{
-          padding: 0.5rem;
-      }
-      
-    
+    .preview-details {
+        margin-top            : -5px;
+        padding               : 0.5rem;
+        // background-position: center;
+        // background-size: cover;
+
+
+        >* {
+            background    : $clr6;
+            //   transform: scaleY(-1);
+        }
+
+    }
+
+
 }

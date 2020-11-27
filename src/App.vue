@@ -2,21 +2,20 @@
   <div id="app" class="main-container">
     <!-- <header class="full"> -->
       <app-header></app-header>
-    <!-- </header> -->
-    <main>
-      <router-view />
-    </main>
+      <!-- </header> -->
+      <main>
+        <router-view />
+      </main>
     <!-- <footer class="full"> -->
-      <app-footer></app-footer>
+    <app-footer></app-footer>
     <!-- </footer> -->
   </div>
 </template>
 
 <script>
-import '@/style/main.scss'
+import "@/style/main.scss";
 import appHeader from "@/cmp/app-header";
 import appFooter from "@/cmp/app-footer";
-
 
 export default {
   name: "volunteerApp",
