@@ -3,7 +3,7 @@ import { volunteerService } from '../../service/volunteer-service.js'
 export const volunteerStore = {
     state: {
         volunteers: [],
-        tags: ['Animal', 'Children', 'Food', 'Needy', 'COVID-19'],
+        tags: ['animals', 'Children', 'Food', 'Needy', 'COVID-19', 'Fun'],
         neededs: ['Doctors', 'Field Manager', 'Chef'],
     },
     getters: {
@@ -60,9 +60,9 @@ export const volunteerStore = {
         async setSortVolunteers({ commit }, { sortBy }) {
             console.log(sortBy);
             const volunteers = await volunteerService.getSortList(sortBy)
-            commit({ type:'setVolunteers', volunteers })
+            commit({ type: 'setVolunteers', volunteers })
         },
-        async getVolunteerById(context,{_id}) {
+        async getVolunteerById(context, { _id }) {
             console.log("🚀 ~ file: volunteer-store.js ~ line 66 ~ getVolunteerById ~ _id", _id)
             return await volunteerService.getById(_id)
         }
