@@ -2,7 +2,7 @@
   <header class="app-header full main-container">
     <div class="flex space-between">
     <div class="logo">
-      <img src="@/assets/logo.svg" alt="" class="logo-img " />
+      <img src="@/assets/logo.svg" alt="" class="logo-img hover-pointer" @click="$router.push('/')" />
     </div>
     <navbar></navbar>
     </div>
