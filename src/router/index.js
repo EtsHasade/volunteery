@@ -8,6 +8,7 @@ import eventiEdit from '../views/eventi-edit';
 import login from '../views/login';
 import eventiDetails from '../views/eventi-details';
 import orgDetails from '../views/org-details';
+import userDetails from '../views/user-details';
 
 Vue.use(VueRouter)
 
@@ -50,6 +51,11 @@ const routes = [{
         path: '/org-details/:orgId',
         name: 'orgDetails',
         component: orgDetails
+    },
+    {
+        path: '/user-details/:userId',
+        name: 'userDetails',
+        component: userDetails
     },
 
 ]
