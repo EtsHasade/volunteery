@@ -29,6 +29,9 @@
             >{{ tag }}</span
           >
         </section>
+        <section class="org-volunteers">
+          <volunteer-list :eventis="orgEventis"></volunteer-list>
+        </section>
         <span>{{ org.desc }}</span>
         <span class="text-center mrg5">Reviews</span>
         <form
@@ -61,19 +64,6 @@
         </section>
       </section>
       <section class="status-details text-center">
-        <el-button class="join-btn" @click="addMember">{{ textBtn }}</el-button>
-        <section class="members">
-          <span class="flex center">Members</span>
-          <section class="members-imgs flex wrap">
-            <avatar
-              class="member-img mrg5"
-              v-for="member in org.members"
-              :key="member._id"
-              :src="member.imgUrl"
-              :title="member.fullName"
-            />
-          </section>
-        </section>
       <router-link type="success" class="el-button el-button--success" :to="'/org-edit/'+org._id">Edit</router-link>
       </section>
     </main>
@@ -86,6 +76,7 @@ import { userService } from '../service/user-service.js';
 import avatar from "vue-avatar";
 import rateStars from '../cmp/element-ui/rate-stars';
 import rateStarsEnable from '../cmp/element-ui/rate-stars-enable';
+import volunteerList from '../cmp/volunteer-list';
 
 export default {
   name: 'org-details',
@@ -100,6 +91,22 @@ export default {
       //   avgRate: null
       //   startDate: null,
       //   endDate: null
+    }
+  },
+  computed:{
+    orgEventis() {
+      const eventis = this.$store.getters.volunteersForDisplay.filter(
+        (eventi) => {
+          if (eventi.byOrg) {
+            return eventi.byOrg._id === this.org._id;
+          }
+        }
+      );
+      console.log(
+        "🚀 ~ file: org-preview.vue ~ line 37 ~ orgEventis ~ eentis",
+        eventis
+      );
+      return eventis;
     }
   },
   methods: {
@@ -161,7 +168,8 @@ export default {
   components: {
     avatar,
     rateStars,
-    rateStarsEnable
+    rateStarsEnable,
+    volunteerList
   }
 }
 </script>

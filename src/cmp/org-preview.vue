@@ -2,7 +2,7 @@
 <template>
   <li v-if="org" class="volunteer-preview card-preview flex-column" @click="openDetails">
     <div class="img-squer-container">
-      <img v-show="imgLoad" @load="imgLoad = true" :src="org.imgUrls[0]" alt="" />
+      <img v-show="imgLoad" @load="imgLoad = true" :src="org.imgUrl" alt="" />
       <div v-if="!imgLoad" class="loading flex center">LOADING...</div>
     </div>
     <div class="preview-details">
@@ -14,7 +14,7 @@
         </div>
         <h6 class="org-goals">{{ org.goals }}</h6>
         <rate-stars v-model="rate"></rate-stars>
-        <h6 class="org-volunteers">{{ orgNumEventis }} Volunteery events</h6>
+        <h6 class="org-volunteers">{{ orgEventis.length }} Volunteery events</h6>
       </div>
     </div>
   </li>
@@ -35,8 +35,8 @@ export default {
     };
   },
   computed: {
-    orgNumEventis() {
-      const orgEventis = this.$store.getters.volunteersForDisplay.filter(
+    orgEventis() {
+      const eventis = this.$store.getters.volunteersForDisplay.filter(
         (eventi) => {
           if (eventi.byOrg) {
             return eventi.byOrg._id === this.org._id;
@@ -44,11 +44,11 @@ export default {
         }
       );
       console.log(
-        "🚀 ~ file: org-preview.vue ~ line 37 ~ orgNumEventis ~ orgEentis",
-        orgEventis
+        "🚀 ~ file: org-preview.vue ~ line 37 ~ orgEventis ~ eentis",
+        eventis
       );
-      return orgEventis.length;
-    },
+      return eventis;
+    }
   },
   created() {
     this.orgRate = JSON.parse(JSON.stringify(this.org.rate));
