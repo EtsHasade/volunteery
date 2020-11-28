@@ -17,7 +17,7 @@ export default {
     },
   },
   created() {
-    this.$store.dispatch({ type: "setVolunteers" });
+    this.$store.dispatch({ type: "setEventis" });
     this.$store.dispatch({ type: "setOrgs" });
   },
   components: {

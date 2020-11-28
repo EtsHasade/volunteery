@@ -1,6 +1,6 @@
 
 <template>
-  <li v-if="org" class="volunteer-preview card-preview flex-column" @click="openDetails">
+  <li v-if="org" class="eventi-preview card-preview flex-column" @click="openDetails">
     <div class="img-squer-container">
       <img v-show="imgLoad" @load="imgLoad = true" :src="org.imgUrls[0]" alt="" />
       <div v-if="!imgLoad" class="loading flex center">LOADING...</div>
@@ -14,7 +14,7 @@
         </div>
         <h6 class="org-goals">{{ org.goals }}</h6>
         <rate-stars v-model="rate"></rate-stars>
-        <h6 class="org-volunteers">{{ orgEventis.length }} Volunteery events</h6>
+        <h6 class="org-eventis">{{ orgEventis.length }} Eventiy events</h6>
       </div>
     </div>
   </li>
@@ -36,7 +36,7 @@ export default {
   },
   computed: {
     orgEventis() {
-      const eventis = this.$store.getters.volunteersForDisplay.filter(
+      const eventis = this.$store.getters.eventisForDisplay.filter(
         (eventi) => {
           if (eventi.byOrg) {
             return eventi.byOrg._id === this.org._id;

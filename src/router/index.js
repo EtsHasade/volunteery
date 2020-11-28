@@ -1,12 +1,12 @@
 import Vue from 'vue';
 import VueRouter from 'vue-router';
 import homePage from '../views/home-page';
-import volunteerApp from '../views/volunteer-app';
+import eventiApp from '../views/eventi-app';
 import orgApp from '../views/org-app';
 import orgEdit from '../views/org-edit';
-import volunteerEdit from '../views/volunteer-edit';
+import eventiEdit from '../views/eventi-edit';
 import login from '../views/login';
-import volunteerDetails from '../views/volunteer-details';
+import eventiDetails from '../views/eventi-details';
 import orgDetails from '../views/org-details';
 
 Vue.use(VueRouter)
@@ -17,9 +17,9 @@ const routes = [{
         component: homePage
     },
     {
-        path: '/volunteer-app',
-        name: 'volunteerApp',
-        component: volunteerApp
+        path: '/eventi-app',
+        name: 'eventiApp',
+        component: eventiApp
     },
     {
         path: '/org-app',
@@ -32,9 +32,9 @@ const routes = [{
         component: orgEdit
     },
     {
-        path: '/volunteer-edit/:_id?',
-        name: 'volunteerEdit',
-        component: volunteerEdit
+        path: '/eventi-edit/:_id?',
+        name: 'eventiEdit',
+        component: eventiEdit
     },
     {
         path: '/login',
@@ -42,9 +42,9 @@ const routes = [{
         component: login
     },
     {
-        path: '/volunteer-details/:volunteerId',
-        name: 'volunteerDetails',
-        component: volunteerDetails
+        path: '/eventi-details/:eventiId',
+        name: 'eventiDetails',
+        component: eventiDetails
     },
     {
         path: '/org-details/:orgId',

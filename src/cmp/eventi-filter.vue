@@ -1,6 +1,6 @@
 
 <template>
-  <section class="volunteer-filter flex center mb10">
+  <section class="eventi-filter flex center mb10">
     <form class="flex center" @click.prevent="emitFilter">
       <el-input
         placeholder="Search By Title"
@@ -15,7 +15,7 @@
 <script>
 import selectMulti from '../cmp/element-ui/select-multi'
 export default {
-  name: 'volunteer-filter',
+  name: 'eventi-filter',
   data() {
     return {
       filterBy: { byTitle: '', byTags: [] },

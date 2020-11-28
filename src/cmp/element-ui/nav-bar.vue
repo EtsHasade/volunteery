@@ -8,8 +8,8 @@
   @select="handleSelect"
   >
   <el-menu-item index="/">Home</el-menu-item>
-  <el-menu-item index="/volunteer-app">Volunteerys</el-menu-item>
-  <el-menu-item index="/volunteer-edit">Create</el-menu-item>
+  <el-menu-item index="/eventi-app">Eventiys</el-menu-item>
+  <el-menu-item index="/eventi-edit">Create</el-menu-item>
   <el-submenu index="2">
     <template slot="title">Organizations</template>
     <el-menu-item index="/org-app">Show all</el-menu-item>

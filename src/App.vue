@@ -18,7 +18,7 @@ import appHeader from "@/cmp/app-header";
 import appFooter from "@/cmp/app-footer";
 
 export default {
-  name: "volunteerApp",
+  name: "eventiApp",
   components: {
     appHeader,
     appFooter,

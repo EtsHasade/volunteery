@@ -1,26 +1,26 @@
 import httpService from './http-service.js'
-import { utilService } from '../service/utils/util.service.js'
+import { utilService } from './utils/util.service.js'
 
 const VOLUNTEER_COLECTION_KEY = 'eventi';
-export const volunteerService = {
+export const eventiService = {
     query,
     getById,
     remove,
     save,
-    getEmptyVolunteer,
+    getEmptyEventi,
     getSortList,
     timeAgo,
     makeId
 }
 
 function getById(id) {
-    console.log("🚀 ~ file: volunteer-service.js ~ line 17 ~ getById ~ id", id)
+    console.log("🚀 ~ file: eventi-service.js ~ line 17 ~ getById ~ id", id)
     return httpService.get(`${VOLUNTEER_COLECTION_KEY}/${id}`)
 }
 
 async function getSortList(sortBy) {
-    const volunteers = await query()
-    return volunteers.sort((a, b) => (a[sortBy] > b[sortBy]) ? 1 : ((b[sortBy] > a[sortBy]) ? -1 : 0));
+    const eventis = await query()
+    return eventis.sort((a, b) => (a[sortBy] > b[sortBy]) ? 1 : ((b[sortBy] > a[sortBy]) ? -1 : 0));
 }
 
 // function query(q = '', delay = 0) {
@@ -28,28 +28,28 @@ function query() {
     return httpService.get(VOLUNTEER_COLECTION_KEY)
 }
 
-function remove(volunteerId) {
-    // eventBusService.$emit(SHOW_MSG, { txt: `${volunteerId} Removed Succefully`, type: 'success' });
-    return httpService.delete(`${VOLUNTEER_COLECTION_KEY}/${volunteerId}`)
+function remove(eventiId) {
+    // eventBusService.$emit(SHOW_MSG, { txt: `${eventiId} Removed Succefully`, type: 'success' });
+    return httpService.delete(`${VOLUNTEER_COLECTION_KEY}/${eventiId}`)
 }
 
-function save(volunteer) {
-    const savedVolunteer = (volunteer._id) ? _update(volunteer) : _add(volunteer)
-    return savedVolunteer
+function save(eventi) {
+    const savedEventi = (eventi._id) ? _update(eventi) : _add(eventi)
+    return savedEventi
 }
 
-function _add(volunteer) {
-    volunteer.createdAt = Date.now()
-        // eventBusService.$emit(SHOW_MSG, { txt: `${volunteer.name} Added Succefully`, type: 'success' });
-    return httpService.post(VOLUNTEER_COLECTION_KEY, volunteer)
+function _add(eventi) {
+    eventi.createdAt = Date.now()
+        // eventBusService.$emit(SHOW_MSG, { txt: `${eventi.name} Added Succefully`, type: 'success' });
+    return httpService.post(VOLUNTEER_COLECTION_KEY, eventi)
 }
 
-function _update(volunteer) {
-    volunteer.updateAt = Date.now()
-    return httpService.put(`${VOLUNTEER_COLECTION_KEY}/${volunteer._id}`, volunteer)
+function _update(eventi) {
+    eventi.updateAt = Date.now()
+    return httpService.put(`${VOLUNTEER_COLECTION_KEY}/${eventi._id}`, eventi)
 }
 
-function getEmptyVolunteer() {
+function getEmptyEventi() {
     return {
         title: '',
         desc: '',

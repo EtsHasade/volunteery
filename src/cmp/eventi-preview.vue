@@ -1,6 +1,6 @@
 
 <template>
-  <li class="volunteer-preview card-preview flex-column"  @click="openDetails">
+  <li class="eventi-preview card-preview flex-column"  @click="openDetails">
     <div class="img-squer-container">
       <img v-show="imgLoad" @load="imgLoad = true" :src="eventi.imgUrls[0]" alt="" />
       <div v-if="!imgLoad" class="loading flex center">LOADING...</div>
@@ -43,7 +43,7 @@ import avatar from "vue-avatar";
 import rateStars from "./element-ui/rate-stars";
 
 export default {
-  name: "volunteerPreview",
+  name: "eventiPreview",
   props: {
     eventi: Object,
   },
@@ -68,7 +68,7 @@ export default {
   },
   methods:{
     openDetails(){
-      this.$router.push(`/volunteer-details/${this.eventi._id}`)
+      this.$router.push(`/eventi-details/${this.eventi._id}`)
     }
   }
 };

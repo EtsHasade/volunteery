@@ -1,57 +1,57 @@
 <template>
-  <section v-if="volunteer" class="volunteer-details">
-    <section class="volunteer-imgs">
+  <section v-if="eventi" class="eventi-details">
+    <section class="eventi-imgs">
       <img
-        class="volunteer-img"
-        v-for="(img, idx) in volunteer.imgUrls"
+        class="eventi-img"
+        v-for="(img, idx) in eventi.imgUrls"
         :key="idx"
         :src="img"
       />
     </section>
     <main class="flex">
       <section class="details flex column">
-        <h2>{{ volunteer.title }}</h2>
+        <h2>{{ eventi.title }}</h2>
         <section class="mini-org">
-          <avatar :src="volunteer.byOrg.imgUrl" />
-          <!-- <img class="img-org mini-img" :src="volunteer.byOrg.imgUrl" alt="" /> -->
-          <span>By {{ volunteer.byOrg.name }}</span>
+          <avatar :src="eventi.byOrg.imgUrl" />
+          <!-- <img class="img-org mini-img" :src="eventi.byOrg.imgUrl" alt="" /> -->
+          <span>By {{ eventi.byOrg.name }}</span>
         </section>
         <span
-          >{{ volunteer.location.address }},
-          {{ volunteer.location.country }}</span
+          >{{ eventi.location.address }},
+          {{ eventi.location.country }}</span
         >
-        <rate-stars v-if="volunteer.reviews.length" v-model="volunteer.rate" />
-        <!-- <span v-if="volunteer.reviews.length">{{ volunteer.rate }} Stars</span> -->
+        <rate-stars v-if="eventi.reviews.length" v-model="eventi.rate" />
+        <!-- <span v-if="eventi.reviews.length">{{ eventi.rate }} Stars</span> -->
         <span v-else>{{ msg }}</span>
         <span>Tags:</span>
         <section class="tags flex wrap">
           <span
             class="tag text-center mrg5"
-            v-for="(tag, idx) in volunteer.tags"
+            v-for="(tag, idx) in eventi.tags"
             :key="idx"
             >{{ tag }}</span
           >
         </section>
-        <span>Limit: {{ volunteer.capacity }} members</span>
+        <span>Limit: {{ eventi.capacity }} members</span>
         <section class="dates flex column">
-          <span>date start: {{ timeToPresent(volunteer.startAt) }}</span>
-          <span v-if="volunteer.endAt"
-            >date end: {{ timeToPresent(volunteer.endAt) }}</span
+          <span>date start: {{ timeToPresent(eventi.startAt) }}</span>
+          <span v-if="eventi.endAt"
+            >date end: {{ timeToPresent(eventi.endAt) }}</span
           >
         </section>
         <section class="neededs">
-          <span>We need for this volunteer:</span>
+          <span>We need for this eventi:</span>
           <ul class="needed-content clean-list flex wrap">
             <li
               class="needed text-center mrg5"
-              v-for="(needed, idx) in volunteer.neededs"
+              v-for="(needed, idx) in eventi.neededs"
               :key="idx"
             >
               {{ needed }}
             </li>
           </ul>
         </section>
-        <span>{{ volunteer.desc }}</span>
+        <span>{{ eventi.desc }}</span>
         <span class="text-center mrg5">Reviews</span>
         <form
           @submit.prevent="addReview"
@@ -65,7 +65,7 @@
         <section class="reviews flex column">
           <section
             class="review flex column mrg5"
-            v-for="review in volunteer.reviews"
+            v-for="review in eventi.reviews"
             :key="review._id"
           >
             <section class="details-review flex">
@@ -89,34 +89,34 @@
           <section class="members-imgs flex wrap">
             <avatar
               class="member-img mrg5"
-              v-for="member in volunteer.members"
+              v-for="member in eventi.members"
               :key="member._id"
               :src="member.imgUrl"
               :title="member.fullName"
             />
           </section>
         </section>
-      <router-link type="success" class="el-button el-button--success" :to="'/volunteer-edit/'+volunteer._id">Edit</router-link>
+      <router-link type="success" class="el-button el-button--success" :to="'/eventi-edit/'+eventi._id">Edit</router-link>
       </section>
     </main>
   </section>
 </template>
 
 <script>
-import { volunteerService } from '../service/volunteer-service.js';
+import { eventiService } from '../service/eventi-service.js';
 import { userService } from '../service/user-service.js';
 import avatar from "vue-avatar";
 import rateStars from '../cmp/element-ui/rate-stars';
 import rateStarsEnable from '../cmp/element-ui/rate-stars-enable';
 
 export default {
-  name: 'volunteer-details',
+  name: 'eventi-details',
   data() {
     return {
-      volunteer: null,
+      eventi: null,
       reviewToEdit: { author: {}, txt: '', rate: 5 },
       miniLoggedinUser: null,
-      miniVolunteer: null,
+      miniEventi: null,
       textBtn: 'Join us!',
       msg: 'no Rates',
       //   avgRate: null
@@ -126,58 +126,58 @@ export default {
   },
   methods: {
     timeToPresent(time) {
-      return volunteerService.timeAgo(time)
+      return eventiService.timeAgo(time)
     },
     avgRates() {
-      if (this.volunteer.reviews.length === 1) {
-        this.volunteer.rate = this.volunteer.reviews[0].rate
+      if (this.eventi.reviews.length === 1) {
+        this.eventi.rate = this.eventi.reviews[0].rate
       }
       var sum = 0
-      this.volunteer.reviews.forEach(review => {
+      this.eventi.reviews.forEach(review => {
         sum += review.rate
       })
-      this.volunteer.rate = sum / this.volunteer.reviews.length
-      // return sum / this.volunteer.reviews.length
+      this.eventi.rate = sum / this.eventi.reviews.length
+      // return sum / this.eventi.reviews.length
     },
     async addMember() {
-      if (this.volunteer.members.find(member => member._id === this.miniLoggedinUser._id)) return
+      if (this.eventi.members.find(member => member._id === this.miniLoggedinUser._id)) return
       //   const user = JSON.parse(JSON.stringify(this.$store.getters.loggedinUser))
       const user = await userService.getById('u101')
-      this.volunteer.members.push(this.miniLoggedinUser)
-      volunteerService.save(JSON.parse(JSON.stringify(this.volunteer)))
-      user.events.push(JSON.parse(JSON.stringify(this.miniVolunteer)))
+      this.eventi.members.push(this.miniLoggedinUser)
+      eventiService.save(JSON.parse(JSON.stringify(this.eventi)))
+      user.events.push(JSON.parse(JSON.stringify(this.miniEventi)))
       userService.update(user)
       this.textBtn = 'Your already join'
     },
     addReview() {
       this.reviewToEdit.rate = Number(this.reviewToEdit.rate)
       this.reviewToEdit.createdAt = Date.now()
-      this.reviewToEdit._id = volunteerService.makeId()
+      this.reviewToEdit._id = eventiService.makeId()
       this.reviewToEdit.author = JSON.parse(JSON.stringify(this.miniLoggedinUser))
-      this.volunteer.reviews.push(this.reviewToEdit)
-      volunteerService.save(JSON.parse(JSON.stringify(this.volunteer)))
+      this.eventi.reviews.push(this.reviewToEdit)
+      eventiService.save(JSON.parse(JSON.stringify(this.eventi)))
       this.reviewToEdit = { author: {}, txt: '', rate: 5 }
       this.avgRates()
     },
     // getAvgRate() {
-    //     this.avgRate = [...this.volunteer.reviews].reduce((a, b) => (a.rate + b.rate)) / this.volunteer.reviews.length
+    //     this.avgRate = [...this.eventi.reviews].reduce((a, b) => (a.rate + b.rate)) / this.eventi.reviews.length
     //     console.log(this.avgRate);
     // }
 
   },
   async created() {
-    const id = this.$route.params.volunteerId
-    const volunteer = await volunteerService.getById(id)
-    this.volunteer = JSON.parse(JSON.stringify(volunteer))
-    this.miniVolunteer = { _id: volunteer._id, title: volunteer.title, imgUrl: volunteer.imgUrls[0] }
+    const id = this.$route.params.eventiId
+    const eventi = await eventiService.getById(id)
+    this.eventi = JSON.parse(JSON.stringify(eventi))
+    this.miniEventi = { _id: eventi._id, title: eventi.title, imgUrl: eventi.imgUrls[0] }
     // const user = JSON.parse(JSON.stringify(this.$store.getters.loggedinUser))
     const user = await userService.getById('u101')
     const { _id, fullName, imgUrl } = user
     this.miniLoggedinUser = { _id, fullName, imgUrl }
     this.avgRates()
-    // this.startDate = `${new Date(this.volunteer.startAt).getDate()}.${new Date(this.volunteer.startAt).getMonth() + 1}.${new Date(this.volunteer.startAt).getFullYear()}`
-    // if (this.volunteer.endAt) {
-    //   this.endDate = `${new Date(this.volunteer.endAt).getDate()}.${new Date(this.volunteer.endAt).getMonth() + 1}.${new Date(this.volunteer.endAt).getFullYear()}`
+    // this.startDate = `${new Date(this.eventi.startAt).getDate()}.${new Date(this.eventi.startAt).getMonth() + 1}.${new Date(this.eventi.startAt).getFullYear()}`
+    // if (this.eventi.endAt) {
+    //   this.endDate = `${new Date(this.eventi.endAt).getDate()}.${new Date(this.eventi.endAt).getMonth() + 1}.${new Date(this.eventi.endAt).getFullYear()}`
     // }
   },
   components: {

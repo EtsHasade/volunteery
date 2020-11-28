@@ -1,20 +1,20 @@
 <template>
   <section
-    class="volunteer-edit flex column center text-center small-container"
+    class="eventi-edit flex column center text-center small-container"
   >
-    <h2>Create new volunteer</h2>
-    <form class="flex column center" @submit.prevent="saveVolunteer">
+    <h2>Create new eventi</h2>
+    <form class="flex column center" @submit.prevent="saveEventi">
       <el-input
-        placeholder="Volunteer title"
-        v-model="volunteerToEdit.title"
+        placeholder="Eventi title"
+        v-model="eventiToEdit.title"
         clearable
       >
       </el-input>
       <el-input
         type="textarea"
         :rows="2"
-        placeholder="tell us about your volunteer"
-        v-model="volunteerToEdit.desc"
+        placeholder="tell us about your eventi"
+        v-model="eventiToEdit.desc"
       >
       </el-input>
       <section class="dates">
@@ -30,35 +30,35 @@
         </div>
       </section>
       <el-input
-placeholder="Volunteer Country" v-model="volunteerToEdit.location.country" clearable/>
+placeholder="Eventi Country" v-model="eventiToEdit.location.country" clearable/>
       <el-input
-        placeholder="Volunteer Address"
-        v-model="volunteerToEdit.location.address"
+        placeholder="Eventi Address"
+        v-model="eventiToEdit.location.address"
         clearable
       />
       Limit of members
       <el-input-number
-        v-model="volunteerToEdit.capacity"
+        v-model="eventiToEdit.capacity"
         :min="1"
       ></el-input-number>
-      <select-multi v-model="volunteerToEdit.tags" :items="tags"></select-multi>
+      <select-multi v-model="eventiToEdit.tags" :items="tags"></select-multi>
       <select-multi
-        v-model="volunteerToEdit.tags"
+        v-model="eventiToEdit.tags"
         :items="neededs"
       ></select-multi>
-      <el-button @click="saveVolunteer">Save</el-button>
+      <el-button @click="saveEventi">Save</el-button>
     </form>
   </section>
 </template>
 
 <script>
-import { volunteerService } from "../service/volunteer-service.js";
+import { eventiService } from "../service/eventi-service.js";
 import selectMulti from "../cmp/element-ui/select-multi.vue";
 export default {
-  name: "volunteer-edit",
+  name: "eventi-edit",
   data() {
     return {
-      volunteerToEdit: volunteerService.getEmptyVolunteer(),
+      eventiToEdit: eventiService.getEmptyEventi(),
       pickerOptions: {
         shortcuts: [
           {
@@ -98,36 +98,36 @@ export default {
     };
   },
   methods: {
-    saveVolunteer() {
+    saveEventi() {
       console.log("hi");
-          if (!this.volunteerToEdit._id){
-            if (!this.volunteerToEdit.imgUrls.length)
-              this.volunteerToEdit.imgUrls.push(
+          if (!this.eventiToEdit._id){
+            if (!this.eventiToEdit.imgUrls.length)
+              this.eventiToEdit.imgUrls.push(
                 "https://maestroselectronics.com/wp-content/uploads/2017/12/No_Image_Available.jpg",
                 "https://maestroselectronics.com/wp-content/uploads/2017/12/No_Image_Available.jpg",
                 "https://maestroselectronics.com/wp-content/uploads/2017/12/No_Image_Available.jpg"
               );
-            this.volunteerToEdit.startAt = this.dates[0].getTime;
-            this.volunteerToEdit.endAt = this.dates[1].getTime;
+            this.eventiToEdit.startAt = this.dates[0].getTime;
+            this.eventiToEdit.endAt = this.dates[1].getTime;
           }
 
-      volunteerService.save(this.volunteerToEdit);
-      this.volunteerToEdit = volunteerService.getEmptyVolunteer();
-      this.$router.push("/volunteer-app");
+      eventiService.save(this.eventiToEdit);
+      this.eventiToEdit = eventiService.getEmptyEventi();
+      this.$router.push("/eventi-app");
     },
-    async getVolunteerById() {
-      const volunteerId = this.$route.params._id;
-      if (volunteerId) {
-        this.volunteerToEdit = await this.$store.dispatch({
-          type: "getVolunteerById",
-          _id: volunteerId,
+    async getEventiById() {
+      const eventiId = this.$route.params._id;
+      if (eventiId) {
+        this.eventiToEdit = await this.$store.dispatch({
+          type: "getEventiById",
+          _id: eventiId,
         });
       }
     },
   },
   created() {
-    this.getVolunteerById();
-    // this.volunteerToEdit = this.$route.params._id;
+    this.getEventiById();
+    // this.eventiToEdit = this.$route.params._id;
   },
   components: {
     selectMulti,

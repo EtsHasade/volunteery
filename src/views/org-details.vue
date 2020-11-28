@@ -29,8 +29,8 @@
             >{{ tag }}</span
           >
         </section>
-        <section class="org-volunteers">
-          <volunteer-list :eventis="orgEventis"></volunteer-list>
+        <section class="org-eventis">
+          <eventi-list :eventis="orgEventis"></eventi-list>
         </section>
         <span>{{ org.desc }}</span>
         <span class="text-center mrg5">Reviews</span>
@@ -76,7 +76,7 @@ import { userService } from '../service/user-service.js';
 import avatar from "vue-avatar";
 import rateStars from '../cmp/element-ui/rate-stars';
 import rateStarsEnable from '../cmp/element-ui/rate-stars-enable';
-import volunteerList from '../cmp/volunteer-list';
+import eventiList from '../cmp/eventi-list';
 
 export default {
   name: 'org-details',
@@ -95,7 +95,7 @@ export default {
   },
   computed:{
     orgEventis() {
-      const eventis = this.$store.getters.volunteersForDisplay.filter(
+      const eventis = this.$store.getters.eventisForDisplay.filter(
         (eventi) => {
           if (eventi.byOrg) {
             return eventi.byOrg._id === this.org._id;
@@ -169,7 +169,7 @@ export default {
     avatar,
     rateStars,
     rateStarsEnable,
-    volunteerList
+    eventiList
   }
 }
 </script>
