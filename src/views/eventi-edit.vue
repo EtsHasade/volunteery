@@ -40,7 +40,7 @@
       />
       <el-input
         onblur="this.placeholder = 'Eventi Address'"
-      onfocus="this.placeholder = ''"
+        onfocus="this.placeholder = ''"
         placeholder="Eventi Address"
         v-model="eventiToEdit.location.address"
         clearable
@@ -53,7 +53,13 @@
       <span>Select tags</span>
       <select-multi v-model="eventiToEdit.tags" :items="tags"></select-multi>
       <span>Select neededs</span>
-      <select-multi v-model="eventiToEdit.neededs" :items="neededs"></select-multi>
+      <select-multi
+        v-model="eventiToEdit.neededs"
+        :items="neededs"
+      ></select-multi>
+      <el-button v-if="eventiToEdit._id" type="danger" @click="removeEventi"
+        >Delete Event</el-button
+      >
       <el-button @click="saveEventi">Save</el-button>
     </form>
   </section>
@@ -61,12 +67,14 @@
 
 <script>
 import { eventiService } from "../service/eventi-service.js";
+import { orgService } from "../service/org-service.js";
 import selectMulti from "../cmp/element-ui/select-multi.vue";
 export default {
   name: "eventi-edit",
   data() {
     return {
       eventiToEdit: eventiService.getEmptyEventi(),
+      byOrg: null,
       pickerOptions: {
         shortcuts: [
           {
@@ -109,14 +117,17 @@ export default {
     saveEventi() {
       console.log("hi");
       if (!this.eventiToEdit._id) {
-        if (!this.eventiToEdit.imgUrls.length)
+        if (!this.eventiToEdit.imgUrls.length) {
           this.eventiToEdit.imgUrls.push(
             "https://maestroselectronics.com/wp-content/uploads/2017/12/No_Image_Available.jpg",
             "https://maestroselectronics.com/wp-content/uploads/2017/12/No_Image_Available.jpg",
             "https://maestroselectronics.com/wp-content/uploads/2017/12/No_Image_Available.jpg"
           );
+        }
         this.eventiToEdit.startAt = this.dates[0].getTime;
         this.eventiToEdit.endAt = this.dates[1].getTime;
+
+        this.eventiToEdit.byOrg = this.byOrg;
       }
 
       eventiService.save(this.eventiToEdit);
@@ -132,10 +143,31 @@ export default {
         });
       }
     },
+    async getByOrg() {
+      const byOrgId = this.$store.getters.loggedinUser.org._id || { _id: null };
+      if (byOrgId) {
+        this.byOrg = await orgService.getById(byOrgId);
+        const { _id, name, rate } = this.byOrg;
+        this.byOrg = { _id, name, rate, imgUrl: this.byOrg.imgUrls[0] };
+
+        console.log(
+          "🚀 ~ file: eventi-edit.vue ~ line 146 ~ created ~ this.byOrg",
+          this.byOrg
+        );
+      }
+    },
+    removeEventi() {
+      this.$store.dispatch({
+        type: "removeEventiById",
+        eventiId: this.eventiToEdit._id,
+      });
+      this.$router.go(-2);
+    },
   },
   created() {
     this.getEventiById();
     // this.eventiToEdit = this.$route.params._id;
+    this.getByOrg();
   },
   components: {
     selectMulti,

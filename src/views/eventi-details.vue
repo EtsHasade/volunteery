@@ -95,6 +95,7 @@
             />
           </section>
         </section>
+        <el-button type="danger" @click="removeEventi">Delete Event</el-button>
         <router-link
           type="success"
           class="el-button el-button--success"
