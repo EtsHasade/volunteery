@@ -64,6 +64,7 @@
         </section>
       </section>
       <section class="status-details text-center">
+        <el-button type="warning" @click="removeOrg">Delete Organization</el-button>
       <router-link type="success" class="el-button el-button--success" :to="'/org-edit/'+org._id">Edit</router-link>
       </section>
     </main>
@@ -144,6 +145,10 @@ export default {
       this.reviewToEdit = { author: {}, txt: '', rate: 5 }
       this.avgRates()
     },
+        removeOrg(){
+      this.$store.dispatch({type: 'removeOrgById', orgId: this.org._id});
+      this.$router.go(-1);
+    }
     // getAvgRate() {
     //     this.avgRate = [...this.org.reviews].reduce((a, b) => (a.rate + b.rate)) / this.org.reviews.length
     //     console.log(this.avgRate);

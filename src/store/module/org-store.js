@@ -22,8 +22,8 @@ export const orgStore = {
             })
             state.orgs.splice(idx, 1, org)
         },
-        removeOrg(state, { org }) {
-            const idx = state.orgs.findIndex(currOrg => currOrg._id === org._id)
+        removeOrgById(state, { orgId }) {
+            const idx = state.orgs.findIndex(currOrg => currOrg._id === orgId)
             state.orgs.splice(idx, 1)
         },
     },
@@ -40,14 +40,17 @@ export const orgStore = {
         async setOrgs({ commit }) {
             try {
                 const orgs = await orgService.query()
-                commit({ type: 'setOrgs', orgs })
+                commit({ type: 'setOrgs', orgs })               
             } catch (err) {
                 console.log('err', err);
             }
         },
-        async removeOrg({ commit }, payload) {
-            await orgService.remove(payload.org._id)
+        async removeOrgById({ commit, dispatch }, payload) {
+            await orgService.remove(payload.orgId)
             commit(payload)
+            payload.orgEventis.forEach(eventi => {
+                dispatch({type: 'removeEventiById', eventiId: eventi._id},{root: true})
+            });
         },
         async setSortOrgs({ commit }, { sortBy }) {
             console.log(sortBy);

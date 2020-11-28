@@ -96,6 +96,7 @@
             />
           </section>
         </section>
+        <el-button type="warning" @click="removeEventi">Delete Event</el-button>
       <router-link type="success" class="el-button el-button--success" :to="'/eventi-edit/'+eventi._id">Edit</router-link>
       </section>
     </main>
@@ -159,6 +160,10 @@ export default {
       this.reviewToEdit = { author: {}, txt: '', rate: 5 }
       this.avgRates()
     },
+    removeEventi(){
+      this.$store.dispatch({type: 'removeEventiById', eventiId: this.eventi._id});
+      this.$router.go(-1);
+    }
     // getAvgRate() {
     //     this.avgRate = [...this.eventi.reviews].reduce((a, b) => (a.rate + b.rate)) / this.eventi.reviews.length
     //     console.log(this.avgRate);

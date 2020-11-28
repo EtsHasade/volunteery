@@ -30,8 +30,8 @@ export const eventiStore = {
             })
             state.eventis.splice(idx, 1, eventi)
         },
-        removeEventi(state, { eventi }) {
-            const idx = state.eventis.findIndex(currEventi => currEventi._id === eventi._id)
+        removeEventiById(state, { eventId }) {
+            const idx = state.eventis.findIndex(currEventi => currEventi._id === eventId)
             state.eventis.splice(idx, 1)
         },
     },
@@ -53,8 +53,8 @@ export const eventiStore = {
                 console.log('err', err);
             }
         },
-        async removeEventi({ commit }, payload) {
-            await eventiService.remove(payload.eventi._id)
+        async removeEventiById({ commit }, payload) {
+            await eventiService.remove(payload.eventiId)
             commit(payload)
         },
         async setSortEventis({ commit }, { sortBy }) {
