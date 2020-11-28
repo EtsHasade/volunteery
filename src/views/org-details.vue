@@ -86,7 +86,7 @@
 
 <script>
 import { orgService } from "../service/org-service.js";
-import { userService } from "../service/user-service.js";
+// import { userService } from "../service/user-service.js";
 import avatar from "vue-avatar";
 import rateStars from "../cmp/element-ui/rate-stars";
 import rateStarsEnable from "../cmp/element-ui/rate-stars-enable";
