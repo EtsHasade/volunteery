@@ -57,7 +57,7 @@
           class="add-review flex center text-center"
         >
           <el-input type="text" v-model="reviewToEdit.txt" name="review" />
-          <el-button>Add review</el-button>
+          <el-button type="success">Add review</el-button>
           <rate-stars-enable v-model="reviewToEdit.rate" />
         </form>
 
@@ -161,6 +161,10 @@ export default {
       this.reviewToEdit = { author: {}, txt: '', rate: 5 }
       this.avgRates()
     },
+    removeEventi(){
+      this.$store.dispatch({type: 'removeEventiById', eventiId: this.eventi._id});
+      this.$router.go(-1);
+    }
     // getAvgRate() {
     //     this.avgRate = [...this.eventi.reviews].reduce((a, b) => (a.rate + b.rate)) / this.eventi.reviews.length
     //     console.log(this.avgRate);

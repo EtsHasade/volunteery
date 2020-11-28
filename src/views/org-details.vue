@@ -31,6 +31,7 @@
         </section>
         <section class="org-eventis">
           <span>Our Events</span>
+          <router-link to="/eventi-edit" class="add-eventi el-button el-button--success">Add Event</router-link>
           <eventi-list :eventis="orgEventis"></eventi-list>
         </section>
         <span>{{ org.desc }}</span>
@@ -40,7 +41,7 @@
           class="add-review flex center text-center"
         >
           <el-input type="text" v-model="reviewToEdit.txt" name="review" />
-          <el-button>Add review</el-button>
+          <el-button type="success">Add review</el-button>
           <rate-stars-enable v-model="reviewToEdit.rate" />
         </form>
 
@@ -65,6 +66,7 @@
         </section>
       </section>
       <section class="status-details text-center">
+        <el-button type="warning" @click="removeOrg">Delete Organization</el-button>
       <router-link type="success" class="el-button el-button--success" :to="'/org-edit/'+org._id">Edit</router-link>
       </section>
     </main>
@@ -122,16 +124,6 @@ export default {
       this.org.rate = sum / this.org.reviews.length
       // return sum / this.org.reviews.length
     },
-    async addMember() {
-      if (this.org.members.find(member => member._id === this.miniLoggedinUser._id)) return
-      //   const user = JSON.parse(JSON.stringify(this.$store.getters.loggedinUser))
-      const user = await userService.getById('u101')
-      this.org.members.push(this.miniLoggedinUser)
-      orgService.save(JSON.parse(JSON.stringify(this.org)))
-      user.events.push(JSON.parse(JSON.stringify(this.miniOrg)))
-      userService.update(user)
-      this.textBtn = 'Your already join'
-    },
     addReview() {
       this.reviewToEdit.rate = Number(this.reviewToEdit.rate)
       this.reviewToEdit.createdAt = Date.now()
@@ -142,6 +134,10 @@ export default {
       this.reviewToEdit = { author: {}, txt: '', rate: 5 }
       this.avgRates()
     },
+        removeOrg(){
+      this.$store.dispatch({type: 'removeOrgById', orgId: this.org._id});
+      this.$router.go(-1);
+    }
     // getAvgRate() {
     //     this.avgRate = [...this.org.reviews].reduce((a, b) => (a.rate + b.rate)) / this.org.reviews.length
     //     console.log(this.avgRate);
