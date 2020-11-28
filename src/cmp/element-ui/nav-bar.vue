@@ -15,7 +15,7 @@
     <el-menu-item index="/org-app">Show all</el-menu-item>
     <el-menu-item index="/org-edit">Create</el-menu-item> 
   </el-submenu>
-  <el-menu-item :index="`/user-details/${loggedinUser._id}`" :disabled="!loggedinUser" >User</el-menu-item>
+  <el-menu-item :index="`/user-details/${(loggedinUser)? loggedinUser._id: null}`" :disabled="!loggedinUser" >User</el-menu-item>
   <el-menu-item index="/login">Login</el-menu-item>
 </el-menu>
 </template>
