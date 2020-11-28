@@ -2,7 +2,7 @@
     box-sizing: border-box;
 }
 
-html{
+html {
     font-family: regular, sans-serif;
 }
 
@@ -38,4 +38,19 @@ select:focus {
 
 button:hover {
     cursor: pointer;
+}
+
+form {
+    &>* {
+        margin-bottom: rem(10px);
+    }
+    & .el-input__inner,
+    .el-textarea__inner {
+        text-align: center;
+        border: 1px solid $clr4;
+        margin-bottom: rem(7px);
+        &::placeholder {
+            color: $clr7;
+        }
+    }
 }

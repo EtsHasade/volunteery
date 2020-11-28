@@ -3,7 +3,7 @@
     <!-- <header class="full"> -->
       <app-header></app-header>
       <!-- </header> -->
-      <main>
+      <main class="mb10">
         <router-view />
       </main>
     <!-- <footer class="full"> -->
