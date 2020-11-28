@@ -2,7 +2,7 @@
 <template>
   <li v-if="org" class="volunteer-preview card-preview flex-column" @click="openDetails">
     <div class="img-squer-container">
-      <img v-show="imgLoad" @load="imgLoad = true" :src="org.imgUrl" alt="" />
+      <img v-show="imgLoad" @load="imgLoad = true" :src="org.imgUrls[0]" alt="" />
       <div v-if="!imgLoad" class="loading flex center">LOADING...</div>
     </div>
     <div class="preview-details">
@@ -44,7 +44,7 @@ export default {
         }
       );
       console.log(
-        "🚀 ~ file: org-preview.vue ~ line 37 ~ orgEventis ~ eentis",
+        "🚀 ~ file: org-preview.vue ~ line 37 ~ orgEventis ~ eventis",
         eventis
       );
       return eventis;
