@@ -176,8 +176,9 @@ export default {
     const eventi = await eventiService.getById(id)
     this.eventi = JSON.parse(JSON.stringify(eventi))
     this.miniEventi = { _id: eventi._id, title: eventi.title, imgUrl: eventi.imgUrls[0] }
-    // const user = JSON.parse(JSON.stringify(this.$store.getters.loggedinUser))
-    const user = await userService.getById('u101')
+    
+    // const user = await userService.getById('u101')
+    const user = JSON.parse(JSON.stringify(this.$store.getters.loggedinUser))
     const { _id, fullName, imgUrl } = user
     this.miniLoggedinUser = { _id, fullName, imgUrl }
     this.avgRates()
