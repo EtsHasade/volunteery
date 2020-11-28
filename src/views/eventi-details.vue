@@ -57,7 +57,7 @@
           class="add-review flex center text-center"
         >
           <el-input type="text" v-model="reviewToEdit.txt" name="review" />
-          <el-button>Add review</el-button>
+          <el-button type="success">Add review</el-button>
           <rate-stars-enable v-model="reviewToEdit.rate" />
         </form>
 

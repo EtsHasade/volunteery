@@ -121,7 +121,7 @@ export default {
 
       eventiService.save(this.eventiToEdit);
       this.eventiToEdit = eventiService.getEmptyEventi();
-      this.$router.push("/eventi-app");
+      this.$router.go(-1);
     },
     async getEventiById() {
       const eventiId = this.$route.params._id;

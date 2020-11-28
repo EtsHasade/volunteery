@@ -39,7 +39,7 @@ export default {
             if(!this.orgCred.imgUrls) this.orgCred.imgUrls.push('https://picsum.photos/id/237/200/300');
             orgService.save(this.orgCred);
             this.orgCred = orgService.getEmptyEventi();
-            this.$router.push('/')
+            this.$router.go(-1);
         }
     },
     components: {
