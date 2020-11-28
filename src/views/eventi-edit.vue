@@ -1,19 +1,21 @@
 <template>
-  <section
-    class="eventi-edit flex column center text-center small-container"
-  >
+  <section class="eventi-edit flex column center text-center small-container">
     <h2>Create new eventi</h2>
     <form class="flex column center" @submit.prevent="saveEventi">
       <el-input
+        onblur="this.placeholder = 'Eventi title'"
+        onfocus="this.placeholder = ''"
         placeholder="Eventi title"
         v-model="eventiToEdit.title"
         clearable
       >
       </el-input>
       <el-input
+        onblur="this.placeholder = 'tell us about your eventi'"
         type="textarea"
-        :rows="2"
+        :rows="3"
         placeholder="tell us about your eventi"
+        onfocus="this.placeholder = ''"
         v-model="eventiToEdit.desc"
       >
       </el-input>
@@ -30,8 +32,15 @@
         </div>
       </section>
       <el-input
-placeholder="Eventi Country" v-model="eventiToEdit.location.country" clearable/>
+        onfocus="this.placeholder = ''"
+        onblur="this.placeholder = 'Eventi Country'"
+        placeholder="Eventi Country"
+        v-model="eventiToEdit.location.country"
+        clearable
+      />
       <el-input
+        onblur="this.placeholder = 'Eventi Address'"
+      onfocus="this.placeholder = ''"
         placeholder="Eventi Address"
         v-model="eventiToEdit.location.address"
         clearable
@@ -41,11 +50,10 @@ placeholder="Eventi Country" v-model="eventiToEdit.location.country" clearable/>
         v-model="eventiToEdit.capacity"
         :min="1"
       ></el-input-number>
+      <span>Select tags</span>
       <select-multi v-model="eventiToEdit.tags" :items="tags"></select-multi>
-      <select-multi
-        v-model="eventiToEdit.tags"
-        :items="neededs"
-      ></select-multi>
+      <span>Select neededs</span>
+      <select-multi v-model="eventiToEdit.neededs" :items="neededs"></select-multi>
       <el-button @click="saveEventi">Save</el-button>
     </form>
   </section>
@@ -100,16 +108,16 @@ export default {
   methods: {
     saveEventi() {
       console.log("hi");
-          if (!this.eventiToEdit._id){
-            if (!this.eventiToEdit.imgUrls.length)
-              this.eventiToEdit.imgUrls.push(
-                "https://maestroselectronics.com/wp-content/uploads/2017/12/No_Image_Available.jpg",
-                "https://maestroselectronics.com/wp-content/uploads/2017/12/No_Image_Available.jpg",
-                "https://maestroselectronics.com/wp-content/uploads/2017/12/No_Image_Available.jpg"
-              );
-            this.eventiToEdit.startAt = this.dates[0].getTime;
-            this.eventiToEdit.endAt = this.dates[1].getTime;
-          }
+      if (!this.eventiToEdit._id) {
+        if (!this.eventiToEdit.imgUrls.length)
+          this.eventiToEdit.imgUrls.push(
+            "https://maestroselectronics.com/wp-content/uploads/2017/12/No_Image_Available.jpg",
+            "https://maestroselectronics.com/wp-content/uploads/2017/12/No_Image_Available.jpg",
+            "https://maestroselectronics.com/wp-content/uploads/2017/12/No_Image_Available.jpg"
+          );
+        this.eventiToEdit.startAt = this.dates[0].getTime;
+        this.eventiToEdit.endAt = this.dates[1].getTime;
+      }
 
       eventiService.save(this.eventiToEdit);
       this.eventiToEdit = eventiService.getEmptyEventi();

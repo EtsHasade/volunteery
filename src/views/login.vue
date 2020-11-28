@@ -4,28 +4,30 @@
         <section class="login">
             <h3>Login</h3>
             <form @submit.prevent="login">
-                <el-input v-model="loginCred.username" placeholder="Username"  clearable></el-input>
-                <el-input v-model="loginCred.password" placeholder="Password" clearable></el-input>
-                <!-- <br><input type="text" class="in username" name="username" v-model="loginCred.username" placeholder="Username" /><br>
-                <br><input type="password" class="in password" name="password" v-model="loginCred.password" placeholder="Password" /><br> -->
-                <button>Login</button>
+                <el-input v-model="loginCred.username" onfocus="this.placeholder = ''" onblur="this.placeholder = 'Username'"  placeholder="Username"  clearable></el-input>
+                <el-input v-model="loginCred.password" onfocus="this.placeholder = ''" onblur="this.placeholder = 'Password'" show-password placeholder="Password" clearable></el-input>
+                <!-- <br><input type="text" class="in username" name="username" v-model="loginCred.username" onfocus="this.placeholder = ''" placeholder="Username" /><br>
+                <br><input type="password" class="in password" name="password" v-model="loginCred.password" onfocus="this.placeholder = ''" placeholder="Password" /><br> -->
+                <el-button>Login</el-button>
             </form>
         </section>        
         <section class="signup">
             <h3>Sign-up</h3>
-            <form @submit.prevent="signup">
-                <el-input v-model="signupCred.username" placeholder="Username"  clearable></el-input>
-                <el-input v-model="signupCred.password" placeholder="Password" clearable></el-input>
-                <el-input v-model="signupCred.email" placeholder="baba@gmail.com" clearable></el-input>
-                <el-input v-model="signupCred.tel" placeholder="012-345-6789" clearable></el-input>
-                <!-- <br><input type="text" class="in username" name="username" v-model="signupCred.username" placeholder="Username" /><br>
+            <form @submit.prevent="signup" class="flex column center">
+                <el-input v-model="signupCred.username" onfocus="this.placeholder = ''" onblur="this.placeholder = 'Username'" placeholder="Username"  clearable></el-input>
+                <el-input v-model="signupCred.password" onfocus="this.placeholder = ''" onblur="this.placeholder = 'Password'" show-password placeholder="Password" clearable></el-input>
+                <el-input v-model="signupCred.email" onfocus="this.placeholder = ''" onblur="this.placeholder = 'baba@gmail.com'" placeholder="baba@gmail.com" clearable></el-input>
+                <el-input v-model="signupCred.tel" onfocus="this.placeholder = ''" onblur="this.placeholder = '012-345-6789'" placeholder="012-345-6789" clearable></el-input>
+                <!-- <br><input type="text" class="in username" name="username" v-model="signupCred.username" onfocus="this.placeholder = ''" placeholder="Username" /><br>
                 <br><input type="password" class="in password" name="password" v-model="signupCred.password" placeholder="Password" /><br> -->
                 <!-- <br><input type="email" class="in email" name="email" v-model="signupCred.email" placeholder="baba@gmail.com" /><br>
                 <br><input type="tel" class="in phone" name="phone" v-model="signupCred.tel" placeholder="012-345-6789"/><br> -->
-                <br><select-multi v-model="signupCred.skill" :items="neededs"></select-multi><br>
-                <br><select-multi v-model="signupCred.fav" :items="tags"></select-multi><br>
-                <br><gender-selector class="in "></gender-selector><br>
-                <button type="button" @click="signup">Sign</button>
+                <span>Select skills</span>
+                <select-multi v-model="signupCred.skill" :items="neededs"></select-multi>
+                <span>Select favorites</span>
+                <select-multi v-model="signupCred.fav" :items="tags"></select-multi>
+                <gender-selector class="in "></gender-selector>
+                <el-button>Sign</el-button>
           </form>
         </section>
     </section>

@@ -17,8 +17,7 @@
           <span>By {{ eventi.byOrg.name }}</span>
         </section>
         <span
-          >{{ eventi.location.address }},
-          {{ eventi.location.country }}</span
+          >{{ eventi.location.address }}, {{ eventi.location.country }}</span
         >
         <rate-stars v-if="eventi.reviews.length" v-model="eventi.rate" />
         <!-- <span v-if="eventi.reviews.length">{{ eventi.rate }} Stars</span> -->
@@ -34,9 +33,9 @@
         </section>
         <span>Limit: {{ eventi.capacity }} members</span>
         <section class="dates flex column">
-          <span>date start: {{ timeToPresent(eventi.startAt) }}</span>
+          <span>date start: {{ moment(eventi.startAt).format('YYYY/MM/DD HH:MM') }}</span>
           <span v-if="eventi.endAt"
-            >date end: {{ timeToPresent(eventi.endAt) }}</span
+            >date end: {{ moment(eventi.endAt).format('YYYY/MM/DD HH:MM') }}</span
           >
         </section>
         <section class="neededs">
@@ -73,9 +72,9 @@
               <rate-stars v-model="review.rate" class="review-rate" />
             </section>
             <section class="content-review flex center text-center">
-              <span class="time mrg5">{{
-                timeToPresent(review.createdAt)
-              }}</span>
+              <span class="time mrg5">
+                {{ moment(review.createdAt).startOf("minute").fromNow() }}
+              </span>
               <span class="name-review mrg5">{{ review.author.fullName }}</span>
               <span class="txt-review">{{ review.txt }}</span>
             </section>
@@ -96,7 +95,12 @@
             />
           </section>
         </section>
-      <router-link type="success" class="el-button el-button--success" :to="'/eventi-edit/'+eventi._id">Edit</router-link>
+        <router-link
+          type="success"
+          class="el-button el-button--success"
+          :to="'/eventi-edit/' + eventi._id"
+          >Edit</router-link
+        >
       </section>
     </main>
   </section>
@@ -108,11 +112,12 @@ import { userService } from '../service/user-service.js';
 import avatar from "vue-avatar";
 import rateStars from '../cmp/element-ui/rate-stars';
 import rateStarsEnable from '../cmp/element-ui/rate-stars-enable';
-
+var moment = require('moment')
 export default {
   name: 'eventi-details',
   data() {
     return {
+      moment,
       eventi: null,
       reviewToEdit: { author: {}, txt: '', rate: 5 },
       miniLoggedinUser: null,
@@ -125,9 +130,6 @@ export default {
     }
   },
   methods: {
-    timeToPresent(time) {
-      return eventiService.timeAgo(time)
-    },
     avgRates() {
       if (this.eventi.reviews.length === 1) {
         this.eventi.rate = this.eventi.reviews[0].rate

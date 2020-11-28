@@ -16,7 +16,7 @@
         <h3>Country: {{ org.country }}</h3>
         <section class="mini-user">
           <avatar :src="org.admin.imgUrl" />
-          <span>Admin: {{ org.admin.name }}</span>
+          <span>Admin: {{ org.admin.fullName }}</span>
         </section>
         <rate-stars v-if="org.reviews.length" v-model="org.rate" />
         <span v-else>{{ msg }}</span>
@@ -30,6 +30,7 @@
           >
         </section>
         <section class="org-eventis">
+          <span>Our Events</span>
           <eventi-list :eventis="orgEventis"></eventi-list>
         </section>
         <span>{{ org.desc }}</span>
@@ -55,7 +56,7 @@
             </section>
             <section class="content-review flex center text-center">
               <span class="time mrg5">{{
-                timeToPresent(review.createdAt)
+                moment(review.createdAt).format('YYYY/MM/DD')
               }}</span>
               <span class="name-review mrg5">{{ review.author.fullName }}</span>
               <span class="txt-review">{{ review.txt }}</span>
@@ -110,9 +111,6 @@ export default {
     }
   },
   methods: {
-    timeToPresent(time) {
-      return orgService.timeAgo(time)
-    },
     avgRates() {
       if (this.org.reviews.length === 1) {
         this.org.rate = this.org.reviews[0].rate

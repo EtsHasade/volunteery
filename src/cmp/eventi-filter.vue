@@ -3,11 +3,17 @@
   <section class="eventi-filter flex center mb10">
     <form class="flex center" @click.prevent="emitFilter">
       <el-input
+        onfocus="this.placeholder = ''"
+        onblur="this.placeholder = 'Search By Title'"
         placeholder="Search By Title"
         v-model="filterBy.byTitle"
         @input="emitFilter"
       />
-      <select-multi v-model="filterBy.byTags" @input="emitFilter" :items="tags" />
+      <select-multi
+        v-model="filterBy.byTags"
+        @input="emitFilter"
+        :items="tags"
+      />
     </form>
   </section>
 </template>

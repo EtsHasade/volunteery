@@ -1,5 +1,5 @@
 <template>
-  <el-select v-model="value" multiple placeholder="Select">
+  <el-select v-model="value" multiple onfocus="this.placeholder = ''" onblur="this.placeholder = 'Select'" placeholder="Select">
     <el-option
       v-for="item in options"
       :key="item.value"
