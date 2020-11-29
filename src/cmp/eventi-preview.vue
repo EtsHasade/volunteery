@@ -1,6 +1,6 @@
 
 <template>
-  <li class="eventi-preview card-preview flex-column"  @click="openDetails">
+  <li class="eventi-preview card-preview flex-column" v-if="eventi"  @click="openDetails">
     <div class="img-squer-container">
       <img v-show="imgLoad" @load="imgLoad = true" :src="eventi.imgUrls[0]" alt="" />
       <div v-if="!imgLoad" class="loading flex center">LOADING...</div>

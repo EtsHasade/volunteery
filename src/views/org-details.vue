@@ -46,7 +46,7 @@
           class="add-review flex center text-center"
         >
           <el-input type="text" v-model="reviewToEdit.txt" name="review" />
-          <el-button type="success">Add review</el-button>
+          <el-button type="success" @click="addReview">Add review</el-button>
           <rate-stars-enable v-model="reviewToEdit.rate" />
         </form>
 
@@ -59,12 +59,12 @@
             <section class="details-review flex">
               <avatar :src="review.author.imgUrl"></avatar>
               <rate-stars v-model="review.rate" class="review-rate" />
-            </section>
-            <section class="content-review flex center text-center">
               <span class="time mrg5">{{
-                moment(review.createdAt).format("YYYY/MM/DD")
+                moment(review.createdAt).startOf("minute").fromNow() 
               }}</span>
-              <span class="name-review mrg5">{{ review.author.fullName }}</span>
+            </section>
+            <section class="content-review flex align-center text-center">
+              <span class="name-review mrg5">{{ review.author.fullName }}: </span>
               <span class="txt-review">{{ review.txt }}</span>
             </section>
           </section>
@@ -92,11 +92,13 @@ import avatar from "vue-avatar";
 import rateStars from "../cmp/element-ui/rate-stars";
 import rateStarsEnable from "../cmp/element-ui/rate-stars-enable";
 import eventiList from "../cmp/eventi-list";
+var moment = require('moment')
 
 export default {
   name: "org-details",
   data() {
     return {
+      moment,
       org: null,
       reviewToEdit: { author: {}, txt: "", rate: 5 },
       miniLoggedinUser: null,

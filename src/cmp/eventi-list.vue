@@ -11,7 +11,7 @@
 import eventiPreview from './eventi-preview';
 
 export default {
-  name: 'eventiList',
+  name: 'eventi-list',
   props:{
     eventis: Array
   },

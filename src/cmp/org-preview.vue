@@ -13,7 +13,7 @@
           <h6 class="org-mini-details">{{ org.country }}</h6>
         </div>
         <h6 class="org-goals">{{ org.goals }}</h6>
-        <rate-stars v-model="rate"></rate-stars>
+        <rate-stars v-model="org.rate"></rate-stars>
         <h6 class="org-eventis">{{ orgEventis.length }} Eventiy events</h6>
       </div>
     </div>

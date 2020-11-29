@@ -7,7 +7,7 @@
   :router="true"
   >
   <el-menu-item index="/">Home</el-menu-item>
-  <el-menu-item index="/eventi-app">Eventiys</el-menu-item>
+  <el-menu-item index="/eventi-app">Events</el-menu-item>
   <el-menu-item index="/eventi-edit">Create</el-menu-item>
   <el-submenu index="2">
     <template slot="title">Organizations</template>
