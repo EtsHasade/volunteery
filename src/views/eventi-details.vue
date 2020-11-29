@@ -61,7 +61,7 @@
           class="add-review flex center text-center"
         >
           <el-input type="text" v-model="reviewToEdit.txt" name="review" />
-          <el-button type="success">Add review</el-button>
+          <el-button type="success" @click="addReview">Add review</el-button>
           <rate-stars-enable v-model="reviewToEdit.rate" />
         </form>
 
@@ -74,12 +74,12 @@
             <section class="details-review flex">
               <avatar :src="review.author.imgUrl"></avatar>
               <rate-stars v-model="review.rate" class="review-rate" />
-            </section>
-            <section class="content-review flex center text-center">
               <span class="time mrg5">
-                {{ moment(review.createdAt).startOf("minute").fromNow() }}
+                {{ moment(review.createdAt)}}
               </span>
-              <span class="name-review mrg5">{{ review.author.fullName }}</span>
+            </section>
+            <section class="content-review flex align-center text-center">
+              <span class="name-review mrg5">{{ review.author.fullName }}: </span>
               <span class="txt-review">{{ review.txt }}</span>
             </section>
           </section>
@@ -158,11 +158,23 @@ export default {
       // return sum / this.eventi.reviews.length
     },
     async addMember() {
+<<<<<<< HEAD
       if (!this.miniLoggedinUser._id) {
        console.log('Login first');
        return
       }
       if (this.eventi.members.find(member => member._id === this.miniLoggedinUser._id)) return
+=======
+      if (this.eventi.members.find(member => member._id === this.miniLoggedinUser._id)) {
+        this.$message({
+          showClose: true,
+          message: `You already joined!`,
+          type: 'success',
+          duration: 1500
+        })
+        return
+      }
+>>>>>>> 95176c1e7878a255e1f310e26c63b7dd015704ef
       const user = JSON.parse(JSON.stringify(this.$store.getters.loggedinUser))
       // const user = await userService.getById('u101')
       this.eventi.members.push(this.miniLoggedinUser)

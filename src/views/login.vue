@@ -165,24 +165,14 @@ export default {
         this.msg = 'Some input is incorrect';
       }
     },
-    async logout() {
-      const user = this.loggedinUser()
-      const res = await this.$store.dispatch({ type: 'logout' })
-      if (res.type) {
+    logout() {
+     this.$store.dispatch({ type: 'logout' })
         this.$message({
           showClose: true,
-          message: `${user.fullName} logout sucessfully!`,
+          message: `${this.loggedinUser.fullName} logout sucessfully!`,
           type: 'success',
           duration: 1500
         })
-      } else {
-        this.$message({
-          showClose: true,
-          message: `${user.fullName} logout failed, err ${res.err.code}`,
-          type: 'warning',
-          duration: 1500
-        })
-      }
     },
   }
 }

@@ -16,44 +16,59 @@
       </section>
     </div>
     <h3>My Events</h3>
-    <eventi-list :eventis="eventis" />
+    <eventi-list  :eventis="eventis" />
+    <h3>My Organization</h3>
+    <org-list :orgs="org" />
   </section>
 </template>
 
 <script>
 import eventiList from '../cmp/eventi-list'
+import orgList from '../cmp/org-list'
 import avatar from 'vue-avatar'
-import { userService } from '../service/user-service.js'
+// import { userService } from '../service/user-service.js'
 export default {
   name: 'user-details',
-  data() {
-    return {
-      user: null
-    }
-  },
+  // data() {
+  //   return {
+  //     user: null
+  //   }
+  // },
   computed: {
+    user() {
+      return this.$store.getters.loggedinUser
+    },
     eventis() {
-      // user.events.map(eventi=> {
-      //       return await eventiService.getById(eventi._id)
-      //   })
       return this.user.events.map(miniEventi => {
         return this.$store.getters.eventisForDisplay.find(
           (eventi) => {
             return eventi._id === miniEventi._id;
           })
       })
+    },
+    org() {
+      console.log(this.$store.getters.orgsForDisplay);
+      const org = this.$store.getters.orgsForDisplay.find(
+        (org) => {
+          return org._id === this.user.org._id;
+        })
+      console.log('org', org)
+      const orgs = []
+      orgs.push(org)
+      return orgs
     }
-
   },
   async created() {
     this.$store.dispatch({ type: 'setEventis' })
-    const id = this.$route.params.userId
-    const user = await userService.getById(id)
-    this.user = JSON.parse(JSON.stringify(user))
+    this.$store.dispatch({ type: 'setOrgs' })
+    // const id = this.$route.params.userId
+    // const user = await userService.getById(id)
+    // this.user = JSON.parse(JSON.stringify(user))
   },
   components: {
     avatar,
-    eventiList
+    eventiList,
+    orgList
   }
 }
 </script>
