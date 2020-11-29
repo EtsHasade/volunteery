@@ -7,7 +7,7 @@
     </div>
     <!-- <div class="preview-details" :style="`background-image: url('${eventi.imgUrls[0]}'); transform: scaleY(-1);`"> -->
     <div class="preview-details">
-      <div class="org-details">
+      <div class="org-details" @click.stop="openOrgDetails">
         <div class="flex">
           <avatar
             style="
@@ -71,6 +71,9 @@ export default {
   methods:{
     openDetails(){
       this.$router.push(`/eventi-details/${this.eventi._id}`)
+    },
+    openOrgDetails(){
+      this.$router.push(`/org-details/${this.eventi.byOrg._id}`)
     }
   }
 };
