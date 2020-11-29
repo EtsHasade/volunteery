@@ -27,12 +27,12 @@
       <div class="eventi-label">
         <h3>{{ eventi.title }}</h3>
         <div class="eventi-date flex">
-          <h6>{{moment(eventi.startAt).format('DD/MM/YYYY') }} |</h6>
-          <h6>{{ eventi.location.country }}</h6>
+          <h4><b>{{ eventi.location.country }} </b>| </h4>
+          <h4> {{moment(eventi.startAt).format('DD/MM/YYYY') }}</h4>
         </div>
       </div>
       <div class="eventi-floor">
-        <h4>{{ eventi.members.length }}/{{ eventi.capacity }} 👨‍👨‍👦</h4>
+        <h4>{{ eventi.members.length }}/{{ eventi.capacity }}</h4>
       </div>
     </div>
   </li>
