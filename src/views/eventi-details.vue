@@ -154,6 +154,10 @@ export default {
       // return sum / this.eventi.reviews.length
     },
     async addMember() {
+      if (!this.miniLoggedinUser._id) {
+       console.log('Login first');
+       return
+      }
       if (this.eventi.members.find(member => member._id === this.miniLoggedinUser._id)) return
       const user = JSON.parse(JSON.stringify(this.$store.getters.loggedinUser))
       // const user = await userService.getById('u101')
@@ -190,7 +194,7 @@ export default {
     this.miniEventi = { _id: eventi._id, title: eventi.title, imgUrl: eventi.imgUrls[0] }
     
     // const user = await userService.getById('u101')
-    const user = JSON.parse(JSON.stringify(this.$store.getters.loggedinUser))
+    const user = JSON.parse(JSON.stringify(this.$store.getters.loggedinUser)) || {fullName: 'Goust'}
     const { _id, fullName, imgUrl } = user
     this.miniLoggedinUser = { _id, fullName, imgUrl }
     this.avgRates()
