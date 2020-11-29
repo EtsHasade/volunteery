@@ -129,9 +129,11 @@ export default {
 
         this.eventiToEdit.byOrg = this.byOrg;
       }
-
-      eventiService.save(this.eventiToEdit);
-      this.$store.dispatch({ type: 'setEventis' })
+      this.$store.dispatch({
+          type: "saveEventi",
+          eventi: this.eventiToEdit,
+        });
+      // eventiService.save(this.eventiToEdit);
       this.eventiToEdit = eventiService.getEmptyEventi();
       this.$router.go(-1);
     },

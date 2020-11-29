@@ -39,7 +39,7 @@ function save(org) {
 
 function _add(org) {
     org.createdAt = Date.now()
-    // eventBusService.$emit(SHOW_MSG, { txt: `${org.name} Added Succefully`, type: 'success' });
+        // eventBusService.$emit(SHOW_MSG, { txt: `${org.name} Added Succefully`, type: 'success' });
     return httpService.post(ORGANIZATION_COLECTION_KEY, org)
 }
 
@@ -54,7 +54,7 @@ function getEmptyOrg() {
         country: '',
         desc: '',
         rate: 0,
-        imgUrl: '',
+        imgUrls: [],
         admin: {}
     }
 }
