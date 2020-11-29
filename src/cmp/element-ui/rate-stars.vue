@@ -3,17 +3,15 @@
     <el-rate
       v-model="value"  
       disabled
-      show-score
       text-color="#ff9900"
-      score-template="{value} stars"
     >
     </el-rate>
   </div>
 </template>
-
 <script>
 // disabled
-
+      // show-score
+      // score-template="{value} stars"
 export default {
   props:{
     value: Number,

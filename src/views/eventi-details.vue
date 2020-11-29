@@ -159,13 +159,6 @@ export default {
       // return sum / this.eventi.reviews.length
     },
     async addMember() {
-<<<<<<< HEAD
-      if (!this.miniLoggedinUser._id) {
-       console.log('Login first');
-       return
-      }
-      if (this.eventi.members.find(member => member._id === this.miniLoggedinUser._id)) return
-=======
       if (this.eventi.members.find(member => member._id === this.miniLoggedinUser._id)) {
         this.$message({
           showClose: true,
@@ -175,7 +168,6 @@ export default {
         })
         return
       }
->>>>>>> 95176c1e7878a255e1f310e26c63b7dd015704ef
       const user = JSON.parse(JSON.stringify(this.$store.getters.loggedinUser))
       // const user = await userService.getById('u101')
       this.eventi.members.push(this.miniLoggedinUser)

@@ -1,6 +1,5 @@
 <template>
   <section class="login flex column center text-center small-container">
-    <h2>{{ msg }}</h2>
     <el-button v-if="loggedinUser" @click="logout">Logout</el-button>
     <section v-else>
       <section class="login">
@@ -88,8 +87,7 @@ export default {
     return {
       // loggedinUser: this.$store.getters.loggedinUser,
       loginCred: {},
-      signupCred: {},
-      msg: '',
+      signupCred: {}
       // tags: this.$store.getters.tags,
       // neededs: this.$store.getters.neededs
     }
@@ -122,7 +120,6 @@ export default {
             duration: 1500
           })
           this.loginCred = {};
-          this.msg = 'loging now';
         } catch (err) {
           this.$message({
             showClose: true,
@@ -130,7 +127,6 @@ export default {
             type: 'warning',
             duration: 1500
           })
-          this.msg = 'Your user/password wrong, please try again.';
         }
       } else {
         this.$message({
@@ -140,7 +136,6 @@ export default {
           duration: 1500
         })
         console.table('this.loginCred', this.loginCred);
-        this.msg = 'Username/Password must be present';
       }
     },
     signup() {
@@ -153,7 +148,6 @@ export default {
           type: 'success',
           duration: 1500
         })
-        this.msg = 'Welcome!';
       } else {
         console.table('this.signupCred', this.signupCred);
         this.$message({
@@ -162,7 +156,6 @@ export default {
           type: 'warning',
           duration: 1500
         })
-        this.msg = 'Some input is incorrect';
       }
     },
     logout() {
@@ -187,11 +180,11 @@ export default {
   margin-top: 20px;
   padding: 20px;
 }
-h2 {
+/* h2 {
   margin-top: 10px;
   padding: 5px;
   border: solid 2px black;
   background-color: #69bd42;
   width: 300px;
-}
+} */
 </style>
