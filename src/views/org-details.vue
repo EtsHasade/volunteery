@@ -139,8 +139,23 @@ export default {
       this.reviewToEdit = { author: {}, txt: "", rate: 5 };
       this.avgRates();
     },
-    removeOrg() {
-      this.$store.dispatch({ type: "removeOrgById", orgId: this.org._id });
+    async removeOrg() {
+      const res = await this.$store.dispatch({ type: "removeOrgById", orgId: this.org._id });
+      if (res.type) {
+        this.$message({
+          showClose: true,
+          message: `${this.orgCred.title} removed sucessfully!`,
+          type: 'success',
+          duration: 1500
+        })
+      } else {
+        this.$message({
+          showClose: true,
+          message: `${this.orgCred.title} cant removed, err ${res.err.code}`,
+          type: 'warning',
+          duration: 1500
+        })
+      }
       this.$router.go(-1);
     },
     // getAvgRate() {

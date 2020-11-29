@@ -38,13 +38,11 @@ export default {
     newestEventis() {
       var eventis = JSON.parse(JSON.stringify(this.$store.getters.eventisForDisplay)) 
       eventis.sort((a,b) => (a.createdAt > b.createdAt) ? 1 : -1);
-      console.log(eventis);
       return eventis.splice(0,4)
     },
     popularestEventis() {
       var eventis = JSON.parse(JSON.stringify(this.$store.getters.eventisForDisplay)) 
       eventis.sort((a,b) => (a.rate > b.rate) ? 1 : ((b.rate > a.rate) ? -1 : 0));
-      console.log(eventis);
       return eventis.splice(0,4)
     }
   },

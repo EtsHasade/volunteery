@@ -37,11 +37,8 @@ export default {
       //       return await eventiService.getById(eventi._id)
       //   })
       return this.user.events.map(miniEventi => {
-        console.log('miniEventi', miniEventi);
-        console.log('this.$store.getters.eventisForDisplay', this.$store.getters.eventisForDisplay);
         return this.$store.getters.eventisForDisplay.find(
           (eventi) => {
-            console.log('eventi', eventi);
             return eventi._id === miniEventi._id;
           })
       })

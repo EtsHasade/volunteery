@@ -42,9 +42,14 @@ export const userStore = {
 
         },
         async logout(context) {
-            await userService.logout()
-            context.commit({ type: 'setUsers', users: [] })
-            context.commit({ type: 'setUser', user: null })
+            try {
+                await userService.logout()
+                context.commit({ type: 'setUsers', users: [] })
+                context.commit({ type: 'setUser', user: null })
+                return { type: true, err: null }
+            } catch (err) {
+                return { type: false, err }
+            }
         },
         async loadUsers(context) {
             const users = await userService.getUsers();

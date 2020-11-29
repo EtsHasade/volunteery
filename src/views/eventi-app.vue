@@ -2,9 +2,15 @@
   <main>
     <eventi-filter @doFilter="setFilter"></eventi-filter>
     <section class="btns-tags flex center mb10">
-      <el-button @click="filterBy = {byTitle: '',byTags: ['COVID-19']}">COVID-19</el-button>
-      <el-button @click="filterBy = {byTitle: '',byTags: ['animals']}">Animals</el-button>
-      <el-button @click="filterBy = {byTitle: '',byTags: ['Needy']}">Needy</el-button>
+      <el-button @click="filterBy = { byTitle: '', byTags: ['COVID-19'] }"
+        >COVID-19</el-button
+      >
+      <el-button @click="filterBy = { byTitle: '', byTags: ['animals'] }"
+        >Animals</el-button
+      >
+      <el-button @click="filterBy = { byTitle: '', byTags: ['Needy'] }"
+        >Needy</el-button
+      >
     </section>
     <eventi-list :eventis="eventisToShow"></eventi-list>
   </main>
@@ -41,7 +47,6 @@ export default {
             }
           })
           eventisfilterTags = eventisfilterTags.concat(eventisfilterTag)
-          console.log(eventisfilterTags);
         })
         eventisFilter = JSON.parse(JSON.stringify(eventisfilterTags))
       }
@@ -54,10 +59,25 @@ export default {
     }
   },
   created() {
-    },
-  mounted() {
-    this.$store.dispatch({ type: 'setEventis' })
-
+  },
+  async mounted() {
+    const resEventis = await this.$store.dispatch({ type: "setEventis" });
+    console.log(resEventis);
+    if (resEventis.type) {
+      this.$message({
+        showClose: true,
+        message: `Events set sucessfully!`,
+        type: 'success',
+        duration: 1500
+      })
+    } else {
+      this.$message({
+        showClose: true,
+        message: `Events cant set, err ${resEventis.err}`,
+        type: 'warning',
+        duration: 1500
+      })
+    }
   },
   components: {
     eventiFilter,

@@ -5,7 +5,6 @@
   class="el-menu-demo"
   mode="horizontal"
   :router="true"
-  @select="handleSelect"
   >
   <el-menu-item index="/">Home</el-menu-item>
   <el-menu-item index="/eventi-app">Eventiys</el-menu-item>
@@ -35,10 +34,10 @@
         return this.loggedinUser ? this.loggedinUser._id : '0'
       }
     },
-    methods: {
-      handleSelect(key, keyPath) {
-        console.log(key, keyPath);
-      }
-    }
+    // methods: {
+    //   handleSelect(key, keyPath) {
+    //     console.log(key, keyPath);
+    //   }
+    // }
   }
 </script>

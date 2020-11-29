@@ -115,7 +115,6 @@ export default {
   },
   methods: {
     saveEventi() {
-      console.log("hi");
       if (!this.eventiToEdit._id) {
         if (!this.eventiToEdit.imgUrls.length) {
           this.eventiToEdit.imgUrls.push(
@@ -129,10 +128,25 @@ export default {
 
         this.eventiToEdit.byOrg = this.byOrg;
       }
-      this.$store.dispatch({
-          type: "saveEventi",
-          eventi: this.eventiToEdit,
-        });
+      const res = this.$store.dispatch({
+        type: "saveEventi",
+        eventi: this.eventiToEdit,
+      });
+      if (res.type) {
+        this.$message({
+          showClose: true,
+          message: `${this.eventiToEdit.title} added sucessfully!`,
+          type: 'success',
+          duration: 1500
+        })
+      } else {
+        this.$message({
+          showClose: true,
+          message: `${this.eventiToEdit.title} cant added, err ${res.err.code}`,
+          type: 'warning',
+          duration: 1500
+        })
+      }
       // eventiService.save(this.eventiToEdit);
       this.eventiToEdit = eventiService.getEmptyEventi();
       this.$router.go(-1);

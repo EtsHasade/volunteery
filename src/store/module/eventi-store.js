@@ -37,25 +37,37 @@ export const eventiStore = {
     },
     actions: {
         async saveEventi({ commit }, { eventi }) {
-            console.log('saveStoreEventi', eventi);
-            const actionType = (eventi._id) ? 'updateEventi' : 'addEventi';
-            const savedEventi = await eventiService.save(eventi)
-            console.log('saved', savedEventi);
-            commit({ type: actionType, eventi: savedEventi })
-            return savedEventi;
+            try {
+                console.log('saveStoreEventi', eventi);
+                const actionType = (eventi._id) ? 'updateEventi' : 'addEventi';
+                const savedEventi = await eventiService.save(eventi)
+                console.log('saved', savedEventi);
+                commit({ type: actionType, eventi: savedEventi })
+                return { type: true, err: null }
+            } catch (err) {
+                return { type: false, err }
+            }
 
         },
         async setEventis({ commit }) {
             try {
+                console.log('setEventi');
                 const eventis = await eventiService.query()
                 commit({ type: 'setEventis', eventis })
+                return { type: true, err: null }
             } catch (err) {
                 console.log('err', err);
+                return { type: false, err }
             }
         },
         async removeEventiById({ commit }, payload) {
-            await eventiService.remove(payload.eventiId)
-            commit(payload)
+            try {
+                await eventiService.remove(payload.eventiId)
+                commit(payload)
+                return { type: true, err: null }
+            } catch (err) {
+                return { type: false, err }
+            }
         },
         async setSortEventis({ commit }, { sortBy }) {
             console.log(sortBy);
@@ -63,7 +75,6 @@ export const eventiStore = {
             commit({ type: 'setEventis', eventis })
         },
         async getEventiById(context, { _id }) {
-            console.log("🚀 ~ file: eventi-store.js ~ line 66 ~ getEventiById ~ _id", _id)
             return await eventiService.getById(_id)
         }
     }
