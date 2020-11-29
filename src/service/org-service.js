@@ -55,7 +55,8 @@ function getEmptyOrg() {
         desc: '',
         rate: 0,
         imgUrls: [],
-        admin: {}
+        admin: {},
+        reviews: []
     }
 }
 
