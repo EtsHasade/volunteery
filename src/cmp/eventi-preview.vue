@@ -27,7 +27,7 @@
       <div class="eventi-label">
         <h3>{{ eventi.title }}</h3>
         <div class="eventi-date flex">
-          <h6>{{ new Date(eventi.startAt).toLocaleDateString() }} |</h6>
+          <h6>{{moment(eventi.startAt).format('DD/MM/YYYY') }} |</h6>
           <h6>{{ eventi.location.country }}</h6>
         </div>
       </div>
@@ -41,6 +41,7 @@
 <script>
 import avatar from "vue-avatar";
 import rateStars from "./element-ui/rate-stars";
+var moment = require('moment')
 
 export default {
   name: "eventiPreview",
@@ -50,7 +51,8 @@ export default {
   data() {
     return {
       orgRate: 2,
-      imgLoad: false
+      imgLoad: false,
+      moment
     };
   },
   created() {
