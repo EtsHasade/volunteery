@@ -95,13 +95,16 @@
             />
           </section>
         </section>
-        <el-button type="danger" @click="removeEventi">Delete Event</el-button>
+
+        <div v-if="isUserOrgAdmin" class="edit-btns">
+        <el-button  type="danger" @click="removeEventi">Delete Event</el-button>
         <router-link
           type="success"
           class="el-button el-button--success"
           :to="'/eventi-edit/' + eventi._id"
           >Edit</router-link
         >
+        </div>
       </section>
     </main>
   </section>
@@ -130,6 +133,14 @@ export default {
       //   endDate: null
     }
   },
+  computed:{
+    isUserOrgAdmin(){
+      const loggedinUser = this.$store.getters.loggedinUser;
+      console.log("🚀 ~ file: eventi-details.vue ~ line 139 ~ isUserOrgAdmin ~ loggedinUser", loggedinUser)
+      if (!loggedinUser || !loggedinUser.org || loggedinUser.org._id !== this.eventi.byOrg._id) return false;
+      else return true;
+    }
+  },
   methods: {
     avgRates() {
       if (this.eventi.reviews.length === 1) {
@@ -144,8 +155,8 @@ export default {
     },
     async addMember() {
       if (this.eventi.members.find(member => member._id === this.miniLoggedinUser._id)) return
-      //   const user = JSON.parse(JSON.stringify(this.$store.getters.loggedinUser))
-      const user = await userService.getById('u101')
+      const user = JSON.parse(JSON.stringify(this.$store.getters.loggedinUser))
+      // const user = await userService.getById('u101')
       this.eventi.members.push(this.miniLoggedinUser)
       eventiService.save(JSON.parse(JSON.stringify(this.eventi)))
       user.events.push(JSON.parse(JSON.stringify(this.miniEventi)))
@@ -156,7 +167,7 @@ export default {
       this.reviewToEdit.rate = Number(this.reviewToEdit.rate)
       this.reviewToEdit.createdAt = Date.now()
       this.reviewToEdit._id = eventiService.makeId()
-      this.reviewToEdit.author = JSON.parse(JSON.stringify(this.miniLoggedinUser))
+      this.reviewToEdit.author = JSON.parse(JSON.stringify(this.miniLoggedinUser)) || {fullName: 'Goust'}
       this.eventi.reviews.push(this.reviewToEdit)
       eventiService.save(JSON.parse(JSON.stringify(this.eventi)))
       this.reviewToEdit = { author: {}, txt: '', rate: 5 }

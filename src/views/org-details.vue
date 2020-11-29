@@ -32,6 +32,7 @@
         <section class="org-eventis">
           <span>Our Events</span>
           <router-link
+            v-if="isUserOrgAdmin"
             to="/eventi-edit"
             class="add-eventi el-button el-button--success"
             >Add Event</router-link
@@ -69,7 +70,7 @@
           </section>
         </section>
       </section>
-      <section class="status-details text-center">
+      <section v-if="isUserOrgAdmin" class="status-details text-center">
         <el-button type="warning" @click="removeOrg"
           >Delete Organization</el-button
         >
@@ -115,6 +116,12 @@ export default {
       });
       return eventis;
     },
+      isUserOrgAdmin(){
+      const loggedinUser = this.$store.getters.loggedinUser;
+      console.log("🚀 ~ file: eventi-details.vue ~ line 139 ~ isUserOrgAdmin ~ loggedinUser", loggedinUser)
+      if (!loggedinUser || !loggedinUser.org || loggedinUser.org._id !== this.org._id) return false;
+      else return true;
+    }
   },
   methods: {
     avgRates() {
@@ -152,7 +159,7 @@ export default {
     this.$store.dispatch({ type: "setEventis" });
     const id = this.$route.params.orgId;
     const org = await orgService.getById(id);
-    this.org = JSON.parse(JSON.stringify(org));
+    this.org = JSON.parse(JSON.stringify(org)) || {};
 
     // const user = await userService.getById("u101");
     const user = JSON.parse(JSON.stringify(this.$store.getters.loggedinUser))
