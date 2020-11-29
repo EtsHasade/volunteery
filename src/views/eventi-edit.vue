@@ -1,7 +1,15 @@
 <template>
-  <section class="eventi-edit flex column center text-center small-container">
-    <h2>Create new eventi</h2>
-    <form class="flex column center" @submit.prevent="saveEventi">
+  <section class="edit-page">
+    <div class="edit-page-title title flex-column center-all">
+      <h2>Create new event</h2>
+      <h3>It's free, quick And simple</h3>
+    </div>
+
+    <div class="side-tabs flex">
+      <h2 class="title-tab">Edit your orgaziation</h2>
+      <h2 class="title-tab active">Publish new event and invite volunteers</h2>
+    </div>
+    <form class="edit-form flex column center" @submit.prevent="saveEventi">
       <el-input
         onblur="this.placeholder = 'Eventi title'"
         onfocus="this.placeholder = ''"
@@ -45,22 +53,33 @@
         v-model="eventiToEdit.location.address"
         clearable
       />
-      Limit of members
-      <el-input-number
-        v-model="eventiToEdit.capacity"
-        :min="1"
-      ></el-input-number>
-      <span>Select tags</span>
-      <select-multi v-model="eventiToEdit.tags" :items="tags"></select-multi>
-      <span>Select neededs</span>
-      <select-multi
-        v-model="eventiToEdit.neededs"
-        :items="neededs"
-      ></select-multi>
-      <el-button v-if="eventiToEdit._id" type="danger" @click="removeEventi"
-        >Delete Event</el-button
-      >
-      <el-button @click="saveEventi">Save</el-button>
+      <div class="slect-options-inputs flex">
+        <label>
+          Limit of members
+          <el-input-number
+            v-model="eventiToEdit.capacity"
+            :min="1"
+          ></el-input-number>
+        </label>
+        <label>
+          Select tags
+          <select-multi
+            v-model="eventiToEdit.tags"
+            :items="tags"
+          ></select-multi>
+        </label>
+        <label>
+          Select neededs
+          <select-multi
+            v-model="eventiToEdit.neededs"
+            :items="neededs"
+          ></select-multi>
+        </label>
+        <el-button v-if="eventiToEdit._id" type="danger" @click="removeEventi"
+          >Delete Event</el-button
+        >
+      </div>
+      <el-button @click="saveEventi">Publish</el-button>
     </form>
   </section>
 </template>
@@ -136,16 +155,16 @@ export default {
         this.$message({
           showClose: true,
           message: `${this.eventiToEdit.title} added sucessfully!`,
-          type: 'success',
-          duration: 1500
-        })
+          type: "success",
+          duration: 1500,
+        });
       } else {
         this.$message({
           showClose: true,
           message: `${this.eventiToEdit.title} cant added, err ${res.err.code}`,
-          type: 'warning',
-          duration: 1500
-        })
+          type: "warning",
+          duration: 1500,
+        });
       }
       // eventiService.save(this.eventiToEdit);
       this.eventiToEdit = eventiService.getEmptyEventi();
