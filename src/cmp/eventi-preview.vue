@@ -57,17 +57,16 @@ export default {
   },
   created() {
     this.orgRate = JSON.parse(JSON.stringify(this.eventi.byOrg.rate));
-    console.log("init org rate", this.orgRate);
   },
   components: {
     rateStars,
     avatar,
   },
-  watch: {
-    orgRate: function (newRate) {
-      console.log("orgRate:", newRate);
-    },
-  },
+  // watch: {
+  //   orgRate: function (newRate) {
+  //     console.log("orgRate:", newRate);
+  //   },
+  // },
   methods:{
     openDetails(){
       this.$router.push(`/eventi-details/${this.eventi._id}`)

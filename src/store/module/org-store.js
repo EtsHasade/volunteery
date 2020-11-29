@@ -29,28 +29,37 @@ export const orgStore = {
     },
     actions: {
         async saveOrg({ commit }, { org }) {
-            console.log('saveStoreOrg', org);
-            const actionType = (org._id) ? 'updateOrg' : 'addOrg';
-            const savedOrg = await orgService.save(org)
-            console.log('saved', savedOrg);
-            commit({ type: actionType, org: savedOrg })
-            return savedOrg;
+            try {
+                const actionType = (org._id) ? 'updateOrg' : 'addOrg';
+                const savedOrg = await orgService.save(org)
+                commit({ type: actionType, org: savedOrg })
+                return { type: true, err: null }
+            } catch (err) {
+                return { type: false, err }
+            }
 
         },
         async setOrgs({ commit }) {
             try {
                 const orgs = await orgService.query()
-                commit({ type: 'setOrgs', orgs })               
+                commit({ type: 'setOrgs', orgs })
+                return { type: true, err: null }
             } catch (err) {
                 console.log('err', err);
+                return { type: false, err }
             }
         },
         async removeOrgById({ commit, dispatch }, payload) {
-            await orgService.remove(payload.orgId)
-            commit(payload)
-            payload.orgEventis.forEach(eventi => {
-                dispatch({type: 'removeEventiById', eventiId: eventi._id},{root: true})
-            });
+            try {
+                await orgService.remove(payload.orgId)
+                commit(payload)
+                payload.orgEventis.forEach(eventi => {
+                    dispatch({ type: 'removeEventiById', eventiId: eventi._id }, { root: true })
+                });
+                return { type: true, err: null }
+            } catch (err) {
+                return { type: false, err }
+            }
         },
         async setSortOrgs({ commit }, { sortBy }) {
             console.log(sortBy);

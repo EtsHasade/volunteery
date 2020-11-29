@@ -31,7 +31,6 @@ export default {
   },
   methods: {
     emitFilter() {
-      console.log('emit');
       if (this.debounce) clearTimeout(this.debounce);
       this.debounce = setTimeout(() => {
         this.$emit("doFilter", JSON.parse(JSON.stringify(this.filterBy)));

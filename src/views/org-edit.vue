@@ -53,22 +53,36 @@ export default {
     }
   },
   methods: {
-    createOrg() {
+    async createOrg() {
       console.log('create new org');
       const user = this.$store.getters.loggedinUser
       this.orgCred.admin = {
-          _id: user._id,
-          fullName: user.fullName,
-          imgUrl: user.imgUrl
+        _id: user._id,
+        fullName: user.fullName,
+        imgUrl: user.imgUrl
       }
       if (!this.orgCred.imgUrls.length) {
         this.orgCred.imgUrls.push('https://picsum.photos/id/237/200/300');
       }
-      this.$store.dispatch({
+      const res = await this.$store.dispatch({
         type: "saveOrg",
         org: this.orgCred,
       });
-    //   orgService.save(this.orgCred);
+        if (res.type) {
+          this.$message({
+            showClose: true,
+            message: `${this.orgCred.title} added sucessfully!`,
+            type: 'success',
+            duration: 1500
+          })
+        } else {
+          this.$message({
+            showClose: true,
+            message: `${this.orgCred.title} cant added, err ${res.err.code}`,
+            type: 'warning',
+            duration: 1500
+          })
+      }
       this.orgCred = orgService.getEmptyOrg();
       this.$router.go(-1);
     }

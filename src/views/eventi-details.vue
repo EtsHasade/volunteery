@@ -33,9 +33,13 @@
         </section>
         <span>Limit: {{ eventi.capacity }} members</span>
         <section class="dates flex column">
-          <span>date start: {{ moment(eventi.startAt).format('YYYY/MM/DD HH:MM') }}</span>
+          <span
+            >date start:
+            {{ moment(eventi.startAt).format("YYYY/MM/DD HH:MM") }}</span
+          >
           <span v-if="eventi.endAt"
-            >date end: {{ moment(eventi.endAt).format('YYYY/MM/DD HH:MM') }}</span
+            >date end:
+            {{ moment(eventi.endAt).format("YYYY/MM/DD HH:MM") }}</span
           >
         </section>
         <section class="neededs">
@@ -154,17 +158,35 @@ export default {
       // return sum / this.eventi.reviews.length
     },
     async addMember() {
+<<<<<<< HEAD
+      if (this.eventi.members.find(member => member._id === this.miniLoggedinUser._id)) {
+        this.$message({
+          showClose: true,
+          message: `You already joined!`,
+          type: 'success',
+          duration: 1500
+        })
+        return
+      }
+=======
       if (!this.miniLoggedinUser._id) {
        console.log('Login first');
        return
       }
       if (this.eventi.members.find(member => member._id === this.miniLoggedinUser._id)) return
+>>>>>>> ced9a4bee5384df5b11315b246ec4cf3bf58a342
       const user = JSON.parse(JSON.stringify(this.$store.getters.loggedinUser))
       // const user = await userService.getById('u101')
       this.eventi.members.push(this.miniLoggedinUser)
       eventiService.save(JSON.parse(JSON.stringify(this.eventi)))
       user.events.push(JSON.parse(JSON.stringify(this.miniEventi)))
       userService.update(user)
+      this.$message({
+        showClose: true,
+        message: `You are a member!`,
+        type: 'success',
+        duration: 1500
+      })
       this.textBtn = 'Your already join'
     },
     addReview() {
@@ -174,11 +196,33 @@ export default {
       this.reviewToEdit.author = JSON.parse(JSON.stringify(this.miniLoggedinUser)) || {fullName: 'Goust'}
       this.eventi.reviews.push(this.reviewToEdit)
       eventiService.save(JSON.parse(JSON.stringify(this.eventi)))
+      this.$message({
+        showClose: true,
+        message: `Your review added sucessfully!`,
+        type: 'success',
+        duration: 1500
+      })
+
       this.reviewToEdit = { author: {}, txt: '', rate: 5 }
       this.avgRates()
     },
-    removeEventi(){
-      this.$store.dispatch({type: 'removeEventiById', eventiId: this.eventi._id});
+    async removeEventi() {
+      const res = await this.$store.dispatch({ type: 'removeEventiById', eventiId: this.eventi._id });
+      if (res.type) {
+        this.$message({
+          showClose: true,
+          message: `${this.eventi.title} removed sucessfully!`,
+          type: 'success',
+          duration: 1500
+        })
+      } else {
+        this.$message({
+          showClose: true,
+          message: `${this.eventi.title} cant remove, err ${res.err.code}`,
+          type: 'warning',
+          duration: 1500
+        })
+      }
       this.$router.go(-1);
     }
     // getAvgRate() {
@@ -192,12 +236,15 @@ export default {
     const eventi = await eventiService.getById(id)
     this.eventi = JSON.parse(JSON.stringify(eventi))
     this.miniEventi = { _id: eventi._id, title: eventi.title, imgUrl: eventi.imgUrls[0] }
-    
+
     // const user = await userService.getById('u101')
     const user = JSON.parse(JSON.stringify(this.$store.getters.loggedinUser)) || {fullName: 'Goust'}
     const { _id, fullName, imgUrl } = user
     this.miniLoggedinUser = { _id, fullName, imgUrl }
     this.avgRates()
+    if (this.eventi.members.find(member => member._id === this.miniLoggedinUser._id)) {
+      this.textBtn = 'You already joined'
+    }
     // this.startDate = `${new Date(this.eventi.startAt).getDate()}.${new Date(this.eventi.startAt).getMonth() + 1}.${new Date(this.eventi.startAt).getFullYear()}`
     // if (this.eventi.endAt) {
     //   this.endDate = `${new Date(this.eventi.endAt).getDate()}.${new Date(this.eventi.endAt).getMonth() + 1}.${new Date(this.eventi.endAt).getFullYear()}`

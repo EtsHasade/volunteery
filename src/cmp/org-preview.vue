@@ -43,25 +43,25 @@ export default {
           }
         }
       );
-      console.log(
-        "🚀 ~ file: org-preview.vue ~ line 37 ~ orgEventis ~ eventis",
-        eventis
-      );
+      // console.log(
+      //   "🚀 ~ file: org-preview.vue ~ line 37 ~ orgEventis ~ eventis",
+      //   eventis
+      // );
       return eventis;
     }
   },
   created() {
     this.orgRate = JSON.parse(JSON.stringify(this.org.rate));
-    console.log("org", this.org);
+    // console.log("org", this.org);
   },
   components: {
     rateStars,
   },
-  watch: {
-    rate: function (newRate) {
-      console.log("rate:", newRate);
-    },
-  },
+  // watch: {
+  //   rate: function (newRate) {
+  //     console.log("rate:", newRate);
+  //   },
+  // },
   methods: {
     openDetails() {
       this.$router.push(`/org-details/${this.org._id}`);

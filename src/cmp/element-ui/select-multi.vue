@@ -44,7 +44,6 @@ export default {
   watch: {
     value: function (newValue) {
       this.$emit('input', newValue)
-      console.log(newValue);
     }
   }
 }
