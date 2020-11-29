@@ -64,13 +64,13 @@
                       <br><input type="tel" class="in phone" name="phone" v-model="signupCred.tel" placeholder="012-345-6789"/><br> -->
           <span>Select skills</span>
           <select-multi
-            v-model="signupCred.skill"
+            v-model="signupCred.skills"
             :items="neededs"
           ></select-multi>
           <span>Select favorites</span>
-          <select-multi v-model="signupCred.fav" :items="tags"></select-multi>
+          <select-multi v-model="signupCred.favs" :items="tags"></select-multi>
           <gender-selector class="in"></gender-selector>
-          <el-button>Sign</el-button>
+          <el-button @click="signup">Sign</el-button>
         </form>
       </section>
     </section>
@@ -88,7 +88,7 @@ export default {
     return {
       // loggedinUser: this.$store.getters.loggedinUser,
       loginCred: {},
-      signupCred: {},
+      signupCred: {events: [], imgUrl: null, org: null},
       msg: '',
       // tags: this.$store.getters.tags,
       // neededs: this.$store.getters.neededs

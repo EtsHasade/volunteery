@@ -1,7 +1,7 @@
 <template>
   <section v-if="user" class="user-details">
     <h2>user details</h2>
-    <avatar :src="user.imgUrl" />
+    <avatar v-if="user.imgUrl" :src="user.imgUrl" />
     <h3>Name: {{ user.fullName }}</h3>
     <div class="skills clean-list mb10">
       <h3 class="mrg0">Skills:</h3>
@@ -11,14 +11,16 @@
     </div>
     <div class="favs clean-list mb10">
       <h3 class="mrg0">Favorites:</h3>
-      <section v-for="(fav, idx) in user.favorites" :key="idx">
+      <section v-for="(fav, idx) in user.favs" :key="idx">
         {{ fav }}
       </section>
     </div>
     <h3>My Events</h3>
-    <eventi-list  :eventis="eventis" />
+    <eventi-list v-if="user.events.length"  :eventis="eventis" />
+    <h4 v-else>Join Events!</h4>
     <h3>My Organization</h3>
-    <org-list :orgs="org" />
+    <org-list v-if="user.org" :orgs="org" />
+    <h4 v-else>Make your own Organization</h4>
   </section>
 </template>
 

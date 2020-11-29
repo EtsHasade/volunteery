@@ -115,6 +115,15 @@ export default {
   },
   methods: {
     saveEventi() {
+      if (!this.$store.getters.loggedinUser.org) {
+        this.$message({
+          showClose: true,
+          message: `create organization first`,
+          type: 'warning',
+          duration: 1500
+        })
+        return
+      }
       if (!this.eventiToEdit._id) {
         if (!this.eventiToEdit.imgUrls.length) {
           this.eventiToEdit.imgUrls.push(
@@ -152,6 +161,7 @@ export default {
       this.$router.go(-1);
     },
     async getEventiById() {
+      if (!this.$route.params._id) return
       const eventiId = this.$route.params._id;
       if (eventiId) {
         this.eventiToEdit = await this.$store.dispatch({
@@ -161,6 +171,7 @@ export default {
       }
     },
     async getByOrg() {
+      if (!this.$store.getters.loggedinUser.org) return
       const byOrgId = this.$store.getters.loggedinUser.org._id || { _id: null };
       if (byOrgId) {
         this.byOrg = await orgService.getById(byOrgId);

@@ -93,6 +93,7 @@
               class="member-img mrg5"
               v-for="member in eventi.members"
               :key="member._id"
+              :username="member.fullName"
               :src="member.imgUrl"
               :title="member.fullName"
             />
@@ -117,7 +118,7 @@
 
 <script>
 import { eventiService } from '../service/eventi-service.js';
-import { userService } from '../service/user-service.js';
+// import { userService } from '../service/user-service.js';
 import avatar from "vue-avatar";
 import rateStars from '../cmp/element-ui/rate-stars';
 import rateStarsEnable from '../cmp/element-ui/rate-stars-enable';
@@ -173,13 +174,19 @@ export default {
       this.eventi.members.push(this.miniLoggedinUser)
       eventiService.save(JSON.parse(JSON.stringify(this.eventi)))
       user.events.push(JSON.parse(JSON.stringify(this.miniEventi)))
-      userService.update(user)
-      this.$message({
-        showClose: true,
-        message: `You are a member!`,
-        type: 'success',
-        duration: 1500
-      })
+      // userService.update(user)
+      const res = await this.$store.dispatch({
+        type: "updateUser",
+        user,
+      });
+      if (res.type) {
+        this.$message({
+          showClose: true,
+          message: `You are a member!`,
+          type: 'success',
+          duration: 1500
+        })
+      }
       this.textBtn = 'Your already join'
     },
     addReview() {
@@ -188,6 +195,7 @@ export default {
       this.reviewToEdit._id = eventiService.makeId()
       this.reviewToEdit.author = JSON.parse(JSON.stringify(this.miniLoggedinUser)) || { fullName: 'Goust' }
       this.eventi.reviews.push(this.reviewToEdit)
+      this.avgRates()
       eventiService.save(JSON.parse(JSON.stringify(this.eventi)))
       this.$message({
         showClose: true,
@@ -197,7 +205,6 @@ export default {
       })
 
       this.reviewToEdit = { author: {}, txt: '', rate: 5 }
-      this.avgRates()
     },
     async removeEventi() {
       const res = await this.$store.dispatch({ type: 'removeEventiById', eventiId: this.eventi._id });

@@ -60,11 +60,13 @@
               <avatar :src="review.author.imgUrl"></avatar>
               <rate-stars v-model="review.rate" class="review-rate" />
               <span class="time mrg5">{{
-                moment(review.createdAt).startOf("minute").fromNow() 
+                moment(review.createdAt).startOf("minute").fromNow()
               }}</span>
             </section>
             <section class="content-review flex align-center text-center">
-              <span class="name-review mrg5">{{ review.author.fullName }}: </span>
+              <span class="name-review mrg5"
+                >{{ review.author.fullName }}:
+              </span>
               <span class="txt-review">{{ review.txt }}</span>
             </section>
           </section>
@@ -118,7 +120,7 @@ export default {
       });
       return eventis;
     },
-      isUserOrgAdmin(){
+    isUserOrgAdmin() {
       const loggedinUser = this.$store.getters.loggedinUser;
       console.log("🚀 ~ file: eventi-details.vue ~ line 139 ~ isUserOrgAdmin ~ loggedinUser", loggedinUser)
       if (!loggedinUser || !loggedinUser.org || loggedinUser.org._id !== this.org._id) return false;
@@ -127,14 +129,15 @@ export default {
   },
   methods: {
     avgRates() {
-      if (this.org.reviews.length === 1) {
-        this.org.rate = this.org.reviews[0].rate;
-      }
-      var sum = 0;
-      this.org.reviews.forEach((review) => {
-        sum += review.rate;
-      });
-      this.org.rate = sum / this.org.reviews.length;
+      // if (this.org.reviews.length === 1) {
+      //   this.org.rate = this.org.reviews[0].rate;
+      // } else {
+        var sum = 0;
+        this.org.reviews.forEach((review) => {
+          sum += review.rate;
+        });
+        this.org.rate = sum / this.org.reviews.length;
+      // }
     },
     addReview() {
       this.reviewToEdit.rate = Number(this.reviewToEdit.rate);
@@ -144,9 +147,11 @@ export default {
         JSON.stringify(this.miniLoggedinUser)
       );
       this.org.reviews.push(this.reviewToEdit);
-      orgService.save(JSON.parse(JSON.stringify(this.org)));
-      this.reviewToEdit = { author: {}, txt: "", rate: 5 };
       this.avgRates();
+      console.log(this.org);
+      // orgService.save(JSON.parse(JSON.stringify(this.org)));
+      this.$store.dispatch({ type: "saveOrg", org: JSON.parse(JSON.stringify(this.org)) });
+      this.reviewToEdit = { author: {}, txt: "", rate: 5 };
     },
     async removeOrg() {
       const res = await this.$store.dispatch({ type: "removeOrgById", orgId: this.org._id });
