@@ -149,6 +149,7 @@ export default {
     // }
   },
   async created() {
+    this.$store.dispatch({ type: "setEventis" });
     const id = this.$route.params.orgId;
     const org = await orgService.getById(id);
     this.org = JSON.parse(JSON.stringify(org));

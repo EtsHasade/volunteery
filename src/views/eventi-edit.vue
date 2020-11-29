@@ -131,6 +131,7 @@ export default {
       }
 
       eventiService.save(this.eventiToEdit);
+      this.$store.dispatch({ type: 'setEventis' })
       this.eventiToEdit = eventiService.getEmptyEventi();
       this.$router.go(-1);
     },
