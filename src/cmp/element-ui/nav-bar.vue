@@ -12,7 +12,7 @@
       <el-menu-item index="/eventi-app">All volunteer events</el-menu-item>
       <el-menu-item index="/org-app">All Organizations</el-menu-item>
     </el-submenu>
-      <el-menu-item v-if="!loggedinUser.org" index="/org-edit">I need volunteers</el-menu-item>
+      <el-menu-item v-if="loggedinUser && !loggedinUser.org" index="/org-edit">I need volunteers</el-menu-item>
       <el-menu-item v-else index="/eventi-edit">Publish new Event</el-menu-item>
     <el-menu-item :index="`/user-details/${userId}`" :disabled="!loggedinUser"
       >User</el-menu-item

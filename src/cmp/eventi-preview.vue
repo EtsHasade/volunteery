@@ -7,9 +7,10 @@
     </div>
     <!-- <div class="preview-details" :style="`background-image: url('${eventi.imgUrls[0]}'); transform: scaleY(-1);`"> -->
     <div class="preview-details">
-      <div class="org-details" @click.stop="openOrgDetails">
-        <div class="flex">
+      <div class="org-details">
+        <div class="flex mb10">
           <avatar
+            @click.stop="openOrgDetails"
             style="
                {
                 background-position: center;
@@ -22,7 +23,8 @@
           <!-- <img class="org-logo" :src="eventi.byOrg.imgUrl" alt="" /> -->
           <h4>{{ eventi.byOrg.name }}</h4>
         </div>
-        <rate-stars v-model="orgRate" :disabled="true"></rate-stars>
+        <!-- <rate-stars v-model="orgRate" :disabled="true"></rate-stars> -->
+        <p>⭐ {{orgRate}}</p>
       </div>
       <div class="eventi-label">
         <h3>{{ eventi.title }}</h3>
@@ -40,7 +42,7 @@
 
 <script>
 import avatar from "vue-avatar";
-import rateStars from "./element-ui/rate-stars";
+// import rateStars from "./element-ui/rate-stars";
 var moment = require('moment')
 
 export default {
@@ -59,7 +61,7 @@ export default {
     this.orgRate = JSON.parse(JSON.stringify(this.eventi.byOrg.rate));
   },
   components: {
-    rateStars,
+    // rateStars,
     avatar,
   },
   // watch: {

@@ -15,30 +15,30 @@ export default {
   },
   async created() {
     const resEventis = await this.$store.dispatch({ type: "setEventis" });
-    if(!resEventis.type) {
-      this.$message({
-        showClose: true,
-        message: `Events cant set, err ${resEventis.err.code}`,
-        type: 'warning',
-        duration: 3000
-      })
-    }
+    // if(!resEventis.type) {
+    //   this.$message({
+    //     showClose: true,
+    //     message: `Events cant set, err ${resEventis.err.code}`,
+    //     type: 'warning',
+    //     duration: 3000
+    //   })
+    // }
     const resOrgs = await this.$store.dispatch({ type: "setOrgs" });
-    if (resOrgs.type) {
-      this.$message({
-        showClose: true,
-        message: `Organizations set sucessfully!`,
-        type: 'success',
-        duration: 3000
-      })
-    } else {
-      this.$message({
-        showClose: true,
-        message: `Organizations cant set, err ${resOrgs.err.code}`,
-        type: 'warning',
-        duration: 3000
-      })
-    }
+    // if (resOrgs.type) {
+    //   this.$message({
+    //     showClose: true,
+    //     message: `Organizations set sucessfully!`,
+    //     type: 'success',
+    //     duration: 3000
+    //   })
+    // } else {
+    //   this.$message({
+    //     showClose: true,
+    //     message: `Organizations cant set, err ${resOrgs.err.code}`,
+    //     type: 'warning',
+    //     duration: 3000
+    //   })
+    // }
   },
   components: {
   

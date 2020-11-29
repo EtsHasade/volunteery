@@ -19,8 +19,10 @@
         <span
           >{{ eventi.location.address }}, {{ eventi.location.country }}</span
         >
-        <rate-stars v-if="eventi.reviews.length" v-model="eventi.rate" />
-        <!-- <span v-if="eventi.reviews.length">{{ eventi.rate }} Stars</span> -->
+        <!-- <rate-stars v-if="eventi.reviews.length" v-model="eventi.rate" /> -->
+        <span v-if="eventi.reviews.length"
+          >⭐ {{ eventi.rate }} ({{ eventi.reviews.length }} reviews)</span
+        >
         <span v-else>{{ msg }}</span>
         <span>Tags:</span>
         <section class="tags flex wrap">
@@ -99,7 +101,6 @@
             />
           </section>
         </section>
-
         <div v-if="isUserOrgAdmin" class="edit-btns">
           <el-button type="danger" @click="removeEventi"
             >Delete Event</el-button
@@ -111,12 +112,27 @@
             >Edit</router-link
           >
         </div>
+        <button @click="openChat" class="chat-btn">💬</button>
+        <chat-app v-if="showChat" class="chat-app" @closeChat="closeChat">
+          <button slot="header" @click="closeChat">X</button>
+          <section v-for="(msg, idx) in msgs" class="mainChat" :key="idx">
+            <span class="msg">{{ msg.from }}: {{ msg.txt }}</span>
+          </section>
+          <div slot="footer">
+            <form @submit.prevent="sendMsg">
+              <input type="text" placeholder="Send Massage" v-model="msgChat.txt" />
+              <button>send</button>
+            </form>
+          </div>
+        </chat-app>
       </section>
     </main>
   </section>
 </template>
 
 <script>
+import chatApp from '../cmp/chat-app'
+import socketService from '../service/socket-service.js'
 import { eventiService } from '../service/eventi-service.js';
 // import { userService } from '../service/user-service.js';
 import avatar from "vue-avatar";
@@ -134,9 +150,12 @@ export default {
       miniEventi: null,
       textBtn: 'Join us!',
       msg: 'no Rates',
-      //   avgRate: null
-      //   startDate: null,
-      //   endDate: null
+      msgChat: { from: '', txt: '' },
+      msgs: [],
+      topic: 'love',
+      showChat: false,
+      debounce: null,
+
     }
   },
   computed: {
@@ -160,21 +179,43 @@ export default {
       // return sum / this.eventi.reviews.length
     },
     async addMember() {
-      if (this.eventi.members.find(member => member._id === this.miniLoggedinUser._id)) {
-        this.$message({
-          showClose: true,
-          message: `You already joined!`,
-          type: 'success',
-          duration: 1500
+      const idx = this.eventi.members.findIndex(member => {
+        return member._id === this.miniLoggedinUser._id
+      })
+      if (idx != -1) {
+        this.eventi.members.splice(idx, 1)
+        const idxEvent = this.$store.getters.loggedinUser.events.findIndex(event => {
+          return event._id === this.eventi._id
         })
+        const user = this.$store.getters.loggedinUser
+        user.events.splice(idxEvent, 1)
+        this.$store.dispatch({
+          type: 'updateUser',
+          user: JSON.parse(JSON.stringify(user))
+        })
+        const res = await this.$store.dispatch({
+          type: 'saveEventi',
+          eventi: JSON.parse(JSON.stringify(this.eventi))
+        })
+        if (res.type) {
+          this.textBtn = 'Join us'
+          this.$message({
+            showClose: true,
+            message: `You remove from this event`,
+            type: 'success',
+            duration: 1500
+          })
+        }
         return
       }
       const user = JSON.parse(JSON.stringify(this.$store.getters.loggedinUser))
-      // const user = await userService.getById('u101')
       this.eventi.members.push(this.miniLoggedinUser)
-      eventiService.save(JSON.parse(JSON.stringify(this.eventi)))
+      // eventiService.save(JSON.parse(JSON.stringify(this.eventi)))
+      this.$store.dispatch({
+        type: "saveEventi",
+        eventi: JSON.parse(JSON.stringify(this.eventi)),
+      });
       user.events.push(JSON.parse(JSON.stringify(this.miniEventi)))
-      // userService.update(user)
       const res = await this.$store.dispatch({
         type: "updateUser",
         user,
@@ -187,7 +228,7 @@ export default {
           duration: 1500
         })
       }
-      this.textBtn = 'Your already join'
+      this.textBtn = 'leave event'
     },
     addReview() {
       this.reviewToEdit.rate = Number(this.reviewToEdit.rate)
@@ -224,11 +265,32 @@ export default {
         })
       }
       this.$router.go(-1);
-    }
-    // getAvgRate() {
-    //     this.avgRate = [...this.eventi.reviews].reduce((a, b) => (a.rate + b.rate)) / this.eventi.reviews.length
-    //     console.log(this.avgRate);
-    // }
+    },
+    closeChat() {
+      this.showChat = false;
+      this.msgs = [];
+      this.msgChat = "";
+      socketService.off('chat addMsg', this.addMsg)
+      socketService.terminate();
+    },
+    openChat() {
+      if (!this.$store.getters.loggedinUser) return
+      this.showChat = true;
+      this.msgChat.from = this.$store.getters.loggedinUser.fullName
+      this.topic = this.eventi._id
+      socketService.setup();
+      socketService.emit('chat topic', this.topic)
+      // socketService.emit('msgChat history')
+      socketService.on('chat addMsg', this.addMsg)
+    },
+    addMsg(msgChat) {
+      this.msgs.push(msgChat)
+    },
+    sendMsg() {
+      console.log('Sending', this.msgChat);
+      socketService.emit('chat newMsg', this.msgChat)
+      this.msgChat = { from: this.$store.getters.loggedinUser.fullName, txt: '' };
+    },
 
   },
   async created() {
@@ -243,7 +305,7 @@ export default {
     this.miniLoggedinUser = { _id, fullName, imgUrl }
     this.avgRates()
     if (this.eventi.members.find(member => member._id === this.miniLoggedinUser._id)) {
-      this.textBtn = 'You already joined'
+      this.textBtn = 'leave event'
     }
     // this.startDate = `${new Date(this.eventi.startAt).getDate()}.${new Date(this.eventi.startAt).getMonth() + 1}.${new Date(this.eventi.startAt).getFullYear()}`
     // if (this.eventi.endAt) {
@@ -253,7 +315,8 @@ export default {
   components: {
     avatar,
     rateStars,
-    rateStarsEnable
+    rateStarsEnable,
+    chatApp
   }
 }
 </script>
