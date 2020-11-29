@@ -55,7 +55,7 @@ export default {
   methods: {
     async createOrg() {
       console.log('create new org');
-      const user = this.$store.getters.loggedinUser
+      const user =  JSON.parse(JSON.stringify(this.$store.getters.loggedinUser)) 
       this.orgCred.admin = {
         _id: user._id,
         fullName: user.fullName,
@@ -68,6 +68,10 @@ export default {
         type: "saveOrg",
         org: this.orgCred,
       });
+
+      user.org = {_id: this.orgCred._id, name: this.orgCred.name, imgUrl: this.orgCred.imgUrls[0]};
+       await this.$store.dispatch({type: 'updateUser', user});
+       
         if (res.type) {
           this.$message({
             showClose: true,
