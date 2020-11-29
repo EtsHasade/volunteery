@@ -56,8 +56,11 @@ export const userStore = {
             context.commit({ type: 'removeUser', userId })
         },
         async updateUser(context, { user }) {
+            console.log(user);
             user = await userService.update(user);
+            console.log(user);
             context.commit({ type: 'setUser', user })
+            return { type: true }
         }
     }
 }

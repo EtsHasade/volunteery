@@ -2,15 +2,15 @@
   <div class="rate-stars">
     <el-rate
       v-model="value"  
-      show-score
       text-color="#ff9900"
-      score-template="{value} stars"
     >
     </el-rate>
   </div>
 </template>
 
 <script>
+      // score-template="{value} stars"
+      // show-score
 
 export default {
   props:{
