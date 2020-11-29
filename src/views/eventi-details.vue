@@ -8,7 +8,7 @@
         :src="img"
       />
     </section>
-    <main class="flex">
+    <main class="flex justify-center">
       <section class="details flex column">
         <h2>{{ eventi.title }}</h2>
         <section class="mini-org">
@@ -56,14 +56,11 @@
         </section>
         <span>{{ eventi.desc }}</span>
         <span class="text-center mrg5">Reviews</span>
-        <form
-          @submit.prevent="addReview"
-          class="add-review flex center text-center"
-        >
+        <section class="add-review flex align-center text-center mb10">
           <el-input type="text" v-model="reviewToEdit.txt" name="review" />
           <el-button type="success" @click="addReview">Add review</el-button>
-          <rate-stars-enable v-model="reviewToEdit.rate" />
-        </form>
+          <rate-stars-enable class="mb10" v-model="reviewToEdit.rate" />
+        </section>
 
         <section class="reviews flex column">
           <section
@@ -75,11 +72,13 @@
               <avatar :src="review.author.imgUrl"></avatar>
               <rate-stars v-model="review.rate" class="review-rate" />
               <span class="time mrg5">
-                {{ moment(review.createdAt)}}
+                {{ moment(review.createdAt).startOf("minute").fromNow() }}
               </span>
             </section>
             <section class="content-review flex align-center text-center">
-              <span class="name-review mrg5">{{ review.author.fullName }}: </span>
+              <span class="name-review mrg5"
+                >{{ review.author.fullName }}:
+              </span>
               <span class="txt-review">{{ review.txt }}</span>
             </section>
           </section>
@@ -101,13 +100,15 @@
         </section>
 
         <div v-if="isUserOrgAdmin" class="edit-btns">
-        <el-button  type="danger" @click="removeEventi">Delete Event</el-button>
-        <router-link
-          type="success"
-          class="el-button el-button--success"
-          :to="'/eventi-edit/' + eventi._id"
-          >Edit</router-link
-        >
+          <el-button type="danger" @click="removeEventi"
+            >Delete Event</el-button
+          >
+          <router-link
+            type="success"
+            class="el-button el-button--success"
+            :to="'/eventi-edit/' + eventi._id"
+            >Edit</router-link
+          >
         </div>
       </section>
     </main>
@@ -137,8 +138,8 @@ export default {
       //   endDate: null
     }
   },
-  computed:{
-    isUserOrgAdmin(){
+  computed: {
+    isUserOrgAdmin() {
       const loggedinUser = this.$store.getters.loggedinUser;
       console.log("🚀 ~ file: eventi-details.vue ~ line 139 ~ isUserOrgAdmin ~ loggedinUser", loggedinUser)
       if (!loggedinUser || !loggedinUser.org || loggedinUser.org._id !== this.eventi.byOrg._id) return false;
@@ -185,7 +186,7 @@ export default {
       this.reviewToEdit.rate = Number(this.reviewToEdit.rate)
       this.reviewToEdit.createdAt = Date.now()
       this.reviewToEdit._id = eventiService.makeId()
-      this.reviewToEdit.author = JSON.parse(JSON.stringify(this.miniLoggedinUser)) || {fullName: 'Goust'}
+      this.reviewToEdit.author = JSON.parse(JSON.stringify(this.miniLoggedinUser)) || { fullName: 'Goust' }
       this.eventi.reviews.push(this.reviewToEdit)
       eventiService.save(JSON.parse(JSON.stringify(this.eventi)))
       this.$message({
@@ -230,7 +231,7 @@ export default {
     this.miniEventi = { _id: eventi._id, title: eventi.title, imgUrl: eventi.imgUrls[0] }
 
     // const user = await userService.getById('u101')
-    const user = JSON.parse(JSON.stringify(this.$store.getters.loggedinUser)) || {fullName: 'Goust'}
+    const user = JSON.parse(JSON.stringify(this.$store.getters.loggedinUser)) || { fullName: 'Goust' }
     const { _id, fullName, imgUrl } = user
     this.miniLoggedinUser = { _id, fullName, imgUrl }
     this.avgRates()
