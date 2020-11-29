@@ -21,7 +21,7 @@
         :eventi="eventi"
       />
     </ul>
-    <global-info></global-info>
+    <!-- <global-info /> -->
   </div>
 
 </template>
@@ -30,7 +30,7 @@
 // @ is an alias to /src
 
 import eventiPreview from '../cmp/eventi-preview';
-import globalInfo from '../cmp/global-info';
+// import globalInfo from '../cmp/global-info';
 
 // import orgPreview from '../cmp/org-preview'
 // import { eventiService } from '../service/eventi-service.js'
@@ -55,6 +55,7 @@ export default {
   },
   components: {
     eventiPreview,
+    // globalInfo
     // orgPreview
   }
 }
