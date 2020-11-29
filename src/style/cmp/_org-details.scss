@@ -1,15 +1,15 @@
-.eventi-details {
+.org-details {
     // display: grid;
     // grid-template-rows: 200px 1fr;
     // grid-gap: 10px;
     & .details-review {
         align-items: center;
     }
-    & .eventi-imgs {
+    & .org-imgs {
         height: 300px;
         margin: 2rem 0;
         display: grid;
-        grid-template-columns: repeat(auto-fit, 1fr);
+        grid-template-columns: repeat(3, 1fr);
         grid-gap: 8px;
         grid-auto-flow: dense;
         border-radius: 10px;
@@ -20,11 +20,6 @@
             object-fit: cover;
             display: block;
         }
-        & img:nth-child(3) {
-            // height: 555px;
-            grid-row-start: 1;
-            grid-column-start: 3;
-        }
         & img:first-child {
             // height: 555px;
             grid-row-start: 1;
@@ -32,7 +27,6 @@
             grid-column-start: 1;
             grid-column-end: 3;
         }
-
     }
     //     grid-row: 1;
     //     display: grid;

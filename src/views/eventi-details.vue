@@ -99,13 +99,16 @@
             />
           </section>
         </section>
-        <el-button type="danger" @click="removeEventi">Delete Event</el-button>
+
+        <div v-if="isUserOrgAdmin" class="edit-btns">
+        <el-button  type="danger" @click="removeEventi">Delete Event</el-button>
         <router-link
           type="success"
           class="el-button el-button--success"
           :to="'/eventi-edit/' + eventi._id"
           >Edit</router-link
         >
+        </div>
       </section>
     </main>
   </section>
@@ -134,6 +137,14 @@ export default {
       //   endDate: null
     }
   },
+  computed:{
+    isUserOrgAdmin(){
+      const loggedinUser = this.$store.getters.loggedinUser;
+      console.log("🚀 ~ file: eventi-details.vue ~ line 139 ~ isUserOrgAdmin ~ loggedinUser", loggedinUser)
+      if (!loggedinUser || !loggedinUser.org || loggedinUser.org._id !== this.eventi.byOrg._id) return false;
+      else return true;
+    }
+  },
   methods: {
     avgRates() {
       if (this.eventi.reviews.length === 1) {
@@ -147,6 +158,7 @@ export default {
       // return sum / this.eventi.reviews.length
     },
     async addMember() {
+<<<<<<< HEAD
       if (this.eventi.members.find(member => member._id === this.miniLoggedinUser._id)) {
         this.$message({
           showClose: true,
@@ -156,6 +168,13 @@ export default {
         })
         return
       }
+=======
+      if (!this.miniLoggedinUser._id) {
+       console.log('Login first');
+       return
+      }
+      if (this.eventi.members.find(member => member._id === this.miniLoggedinUser._id)) return
+>>>>>>> ced9a4bee5384df5b11315b246ec4cf3bf58a342
       const user = JSON.parse(JSON.stringify(this.$store.getters.loggedinUser))
       // const user = await userService.getById('u101')
       this.eventi.members.push(this.miniLoggedinUser)
@@ -174,7 +193,7 @@ export default {
       this.reviewToEdit.rate = Number(this.reviewToEdit.rate)
       this.reviewToEdit.createdAt = Date.now()
       this.reviewToEdit._id = eventiService.makeId()
-      this.reviewToEdit.author = JSON.parse(JSON.stringify(this.miniLoggedinUser))
+      this.reviewToEdit.author = JSON.parse(JSON.stringify(this.miniLoggedinUser)) || {fullName: 'Goust'}
       this.eventi.reviews.push(this.reviewToEdit)
       eventiService.save(JSON.parse(JSON.stringify(this.eventi)))
       this.$message({
@@ -219,7 +238,7 @@ export default {
     this.miniEventi = { _id: eventi._id, title: eventi.title, imgUrl: eventi.imgUrls[0] }
 
     // const user = await userService.getById('u101')
-    const user = JSON.parse(JSON.stringify(this.$store.getters.loggedinUser))
+    const user = JSON.parse(JSON.stringify(this.$store.getters.loggedinUser)) || {fullName: 'Goust'}
     const { _id, fullName, imgUrl } = user
     this.miniLoggedinUser = { _id, fullName, imgUrl }
     this.avgRates()
