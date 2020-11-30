@@ -1,11 +1,13 @@
 <template>
   <header class="app-header full main-container">
-    <div class="flex space-between">
-    <div class="logo">
-      <img src="@/assets/logo.svg" alt="" class="logo-img hover-pointer" @click="$router.push('/')" />
-    </div>
-    <navbar></navbar>
-    </div>
+    <!-- <section class="full-nav"> -->
+      <div class="full-nav flex space-between">
+        <div class="logo">
+          <img src="@/assets/logo.svg" alt="" class="logo-img hover-pointer" @click="$router.push('/')" />
+        </div>
+        <navbar></navbar>
+      </div>
+    <!-- </section> -->
   </header>
 </template>
 

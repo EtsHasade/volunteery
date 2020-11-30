@@ -1,8 +1,5 @@
 <template>
   <div class="home-page">
-    <section class="full">
-      <img class="hero" src="https://ewscripps.brightspotcdn.com/dims4/default/61272c3/2147483647/strip/true/crop/640x360+0+34/resize/1280x720!/quality/90/?url=https%3A%2F%2Fmediaassets.10news.com%2Fphoto%2F2018%2F10%2F30%2Fvolunteer_900x600_1540924954704_101792658_ver1.0_640_480.jpg">
-    </section>
     <h2>Home page</h2>
     <span>NEWS</span>
     <eventi-list :eventis="newestEventis" />
