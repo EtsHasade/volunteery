@@ -23,39 +23,41 @@
     </section>
     <main class="flex justify-center">
       <section class="details flex column">
-        <span>Tags:</span>
-        <section class="tags flex wrap">
-          <span
-            class="tag text-center mrg5"
-            v-for="(tag, idx) in eventi.tags"
-            :key="idx"
-            >{{ tag }}</span
-          >
-        </section>
-        <span>Limit: {{ eventi.capacity }} members</span>
-        <section class="dates flex column">
-          <span
-            >date start:
-            {{ moment(eventi.startAt).format("YYYY/MM/DD HH:MM") }}</span
-          >
-          <span v-if="eventi.endAt"
-            >date end:
-            {{ moment(eventi.endAt).format("YYYY/MM/DD HH:MM") }}</span
-          >
-        </section>
-        <section class="neededs">
-          <span>We need for this eventi:</span>
-          <ul class="needed-content clean-list flex wrap">
-            <li
-              class="needed text-center mrg5"
-              v-for="(needed, idx) in eventi.neededs"
+        <section class="details-ev">
+        <hr>
+          <span>Tags:</span>
+          <section class="tags flex wrap">
+          <!--  -->
+            <span
+              class="tag text-center mrg5"
+              v-for="(tag, idx) in eventi.tags"
               :key="idx"
+              >{{ tag }}</span
             >
-              {{ needed }}
-            </li>
-          </ul>
+          </section>
+          <span>Limit: {{ eventi.capacity }} members</span>
+          <section class="dates flex column">
+            <span>⏳ {{ moment(eventi.startAt).format("DD/MM/YYYY") }} - {{ moment(eventi.endAt).format("DD/MM/YYYY") }}</span>
+            <!-- <br v-if="eventi.endAt"> -->
+          </section>
+          <section class="neededs">
+            <span><i class="fas fa-list-ol"></i>We need for this eventi:</span>
+            <ul class="needed-content clean-list flex wrap">
+              <li
+                class="needed text-center mrg5"
+                v-for="(needed, idx) in eventi.neededs"
+                :key="idx"
+              >
+                {{ needed }}
+              </li>
+            </ul>
+          </section>
+        <hr>
         </section>
-        <span>{{ eventi.desc }}</span>
+
+        <section class="desc-ev">
+          <span>{{ eventi.desc }}</span>
+        </section>
       </section>
       <section class="status-details text-center">
         <div class="join-section flex column center">
