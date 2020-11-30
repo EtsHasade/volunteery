@@ -176,7 +176,7 @@ export default {
     isUserOrgAdmin() {
       const loggedinUser = this.$store.getters.loggedinUser;
       console.log("🚀 ~ file: eventi-details.vue ~ line 139 ~ isUserOrgAdmin ~ loggedinUser", loggedinUser)
-      if(loggedinUser.isAdmin) return true; // not secured!!
+      if(loggedinUser && loggedinUser.isAdmin) return true; // not secured!!
       if (!loggedinUser || !loggedinUser.org || loggedinUser.org._id !== this.eventi.byOrg._id) return false;
       else return true;
     }
@@ -302,6 +302,7 @@ export default {
     },
     sendMsg() {
       if (!this.$store.getters.loggedinUser) return
+      this.msgChat.from = this.$store.getters.loggedinUser.fullName;
       console.log('Sending', this.msgChat);
       socketService.emit('chat newMsg', this.msgChat)
       this.msgChat = { from: this.$store.getters.loggedinUser.fullName, txt: '' };
@@ -320,7 +321,8 @@ export default {
     if (this.eventi.members.find(member => member._id === this.miniLoggedinUser._id)) {
       this.textBtn = 'leave event'
     }
-    this.msgChat.from = this.$store.getters.loggedinUser.fullName
+
+    // this.msgChat.from = (this.$store.getters.loggedinUser)? this.$store.getters.loggedinUser.fullName : 'Goust';
     this.topic = this.eventi._id
     socketService.setup();
     socketService.emit('chat topic', this.topic)
