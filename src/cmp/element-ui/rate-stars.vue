@@ -9,9 +9,9 @@
   </div>
 </template>
 <script>
-// disabled
       // show-score
-      // score-template="{value} stars"
+// disabled
+      // score-template="{value}"
 export default {
   props:{
     value: Number,

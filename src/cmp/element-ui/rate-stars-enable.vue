@@ -9,7 +9,7 @@
 </template>
 
 <script>
-      // score-template="{value} stars"
+      // score-template="{value}"
       // show-score
 
 export default {
