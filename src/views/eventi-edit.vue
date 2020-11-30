@@ -173,15 +173,15 @@ export default {
     saveEventi() {
       if(!this.eventiToEdit.imgUrls) this.eventiToEdit.imgUrls = []
       this.eventiToEdit.imgUrls.push(...this.imgUrls);
-      // if (!this.$store.getters.loggedinUser.org) {
-      //   this.$message({
-      //     showClose: true,
-      //     message: `create organization first`,
-      //     type: 'warning',
-      //     duration: 1500
-      //   })
-      //   return
-      // }
+      if (!this.$store.getters.loggedinUser.org) {
+        this.$message({
+          showClose: true,
+          message: `create organization first`,
+          type: 'warning',
+          duration: 1500
+        })
+        return
+      }
       if (!this.eventiToEdit._id) {
         if (!this.eventiToEdit.imgUrls.length) {
           this.eventiToEdit.imgUrls.push(

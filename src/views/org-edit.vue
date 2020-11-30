@@ -63,9 +63,17 @@ export default {
   data() {
     return {
       orgCred: orgService.getEmptyOrg(),
-      tags: this.$store.getters.tags,
-      loggedinUser: this.$store.getters.loggedinUser,
-    };
+      // tags: this.$store.getters.tags,
+      // loggedinUser: this.$store.getters.loggedinUser,
+    }
+  },
+  computed: {
+    loggedinUser() {
+      return this.$store.getters.loggedinUser
+    },
+    tags() {
+      return this.$store.getters.tags
+    }
   },
   methods: {
     async createOrg() {
@@ -110,6 +118,15 @@ export default {
       this.orgCred = orgService.getEmptyOrg();
       this.$router.push("/eventi-edit/");
     },
+    created() {
+      console.log('hi');
+    //   const id = this.$route.params._id;
+    //   console.log('id', id);
+    //   if(id) {
+    //     const org = await orgService.getById(id);
+    //     this.orgCred = JSON.parse(JSON.stringify(org));
+    //   }
+    }
   },
   components: {
     selectMulti,
