@@ -24,7 +24,8 @@
           <h4>{{ eventi.byOrg.name }}</h4>
         </div>
         <!-- <rate-stars v-model="orgRate" :disabled="true"></rate-stars> -->
-        <p>⭐ {{eventi.byOrg.rate}}</p>
+        <p v-if="eventi.byOrg.rate > 0"><i class="star fas fa-star"></i> {{eventi.byOrg.rate}}</p>
+        <p v-else><i class="star fas fa-star"></i> New Organization</p>
       </div>
       <div class="eventi-label">
         <h3>{{ eventi.title }}</h3>

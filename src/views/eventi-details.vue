@@ -3,9 +3,9 @@
     <section class="main-details">
       <h2 class="mb10">{{ eventi.title }}</h2>
       <span v-if="eventi.reviews.length"
-        >⭐ {{ eventi.rate }} ({{ eventi.reviews.length }} reviews)</span
+        ><i class="star fas fa-star"></i> {{ eventi.rate }} ({{ eventi.reviews.length }} reviews)</span
       >
-      <span v-else>⭐ New</span>
+      <span v-else><i class="star fas fa-star"></i> New</span> | 
       <span>{{ eventi.location.address }}, {{ eventi.location.country }}</span>
       <!-- <rate-stars v-if="eventi.reviews.length" v-model="eventi.rate" /> -->
     </section>
@@ -42,13 +42,15 @@
           <section class="neededs">
             <span><i class="fas fa-list-ol"></i>We need for this eventi:</span>
             <ul class="needed-content clean-list flex wrap">
-              <li
+              <!-- <li -->
+              <span
                 class="needed text-center mrg5"
                 v-for="(needed, idx) in eventi.neededs"
-                :key="idx"
-              >
-                {{ needed }}
-              </li>
+                :key="idx">
+                <i :class="neededsIcon[needed]"></i> {{ needed }} 
+                <!-- {{ needed }} -->
+              <!-- </li> -->
+                </span>
             </ul>
           </section>
         <hr>
@@ -167,6 +169,9 @@ export default {
   computed: {
     tagsIcon(){
       return this.$store.getters.tagsIcon;
+    },
+    neededsIcon(){
+      return this.$store.getters.neededsIcon;
     },
     isUserOrgAdmin() {
       const loggedinUser = this.$store.getters.loggedinUser;

@@ -14,9 +14,9 @@
         </div>
         <h6 class="org-goals">{{ org.goals }}</h6>
       <span v-if="org.reviews.length"
-        >⭐ {{ org.rate }} ({{ org.reviews.length }} reviews)</span
+        ><i class="star fas fa-star"></i> {{ org.rate }} ({{ org.reviews.length }} reviews)</span
       >
-      <span v-else>⭐ New</span>
+      <span v-else><i class="star fas fa-star"></i> New</span>
         <!-- <rate-stars v-model="org.rate"></rate-stars> -->
         <h6 class="org-eventis">{{ orgEventis.length }} Eventiy events</h6>
       </div>

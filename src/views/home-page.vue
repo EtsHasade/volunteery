@@ -1,5 +1,5 @@
 <template>
-  <div class="home">
+  <div class="home-page">
     <h2>Home page</h2>
     <span>NEWS</span>
     <eventi-list :eventis="newestEventis" />

@@ -2,9 +2,9 @@
   <section v-if="org" class="org-details">
     <h2>{{ org.name }}</h2>
     <span v-if="org.reviews.length">
-      ⭐ {{ org.rate }} ({{ org.reviews.length }} reviews) | {{ org.country }}
+      <i class="star fas fa-star"></i> {{ org.rate }} ({{ org.reviews.length }} reviews) | {{ org.country }}
     </span>
-    <span v-else>⭐ New</span>
+    <span v-else><i class="star fas fa-star"></i> New</span>
     <section class="org-imgs">
       <img
         class="org-img"
