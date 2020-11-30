@@ -15,7 +15,7 @@
         <h4>{{ org.goals }}</h4>
         <h3>Country: {{ org.country }}</h3>
         <section class="mini-user">
-          <avatar :src="org.admin.imgUrl" />
+          <avatar :src="org.admin.imgUrl" :username="org.admin.fullName"/>
           <span>Admin: {{ org.admin.fullName }}</span>
         </section>
         <rate-stars v-if="org.reviews.length" v-model="org.rate" />
@@ -57,7 +57,7 @@
             :key="review._id"
           >
             <section class="details-review flex">
-              <avatar :src="review.author.imgUrl"></avatar>
+              <avatar :src="review.author.imgUrl" :username="review.author.fullName"></avatar>
               <rate-stars v-model="review.rate" class="review-rate" />
               <span class="time mrg5">{{
                 moment(review.createdAt).startOf("minute").fromNow()
@@ -123,6 +123,7 @@ export default {
     isUserOrgAdmin() {
       const loggedinUser = this.$store.getters.loggedinUser;
       console.log("🚀 ~ file: eventi-details.vue ~ line 139 ~ isUserOrgAdmin ~ loggedinUser", loggedinUser)
+      if(loggedinUser.isAdmin) return true; // not secured!!
       if (!loggedinUser || !loggedinUser.org || loggedinUser.org._id !== this.org._id) return false;
       else return true;
     }
@@ -158,14 +159,14 @@ export default {
       if (res.type) {
         this.$message({
           showClose: true,
-          message: `${this.orgCred.title} removed sucessfully!`,
+          message: `${this.org.title} removed sucessfully!`,
           type: 'success',
           duration: 1500
         })
       } else {
         this.$message({
           showClose: true,
-          message: `${this.orgCred.title} cant removed, err ${res.err.code}`,
+          message: `${this.org.title} cant removed, err ${res.err}`,
           type: 'warning',
           duration: 1500
         })
