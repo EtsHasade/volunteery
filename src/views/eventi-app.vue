@@ -62,21 +62,6 @@ export default {
   },
   async mounted() {
     this.$store.dispatch({ type: "setEventis" });
-    // if (resEventis.type) {
-    //   this.$message({
-    //     showClose: true,
-    //     message: `Events set sucessfully!`,
-    //     type: 'success',
-    //     duration: 1500
-    //   })
-    // } else {
-    //   this.$message({
-    //     showClose: true,
-    //     message: `Events cant set, err ${resEventis.err}`,
-    //     type: 'warning',
-    //     duration: 1500
-    //   })
-    // }
   },
   components: {
     eventiFilter,
