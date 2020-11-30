@@ -11,6 +11,10 @@
     <main class="flex">
       <section class="details flex column">
         <h2>{{ org.name }}</h2>
+        <span v-if="org.reviews.length">
+          ⭐ {{ org.rate }} ({{ org.reviews.length }} reviews)
+        </span>
+        <span v-else>⭐ New</span>
         <h3>Goals:</h3>
         <h4>{{ org.goals }}</h4>
         <h3>Country: {{ org.country }}</h3>

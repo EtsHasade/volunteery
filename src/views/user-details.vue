@@ -19,12 +19,14 @@
     <eventi-list v-if="user.events.length"  :eventis="eventis" />
     <h4 v-else>Join Events!</h4>
     <h3>My Organization</h3>
+    <!-- <org-preview v-if="user.org" :org="user.org" /> -->
     <org-list v-if="user.org" :orgs="org" />
     <h4 v-else>Make your own Organization</h4>
   </section>
 </template>
 
 <script>
+// import orgPreview from '../cmp/org-preview'
 import eventiList from '../cmp/eventi-list'
 import orgList from '../cmp/org-list'
 import avatar from 'vue-avatar'
@@ -70,7 +72,8 @@ export default {
   components: {
     avatar,
     eventiList,
-    orgList
+    orgList,
+    // orgPreview,
   }
 }
 </script>

@@ -13,7 +13,11 @@
           <h6 class="org-mini-details">{{ org.country }}</h6>
         </div>
         <h6 class="org-goals">{{ org.goals }}</h6>
-        <rate-stars v-model="org.rate"></rate-stars>
+      <span v-if="org.reviews.length"
+        >⭐ {{ org.rate }} ({{ org.reviews.length }} reviews)</span
+      >
+      <span v-else>⭐ New</span>
+        <!-- <rate-stars v-model="org.rate"></rate-stars> -->
         <h6 class="org-eventis">{{ orgEventis.length }} Eventiy events</h6>
       </div>
     </div>
@@ -21,7 +25,7 @@
 </template>
 
 <script>
-import rateStars from "./element-ui/rate-stars";
+// import rateStars from "./element-ui/rate-stars";
 
 export default {
   name: "orgPreview",
@@ -51,11 +55,11 @@ export default {
     }
   },
   created() {
-    this.orgRate = JSON.parse(JSON.stringify(this.org.rate));
+    // this.orgRate = JSON.parse(JSON.stringify(this.org.rate));
     // console.log("org", this.org);
   },
   components: {
-    rateStars,
+    // rateStars,
   },
   // watch: {
   //   rate: function (newRate) {

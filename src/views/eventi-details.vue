@@ -9,7 +9,7 @@
       <span v-if="eventi.reviews.length"
         >⭐ {{ eventi.rate }} ({{ eventi.reviews.length }} reviews)</span
       >
-      <span v-else>{{ msg }}</span>
+      <span v-else>⭐ New</span>
       <span>{{ eventi.location.address }}, {{ eventi.location.country }}</span>
       <!-- <rate-stars v-if="eventi.reviews.length" v-model="eventi.rate" /> -->
     </section>
