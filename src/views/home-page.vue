@@ -2,26 +2,10 @@
   <div class="home">
     <h2>Home page</h2>
     <span>NEWS</span>
-    <ul
-      class="eventi-list clean-list card-list"
-    >
-      <eventi-preview
-        v-for="eventi in newestEventis"
-        :key="eventi._id"
-        :eventi="eventi"
-      />
-    </ul>
+    <eventi-list :eventis="newestEventis" />
     <span>POPULARS</span>
-    <ul
-      class="eventi-list clean-list card-list"
-    >
-      <eventi-preview
-        v-for="eventi in popularestEventis"
-        :key="eventi._id"
-        :eventi="eventi"
-      />
-    </ul>
-    <!-- <global-info /> -->
+    <eventi-list :eventis="popularestEventis" />
+    <global-info />
   </div>
 
 </template>
@@ -29,8 +13,9 @@
 <script>
 // @ is an alias to /src
 
-import eventiPreview from '../cmp/eventi-preview';
-// import globalInfo from '../cmp/global-info';
+import eventiList from '../cmp/eventi-list'
+// import eventiPreview from '../cmp/eventi-preview';
+import globalInfo from '../cmp/global-info';
 
 // import orgPreview from '../cmp/org-preview'
 // import { eventiService } from '../service/eventi-service.js'
@@ -54,8 +39,8 @@ export default {
     this.$store.dispatch({ type: 'setEventis' })
   },
   components: {
-    eventiPreview,
-    // globalInfo
+    eventiList,
+    globalInfo,
     // orgPreview
   }
 }
