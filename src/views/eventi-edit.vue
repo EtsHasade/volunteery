@@ -112,6 +112,7 @@ import { eventiService } from "../service/eventi-service.js";
 import { orgService } from "../service/org-service.js";
 import selectMulti from "../cmp/element-ui/select-multi.vue";
 import { uploadImg } from '../service/img-upload-service.js'
+
 export default {
   name: "eventi-edit",
   data() {
