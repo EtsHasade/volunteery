@@ -1,5 +1,18 @@
 <template>
   <section v-if="eventi" class="eventi-details">
+    <section class="main-details">
+      <h2 class="mb10">{{ eventi.title }}</h2>
+      <section class="mini-org flex align-center">
+        <avatar :src="eventi.byOrg.imgUrl" />
+        <span>By {{ eventi.byOrg.name }}</span>
+      </section>
+      <span v-if="eventi.reviews.length"
+        >⭐ {{ eventi.rate }} ({{ eventi.reviews.length }} reviews)</span
+      >
+      <span v-else>{{ msg }}</span>
+      <span>{{ eventi.location.address }}, {{ eventi.location.country }}</span>
+      <!-- <rate-stars v-if="eventi.reviews.length" v-model="eventi.rate" /> -->
+    </section>
     <section class="eventi-imgs">
       <img
         class="eventi-img"
@@ -10,20 +23,6 @@
     </section>
     <main class="flex justify-center">
       <section class="details flex column">
-        <h2>{{ eventi.title }}</h2>
-        <section class="mini-org">
-          <avatar :src="eventi.byOrg.imgUrl" />
-          <!-- <img class="img-org mini-img" :src="eventi.byOrg.imgUrl" alt="" /> -->
-          <span>By {{ eventi.byOrg.name }}</span>
-        </section>
-        <span
-          >{{ eventi.location.address }}, {{ eventi.location.country }}</span
-        >
-        <!-- <rate-stars v-if="eventi.reviews.length" v-model="eventi.rate" /> -->
-        <span v-if="eventi.reviews.length"
-          >⭐ {{ eventi.rate }} ({{ eventi.reviews.length }} reviews)</span
-        >
-        <span v-else>{{ msg }}</span>
         <span>Tags:</span>
         <section class="tags flex wrap">
           <span
@@ -57,40 +56,15 @@
           </ul>
         </section>
         <span>{{ eventi.desc }}</span>
-        <span class="text-center mrg5">Reviews</span>
-        <section class="add-review flex align-center text-center mb10">
-          <el-input type="text" v-model="reviewToEdit.txt" name="review" />
-          <el-button type="success" @click="addReview">Add review</el-button>
-          <rate-stars-enable class="mb10" v-model="reviewToEdit.rate" />
-        </section>
-
-        <section class="reviews flex column">
-          <section
-            class="review flex column mrg5"
-            v-for="review in eventi.reviews"
-            :key="review._id"
-          >
-            <section class="details-review flex">
-              <avatar :src="review.author.imgUrl"></avatar>
-              <rate-stars v-model="review.rate" class="review-rate" />
-              <span class="time mrg5">
-                {{ moment(review.createdAt).startOf("minute").fromNow() }}
-              </span>
-            </section>
-            <section class="content-review flex align-center text-center">
-              <span class="name-review mrg5"
-                >{{ review.author.fullName }}:
-              </span>
-              <span class="txt-review">{{ review.txt }}</span>
-            </section>
-          </section>
-        </section>
       </section>
       <section class="status-details text-center">
-        <el-button class="join-btn" @click="addMember">{{ textBtn }}</el-button>
+        <div class="join-section flex column center">
+          <p>We need speicals volunteer, if you are please join us!</p>
+          <el-button class="join-btn" @click="addMember">{{ textBtn }}</el-button>
+        </div>
         <section class="members">
           <span class="flex center">Members</span>
-          <section class="members-imgs flex wrap">
+          <section class="members-imgs flex center wrap">
             <avatar
               class="member-img mrg5"
               v-for="member in eventi.members"
@@ -112,21 +86,53 @@
             >Edit</router-link
           >
         </div>
-        <button @click="openChat" class="chat-btn">💬</button>
-        <chat-app v-if="showChat" class="chat-app" @closeChat="closeChat">
-          <button slot="header" @click="closeChat">X</button>
+        <!-- <button @click="openChat" class="chat-btn">💬</button> -->
+        <!-- <chat-app v-if="showChat" class="chat-app" @closeChat="closeChat"> -->
+        <chat-app class="chat-app">
+          <h3 slot="header">Event Chat</h3>
           <section v-for="(msg, idx) in msgs" class="mainChat" :key="idx">
             <span class="msg">{{ msg.from }}: {{ msg.txt }}</span>
           </section>
           <div slot="footer">
             <form @submit.prevent="sendMsg">
-              <input type="text" placeholder="Send Massage" v-model="msgChat.txt" />
+              <input
+                type="text"
+                placeholder="Send Massage"
+                v-model="msgChat.txt"
+              />
               <button>send</button>
             </form>
           </div>
         </chat-app>
       </section>
     </main>
+    <section class="reviews-section flex column center">
+      <section class="add-review flex align-center text-center mb10">
+        <el-input type="text" v-model="reviewToEdit.txt" name="review" />
+        <el-button type="success" @click="addReview">Add review</el-button>
+        <rate-stars-enable class="mb10" v-model="reviewToEdit.rate" />
+      </section>
+      <span class="text-center mrg5">Reviews</span>
+      <section class="reviews flex wrap">
+        <section
+          class="review flex column mrg5"
+          v-for="review in eventi.reviews"
+          :key="review._id"
+        >
+          <section class="details-review flex">
+            <avatar :src="review.author.imgUrl"></avatar>
+            <rate-stars v-model="review.rate" class="review-rate" />
+            <span class="time mrg5">
+              {{ moment(review.createdAt).startOf("minute").fromNow() }}
+            </span>
+          </section>
+          <section class="content-review flex align-center text-center">
+            <span class="name-review mrg5">{{ review.author.fullName }}: </span>
+            <span class="txt-review">{{ review.txt }}</span>
+          </section>
+        </section>
+      </section>
+    </section>
   </section>
 </template>
 
@@ -153,7 +159,7 @@ export default {
       msgChat: { from: '', txt: '' },
       msgs: [],
       topic: 'love',
-      showChat: false,
+      // showChat: false,
       debounce: null,
 
     }
@@ -266,27 +272,27 @@ export default {
       }
       this.$router.go(-1);
     },
-    closeChat() {
-      this.showChat = false;
-      this.msgs = [];
-      this.msgChat = "";
-      socketService.off('chat addMsg', this.addMsg)
-      socketService.terminate();
-    },
-    openChat() {
-      if (!this.$store.getters.loggedinUser) return
-      this.showChat = true;
-      this.msgChat.from = this.$store.getters.loggedinUser.fullName
-      this.topic = this.eventi._id
-      socketService.setup();
-      socketService.emit('chat topic', this.topic)
-      // socketService.emit('msgChat history')
-      socketService.on('chat addMsg', this.addMsg)
-    },
+    // closeChat() {
+    //   this.showChat = false;
+    //   this.msgs = [];
+    //   this.msgChat = "";
+    //   socketService.off('chat addMsg', this.addMsg)
+    //   socketService.terminate();
+    // },
+    // openChat() {
+    //   if (!this.$store.getters.loggedinUser) return
+    //   this.showChat = true;
+    //   this.msgChat.from = this.$store.getters.loggedinUser.fullName
+    //   this.topic = this.eventi._id
+    //   socketService.setup();
+    //   socketService.emit('chat topic', this.topic)
+    //   socketService.on('chat addMsg', this.addMsg)
+    // },
     addMsg(msgChat) {
       this.msgs.push(msgChat)
     },
     sendMsg() {
+      if (!this.$store.getters.loggedinUser) return
       console.log('Sending', this.msgChat);
       socketService.emit('chat newMsg', this.msgChat)
       this.msgChat = { from: this.$store.getters.loggedinUser.fullName, txt: '' };
@@ -298,8 +304,6 @@ export default {
     const eventi = await eventiService.getById(id)
     this.eventi = JSON.parse(JSON.stringify(eventi))
     this.miniEventi = { _id: eventi._id, title: eventi.title, imgUrl: eventi.imgUrls[0] }
-
-    // const user = await userService.getById('u101')
     const user = JSON.parse(JSON.stringify(this.$store.getters.loggedinUser)) || { fullName: 'Goust' }
     const { _id, fullName, imgUrl } = user
     this.miniLoggedinUser = { _id, fullName, imgUrl }
@@ -307,10 +311,17 @@ export default {
     if (this.eventi.members.find(member => member._id === this.miniLoggedinUser._id)) {
       this.textBtn = 'leave event'
     }
-    // this.startDate = `${new Date(this.eventi.startAt).getDate()}.${new Date(this.eventi.startAt).getMonth() + 1}.${new Date(this.eventi.startAt).getFullYear()}`
-    // if (this.eventi.endAt) {
-    //   this.endDate = `${new Date(this.eventi.endAt).getDate()}.${new Date(this.eventi.endAt).getMonth() + 1}.${new Date(this.eventi.endAt).getFullYear()}`
-    // }
+    this.msgChat.from = this.$store.getters.loggedinUser.fullName
+    this.topic = this.eventi._id
+    socketService.setup();
+    socketService.emit('chat topic', this.topic)
+    socketService.on('chat addMsg', this.addMsg)
+  },
+  destroyed() {
+    this.msgs = [];
+    this.msgChat = "";
+    socketService.off('chat addMsg', this.addMsg)
+    socketService.terminate();
   },
   components: {
     avatar,

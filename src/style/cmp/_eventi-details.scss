@@ -14,11 +14,6 @@
             @include for-wide-layout {
                 width: 480px;
             }
-            & .review {
-                border: 2px solid $clr4;
-                padding: rem(5px);
-                border-radius: rem(8px);
-            }
         }
         & .status-details {
             @include for-normal-layout {
@@ -27,10 +22,29 @@
             @include for-wide-layout {
                 width: 370px;
             }
+            & .join-section {
+                width: rem(368px);
+                height: rem(224px);
+                border: 2px solid $clr3;
+                border-radius: rem(8px);
+                & .el-button {
+                    width: rem(200px);
+                    height: rem(60px);
+                }
+            }
         }
     }
-    & .details-review {
-        align-items: center;
+    & .review {
+        border: 2px solid $clr4;
+        padding: rem(5px);
+        border-radius: rem(8px);
+        width: rem(310px);
+        & .details-review {
+            align-items: center;
+        }
+        & .review-rate {
+            max-width: rem(95px);
+        }
     }
     & .eventi-imgs {
         height: 300px;
