@@ -40,6 +40,7 @@
             <!-- <br v-if="eventi.endAt"> -->
           </section>
           <section class="neededs">
+            {{neededsIcon}}
             <span><i class="fas fa-list-ol"></i>We need for this eventi:</span>
             <ul class="needed-content clean-list flex wrap">
               <!-- <li -->
