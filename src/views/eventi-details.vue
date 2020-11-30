@@ -32,12 +32,11 @@
               class="tag text-center mrg5"
               v-for="(tag, idx) in eventi.tags"
               :key="idx"
-              >{{ tag }}</span
-            >
+              ><i :class="tagsIcon[tag]"></i> {{ tag }}</span>
           </section>
           <span>Limit: {{ eventi.capacity }} members</span>
           <section class="dates flex column">
-            <span>⏳ {{ moment(eventi.startAt).format("DD/MM/YYYY") }} - {{ moment(eventi.endAt).format("DD/MM/YYYY") }}</span>
+            <span><i class="fal fa-calendar-alt"></i>{{ moment(eventi.startAt).format("DD/MM/YYYY") }} - {{ moment(eventi.endAt).format("DD/MM/YYYY") }}</span>
             <!-- <br v-if="eventi.endAt"> -->
           </section>
           <section class="neededs">
@@ -163,10 +162,12 @@ export default {
       topic: 'love',
       // showChat: false,
       debounce: null,
-
     }
   },
   computed: {
+    tagsIcon(){
+      return this.$store.getters.tagsIcon;
+    },
     isUserOrgAdmin() {
       const loggedinUser = this.$store.getters.loggedinUser;
       console.log("🚀 ~ file: eventi-details.vue ~ line 139 ~ isUserOrgAdmin ~ loggedinUser", loggedinUser)
@@ -178,26 +179,26 @@ export default {
   methods: {
     avgRates() {
       if (this.eventi.reviews.length === 1) {
-        this.eventi.rate = this.eventi.reviews[0].rate
+        this.eventi.rate = this.eventi.reviews[0].rate;
       }
-      var sum = 0
+      var sum = 0;
       this.eventi.reviews.forEach(review => {
-        sum += review.rate
+        sum += review.rate;
       })
-      this.eventi.rate = sum / this.eventi.reviews.length
+      this.eventi.rate = sum / this.eventi.reviews.length;
       // return sum / this.eventi.reviews.length
     },
     async addMember() {
       const idx = this.eventi.members.findIndex(member => {
-        return member._id === this.miniLoggedinUser._id
+        return member._id === this.miniLoggedinUser._id;
       })
       if (idx != -1) {
         this.eventi.members.splice(idx, 1)
         const idxEvent = this.$store.getters.loggedinUser.events.findIndex(event => {
-          return event._id === this.eventi._id
+          return event._id === this.eventi._id;
         })
-        const user = this.$store.getters.loggedinUser
-        user.events.splice(idxEvent, 1)
+        const user = this.$store.getters.loggedinUser;
+        user.events.splice(idxEvent, 1);
         this.$store.dispatch({
           type: 'updateUser',
           user: JSON.parse(JSON.stringify(user))
