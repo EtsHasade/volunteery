@@ -79,6 +79,29 @@
           >Delete Event</el-button
         >
       </div>
+      <label class="img-list">
+        Pictures:
+        <section class="imgs flex center">
+          <section class="img-edit flex column center mrg5" v-for="(imgUrl, idx) in eventiToEdit.imgUrls" :key="idx">
+            <img class="border-radius mb10" :src="imgUrl" alt="img...">
+            <el-button type="danger" icon="el-icon-delete" circle class="remove-img" @click.stop.prevent="removeImg(idx)"></el-button> 
+          </section>
+        </section>
+      </label>
+
+      <section class="upload-img flex column center">
+        <template v-if="!isLoading">
+          <label for="imgUploader"> <img class="img-uploader" src="http://www.pngall.com/wp-content/uploads/2/Upload-PNG-Image-File.png" alt=""> </label>
+          <input type="file" name="img-uploader" id="imgUploader" @change="onUploadImg">  
+        </template>
+        <img class="loader" v-else src="https://i.pinimg.com/originals/65/ba/48/65ba488626025cff82f091336fbf94bb.gif" alt="">
+        <div class="img-list">
+          <section class="imgs flex center">
+            <img class="border-radius mrg5 " v-for="(imgUrl, idx) in imgUrls" :src="imgUrl" :key="idx" alt="img...">
+          </section>
+        </div>
+      </section>
+
       <el-button @click="saveEventi">Publish</el-button>
     </form>
   </section>
@@ -88,6 +111,7 @@
 import { eventiService } from "../service/eventi-service.js";
 import { orgService } from "../service/org-service.js";
 import selectMulti from "../cmp/element-ui/select-multi.vue";
+import { uploadImg } from '../service/img-upload-service.js'
 export default {
   name: "eventi-edit",
   data() {
@@ -130,19 +154,34 @@ export default {
       dates: null,
       tags: this.$store.getters.tags,
       neededs: this.$store.getters.neededs,
+      isLoading: false,
+      imgUrls: []
+
     };
   },
   methods: {
+    async onUploadImg(ev) {
+      this.isLoading = true;
+      const res = await uploadImg(ev);
+      this.imgUrls.push(res.url)
+      this.isLoading = false;
+    },
+    removeImg(idx) {
+      console.log(idx);
+      this.eventiToEdit.imgUrls.splice(idx, 1)
+    },
     saveEventi() {
-      if (!this.$store.getters.loggedinUser.org) {
-        this.$message({
-          showClose: true,
-          message: `create organization first`,
-          type: 'warning',
-          duration: 1500
-        })
-        return
-      }
+      if(!this.eventiToEdit.imgUrls) this.eventiToEdit.imgUrls = []
+      this.eventiToEdit.imgUrls.push(...this.imgUrls);
+      // if (!this.$store.getters.loggedinUser.org) {
+      //   this.$message({
+      //     showClose: true,
+      //     message: `create organization first`,
+      //     type: 'warning',
+      //     duration: 1500
+      //   })
+      //   return
+      // }
       if (!this.eventiToEdit._id) {
         if (!this.eventiToEdit.imgUrls.length) {
           this.eventiToEdit.imgUrls.push(
@@ -158,7 +197,7 @@ export default {
       }
       const res = this.$store.dispatch({
         type: "saveEventi",
-        eventi: this.eventiToEdit,
+        eventi: JSON.parse(JSON.stringify(this.eventiToEdit))
       });
       if (res.type) {
         this.$message({
@@ -170,7 +209,7 @@ export default {
       } else {
         this.$message({
           showClose: true,
-          message: `${this.eventiToEdit.title} cant added, err ${res.err.code}`,
+          message: `${this.eventiToEdit.title} cant added, err ${res.err}`,
           type: "warning",
           duration: 1500,
         });
@@ -213,7 +252,6 @@ export default {
   },
   created() {
     this.getEventiById();
-    // this.eventiToEdit = this.$route.params._id;
     this.getByOrg();
   },
   components: {
@@ -223,4 +261,22 @@ export default {
 </script>
 
 <style>
+.loader {
+  height: 150px;
+}
+
+.img-list img {
+  height: 100px;
+}
+
+.img-uploader{
+  height: 50px;
+}
+.img-uploader:hover {
+  cursor: pointer;
+}
+
+input[name="img-uploader"] {
+  opacity: 0;
+}
 </style>
