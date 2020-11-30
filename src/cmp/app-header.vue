@@ -1,6 +1,6 @@
 <template>
   <header class="app-header full main-container" :class="{scrolly:(scrollYposition > 20)}">
-    <div class="flex space-between">
+    <div class="hedear-container flex space-between">
       <div class="logo">
         <img
           src="@/assets/logo.svg"

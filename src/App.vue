@@ -1,7 +1,7 @@
 <template>
   <div id="app" class="main-container">
       <app-header></app-header>
-      <main class="mb10">
+      <main class="mb10 full main-container">
         <router-view />
       </main>
     <app-footer></app-footer>
