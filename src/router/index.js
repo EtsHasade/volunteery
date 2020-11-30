@@ -28,7 +28,7 @@ const routes = [{
         component: orgApp
     },
     {
-        path: '/org-edit',
+        path: '/org-edit/:orgId',
         name: 'orgEdit',
         component: orgEdit
     },
