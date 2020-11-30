@@ -2,10 +2,6 @@
   <section v-if="eventi" class="eventi-details">
     <section class="main-details">
       <h2 class="mb10">{{ eventi.title }}</h2>
-      <section class="mini-org flex align-center">
-        <avatar :src="eventi.byOrg.imgUrl" :username="eventi.byOrg.name"/>
-        <span>By {{ eventi.byOrg.name }}</span>
-      </section>
       <span v-if="eventi.reviews.length"
         >⭐ {{ eventi.rate }} ({{ eventi.reviews.length }} reviews)</span
       >
@@ -20,6 +16,10 @@
         :key="idx"
         :src="img"
       />
+    </section>
+    <section class="mini-org flex align-center">
+      <avatar :src="eventi.byOrg.imgUrl" :username="eventi.byOrg.name"/>
+      <span>By {{ eventi.byOrg.name }}</span>
     </section>
     <main class="flex justify-center">
       <section class="details flex column">

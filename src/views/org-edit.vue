@@ -46,6 +46,28 @@
         ></el-input>
         <span>Select tags</span>
         <select-multi v-model="orgCred.tags" :items="tags"></select-multi>
+        
+        <label class="img-list">
+          Pictures:
+          <section class="imgs flex center">
+            <section class="img-edit flex column center mrg5" v-for="(imgUrl, idx) in orgCred.imgUrls" :key="idx">
+              <img class="border-radius mb10" :src="imgUrl" alt="img...">
+              <el-button type="danger" icon="el-icon-delete" circle class="remove-img" @click.stop.prevent="removeImg(idx)"></el-button> 
+            </section>
+          </section>
+        </label>
+        <section class="upload-img flex column center">
+          <template v-if="!isLoading">
+            <label for="imgUploader"> <img class="img-uploader" src="http://www.pngall.com/wp-content/uploads/2/Upload-PNG-Image-File.png" alt=""> </label>
+            <input type="file" name="img-uploader" id="imgUploader" @change="onUploadImg">  
+          </template>
+          <img class="loader" v-else src="https://i.pinimg.com/originals/65/ba/48/65ba488626025cff82f091336fbf94bb.gif" alt="">
+          <div class="img-list">
+            <section class="imgs flex center">
+              <img class="border-radius mrg5 " v-for="(imgUrl, idx) in imgUrls" :src="imgUrl" :key="idx" alt="img...">
+            </section>
+          </div>
+        </section>
         <el-button @click="createOrg">{{
           !loggedinUser || !loggedinUser.org ? "Next >" : "Save"
         }}</el-button>
@@ -57,14 +79,16 @@
 <script>
 import { orgService } from "../service/org-service.js";
 import selectMulti from "../cmp/element-ui/select-multi";
+import { uploadImg } from '../service/img-upload-service.js'
 
 export default {
   name: "orgEdit",
   data() {
     return {
       orgCred: orgService.getEmptyOrg(),
-      // tags: this.$store.getters.tags,
-      // loggedinUser: this.$store.getters.loggedinUser,
+      isLoading: false,
+      imgUrls: []
+
     }
   },
   computed: {
@@ -76,9 +100,21 @@ export default {
     }
   },
   methods: {
+    async onUploadImg(ev) {
+      this.isLoading = true;
+      const res = await uploadImg(ev);
+      this.imgUrls.push(res.url)
+      this.isLoading = false;
+    },
+    removeImg(idx) {
+      console.log(idx);
+      this.orgCred.imgUrls.splice(idx, 1)
+    },
     async createOrg() {
       if (!this.loggedinUser) this.$router.push('/login');
       console.log("create new org");
+      if(!this.orgCred.imgUrls) this.orgCred.imgUrls = []
+      this.orgCred.imgUrls.push(...this.imgUrls);
       const user = JSON.parse(JSON.stringify(this.$store.getters.loggedinUser));
       this.orgCred.admin = {
         _id: user._id,
@@ -90,7 +126,7 @@ export default {
       }
       const res = await this.$store.dispatch({
         type: "saveOrg",
-        org: this.orgCred,
+        org: JSON.parse(JSON.stringify(this.orgCred)),
       });
 
       user.org = {
@@ -103,34 +139,32 @@ export default {
       if (res.type) {
         this.$message({
           showClose: true,
-          message: `${this.orgCred.title} added sucessfully!`,
+          message: `${this.orgCred.name} added sucessfully!`,
           type: "success",
           duration: 1500,
         });
       } else {
         this.$message({
           showClose: true,
-          message: `${this.orgCred.title} cant added, err ${res.err}`,
+          message: `${this.orgCred.name} cant added, err ${res.err}`,
           type: "warning",
           duration: 1500,
         });
       }
       this.orgCred = orgService.getEmptyOrg();
-      this.$router.push("/eventi-edit/");
+      if(!this.loggedinUser || !this.loggedinUser.org)this.$router.push('/eventi-edit/');
+      this.$router.go(-1);
     },
   },
   async created() {
-    console.log('hi');
     const id = this.$route.params.orgId;
-    console.log('id', id);
     if (id) {
       const org = await orgService.getById(id);
       this.orgCred = JSON.parse(JSON.stringify(org));
     }
   },
   components: {
-    selectMulti,
-
+    selectMulti
   },
 };
 </script>

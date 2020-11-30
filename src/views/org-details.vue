@@ -1,5 +1,10 @@
 <template>
   <section v-if="org" class="org-details">
+    <h2>{{ org.name }}</h2>
+    <span v-if="org.reviews.length">
+      ⭐ {{ org.rate }} ({{ org.reviews.length }} reviews) | {{ org.country }}
+    </span>
+    <span v-else>⭐ New</span>
     <section class="org-imgs">
       <img
         class="org-img"
@@ -10,14 +15,7 @@
     </section>
     <main class="flex">
       <section class="details flex column">
-        <h2>{{ org.name }}</h2>
-        <span v-if="org.reviews.length">
-          ⭐ {{ org.rate }} ({{ org.reviews.length }} reviews)
-        </span>
-        <span v-else>⭐ New</span>
-        <h3>Goals:</h3>
         <h4>{{ org.goals }}</h4>
-        <h3>Country: {{ org.country }}</h3>
         <section class="mini-user">
           <avatar :src="org.admin.imgUrl" :username="org.admin.fullName"/>
           <span>Admin: {{ org.admin.fullName }}</span>
