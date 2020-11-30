@@ -10,6 +10,7 @@ export const eventiStore = {
             Children: 'fas fa-child',
             Food: 'fas fa-utensils',
             Needy: 'fas fa-hand-holding-heart',
+            // ["COVID-19"]: 'fas fa-head-side-mask',
             'COVID-19': 'fas fa-head-side-mask',
             Fun: 'far fa-smile-beam',
             Baby: 'fas fa-baby'

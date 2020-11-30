@@ -13,7 +13,7 @@
       <el-input
         onblur="this.placeholder = 'Eventi title'"
         onfocus="this.placeholder = ''"
-        placeholder="Eventi title"
+        placeholder="Eventi Title"
         v-model="eventiToEdit.title"
         clearable
       >
@@ -22,7 +22,7 @@
         onblur="this.placeholder = 'tell us about your eventi'"
         type="textarea"
         :rows="3"
-        placeholder="tell us about your eventi"
+        placeholder="Tell us about your eventi"
         onfocus="this.placeholder = ''"
         v-model="eventiToEdit.desc"
       >
