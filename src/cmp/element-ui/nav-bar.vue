@@ -7,11 +7,13 @@
     :router="true"
   >
     <!-- <el-menu-item index="/">Home</el-menu-item> -->
-    <el-submenu index="1">
+    <!-- <el-submenu index="1">
       <template slot="title">Explore</template>
       <el-menu-item index="/eventi-app">All volunteer events</el-menu-item>
       <el-menu-item index="/org-app">All Organizations</el-menu-item>
-    </el-submenu>
+    </el-submenu> -->
+      <el-menu-item index="/eventi-app">Events</el-menu-item>
+      <el-menu-item index="/org-app">Organizations</el-menu-item>
     <el-menu-item v-if="loggedinUser && loggedinUser.org" index="/eventi-edit"
       >Publish new Event</el-menu-item
     >
