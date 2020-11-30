@@ -1,7 +1,7 @@
 <template>
   <section v-if="user" class="user-details">
     <h2>user details</h2>
-    <avatar v-if="user.imgUrl" :src="user.imgUrl" />
+    <avatar v-if="user.imgUrl" :src="user.imgUrl"   :username="user.fullName"/>
     <h3>Name: {{ user.fullName }}</h3>
     <div class="skills clean-list mb10">
       <h3 class="mrg0">Skills:</h3>

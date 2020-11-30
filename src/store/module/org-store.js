@@ -33,7 +33,7 @@ export const orgStore = {
                 const actionType = (org._id) ? 'updateOrg' : 'addOrg';
                 const savedOrg = await orgService.save(org)
                 commit({ type: actionType, org: savedOrg })
-                return { type: true, err: null }
+                return { type: true, org: savedOrg, err: null }
             } catch (err) {
                 return { type: false, err }
             }

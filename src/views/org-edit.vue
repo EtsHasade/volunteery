@@ -75,7 +75,7 @@ export default {
         imgUrl: user.imgUrl,
       };
       if (!this.orgCred.imgUrls.length) {
-        this.orgCred.imgUrls.push("https://picsum.photos/id/237/200/300");
+        this.orgCred.imgUrls.push("https://maestroselectronics.com/wp-content/uploads/2017/12/No_Image_Available.jpg");
       }
       const res = await this.$store.dispatch({
         type: "saveOrg",
@@ -83,11 +83,11 @@ export default {
       });
 
       user.org = {
-        _id: this.orgCred._id,
-        name: this.orgCred.name,
-        imgUrl: this.orgCred.imgUrls[0],
+        _id: res.org._id,
+        name: res.org.name,
+        imgUrl: res.org.imgUrls[0],
       };
-      //   await this.$store.dispatch({ type: "updateUser", user });
+        await this.$store.dispatch({ type: "updateUser", user });
 
       if (res.type) {
         this.$message({
@@ -99,7 +99,7 @@ export default {
       } else {
         this.$message({
           showClose: true,
-          message: `${this.orgCred.title} cant added, err ${res.err.code}`,
+          message: `${this.orgCred.title} cant added, err ${res.err}`,
           type: "warning",
           duration: 1500,
         });
