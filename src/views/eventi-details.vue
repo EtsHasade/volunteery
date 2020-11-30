@@ -40,6 +40,7 @@
             <!-- <br v-if="eventi.endAt"> -->
           </section>
           <section class="neededs">
+            {{neededsIcon}}
             <span><i class="fas fa-list-ol"></i>We need for this eventi:</span>
             <ul class="needed-content clean-list flex wrap">
               <!-- <li -->
@@ -47,10 +48,10 @@
                 class="needed text-center mrg5"
                 v-for="(needed, idx) in eventi.neededs"
                 :key="idx">
-                <i :class="neededsIcon[needed]"></i> {{ needed }} 
+                <i :class="neededsIcon[needed]"></i> {{ needed }}  </span>
                 <!-- {{ needed }} -->
               <!-- </li> -->
-                </span>
+               
             </ul>
           </section>
         <hr>
