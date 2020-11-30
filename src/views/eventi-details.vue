@@ -47,10 +47,10 @@
                 class="needed text-center mrg5"
                 v-for="(needed, idx) in eventi.neededs"
                 :key="idx">
-                <i :class="neededsIcon[needed]"></i> {{ needed }} 
+                <i :class="neededsIcon[needed]"></i> {{ needed }}  </span>
                 <!-- {{ needed }} -->
               <!-- </li> -->
-                </span>
+               
             </ul>
           </section>
         <hr>
