@@ -36,7 +36,13 @@ export default {
     }
   },
   created() {
-    this.$store.dispatch({ type: 'setEventis' })
+    this.$store.dispatch({ type: 'setEventis' });
+
+    document.body.classList.add('home-page');
+
+  },
+  destroyed(){
+    document.body.classList.remove('home-page');
   },
   components: {
     eventiList,

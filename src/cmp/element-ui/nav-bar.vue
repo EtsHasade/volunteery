@@ -12,12 +12,28 @@
       <el-menu-item index="/eventi-app">All volunteer events</el-menu-item>
       <el-menu-item index="/org-app">All Organizations</el-menu-item>
     </el-submenu>
-      <el-menu-item v-if="loggedinUser && loggedinUser.org" index="/eventi-edit">Publish new Event</el-menu-item>
-      <el-menu-item v-else index="/org-edit">I need volunteers</el-menu-item>
+    <el-menu-item v-if="loggedinUser && loggedinUser.org" index="/eventi-edit"
+      >Publish new Event</el-menu-item
+    >
+    <el-menu-item v-else index="/org-edit">I need volunteers</el-menu-item>
     <el-menu-item :index="`/user-details/${userId}`" :disabled="!loggedinUser"
       >User</el-menu-item
     >
     <el-menu-item index="/login">Login</el-menu-item>
+
+
+      <el-submenu index="2" class="user-menu">
+        <template slot="title" class="user-menu">
+          <!-- <span><i class="fas fa-bars"></i></span> -->
+          <span><i class="fas fa-user-circle"></i></span>
+          </template>
+        <el-menu-item
+          :index="`/user-details/${userId}`"
+          :disabled="!loggedinUser"
+          >User profile</el-menu-item
+        >
+        <el-menu-item index="/login">Login</el-menu-item>
+      </el-submenu>
   </el-menu>
 </template>
 
