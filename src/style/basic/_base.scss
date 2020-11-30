@@ -8,8 +8,13 @@ html {
 
 body {
     padding: 0;
-    margin: 0;
-    height: 100%;
+    margin : 0;
+    height : 100%;
+    padding-top: 80px;
+}
+
+.home-page{
+    margin-top: -80px;
 }
 
 h1,
@@ -20,13 +25,13 @@ h5,
 h6,
 p,
 a {
-    margin: 0 0 1em;
+    margin     : 0 0 1em;
     font-weight: normal;
     line-height: 1.3;
 }
 
 img {
-    width: 100%;
+    width        : 100%;
     // object-fit: cover;
 }
 
@@ -44,11 +49,13 @@ form {
     &>* {
         margin-bottom: rem(10px);
     }
+
     & .el-input__inner,
     .el-textarea__inner {
-        text-align: center;
-        border: 1px solid $clr4;
+        text-align   : center;
+        border       : 1px solid $clr4;
         margin-bottom: rem(7px);
+
         &::placeholder {
             color: $clr7;
         }
