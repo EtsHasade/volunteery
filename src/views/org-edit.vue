@@ -8,11 +8,13 @@
       <h3>It's free, quick And simple</h3>
     </div>
     <div class="side-tabs flex">
-      <h2 class="title-tab active">Add your orgaziation</h2>
+      <h2  v-if="!loggedinUser" class="title-tab active" to="/login">Login</h2>
+      <h2 class="title-tab" :class="(loggedinUser)? 'active' : ''">Add your orgaziation</h2>
+      <!-- <h2 class="title-tab active">Add your orgaziation</h2> -->
       <h2 class="title-tab">Publish new event and invite volunteers</h2>
     </div>
     <keep-alive>
-      <form @submit.prevent="createOrg" class="edit-form flex column center">
+      <form v-if="loggedinUser" @submit.prevent="createOrg" class="edit-form flex column center">
         <el-input
           onfocus="this.placeholder = ''"
           onblur="this.placeholder = 'orgaziation name'"
@@ -72,14 +74,19 @@
           !loggedinUser || !loggedinUser.org ? "Next >" : "Save"
         }}</el-button>
       </form>
-    </keep-alive>
+      <div v-else class="edit-form flex column center">
+        <h3>Volunteer? Activist?</h3>
+        <router-link class="el-button el-button--primary" to="/login">Login or SignUp</router-link>
+        <h3>We are here for you, and just want to help you doing good things</h3>
+      </div>
+      </keep-alive>
   </section>
 </template>
 
 <script>
 import { orgService } from "../service/org-service.js";
 import selectMulti from "../cmp/element-ui/select-multi";
-import { uploadImg } from '../service/img-upload-service.js'
+import { uploadImg } from "../service/img-upload-service.js";
 
 export default {
   name: "orgEdit",
@@ -87,33 +94,32 @@ export default {
     return {
       orgCred: orgService.getEmptyOrg(),
       isLoading: false,
-      imgUrls: []
-
-    }
+      imgUrls: [],
+    };
   },
   computed: {
     loggedinUser() {
-      return this.$store.getters.loggedinUser
+      return this.$store.getters.loggedinUser;
     },
     tags() {
-      return this.$store.getters.tags
-    }
+      return this.$store.getters.tags;
+    },
   },
   methods: {
     async onUploadImg(ev) {
       this.isLoading = true;
       const res = await uploadImg(ev);
-      this.imgUrls.push(res.url)
+      this.imgUrls.push(res.url);
       this.isLoading = false;
     },
     removeImg(idx) {
       console.log(idx);
-      this.orgCred.imgUrls.splice(idx, 1)
+      this.orgCred.imgUrls.splice(idx, 1);
     },
     async createOrg() {
-      if (!this.loggedinUser) this.$router.push('/login');
+      if (!this.loggedinUser) this.$router.push("/login");
       console.log("create new org");
-      if(!this.orgCred.imgUrls) this.orgCred.imgUrls = []
+      if (!this.orgCred.imgUrls) this.orgCred.imgUrls = [];
       this.orgCred.imgUrls.push(...this.imgUrls);
       const user = JSON.parse(JSON.stringify(this.$store.getters.loggedinUser));
       this.orgCred.admin = {
@@ -122,7 +128,9 @@ export default {
         imgUrl: user.imgUrl,
       };
       if (!this.orgCred.imgUrls.length) {
-        this.orgCred.imgUrls.push("https://maestroselectronics.com/wp-content/uploads/2017/12/No_Image_Available.jpg");
+        this.orgCred.imgUrls.push(
+          "https://maestroselectronics.com/wp-content/uploads/2017/12/No_Image_Available.jpg"
+        );
       }
       const res = await this.$store.dispatch({
         type: "saveOrg",
@@ -152,7 +160,8 @@ export default {
         });
       }
       this.orgCred = orgService.getEmptyOrg();
-      if(!this.loggedinUser || !this.loggedinUser.org)this.$router.push('/eventi-edit/');
+      if (!this.loggedinUser || !this.loggedinUser.org)
+        this.$router.push("/eventi-edit/");
       this.$router.go(-1);
     },
   },
@@ -164,7 +173,7 @@ export default {
     }
   },
   components: {
-    selectMulti
+    selectMulti,
   },
 };
 </script>
