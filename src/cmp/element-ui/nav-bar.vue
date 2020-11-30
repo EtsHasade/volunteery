@@ -20,20 +20,18 @@
       >User</el-menu-item>
     <el-menu-item index="/login">Login</el-menu-item> -->
 
-
-      <el-submenu index="2" class="user-menu">
-        <template slot="title" class="user-menu">
-          <!-- <span><i class="fas fa-bars"></i></span> -->
-          <span><i class="fas fa-user-circle"></i></span>
-          </template>
-        <el-menu-item
-          :index="`/user-details/${userId}`"
-          :disabled="!loggedinUser"
-          >User profile</el-menu-item
-        >
-        <el-menu-item index="/login">Login</el-menu-item>
-        <el-menu-item index="/login">SignUp</el-menu-item>
-      </el-submenu>
+    <el-submenu index="2" class="user-menu">
+      <template slot="title" class="user-menu">
+        <!-- <span><i class="fas fa-bars"></i></span> -->
+        <span><i class="fas fa-user-circle"></i></span>
+      </template>
+      <el-menu-item :index="`/user-details/${userId}`" :disabled="!loggedinUser"
+        >User profile</el-menu-item
+      >
+      <el-menu-item v-if="loggedinUser" @click="logout">Logout</el-menu-item>
+      <el-menu-item v-if="!loggedinUser" index="/login">Login</el-menu-item>
+      <el-menu-item v-if="!loggedinUser" index="/login">SignUp</el-menu-item>
+    </el-submenu>
   </el-menu>
 </template>
 
@@ -52,10 +50,19 @@ export default {
       return this.loggedinUser ? this.loggedinUser._id : "0";
     },
   },
-  // methods: {
-  //   handleSelect(key, keyPath) {
-  //     console.log(key, keyPath);
-  //   }
-  // }
+  methods: {
+    logout() { 
+      this.$store.dispatch({ type: "logout" });
+      this.$message({
+        showClose: true,
+        message: `${this.loggedinUser.fullName} logout sucessfully!`,
+        type: "success",
+        duration: 1500,
+      });
+    },
+    // handleSelect(key, keyPath) {
+    //   console.log(key, keyPath);
+    // }
+  },
 };
 </script>
