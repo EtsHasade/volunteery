@@ -160,6 +160,7 @@ export default {
           duration: 1500
         })
       }
+      this.$router.go(-1);
     },
     logout() {
      this.$store.dispatch({ type: 'logout' })
