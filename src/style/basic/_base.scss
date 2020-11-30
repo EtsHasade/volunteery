@@ -34,7 +34,6 @@ button:focus,
 input:focus,
 select:focus {
     outline: 0
-    
 }
 
 button:hover {
@@ -54,4 +53,8 @@ form {
             color: $clr7;
         }
     }
+}
+
+.star {
+    color: $clr2;
 }

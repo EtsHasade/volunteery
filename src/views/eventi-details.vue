@@ -3,9 +3,9 @@
     <section class="main-details">
       <h2 class="mb10">{{ eventi.title }}</h2>
       <span v-if="eventi.reviews.length"
-        >⭐ {{ eventi.rate }} ({{ eventi.reviews.length }} reviews)</span
+        ><i class="star fas fa-star"></i> {{ eventi.rate }} ({{ eventi.reviews.length }} reviews)</span
       >
-      <span v-else>⭐ New</span>
+      <span v-else><i class="star fas fa-star"></i> New</span> | 
       <span>{{ eventi.location.address }}, {{ eventi.location.country }}</span>
       <!-- <rate-stars v-if="eventi.reviews.length" v-model="eventi.rate" /> -->
     </section>

@@ -4,6 +4,7 @@
       v-model="value"  
       disabled
       text-color="#ff9900"
+
     >
     </el-rate>
   </div>
