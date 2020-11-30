@@ -42,13 +42,15 @@
           <section class="neededs">
             <span><i class="fas fa-list-ol"></i>We need for this eventi:</span>
             <ul class="needed-content clean-list flex wrap">
-              <li
+              <!-- <li -->
+              <span
                 class="needed text-center mrg5"
                 v-for="(needed, idx) in eventi.neededs"
-                :key="idx"
-              >
-                {{ needed }}
-              </li>
+                :key="idx">
+                <i :class="neededsIcon[needed]"></i> {{ needed }} 
+                <!-- {{ needed }} -->
+              <!-- </li> -->
+                </span>
             </ul>
           </section>
         <hr>
@@ -167,6 +169,9 @@ export default {
   computed: {
     tagsIcon(){
       return this.$store.getters.tagsIcon;
+    },
+    neededsIcon(){
+      return this.$store.getters.neededsIcon;
     },
     isUserOrgAdmin() {
       const loggedinUser = this.$store.getters.loggedinUser;
