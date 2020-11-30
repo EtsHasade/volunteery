@@ -12,44 +12,44 @@
       <h2 class="title-tab">Publish new event and invite volunteers</h2>
     </div>
     <keep-alive>
-    <form @submit.prevent="createOrg" class="edit-form flex column center">
-      <el-input
-        onfocus="this.placeholder = ''"
-        onblur="this.placeholder = 'orgaziation name'"
-        placeholder="orgaziation name"
-        v-model="orgCred.name"
-        clearable
-      ></el-input>
-      <el-input
-        onfocus="this.placeholder = ''"
-        onblur="this.placeholder = 'orgaziation country'"
-        placeholder="country"
-        v-model="orgCred.country"
-        clearable
-      ></el-input>
-      <el-input
-        onblur="this.placeholder = 'tell us about your goals'"
-        type="textarea"
-        :rows="2"
-        placeholder="tell us about your goals"
-        onfocus="this.placeholder = ''"
-        v-model="orgCred.goals"
-      >
-      </el-input>
-      <el-input
-        type="textarea"
-        :rows="3"
-        onfocus="this.placeholder = ''"
-        onblur="this.placeholder = 'tell us about your organization'"
-        placeholder="tell us about your organization"
-        v-model="orgCred.desc"
-      ></el-input>
-      <span>Select tags</span>
-      <select-multi v-model="orgCred.tags" :items="tags"></select-multi>
-      <el-button @click="createOrg">{{
-        (!loggedinUser || !loggedinUser.org) ? "Next >" : "Save"
-      }}</el-button>
-    </form>
+      <form @submit.prevent="createOrg" class="edit-form flex column center">
+        <el-input
+          onfocus="this.placeholder = ''"
+          onblur="this.placeholder = 'orgaziation name'"
+          placeholder="orgaziation name"
+          v-model="orgCred.name"
+          clearable
+        ></el-input>
+        <el-input
+          onfocus="this.placeholder = ''"
+          onblur="this.placeholder = 'orgaziation country'"
+          placeholder="country"
+          v-model="orgCred.country"
+          clearable
+        ></el-input>
+        <el-input
+          onblur="this.placeholder = 'tell us about your goals'"
+          type="textarea"
+          :rows="2"
+          placeholder="tell us about your goals"
+          onfocus="this.placeholder = ''"
+          v-model="orgCred.goals"
+        >
+        </el-input>
+        <el-input
+          type="textarea"
+          :rows="3"
+          onfocus="this.placeholder = ''"
+          onblur="this.placeholder = 'tell us about your organization'"
+          placeholder="tell us about your organization"
+          v-model="orgCred.desc"
+        ></el-input>
+        <span>Select tags</span>
+        <select-multi v-model="orgCred.tags" :items="tags"></select-multi>
+        <el-button @click="createOrg">{{
+          !loggedinUser || !loggedinUser.org ? "Next >" : "Save"
+        }}</el-button>
+      </form>
     </keep-alive>
   </section>
 </template>
@@ -77,7 +77,7 @@ export default {
   },
   methods: {
     async createOrg() {
-      if(!this.loggedinUser) this.$router.push('/login');
+      if (!this.loggedinUser) this.$router.push('/login');
       console.log("create new org");
       const user = JSON.parse(JSON.stringify(this.$store.getters.loggedinUser));
       this.orgCred.admin = {
@@ -98,7 +98,7 @@ export default {
         name: res.org.name,
         imgUrl: res.org.imgUrls[0],
       };
-        await this.$store.dispatch({ type: "updateUser", user });
+      await this.$store.dispatch({ type: "updateUser", user });
 
       if (res.type) {
         this.$message({
@@ -118,14 +118,14 @@ export default {
       this.orgCred = orgService.getEmptyOrg();
       this.$router.push("/eventi-edit/");
     },
-    created() {
-      console.log('hi');
-    //   const id = this.$route.params._id;
-    //   console.log('id', id);
-    //   if(id) {
-    //     const org = await orgService.getById(id);
-    //     this.orgCred = JSON.parse(JSON.stringify(org));
-    //   }
+  },
+  async created() {
+    console.log('hi');
+    const id = this.$route.params.orgId;
+    console.log('id', id);
+    if (id) {
+      const org = await orgService.getById(id);
+      this.orgCred = JSON.parse(JSON.stringify(org));
     }
   },
   components: {
