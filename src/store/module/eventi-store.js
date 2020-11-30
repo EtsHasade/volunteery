@@ -5,7 +5,15 @@ export const eventiStore = {
         eventis: [],
         tags: ['Animals', 'Children', 'Food', 'Needy', 'COVID-19', 'Fun', 'Baby'],
         neededs: ['Doctors', 'Field Manager', 'Chef'],
-        tagsIcon: [{ Animals: 'fas fa-paw' }, { Children: 'fas fa-child' }, { Food: 'fas fa-utensils' }, { Needy: 'fas fa-hand-holding-heart' }, { value: 'fas fa-head-side-mask', key: 'COVID-19' }, { Fun: 'far fa-smile-beam' }, { Baby: 'fas fa-baby' }]
+        tagsIcon: {
+            Animals: 'fas fa-paw',
+            Children: 'fas fa-child',
+            Food: 'fas fa-utensils',
+            Needy: 'fas fa-hand-holding-heart',
+            'COVID-19': 'fas fa-head-side-mask',
+            Fun: 'far fa-smile-beam',
+            Baby: 'fas fa-baby'
+        }
 
     },
     getters: {
