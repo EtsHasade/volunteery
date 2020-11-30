@@ -6,7 +6,7 @@
     mode="horizontal"
     :router="true"
   >
-    <el-menu-item index="/">Home</el-menu-item>
+    <!-- <el-menu-item index="/">Home</el-menu-item> -->
     <el-submenu index="1">
       <template slot="title">Explore</template>
       <el-menu-item index="/eventi-app">All volunteer events</el-menu-item>
@@ -16,10 +16,9 @@
       >Publish new Event</el-menu-item
     >
     <el-menu-item v-else index="/org-edit">I need volunteers</el-menu-item>
-    <el-menu-item :index="`/user-details/${userId}`" :disabled="!loggedinUser"
-      >User</el-menu-item
-    >
-    <el-menu-item index="/login">Login</el-menu-item>
+    <!-- <el-menu-item :index="`/user-details/${userId}`" :disabled="!loggedinUser"
+      >User</el-menu-item>
+    <el-menu-item index="/login">Login</el-menu-item> -->
 
 
       <el-submenu index="2" class="user-menu">
@@ -33,6 +32,7 @@
           >User profile</el-menu-item
         >
         <el-menu-item index="/login">Login</el-menu-item>
+        <el-menu-item index="/login">SignUp</el-menu-item>
       </el-submenu>
   </el-menu>
 </template>

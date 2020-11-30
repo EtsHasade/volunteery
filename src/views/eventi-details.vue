@@ -25,7 +25,7 @@
       <section class="details flex column">
         <section class="details-ev">
         <hr>
-          <span>Tags:</span>
+          <span><b>Tags:</b></span>
           <section class="tags flex wrap">
           <!--  -->
             <span
@@ -34,14 +34,13 @@
               :key="idx"
               ><i :class="tagsIcon[tag]"></i> {{ tag }}</span>
           </section>
-          <span>Limit: {{ eventi.capacity }} members</span>
+          <span><i class="fas fa-users"></i> {{ eventi.capacity }} members</span>
           <section class="dates flex column">
             <span><i class="fal fa-calendar-alt"></i>{{ moment(eventi.startAt).format("DD/MM/YYYY") }} - {{ moment(eventi.endAt).format("DD/MM/YYYY") }}</span>
             <!-- <br v-if="eventi.endAt"> -->
           </section>
           <section class="neededs">
-            {{neededsIcon}}
-            <span><i class="fas fa-list-ol"></i>We need for this eventi:</span>
+            <span><i class="fas fa-list-ol"></i><b>We need for this eventi:</b></span>
             <ul class="needed-content clean-list flex wrap">
               <!-- <li -->
               <span
