@@ -28,14 +28,11 @@
           <span>Tags:</span>
           <section class="tags flex wrap">
           <!--  -->
-            <!-- <span
+            <span
               class="tag text-center mrg5"
               v-for="(tag, idx) in eventi.tags"
               :key="idx"
-              >{{ tag }}</span> -->
-                 <span class="tag text-center mrg5"
-              v-for="(tag, idx) in eventi.tagsIcon" :key="idx"
-              >{{tag.icon}} : {{ tag.name }}</span>
+              ><i :class="tagsIcon[tag]"></i> {{ tag }}</span>
           </section>
           <span>Limit: {{ eventi.capacity }} members</span>
           <section class="dates flex column">
@@ -165,10 +162,12 @@ export default {
       topic: 'love',
       // showChat: false,
       debounce: null,
-
     }
   },
   computed: {
+    tagsIcon(){
+      return this.$store.getters.tagsIcon;
+    },
     isUserOrgAdmin() {
       const loggedinUser = this.$store.getters.loggedinUser;
       console.log("🚀 ~ file: eventi-details.vue ~ line 139 ~ isUserOrgAdmin ~ loggedinUser", loggedinUser)

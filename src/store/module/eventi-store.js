@@ -5,7 +5,7 @@ export const eventiStore = {
         eventis: [],
         tags: ['Animals', 'Children', 'Food', 'Needy', 'COVID-19', 'Fun', 'Baby'],
         neededs: ['Doctors', 'Field Manager', 'Chef'],
-        tagsIcon: [{ value: '<i class="fas fa-paw"></i>', key: 'Animals' }, { value: '<i class="fas fa-child"></i>', key: 'Children' }, { value: '<i class="fas fa-utensils"></i>', key: 'Food' }, { value: '<i class="fas fa-hand-holding-heart"></i>', key: 'Needy' }, { value: '<i class="fas fa-head-side-mask"></i>', key: 'COVID-19' }, { value: '<i class="far fa-smile-beam"></i>', key: 'Fun' }, { value: '<i class="fas fa-baby"></i>', key: 'Baby' }]
+        tagsIcon: [{ Animals: 'fas fa-paw' }, { Children: 'fas fa-child' }, { Food: 'fas fa-utensils' }, { Needy: 'fas fa-hand-holding-heart' }, { value: 'fas fa-head-side-mask', key: 'COVID-19' }, { Fun: 'far fa-smile-beam' }, { Baby: 'fas fa-baby' }]
 
     },
     getters: {
