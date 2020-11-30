@@ -1,7 +1,12 @@
 .card-preview {
     cursor       : pointer;
-    box-shadow   : $clr7 0 2px 4px;
+    // box-shadow   : $clr7 0 2px 4px;
     border-radius: 8px;
+
+    &:hover {
+        box-shadow: 0 2px 3px  #b9b9b9;
+        transition: .4s;
+    }
 
     .img-squer-container {
         width           : 100%;

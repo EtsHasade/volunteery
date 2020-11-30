@@ -3,7 +3,7 @@
     <section class="main-details">
       <h2 class="mb10">{{ eventi.title }}</h2>
       <section class="mini-org flex align-center">
-        <avatar :src="eventi.byOrg.imgUrl" />
+        <avatar :src="eventi.byOrg.imgUrl" :username="eventi.byOrg.name"/>
         <span>By {{ eventi.byOrg.name }}</span>
       </section>
       <span v-if="eventi.reviews.length"
@@ -120,7 +120,7 @@
           :key="review._id"
         >
           <section class="details-review flex">
-            <avatar :src="review.author.imgUrl"></avatar>
+            <avatar :src="review.author.imgUrl" :username="review.author.fullName"></avatar>
             <rate-stars v-model="review.rate" class="review-rate" />
             <span class="time mrg5">
               {{ moment(review.createdAt).startOf("minute").fromNow() }}
@@ -168,6 +168,7 @@ export default {
     isUserOrgAdmin() {
       const loggedinUser = this.$store.getters.loggedinUser;
       console.log("🚀 ~ file: eventi-details.vue ~ line 139 ~ isUserOrgAdmin ~ loggedinUser", loggedinUser)
+      if(loggedinUser.isAdmin) return true; // not secured!!
       if (!loggedinUser || !loggedinUser.org || loggedinUser.org._id !== this.eventi.byOrg._id) return false;
       else return true;
     }
