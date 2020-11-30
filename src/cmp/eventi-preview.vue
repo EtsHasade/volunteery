@@ -24,7 +24,7 @@
           <h4>{{ eventi.byOrg.name }}</h4>
         </div>
         <!-- <rate-stars v-model="orgRate" :disabled="true"></rate-stars> -->
-        <p>⭐ {{orgRate}}</p>
+        <p>⭐ {{eventi.byOrg.rate}}</p>
       </div>
       <div class="eventi-label">
         <h3>{{ eventi.title }}</h3>
@@ -58,7 +58,7 @@ export default {
     };
   },
   created() {
-    this.orgRate = JSON.parse(JSON.stringify(this.eventi.byOrg.rate));
+    // this.orgRate = JSON.parse(JSON.stringify(this.eventi.byOrg.rate));
   },
   components: {
     // rateStars,
