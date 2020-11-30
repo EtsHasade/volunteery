@@ -1,7 +1,7 @@
 <template>
   <section class="edit-page">
     <div
-      v-if="!loggedinUser.org"
+      v-if="!loggedinUser || !loggedinUser.org"
       class="edit-page-title title flex-column center-all"
     >
       <h2>Need volunteers? join us!</h2>
@@ -11,6 +11,7 @@
       <h2 class="title-tab active">Add your orgaziation</h2>
       <h2 class="title-tab">Publish new event and invite volunteers</h2>
     </div>
+    <keep-alive>
     <form @submit.prevent="createOrg" class="edit-form flex column center">
       <el-input
         onfocus="this.placeholder = ''"
@@ -46,9 +47,10 @@
       <span>Select tags</span>
       <select-multi v-model="orgCred.tags" :items="tags"></select-multi>
       <el-button @click="createOrg">{{
-        !loggedinUser.org ? "Next >" : "Save"
+        (!loggedinUser || !loggedinUser.org) ? "Next >" : "Save"
       }}</el-button>
     </form>
+    </keep-alive>
   </section>
 </template>
 
@@ -57,7 +59,7 @@ import { orgService } from "../service/org-service.js";
 import selectMulti from "../cmp/element-ui/select-multi";
 
 export default {
-  name: "create-org",
+  name: "orgEdit",
   data() {
     return {
       orgCred: orgService.getEmptyOrg(),
@@ -67,6 +69,7 @@ export default {
   },
   methods: {
     async createOrg() {
+      if(!this.loggedinUser) this.$router.push('/login');
       console.log("create new org");
       const user = JSON.parse(JSON.stringify(this.$store.getters.loggedinUser));
       this.orgCred.admin = {

@@ -138,6 +138,8 @@ export default {
         })
         console.table('this.loginCred', this.loginCred);
       }
+
+      this.$router.go(-1);
     },
     signup() {
       if (this.signupCred.fullName && this.signupCred.password && this.signupCred.email) {

@@ -97,7 +97,7 @@ import eventiList from "../cmp/eventi-list";
 var moment = require('moment')
 
 export default {
-  name: "org-details",
+  name: "orgDetails",
   data() {
     return {
       moment,
@@ -123,7 +123,7 @@ export default {
     isUserOrgAdmin() {
       const loggedinUser = this.$store.getters.loggedinUser;
       console.log("🚀 ~ file: eventi-details.vue ~ line 139 ~ isUserOrgAdmin ~ loggedinUser", loggedinUser)
-      if(loggedinUser.isAdmin) return true; // not secured!!
+      if(loggedinUser && loggedinUser.isAdmin) return true; // not secured!!
       if (!loggedinUser || !loggedinUser.org || loggedinUser.org._id !== this.org._id) return false;
       else return true;
     }
@@ -185,7 +185,7 @@ export default {
     this.org = JSON.parse(JSON.stringify(org)) || {};
 
     // const user = await userService.getById("u101");
-    const user = JSON.parse(JSON.stringify(this.$store.getters.loggedinUser))
+    const user = JSON.parse(JSON.stringify(this.$store.getters.loggedinUser)) || { _id: '', fullName: 'Goust', imgUrl: '' }
     const { _id, fullName, imgUrl } = user;
     this.miniLoggedinUser = { _id, fullName, imgUrl };
     this.avgRates();
