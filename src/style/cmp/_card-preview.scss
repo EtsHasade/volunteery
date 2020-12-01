@@ -1,16 +1,16 @@
 .card-preview {
     cursor       : pointer;
     border-radius: 8px;
-    transition: .4s;
+    transition   : .4s;
 
     &:hover {
         box-shadow: 0 2px 3px #b9b9b9;
     }
 
     .img-squer-container {
-        width           : 100%;
-        padding-top     : 70%;
-        position        : relative;
+        width      : 100%;
+        padding-top: 70%;
+        position   : relative;
 
         img {
             border-top-left-radius : 8px;
@@ -25,18 +25,18 @@
         }
 
         .preview-card-avatar {
-            width: 40px;
-            height: 40px;
-            z-index         : 999;
-            position        : absolute;
-            bottom          : 0;
-            background-position: center;
-            background-size    : contain;
+            width                  : 40px;
+            height                 : 40px;
+            z-index                : 999;
+            position               : absolute;
+            bottom                 : 0;
+            background-position    : center;
+            background-size        : contain;
             border-top-right-radius: 7px;
-            border-top: 3px solid #ffffff;
-            border-right: 3px solid #ffffff;
+            border-top             : 3px solid #ffffff;
+            border-right           : 3px solid #ffffff;
 
-            &:hover{
+            &:hover {
                 box-shadow: inset 20px 20px 20px #ffffff57;
             }
         }
@@ -45,29 +45,34 @@
 }
 
 .preview-details {
-    height: 100%;
+    height    : 100%;
     margin-top: -5px;
     padding   : 0.5rem;
 
-    .card-title{
-        font-size: 1.2rem;
+    .card-title {
+        font-size  : 1.2rem;
         line-height: 1.2em;
     }
 
-    .card-desc{
-        color: $gray3;
-        line-height: 1.5;
+    .card-desc {
+        color             : $gray3;
+        line-height       : 1.5;
+        overflow          : hidden;
+        text-overflow     : ellipsis;
+        display           : -webkit-box;
+        -webkit-line-clamp: 4;
+        /* number of lines to show */
+        -webkit-box-orient: vertical;
     }
 
-    .country{
-        font-weight: bold;
-        font-size: 0.8rem;
+    .country {
+        font-weight : bold;
+        font-size   : 0.8rem;
         margin-right: 0.5em;
     }
-    .time{
+
+    .time {
         text-align: right;
-        font-size: 0.8rem;
+        font-size : 0.8rem;
     }
 }
-
-
