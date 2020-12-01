@@ -34,4 +34,9 @@ export default {
 .hero{
   background-image: url(./assets/img/hero.jpg);
 }
+
+@font-face{
+    font-family: hindBold;
+    src: url(./assets/fonts/Hind/Hind-Bold.ttf);
+}
 </style>

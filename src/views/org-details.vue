@@ -17,25 +17,33 @@
       />
     </section>
     <main class="flex">
-      <section class="details flex column">
-        <h4>{{ org.goals }}</h4>
-        <section class="mini-user">
-          <avatar :src="org.admin.imgUrl" :username="org.admin.fullName" />
-          <span>Admin: {{ org.admin.fullName }}</span>
+      <section class="details">
+        <hr />
+        <section class="mini-user flex align-center mb10">
+          <avatar class="mr10" :src="org.admin.imgUrl" :username="org.admin.fullName" />
+          <span>{{ org.admin.fullName }}</span>
         </section>
-        <rate-stars v-if="org.reviews.length" v-model="org.rate" />
-        <span v-else>{{ msg }}</span>
-        <span>Tags:</span>
-        <section class="tags flex wrap">
-          <span
-            class="tag text-center mrg5"
-            v-for="(tag, idx) in org.tags"
-            :key="idx"
-            >{{ tag }}</span
-          >
+        <hr />
+        <p class="org-goals">{{ org.goals }}</p>
+        <hr />
+        <section class="tags-section flex align-center wrap">
+          <span class="bold mr16">Tags</span>
+          <section class="tags">
+            <span
+              class="tag text-center mrg5"
+              v-for="(tag, idx) in org.tags"
+              :key="idx"
+              ><i :class="tagsIcon[tag]"></i> {{ tag }}
+            </span>
+          </section>
         </section>
+        <hr />
+        <section class="org-desc">
+          <p>{{ org.desc }}</p>
+        </section>
+        <hr />
         <section class="org-eventis">
-          <span>Our Events</span>
+          <span class="bold">Our Events</span>
           <router-link
             v-if="isUserOrgAdmin"
             to="/eventi-edit"
@@ -44,7 +52,7 @@
           >
           <eventi-list :eventis="orgEventis"></eventi-list>
         </section>
-        <span>{{ org.desc }}</span>
+        <hr />
         <span class="text-center mrg5">Reviews</span>
           <form
             @submit.prevent="addReview"
@@ -120,6 +128,9 @@ export default {
     };
   },
   computed: {
+    tagsIcon() {
+      return this.$store.getters.tagsIcon;
+    },
     orgEventis() {
       const eventis = this.$store.getters.eventisForDisplay.filter((eventi) => {
         if (eventi.byOrg) {
