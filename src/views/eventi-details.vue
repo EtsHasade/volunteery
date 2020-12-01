@@ -25,8 +25,8 @@
       <section class="details flex column">
         <section class="details-ev">
         <hr>
+          <section class="tags flex wrap align-center">
           <span><b>Tags:</b></span>
-          <section class="tags flex wrap">
           <!--  -->
             <span
               class="tag text-center mrg5"
@@ -34,6 +34,7 @@
               :key="idx"
               ><i :class="tagsIcon[tag]"></i> {{ tag }}</span>
           </section>
+        <hr>
           <span><i class="fas fa-users"></i> {{ eventi.capacity }} members</span>
           <section class="dates flex column">
             <span><i class="fal fa-calendar-alt"></i>{{ moment(eventi.startAt).format("DD/MM/YYYY") }} - {{ moment(eventi.endAt).format("DD/MM/YYYY") }}</span>
@@ -63,7 +64,7 @@
       <section class="status-details text-center">
         <div class="join-section flex column center">
           <p>We need speicals volunteer, if you are please join us!</p>
-          <el-button class="join-btn" @click="addMember">{{ textBtn }}</el-button>
+          <el-button type="success" class="join-btn" @click="addMember">{{ textBtn }}</el-button>
         </div>
         <section class="members">
           <span class="flex center">Members</span>
