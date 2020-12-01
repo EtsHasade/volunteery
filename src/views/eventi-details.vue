@@ -205,7 +205,8 @@ export default {
       this.eventi.reviews.forEach((review) => {
         sum += review.rate;
       });
-      this.eventi.rate = sum / this.eventi.reviews.length;
+      this.eventi.rate = (sum / this.eventi.reviews.length).toFixed(2);
+      
       // return sum / this.eventi.reviews.length
     },
     async addMember() {
