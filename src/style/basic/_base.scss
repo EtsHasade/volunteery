@@ -6,6 +6,7 @@ html {
     scroll-behavior: smooth;
     color: $gray1;
 }
+
 body {
     font-family: regular;
     color: $gray1;
@@ -14,7 +15,6 @@ body {
     height: 100%;
 }
 
-
 h1,
 h2,
 h3,
@@ -22,7 +22,6 @@ h4,
 h5,
 h6,
 p,
-
 a {
     margin: 0 0 1em;
     font-weight: normal;

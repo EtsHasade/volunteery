@@ -3,6 +3,8 @@
     <!-- <h2>Home page</h2> -->
     <!-- <img class="hero-img full" src="@/assets/img/hero.jpg" alt=""> -->
     <!-- <img class="hero-img full" src="https://ewscripps.brightspotcdn.com/dims4/default/61272c3/2147483647/strip/true/crop/640x360+0+34/resize/1280x720!/quality/90/?url=https%3A%2F%2Fmediaassets.10news.com%2Fphoto%2F2018%2F10%2F30%2Fvolunteer_900x600_1540924954704_101792658_ver1.0_640_480.jpg" alt=""> -->
+    <span>Suggest</span>
+    <eventi-list :eventis="suggestEventis" />
     <span>NEWS</span>
     <eventi-list :eventis="newestEventis" />
     <span>POPULARS</span>
@@ -33,13 +35,41 @@ export default {
     },
     popularestEventis() {
       var eventis = JSON.parse(JSON.stringify(this.$store.getters.eventisForDisplay)) 
-      eventis.sort((a,b) => (a.rate > b.rate) ? 1 : ((b.rate > a.rate) ? -1 : 0));
+      eventis.sort((a,b) => (a.rate > b.rate) ? -1 : ((b.rate > a.rate) ? 1 : 0));
       return eventis.splice(0,4)
+    },
+    suggestEventis() {
+      var suggestEventis = []
+      var suggestEventisArrays = []
+      const favs = this.$store.getters.loggedinUser.favs
+      var eventis = JSON.parse(JSON.stringify(this.$store.getters.eventisForDisplay)) 
+      eventis.sort((a,b) => (a.rate > b.rate) ? -1 : ((b.rate > a.rate) ? 1 : 0));
+      [...favs].forEach(fav => {
+        let favEventis = [];
+        [...eventis].forEach(eventi => {
+          eventi.tags.forEach(eventTag => {
+            if(eventTag === fav) {
+              favEventis.push(eventi)
+            }
+          })
+        })
+        suggestEventisArrays.push(JSON.parse(JSON.stringify(favEventis)))
+      })
+      
+      const arr = [0,1,2,3]
+      arr.forEach((num) => {
+        var myIdx = num
+        if(myIdx === suggestEventisArrays.length) myIdx = 0
+        if(myIdx - 1 === suggestEventisArrays.length) myIdx = 1
+        suggestEventis.push(suggestEventisArrays[myIdx].shift())
+      })
+      return suggestEventis
     }
+  },
+  methods: {
   },
   created() {
     this.$store.dispatch({ type: 'setEventis' });
-
     document.body.classList.add('hero-page');
 
   },

@@ -83,7 +83,7 @@
             border: 2px solid $clr4;
             padding: rem(5px);
             border-radius: rem(8px);
-            width: rem(310px);
+            min-width: rem(310px);
             & .details-review {
                 align-items: center;
             }

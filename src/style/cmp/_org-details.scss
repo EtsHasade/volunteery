@@ -47,6 +47,21 @@
             position: relative;
         }
     }
+    & .reviews-section {
+        & .review {
+            border: 2px solid $clr4;
+            padding: rem(5px);
+            border-radius: rem(8px);
+            min-width: rem(310px);
+            & .details-review {
+                align-items: center;
+            }
+            & .review-rate {
+                max-width: rem(95px);
+                margin-left: rem(7px);
+            }
+        }
+    }
     //     grid-row: 1;
     //     display: grid;
     //     grid-row: auto;
