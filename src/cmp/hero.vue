@@ -8,7 +8,13 @@
         talents?
       </p>
       <p>We invite you to choose the volunteering that best suits you.</p>
-      <h4 ref="scrollToList" class="call-to-action" @click="scrollMeTo('scrollToList')">See our suggestions</h4>
+      <h4
+        ref="scrollToList"
+        class="call-to-action"
+        @click="scrollMeTo('scrollToList', 200)"
+      >
+        See our suggestions
+      </h4>
     </div>
   </div>
 </template>
@@ -17,9 +23,9 @@
 export default {
   name: "hero",
   methods: {
-    scrollMeTo(refName) {
+    scrollMeTo(refName, topOffset) {
       var element = this.$refs[refName];
-      var top = element.offsetTop;
+      var top = element.offsetTop + 250;
       window.scrollTo(0, top);
     },
   },

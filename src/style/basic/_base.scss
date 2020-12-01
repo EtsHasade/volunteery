@@ -2,10 +2,10 @@
     box-sizing: border-box;
 }
 
-// html {
-//     // font-family: Hind-Regular;
-//     // color: $gray1;
-// }
+html {
+    scroll-behavior: smooth;
+    color: $gray1;
+}
 body {
     font-family: regular;
     color: $gray1;
