@@ -153,9 +153,9 @@
     }
 }
 
-.neededs {
-    color: $gray1;
-    &.needed {
-        color: $gray3;
-    }
+.details-ev {
+    color: $gray3;
+    // &.needed-content {
+    //     color: $clr1;
+    // }
 }
