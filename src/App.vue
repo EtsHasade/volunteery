@@ -27,4 +27,8 @@ export default {
     font-family: regular;
     src: url(./assets/fonts/Hind/Hind-Regular.ttf);
 }
+@font-face{
+    font-family: hindBold;
+    src: url(./assets/fonts/Hind/Hind-Bold.ttf);
+}
 </style>

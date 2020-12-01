@@ -21,8 +21,8 @@
       />
     </section>
     <section class="mini-org flex align-center" @click="openOrgDetails">
-      <avatar :src="eventi.byOrg.imgUrl" :username="eventi.byOrg.name" />
-      <span>By {{ eventi.byOrg.name }}</span>
+      <avatar class="mr16 hover-pointer" :src="eventi.byOrg.imgUrl" :username="eventi.byOrg.name" />
+      <span>{{ eventi.byOrg.name }}</span>
     </section>
     <main class="flex justify-center">
       <section class="details flex column">
