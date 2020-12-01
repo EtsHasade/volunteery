@@ -25,6 +25,6 @@ export default {
 <style lang="scss">
 @font-face{
     font-family: regular;
-    src: url(./assets/font/Hind/Hind-Regular.ttf);
+    src: url(./assets/fonts/Hind/Hind-Regular.ttf);
 }
 </style>
