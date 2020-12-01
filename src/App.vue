@@ -1,7 +1,8 @@
 <template>
   <div id="app" class="main-container">
       <app-header></app-header>
-      <main class="mb10 full main-container">
+      <hero/>
+      <main class="mb10">
         <router-view />
       </main>
     <app-footer></app-footer>
@@ -12,12 +13,14 @@
 import "@/style/main.scss";
 import appHeader from "@/cmp/app-header";
 import appFooter from "@/cmp/app-footer";
+import hero from "@/cmp/hero";
 
 export default {
   name: "eventiApp",
   components: {
     appHeader,
     appFooter,
+    hero
   },
 };
 </script>
@@ -27,6 +30,11 @@ export default {
     font-family: regular;
     src: url(./assets/fonts/Hind/Hind-Regular.ttf);
 }
+
+.hero{
+  background-image: url(./assets/img/hero.jpg);
+}
+
 @font-face{
     font-family: hindBold;
     src: url(./assets/fonts/Hind/Hind-Bold.ttf);
