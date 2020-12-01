@@ -11,7 +11,7 @@
       <h4
         ref="scrollToList"
         class="call-to-action"
-        @click="scrollMeTo('scrollToList', 250)"
+        @click="scrollMeTo('scrollToList', 43)"
       >
         See our suggestions
       </h4>
@@ -25,7 +25,7 @@ export default {
   methods: {
     scrollMeTo(refName, topOffset) {
       var element = this.$refs[refName];
-      var top = element.offsetTop + topOffset;
+      var top = element.offsetTop + (window.innerHeight)*(topOffset/100);
       window.scrollTo(0, top);
     },
   },
