@@ -19,18 +19,27 @@
         }
     }
 
-    .user-menu .el-submenu__title>span {
-        font-size: 2rem;
+    .user-menu .el-submenu{
+        &:focus, *:focus, * *:focus{
+            color: inherit;
+        }
+
+        .el-submenu__title>span {
+            font-size: 2rem;
+            color    : inherit;
+        }
     }
 
-
+    .el-menu--horizontal>.el-submenu:focus .el-submenu__title {
+        color: inherit;
+    }
     .el-menu.el-menu--horizontal {
         border-bottom   : none;
         background-color: inherit;
         color           : inherit;
 
 
-        .el-menu-item{
+        .el-menu-item {
             border-bottom: none;
             color        : inherit;
 
@@ -56,7 +65,8 @@
                 color           : inherit;
             }
 
-            i, i:focus {
+            i,
+            i:focus {
                 color: inherit;
 
             }
