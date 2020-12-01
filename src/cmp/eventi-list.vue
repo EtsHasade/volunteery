@@ -1,7 +1,7 @@
 <template>
 <section>
   <ul v-if="eventis" class="eventi-list clean-list card-list">
-    <eventi-preview v-for="eventi in eventis" :key="eventi._id"  :eventi="eventi"/>
+    <eventi-preview v-for="(eventi, idx) in eventis" :key="idx"  :eventi="eventi"/>
     <li></li>
     <li></li>
   </ul> 
