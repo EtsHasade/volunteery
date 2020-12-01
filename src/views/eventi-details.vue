@@ -25,8 +25,8 @@
       <section class="details flex column">
         <section class="details-ev">
         <hr>
+          <section class="tags flex wrap align-center">
           <span><b>Tags:</b></span>
-          <section class="tags flex wrap">
           <!--  -->
             <span
               class="tag text-center mrg5"
@@ -34,6 +34,7 @@
               :key="idx"
               ><i :class="tagsIcon[tag]"></i> {{ tag }}</span>
           </section>
+        <hr>
           <span><i class="fas fa-users"></i> {{ eventi.capacity }} members</span>
           <section class="dates flex column">
             <span><i class="fal fa-calendar-alt"></i>{{ moment(eventi.startAt).format("DD/MM/YYYY") }} - {{ moment(eventi.endAt).format("DD/MM/YYYY") }}</span>
@@ -63,7 +64,7 @@
       <section class="status-details text-center">
         <div class="join-section flex column center">
           <p>We need speicals volunteer, if you are please join us!</p>
-          <el-button class="join-btn" @click="addMember">{{ textBtn }}</el-button>
+          <el-button type="success" class="join-btn" @click="addMember">{{ textBtn }}</el-button>
         </div>
         <section class="share-button flex center">
           <section><a href="https://api.whatsapp.com/send?phone=972501122337&text=http://localhost:8080/#/eventi-details/5fc3c2f8b939f9e519ca2794" target="_blank"><i class="fab fa-whatsapp"></i></a></section>
@@ -128,7 +129,8 @@
         >
           <section class="details-review flex">
             <avatar :src="review.author.imgUrl" :username="review.author.fullName"></avatar>
-            <rate-stars v-model="review.rate" class="review-rate" />
+            <!-- <rate-stars v-model="review.rate" class="review-rate" /> -->
+            <span class="review-rate">{{ review.rate }}<i class="star fas fa-star"></i></span>
             <span class="time mrg5">
               {{ moment(review.createdAt).startOf("minute").fromNow() }}
             </span>
@@ -149,7 +151,7 @@ import socketService from '../service/socket-service.js'
 import { eventiService } from '../service/eventi-service.js';
 // import { userService } from '../service/user-service.js';
 import avatar from "vue-avatar";
-import rateStars from '../cmp/element-ui/rate-stars';
+// import rateStars from '../cmp/element-ui/rate-stars';
 import rateStarsEnable from '../cmp/element-ui/rate-stars-enable';
 var moment = require('moment')
 export default {
@@ -256,7 +258,11 @@ export default {
       this.reviewToEdit.author = JSON.parse(JSON.stringify(this.miniLoggedinUser)) || { fullName: 'Goust' }
       this.eventi.reviews.push(this.reviewToEdit)
       this.avgRates()
-      eventiService.save(JSON.parse(JSON.stringify(this.eventi)))
+      this.$store.dispatch({
+        type: 'saveEventi',
+        eventi: JSON.parse(JSON.stringify(this.eventi))
+      })
+      // eventiService.save(JSON.parse(JSON.stringify(this.eventi)))
       this.$message({
         showClose: true,
         message: `Your review added sucessfully!`,
@@ -340,7 +346,7 @@ export default {
   },
   components: {
     avatar,
-    rateStars,
+    // rateStars,
     rateStarsEnable,
     chatApp
   }

@@ -18,6 +18,8 @@
             &.details-ev {
                 // grid-template-columns: 1fr 1fr;
                 grid-row: 1/2;
+                // .tags{
+                // }
             }
             &.desc-ev {
                 grid-row: 2/3;
@@ -52,6 +54,7 @@
         }
         & .review-rate {
             max-width: rem(95px);
+            margin-left: rem(7px);
         }
     }
     & .eventi-imgs {
