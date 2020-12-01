@@ -178,3 +178,10 @@
         }
     }
 }
+
+.neededs {
+    color: $gray1;
+    &.needed {
+        color: $gray3;
+    }
+}
