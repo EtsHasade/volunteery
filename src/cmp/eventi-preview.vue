@@ -7,7 +7,7 @@
     </div>
     <!-- <div class="preview-details" :style="`background-image: url('${eventi.imgUrls[0]}'); transform: scaleY(-1);`"> -->
     <div class="preview-details">
-      <div class="org-details">
+      <div class="org-details mini-org-details">
         <div class="flex mb10">
           <avatar
             @click.stop="openOrgDetails"

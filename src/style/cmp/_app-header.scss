@@ -70,6 +70,8 @@
 
     &.scrolly {
         background-color: $clr1;
+        // background-color: #9b247dee;
+        background-image: url('/src/assets/img/hero.jpg');
         transition      : 0.5s;
     }
 }
