@@ -82,6 +82,10 @@
             textBtn
           }}</el-button>
         </div>
+        <section class="share-button flex center">
+          <section><a href="https://api.whatsapp.com/send?phone=972501122337&text=http://localhost:8080/#/eventi-details/5fc3c2f8b939f9e519ca2794" target="_blank"><i class="fab fa-whatsapp"></i></a></section>
+          <section class="fb-share-button" data-href="http://localhost:8080/#/eventi-details/5fc3c2f8b939f9e519ca2794" data-layout="button" data-size="large"><a target="_blank" href="https://www.facebook.com/sharer/sharer.php?u=http%3A%2F%2Flocalhost%3A8080%2F%23%2Feventi-details%2F5fc3c2f8b939f9e519ca2794&amp;src=sdkpreparse" class="fb-xfbml-parse-ignore"><i class="fab fa-facebook"></i></a></section>
+        </section>
         <section class="members">
           <span class="flex center">Members</span>
           <section class="members-imgs flex center wrap">
