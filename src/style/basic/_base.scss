@@ -70,23 +70,12 @@ form {
 .fal,
 .fas,
 .far {
-    //     // &.fa-paw,
-    //     // .fa-child,
-    //     // .fa-graduation-cap,
-    //     // .fa-utensils,
-    //     // .fa-hand-holding-heart,
-    //     // .fa-head-side-mask,
-    //     // .fa-baby,
-    //     // .fa-sitemap,
-    //     // .fa-bread-slice,
-    //     // .fa-tractor
     font-size: rem(25px);
     padding: 0 rem(5px);
-    //     // }
 }
 
 .fab {
-    font-size: 35px;
+    font-size: rem(35px);
     color: #385898;
     padding: 10px;
     &.fa-whatsapp {

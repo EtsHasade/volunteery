@@ -34,14 +34,11 @@
             <span
               class="tag text-center mrg5"
               v-for="(tag, idx) in eventi.tags"
-              :key="idx"
-              ><i :class="tagsIcon[tag]"></i> {{ tag }}</span
-            >
+              :key="idx"><i :class="tagsIcon[tag]"></i> {{ tag }}
+            </span>
           </section>
           <hr />
-          <span
-            ><i class="fas fa-users"></i> {{ eventi.capacity }} members</span
-          >
+          <span><i class="fas fa-users"></i> {{eventi.members.length}} / {{ eventi.capacity }} members</span>
           <section class="dates flex column">
             <span><i class="fas fa-calendar-alt"></i>{{ moment(eventi.startAt).format("DD/MM/YYYY") }} - {{ moment(eventi.endAt).format("DD/MM/YYYY") }}</span>
             <!-- <br v-if="eventi.endAt"> -->
@@ -52,16 +49,12 @@
               ><b>We need for this eventi:</b></span
             >
             <ul class="needed-content clean-list flex wrap">
-              <!-- <li -->
               <span
                 class="needed text-center mrg5"
                 v-for="(needed, idx) in eventi.neededs"
-                :key="idx"
-              >
+                :key="idx">
                 <i :class="neededsIcon[needed]"></i> {{ needed }}
               </span>
-              <!-- {{ needed }} -->
-              <!-- </li> -->
             </ul>
           </section>
           <hr />
@@ -97,7 +90,7 @@
           <section class="members flex column text-center align-center">
             <h3 class="title-members">Members</h3>
             <section class="members-imgs flex center wrap">
-              <avatar
+              <avatar style="background-position: center; background-size:cover;"
                 class="member-img mrg5"
                 v-for="member in eventi.members"
                 :key="member._id"
