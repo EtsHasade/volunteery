@@ -4,6 +4,7 @@
 
 html {
     font-family: regular, sans-serif;
+    color: $gray1;
 }
 
 body {
@@ -81,4 +82,13 @@ form {
     font-size: rem(25px);
     padding: 0 rem(5px);
     //     // }
+}
+
+.fab {
+    font-size: 35px;
+    color: #385898;
+    padding: 10px;
+    &.fa-whatsapp {
+        color: #25d366;
+    }
 }
