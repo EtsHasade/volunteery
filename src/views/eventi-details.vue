@@ -125,7 +125,8 @@
         >
           <section class="details-review flex">
             <avatar :src="review.author.imgUrl" :username="review.author.fullName"></avatar>
-            <rate-stars v-model="review.rate" class="review-rate" />
+            <!-- <rate-stars v-model="review.rate" class="review-rate" /> -->
+            <span class="review-rate">{{ review.rate }}<i class="star fas fa-star"></i></span>
             <span class="time mrg5">
               {{ moment(review.createdAt).startOf("minute").fromNow() }}
             </span>
@@ -146,7 +147,7 @@ import socketService from '../service/socket-service.js'
 import { eventiService } from '../service/eventi-service.js';
 // import { userService } from '../service/user-service.js';
 import avatar from "vue-avatar";
-import rateStars from '../cmp/element-ui/rate-stars';
+// import rateStars from '../cmp/element-ui/rate-stars';
 import rateStarsEnable from '../cmp/element-ui/rate-stars-enable';
 var moment = require('moment')
 export default {
@@ -341,7 +342,7 @@ export default {
   },
   components: {
     avatar,
-    rateStars,
+    // rateStars,
     rateStarsEnable,
     chatApp
   }
