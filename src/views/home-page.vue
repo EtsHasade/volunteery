@@ -33,7 +33,7 @@ export default {
     },
     popularestEventis() {
       var eventis = JSON.parse(JSON.stringify(this.$store.getters.eventisForDisplay)) 
-      eventis.sort((a,b) => (a.rate > b.rate) ? 1 : ((b.rate > a.rate) ? -1 : 0));
+      eventis.sort((a,b) => (a.rate > b.rate) ? -1 : ((b.rate > a.rate) ? 1 : 0));
       return eventis.splice(0,4)
     }
   },
