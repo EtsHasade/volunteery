@@ -29,8 +29,7 @@
         <section class="details-ev">
           <hr />
           <section class="tags flex wrap align-center">
-            <span><b>Tags:</b></span>
-            <!--  -->
+            <span >Tags:</span>
             <span
               class="tag text-center mrg5"
               v-for="(tag, idx) in eventi.tags"
@@ -40,14 +39,10 @@
           <hr />
           <span><i class="fas fa-users"></i> {{eventi.members.length}} / {{ eventi.capacity }} members</span>
           <section class="dates flex column">
-            <span><i class="fas fa-calendar-alt"></i>{{ moment(eventi.startAt).format("DD/MM/YYYY") }} - {{ moment(eventi.endAt).format("DD/MM/YYYY") }}</span>
-            <!-- <br v-if="eventi.endAt"> -->
+            <span><i class="fas fa-calendar-alt"></i> {{ moment(eventi.startAt).format("DD/MM/YYYY") }} - {{ moment(eventi.endAt).format("DD/MM/YYYY") }}</span>
           </section>
           <section class="neededs">
-            <span
-              ><i class="fas fa-list-ol"></i
-              ><b>We need for this eventi:</b></span
-            >
+            <span><i class="fas fa-list-ol"></i>We need for this eventi:</span>
             <ul class="needed-content clean-list flex wrap">
               <span
                 class="needed text-center mrg5"
