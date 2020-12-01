@@ -2,7 +2,10 @@
   <section v-if="org" class="org-details">
     <h2>{{ org.name }}</h2>
     <span v-if="org.reviews.length">
-      <i class="star fas fa-star"></i> {{ org.rate }} ({{ org.reviews.length }} reviews) | {{ org.country }}
+      <i class="star fas fa-star"></i> {{ org.rate }} ({{
+        org.reviews.length
+      }}
+      reviews) | {{ org.country }}
     </span>
     <span v-else><i class="star fas fa-star"></i> New</span>
     <section class="org-imgs">
@@ -17,7 +20,7 @@
       <section class="details flex column">
         <h4>{{ org.goals }}</h4>
         <section class="mini-user">
-          <avatar :src="org.admin.imgUrl" :username="org.admin.fullName"/>
+          <avatar :src="org.admin.imgUrl" :username="org.admin.fullName" />
           <span>Admin: {{ org.admin.fullName }}</span>
         </section>
         <rate-stars v-if="org.reviews.length" v-model="org.rate" />
@@ -43,14 +46,14 @@
         </section>
         <span>{{ org.desc }}</span>
         <span class="text-center mrg5">Reviews</span>
-        <form
-          @submit.prevent="addReview"
-          class="add-review flex center text-center"
-        >
-          <el-input type="text" v-model="reviewToEdit.txt" name="review" />
-          <el-button type="success" @click="addReview">Add review</el-button>
-          <rate-stars-enable v-model="reviewToEdit.rate" />
-        </form>
+          <form
+            @submit.prevent="addReview"
+            class="add-review flex center text-center"
+          >
+            <el-input type="text" v-model="reviewToEdit.txt" name="review" />
+            <el-button type="success" @click="addReview">Add review</el-button>
+            <rate-stars-enable v-model="reviewToEdit.rate" />
+          </form>
 
         <section class="reviews flex column">
           <section
@@ -59,7 +62,10 @@
             :key="review._id"
           >
             <section class="details-review flex">
-              <avatar :src="review.author.imgUrl" :username="review.author.fullName"></avatar>
+              <avatar
+                :src="review.author.imgUrl"
+                :username="review.author.fullName"
+              ></avatar>
               <rate-stars v-model="review.rate" class="review-rate" />
               <span class="time mrg5">{{
                 moment(review.createdAt).startOf("minute").fromNow()
@@ -125,7 +131,7 @@ export default {
     isUserOrgAdmin() {
       const loggedinUser = this.$store.getters.loggedinUser;
       console.log("🚀 ~ file: eventi-details.vue ~ line 139 ~ isUserOrgAdmin ~ loggedinUser", loggedinUser)
-      if(loggedinUser && loggedinUser.isAdmin) return true; // not secured!!
+      if (loggedinUser && loggedinUser.isAdmin) return true; // not secured!!
       if (!loggedinUser || !loggedinUser.org || loggedinUser.org._id !== this.org._id) return false;
       else return true;
     }
@@ -135,14 +141,23 @@ export default {
       // if (this.org.reviews.length === 1) {
       //   this.org.rate = this.org.reviews[0].rate;
       // } else {
-        var sum = 0;
-        this.org.reviews.forEach((review) => {
-          sum += review.rate;
-        });
-        this.org.rate = sum / this.org.reviews.length;
+      var sum = 0;
+      this.org.reviews.forEach((review) => {
+        sum += review.rate;
+      });
+      this.org.rate = sum / this.org.reviews.length;
       // }
     },
     addReview() {
+      if (!this.$store.getters.loggedinUser) {
+        this.$message({
+          showClose: true,
+          message: `we really want your reviews but loggin first`,
+          type: 'warning',
+          duration: 3000
+        })
+        return
+      }
       this.reviewToEdit.rate = Number(this.reviewToEdit.rate);
       this.reviewToEdit.createdAt = Date.now();
       this.reviewToEdit._id = orgService.makeId();
