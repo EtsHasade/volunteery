@@ -15,7 +15,7 @@
         <h3 class="card-title">{{ eventi.title }}</h3>
       </div>
       <h4 class="card-desc flex-g1">
-        event descriptions, bla boman locomitor jcfif jkvivo  vkkvv njfiviv njiiv jiviv  jvvivi
+        {{eventi.previewDesc || eventi.desc}}
       </h4>
       <div class="eventi-floor flex">
           <h4 class="country">{{ eventi.location.country }}</h4>
