@@ -6,3 +6,10 @@
 .el-rate {
     display: flex;
 }
+
+.el-rate__icon {
+    &.el-icon-star-on {
+        display: flex;
+        color: #69BD42 !important;
+    }
+}

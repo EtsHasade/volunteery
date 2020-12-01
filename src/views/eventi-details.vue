@@ -253,7 +253,11 @@ export default {
       this.reviewToEdit.author = JSON.parse(JSON.stringify(this.miniLoggedinUser)) || { fullName: 'Goust' }
       this.eventi.reviews.push(this.reviewToEdit)
       this.avgRates()
-      eventiService.save(JSON.parse(JSON.stringify(this.eventi)))
+      this.$store.dispatch({
+        type: 'saveEventi',
+        eventi: JSON.parse(JSON.stringify(this.eventi))
+      })
+      // eventiService.save(JSON.parse(JSON.stringify(this.eventi)))
       this.$message({
         showClose: true,
         message: `Your review added sucessfully!`,
