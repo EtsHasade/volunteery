@@ -62,7 +62,7 @@ form {
 }
 
 .star {
-    color: $clr2;
+    color: $clr1;
     font-size: rem(16px) !important;
 }
 
@@ -79,8 +79,8 @@ form {
     //     // .fa-sitemap,
     //     // .fa-bread-slice,
     //     // .fa-tractor
-    font-size: 25px;
-    padding: 5px;
+    font-size: rem(25px);
+    padding: 0 rem(5px);
     //     // }
 }
 

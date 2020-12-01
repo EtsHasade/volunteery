@@ -75,8 +75,8 @@
           <span>{{ eventi.desc }}</span>
         </section>
       </section>
-      <section class="status-details text-center">
-        <div class="join-section flex column center">
+      <section class="status-details text-center flex column center">
+        <div class="join-section flex column align-center">
           <p>We need speicals volunteer, if you are please join us!</p>
           <el-button type="success" class="join-btn" @click="addMember">{{
             textBtn
@@ -110,24 +110,36 @@
             >Edit</router-link
           >
         </div>
-        <!-- <button @click="openChat" class="chat-btn">💬</button> -->
-        <!-- <chat-app v-if="showChat" class="chat-app" @closeChat="closeChat"> -->
-        <chat-app class="chat-app">
-          <h3 slot="header">Event Chat</h3>
-          <section v-for="(msg, idx) in msgs" class="mainChat" :key="idx">
-            <span class="msg">{{ msg.from }}: {{ msg.txt }}</span>
-          </section>
-          <div slot="footer">
-            <form @submit.prevent="sendMsg">
-              <input
-                type="text"
-                placeholder="Send Massage"
-                v-model="msgChat.txt"
+        <section class="section-status-details">
+          <section class="members flex column text-center align-center">
+            <h3  class="title-members">Members</h3>
+            <section class="members-imgs flex center wrap">
+              <avatar
+                class="member-img mrg5"
+                v-for="member in eventi.members"
+                :key="member._id"
+                :username="member.fullName"
+                :src="member.imgUrl"
+                :title="member.fullName"
               />
-              <button>send</button>
-            </form>
-          </div>
-        </chat-app>
+            </section>
+          </section>
+          <chat-app class="chat-app">
+            <h3 class="title-chat" slot="header">Event Chat</h3>
+            <section v-for="(msg, idx) in msgs" class="mainChat" :key="idx">
+              <span class="msg">{{ msg.from }}: {{ msg.txt }}</span>
+            </section>
+            <div slot="footer">
+              <form @submit.prevent="sendMsg" class="flex align-center">
+                <el-input
+                  placeholder="Send Massage"
+                  v-model="msgChat.txt"
+                />
+                <i class="far fa-paper-plane fa-2x hover-pointer" @click="sendMsg"></i>
+              </form>
+            </div>
+          </chat-app>
+        </section>
       </section>
     </main>
     <section class="reviews-section flex column center">
@@ -137,17 +149,14 @@
         <rate-stars-enable class="mb10" v-model="reviewToEdit.rate" />
       </section>
       <span class="text-center mrg5">Reviews</span>
-      <section class="reviews flex wrap">
+      <section class="reviews flex wrap center">
         <section
           class="review flex column mrg5"
           v-for="review in eventi.reviews"
           :key="review._id"
         >
-          <section class="details-review flex">
-            <avatar
-              :src="review.author.imgUrl"
-              :username="review.author.fullName"
-            ></avatar>
+          <section class="details-review flex align-center">
+            <avatar :src="review.author.imgUrl" :username="review.author.fullName"></avatar>
             <!-- <rate-stars v-model="review.rate" class="review-rate" /> -->
             <span class="review-rate"
               >{{ review.rate }}<i class="star fas fa-star"></i
