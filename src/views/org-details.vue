@@ -1,13 +1,36 @@
 <template>
   <section v-if="org" class="org-details">
-    <h2>{{ org.name }}</h2>
-    <span v-if="org.reviews.length">
-      <i class="star fas fa-star"></i> {{ org.rate }} ({{
-        org.reviews.length
-      }}
-      reviews) | {{ org.country }}
-    </span>
-    <span v-else><i class="star fas fa-star"></i> New</span>
+    <section class="top-page flex center space-between">
+      <section class="top-details">
+        <h2 class="mb10">{{ org.name }}</h2>
+        <section class="rate-section">
+          <span v-if="org.reviews.length">
+            <i class="star fas fa-star"></i> {{ org.rate }} ({{
+              org.reviews.length
+            }}
+            reviews) | {{ org.country }}
+          </span>
+          <span v-else><i class="star fas fa-star"></i> New</span>
+        </section>
+      </section>
+       <section v-if="isUserOrgAdmin" class="status-details flex align-center text-center">
+        <el-button type="warning" @click="removeOrg"
+          >Delete Organization</el-button
+        >
+        <router-link
+          type="success"
+          class="el-button el-button--success"
+          :to="'/org-edit/' + org._id"
+          >Edit</router-link
+        >
+        <router-link
+          v-if="isUserOrgAdmin"
+          to="/eventi-edit"
+          class="add-eventi el-button el-button--success"
+          >Add Event</router-link
+        >
+      </section>     
+    </section>
     <section class="org-imgs">
       <img
         class="org-img"
@@ -16,11 +39,15 @@
         :src="img"
       />
     </section>
-    <main class="flex">
+    <main class="">
       <section class="details">
         <hr />
         <section class="mini-user flex align-center mb10">
-          <avatar class="mr10" :src="org.admin.imgUrl" :username="org.admin.fullName" />
+          <avatar
+            class="mr10"
+            :src="org.admin.imgUrl"
+            :username="org.admin.fullName"
+          />
           <span>{{ org.admin.fullName }}</span>
         </section>
         <hr />
@@ -44,24 +71,18 @@
         <hr />
         <section class="org-eventis">
           <span class="bold">Our Events</span>
-          <router-link
-            v-if="isUserOrgAdmin"
-            to="/eventi-edit"
-            class="add-eventi el-button el-button--success"
-            >Add Event</router-link
-          >
           <eventi-list :eventis="orgEventis"></eventi-list>
         </section>
         <hr />
         <span class="text-center mrg5">Reviews</span>
-          <form
-            @submit.prevent="addReview"
-            class="add-review flex center text-center"
-          >
-            <el-input type="text" v-model="reviewToEdit.txt" name="review" />
-            <el-button type="success" @click="addReview">Add review</el-button>
-            <rate-stars-enable v-model="reviewToEdit.rate" />
-          </form>
+        <form
+          @submit.prevent="addReview"
+          class="add-review flex center text-center"
+        >
+          <el-input type="text" v-model="reviewToEdit.txt" name="review" />
+          <el-button type="success" @click="addReview">Add review</el-button>
+          <rate-stars-enable v-model="reviewToEdit.rate" />
+        </form>
 
         <section class="reviews flex column">
           <section
@@ -87,17 +108,6 @@
             </section>
           </section>
         </section>
-      </section>
-      <section v-if="isUserOrgAdmin" class="status-details text-center">
-        <el-button type="warning" @click="removeOrg"
-          >Delete Organization</el-button
-        >
-        <router-link
-          type="success"
-          class="el-button el-button--success"
-          :to="'/org-edit/' + org._id"
-          >Edit</router-link
-        >
       </section>
     </main>
   </section>

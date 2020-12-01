@@ -42,6 +42,10 @@
         & .details-review {
             align-items: center;
         }
+        & .status-details {
+            z-index: 1;
+            position: relative;
+        }
     }
     //     grid-row: 1;
     //     display: grid;
