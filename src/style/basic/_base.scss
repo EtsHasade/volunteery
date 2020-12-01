@@ -2,12 +2,13 @@
     box-sizing: border-box;
 }
 
-html {
-    font-family: regular, sans-serif;
-    color: $gray1;
-}
-
+// html {
+//     // font-family: Hind-Regular;
+//     // color: $gray1;
+// }
 body {
+    font-family: regular;
+    color: $gray1;
     padding: 0;
     margin: 0;
     height: 100%;
