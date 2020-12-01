@@ -57,10 +57,6 @@
             placeholder="012-345-6789"
             clearable
           ></el-input>
-          <!-- <br><input type="text" class="in username" name="username" v-model="signupCred.username" onfocus="this.placeholder = ''" placeholder="Username" /><br>
-                      <br><input type="password" class="in password" name="password" v-model="signupCred.password" placeholder="Password" /><br> -->
-          <!-- <br><input type="email" class="in email" name="email" v-model="signupCred.email" placeholder="baba@gmail.com" /><br>
-                      <br><input type="tel" class="in phone" name="phone" v-model="signupCred.tel" placeholder="012-345-6789"/><br> -->
           <span>Select skills</span>
           <select-multi
             v-model="signupCred.skills"
@@ -68,7 +64,28 @@
           ></select-multi>
           <span>Select favorites</span>
           <select-multi v-model="signupCred.favs" :items="tags"></select-multi>
-          <gender-selector class="in"></gender-selector>
+          <!-- <gender-selector class="in"></gender-selector> -->
+
+          <label class="img-list">
+            Picture:
+            <section v-if="signupCred.imgUrl" class="img flex center">
+                <img class="border-radius mb10" :src="signupCred.imgUrl" alt="img...">
+                <el-button type="danger" icon="el-icon-delete" circle class="remove-img" @click.stop.prevent="removeImg()"></el-button> 
+            </section>
+          </label>
+
+          <section class="upload-img flex column center">
+            <template v-if="!isLoading">
+              <label for="imgUploader"> <img class="img-uploader" src="http://www.pngall.com/wp-content/uploads/2/Upload-PNG-Image-File.png" alt=""> </label>
+              <input type="file" name="img-uploader" id="imgUploader" @change="onUploadImg">  
+            </template>
+            <img class="loader" v-else src="https://i.pinimg.com/originals/65/ba/48/65ba488626025cff82f091336fbf94bb.gif" alt="">
+            <div v-if="imgUrl" class="img-list">
+              <section class="imgs flex center">
+                <img class="border-radius mrg5 " :src="imgUrl" alt="img...">
+              </section>
+            </div>
+          </section>
           <el-button @click="signup">Sign</el-button>
         </form>
       </section>
@@ -78,7 +95,8 @@
 
 <script>
 import selectMulti from '@/cmp/element-ui/select-multi';
-import genderSelector from '@/cmp/element-ui/gender-selector';
+// import genderSelector from '@/cmp/element-ui/gender-selector';
+import { uploadImg } from '../service/img-upload-service.js'
 
 // import { userService } from '../service/user-service.js';
 export default {
@@ -89,13 +107,15 @@ export default {
       loginCred: {},
       signupCred: {events: [], imgUrl: null, org: null},
       msg: '',
+      isLoading: false,
+      imgUrl: null
       // tags: this.$store.getters.tags,
       // neededs: this.$store.getters.neededs
     }
   },
   components: {
     selectMulti,
-    genderSelector,
+    // genderSelector,
   },
   computed: {
     loggedinUser() {
@@ -109,6 +129,16 @@ export default {
     }
   },
   methods: {
+    async onUploadImg(ev) {
+      this.isLoading = true;
+      const res = await uploadImg(ev);
+      this.imgUrl= res.url
+      this.isLoading = false;
+    },
+    removeImg() {
+      this.signupCred.imgUrl = null
+    },
+
     async login() {
       if (this.loginCred.fullName && this.loginCred.password) {
         console.table('this.loginCred', this.loginCred);
@@ -142,6 +172,7 @@ export default {
       this.$router.go(-1);
     },
     signup() {
+      this.signupCred.imgUrl = this.imgUrl;
       if (this.signupCred.fullName && this.signupCred.password && this.signupCred.email) {
         this.$store.dispatch({ type: 'signup', userCred: this.signupCred });
         this.signupCred = {};
