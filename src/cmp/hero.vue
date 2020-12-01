@@ -1,11 +1,10 @@
 <template>
   <div class="hero full">
     <div class="title flex-column">
-      <h1>Looking to do good?</h1>
-      <h3>Togather, we build better world</h3>
+      <h1>Looking for something meaningful?</h1>
+      <h3>Togather, we'll build better world</h3>
       <p>
-        Want to volunteer in your own style and according to your unique
-        talents?
+        Do you want to volunteer your way and according by your unique talents?
       </p>
       <p>We invite you to choose the volunteering that best suits you.</p>
       <h4

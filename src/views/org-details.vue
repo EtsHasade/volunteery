@@ -13,7 +13,10 @@
           <span v-else><i class="star fas fa-star"></i> New</span>
         </section>
       </section>
-       <section v-if="isUserOrgAdmin" class="status-details flex align-center text-center">
+      <section
+        v-if="isUserOrgAdmin"
+        class="status-details flex align-center text-center"
+      >
         <el-button type="warning" @click="removeOrg"
           >Delete Organization</el-button
         >
@@ -29,7 +32,7 @@
           class="add-eventi el-button el-button--success"
           >Add Event</router-link
         >
-      </section>     
+      </section>
     </section>
     <section class="org-imgs">
       <img
@@ -74,7 +77,7 @@
           <eventi-list :eventis="orgEventis"></eventi-list>
         </section>
         <hr />
-        <span class="text-center mrg5">Reviews</span>
+        <!-- <span class="text-center mrg5">Reviews</span>
         <form
           @submit.prevent="addReview"
           class="add-review flex center text-center"
@@ -83,7 +86,6 @@
           <el-button type="success" @click="addReview">Add review</el-button>
           <rate-stars-enable v-model="reviewToEdit.rate" />
         </form>
-
         <section class="reviews flex column">
           <section
             class="review flex column mrg5"
@@ -107,6 +109,41 @@
               <span class="txt-review">{{ review.txt }}</span>
             </section>
           </section>
+        </section> -->
+        <section class="reviews-section flex column center">
+          <section class="add-review flex align-center text-center mb10">
+            <el-input type="text" v-model="reviewToEdit.txt" name="review" />
+            <el-button type="success" @click="addReview">Add review</el-button>
+            <rate-stars-enable class="mb10" v-model="reviewToEdit.rate" />
+          </section>
+          <span class="text-center mrg5">Reviews</span>
+          <section class="reviews flex wrap center">
+            <section
+              class="review flex column mrg5"
+              v-for="review in org.reviews"
+              :key="review._id"
+            >
+              <section class="details-review flex align-center">
+                <avatar
+                  :src="review.author.imgUrl"
+                  :username="review.author.fullName"
+                ></avatar>
+                <!-- <rate-stars v-model="review.rate" class="review-rate" /> -->
+                <span class="review-rate"
+                  >{{ review.rate }}<i class="star fas fa-star"></i
+                ></span>
+                <span class="time mrg5">
+                  {{ moment(review.createdAt).startOf("minute").fromNow() }}
+                </span>
+              </section>
+              <section class="content-review flex align-center text-center">
+                <span class="name-review mrg5"
+                  >{{ review.author.fullName }}:
+                </span>
+                <span class="txt-review">{{ review.txt }}</span>
+              </section>
+            </section>
+          </section>
         </section>
       </section>
     </main>
@@ -117,7 +154,7 @@
 import { orgService } from "../service/org-service.js";
 // import { userService } from "../service/user-service.js";
 import avatar from "vue-avatar";
-import rateStars from "../cmp/element-ui/rate-stars";
+// import rateStars from "../cmp/element-ui/rate-stars";
 import rateStarsEnable from "../cmp/element-ui/rate-stars-enable";
 import eventiList from "../cmp/eventi-list";
 var moment = require('moment')
@@ -230,7 +267,7 @@ export default {
   },
   components: {
     avatar,
-    rateStars,
+    // rateStars,
     rateStarsEnable,
     eventiList,
   },
