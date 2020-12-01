@@ -37,20 +37,23 @@
             </span>
           </section>
           <hr />
-          <span><i class="fas fa-users"></i> {{eventi.members.length}} / {{ eventi.capacity }} members</span>
-          <section class="dates flex column">
-            <span><i class="fas fa-calendar-alt"></i> {{ moment(eventi.startAt).format("DD/MM/YYYY") }} - {{ moment(eventi.endAt).format("DD/MM/YYYY") }}</span>
-          </section>
-          <section class="neededs">
-            <span><i class="fas fa-list-ol"></i>We need for this eventi:</span>
-            <ul class="needed-content clean-list flex wrap">
-              <span
-                class="needed text-center mrg5"
-                v-for="(needed, idx) in eventi.neededs"
-                :key="idx">
-                <i :class="neededsIcon[needed]"></i> {{ needed }}
-              </span>
-            </ul>
+          <section class="tags-section flex align-center wrap">
+            <span><i class="fas fa-users"></i> {{eventi.members.length}} / {{ eventi.capacity }} members</span>
+            <hr />
+            <section class="dates flex column">
+              <span><i class="fas fa-calendar-alt"></i> {{ moment(eventi.startAt).format("DD/MM/YYYY") }} - {{ moment(eventi.endAt).format("DD/MM/YYYY") }}</span>
+            </section>
+            <section class="neededs">
+              <span><i class="fas fa-list-ol"></i>We need for this eventi:</span>
+              <section class="needed-content clean-list flex wrap">
+                <span
+                  class="needed text-center mrg5"
+                  v-for="(needed, idx) in eventi.neededs"
+                  :key="idx">
+                  <i :class="neededsIcon[needed]"></i> {{ needed }}
+                </span>
+              </section>
+            </section>
           </section>
           <hr />
         </section>
