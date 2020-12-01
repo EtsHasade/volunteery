@@ -37,6 +37,10 @@
             margin: 0;
             transition: 0.3s;
 
+            h4{
+                margin: 0;
+            }
+
             &:hover{
                 background-color: #ffffff;
                 color: $clr1;

@@ -7,7 +7,7 @@
         Want to volunteer in your own style and according to your unique talents?
       </p>
       <p>We invite you to choose the volunteering that best suits you.</p>
-      <a href=""><h4 class="call-to-action">See our suggestions</h4></a>
+      <a  class="call-to-action" href=""><h4>See our suggestions</h4></a>
     </div>
   </div>
 </template>
