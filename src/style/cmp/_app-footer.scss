@@ -1,6 +1,8 @@
 .footer {
-    height: 60px;
-    background-color: $clr1;
+    height: 40px;
+    // background-color: $clr1;
+    background-color: $clrGray1;
+    font-size: rem(12px);
     & * {
         margin: 0 auto;
     }

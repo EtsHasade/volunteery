@@ -8,13 +8,19 @@
       <h3>It's free, quick And simple</h3>
     </div>
     <div class="side-tabs flex">
-      <h2  v-if="!loggedinUser" class="title-tab active" to="/login">Login</h2>
-      <h2 class="title-tab" :class="(loggedinUser)? 'active' : ''">Add your orgaziation</h2>
+      <h2 v-if="!loggedinUser" class="title-tab active" to="/login">Login</h2>
+      <h2 class="title-tab" :class="loggedinUser ? 'active' : ''">
+        Add your orgaziation
+      </h2>
       <!-- <h2 class="title-tab active">Add your orgaziation</h2> -->
       <h2 class="title-tab">Publish new event and invite volunteers</h2>
     </div>
     <keep-alive>
-      <form v-if="loggedinUser" @submit.prevent="createOrg" class="edit-form flex column center">
+      <form
+        v-if="loggedinUser"
+        @submit.prevent="createOrg"
+        class="edit-form flex column center"
+      >
         <el-input
           onfocus="this.placeholder = ''"
           onblur="this.placeholder = 'orgaziation name'"
@@ -48,25 +54,57 @@
         ></el-input>
         <span>Select tags</span>
         <select-multi v-model="orgCred.tags" :items="tags"></select-multi>
-        
+
         <label class="img-list">
           Pictures:
           <section class="imgs flex center">
-            <section class="img-edit flex column center mrg5" v-for="(imgUrl, idx) in orgCred.imgUrls" :key="idx">
-              <img class="border-radius mb10" :src="imgUrl" alt="img...">
-              <el-button type="danger" icon="el-icon-delete" circle class="remove-img" @click.stop.prevent="removeImg(idx)"></el-button> 
+            <section
+              class="img-edit flex column center mrg5"
+              v-for="(imgUrl, idx) in orgCred.imgUrls"
+              :key="idx"
+            >
+              <img class="border-radius mb10" :src="imgUrl" alt="img..." />
+              <el-button
+                type="danger"
+                icon="el-icon-delete"
+                circle
+                class="remove-img"
+                @click.stop.prevent="removeImg(idx)"
+              ></el-button>
             </section>
           </section>
         </label>
         <section class="upload-img flex column center">
           <template v-if="!isLoading">
-            <label for="imgUploader"> <img class="img-uploader" src="http://www.pngall.com/wp-content/uploads/2/Upload-PNG-Image-File.png" alt=""> </label>
-            <input type="file" name="img-uploader" id="imgUploader" @change="onUploadImg">  
+            <label for="imgUploader">
+              <img
+                class="img-uploader"
+                src="http://www.pngall.com/wp-content/uploads/2/Upload-PNG-Image-File.png"
+                alt=""
+              />
+            </label>
+            <input
+              type="file"
+              name="img-uploader"
+              id="imgUploader"
+              @change="onUploadImg"
+            />
           </template>
-          <img class="loader" v-else src="https://i.pinimg.com/originals/65/ba/48/65ba488626025cff82f091336fbf94bb.gif" alt="">
+          <img
+            class="loader"
+            v-else
+            src="https://i.pinimg.com/originals/65/ba/48/65ba488626025cff82f091336fbf94bb.gif"
+            alt=""
+          />
           <div class="img-list">
             <section class="imgs flex center">
-              <img class="border-radius mrg5 " v-for="(imgUrl, idx) in imgUrls" :src="imgUrl" :key="idx" alt="img...">
+              <img
+                class="border-radius mrg5"
+                v-for="(imgUrl, idx) in imgUrls"
+                :src="imgUrl"
+                :key="idx"
+                alt="img..."
+              />
             </section>
           </div>
         </section>
@@ -76,10 +114,16 @@
       </form>
       <div v-else class="edit-form flex column center">
         <h3>Volunteer? Activist?</h3>
-        <router-link class="el-button el-button--primary" to="/login">Login or SignUp</router-link>
-        <h3>We are here for you, and just want to help you doing good things</h3>
+        <router-link
+          class="el-button el-button--primary"
+          to="/login"
+          >Login or SignUp</router-link
+        >
+        <h3>
+          We are here for you, and just want to help you doing good things
+        </h3>
       </div>
-      </keep-alive>
+    </keep-alive>
   </section>
 </template>
 

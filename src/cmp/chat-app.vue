@@ -5,8 +5,7 @@
     </header>
     <main>
       <slot>
-        <h3>Hi! I'm nadav from support team,</h3>
-        <h5>how can I make your day a better day or just helping:)</h5>
+        <h4>Hi! here you can talk about the event</h4>
       </slot>
     </main>
     <footer>
@@ -45,3 +44,8 @@ export default {
 };
 </script>
 
+<style lang="scss" scoped>
+h4 {
+  margin: 0;
+}
+</style>
