@@ -6,7 +6,7 @@
     position: fixed;
     top: 0;
     width: 100vw;
-    z-index: 999;
+    z-index: 1999;
     background-color: $clr1;
     // margin-bottom   : 10px;
     color: $clr6;
@@ -54,12 +54,13 @@
 
 .home-page .app-header {
     background-color: rgba(255, 255, 255, 0);
-    transition: 0.5s;
+    // transition: 0.5s;
+    transition: background-color 0.3s linear;
     &.scrolly {
         background-color: $clr1;
         // background-color: #9b247dee;
         background-image: url('/src/assets/img/hero.jpg');
-        transition: 0.5s;
+        // transition:  0.5s;
         // &.scrolly2 {
         //     box-shadow: 0 2px 6px #0000005c;
         //     transition: 0.1s;

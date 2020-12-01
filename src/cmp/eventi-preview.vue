@@ -4,45 +4,29 @@
     <div class="img-squer-container">
       <img v-show="imgLoad" @load="imgLoad = true" :src="eventi.imgUrls[0]" alt="" />
       <div v-if="!imgLoad" class="loading flex center">LOADING...</div>
+          <div
+          @click.stop="openOrgDetails"
+          class="div preview-card-avatar"
+            :style="`background-image: url(${eventi.byOrg.imgUrl})`"
+          ></div>
     </div>
-    <!-- <div class="preview-details" :style="`background-image: url('${eventi.imgUrls[0]}'); transform: scaleY(-1);`"> -->
-    <div class="preview-details">
-      <div class="org-details mini-org-details">
-        <div class="flex mb10">
-          <avatar
-            @click.stop="openOrgDetails"
-            style="
-               {
-                background-position: center;
-                background-size: cover;
-              }
-            "
-            :username="eventi.byOrg.name"
-            :src="eventi.byOrg.imgUrl"
-          ></avatar>
-          <!-- <img class="org-logo" :src="eventi.byOrg.imgUrl" alt="" /> -->
-          <h4>{{ eventi.byOrg.name }}</h4>
-        </div>
-        <!-- <rate-stars v-model="orgRate" :disabled="true"></rate-stars> -->
-        <p v-if="eventi.byOrg.rate > 0"><i class="star fas fa-star"></i> {{eventi.byOrg.rate}}</p>
-        <p v-else><i class="star fas fa-star"></i> New Organization</p>
+    <div class="preview-details flex-column">
+      <div class="card-label">
+        <h3 class="card-title">{{ eventi.title }}</h3>
       </div>
-      <div class="eventi-label">
-        <h3>{{ eventi.title }}</h3>
-        <div class="eventi-date flex">
-          <h4><b>{{ eventi.location.country }} </b>| </h4>
-          <h4> {{moment(eventi.startAt).format('DD/MM/YYYY') }}</h4>
-        </div>
-      </div>
-      <div class="eventi-floor">
-        <h4>{{ eventi.members.length }}/{{ eventi.capacity }}</h4>
+      <h4 class="card-desc flex-g1">
+        {{eventi.previewDesc || eventi.desc}}
+      </h4>
+      <div class="eventi-floor flex">
+          <h4 class="country">{{ eventi.location.country }}</h4>
+          <h4 class="time">{{moment(eventi.startAt).format('DD/MM/YYYY') }}</h4>
       </div>
     </div>
   </li>
 </template>
 
 <script>
-import avatar from "vue-avatar";
+// import avatar from "vue-avatar";
 // import rateStars from "./element-ui/rate-stars";
 var moment = require('moment')
 
@@ -63,7 +47,7 @@ export default {
   },
   components: {
     // rateStars,
-    avatar,
+    // avatar,
   },
   // watch: {
   //   orgRate: function (newRate) {

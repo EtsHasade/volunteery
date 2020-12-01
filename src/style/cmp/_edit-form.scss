@@ -32,6 +32,14 @@
         grid-column: 2;
         border-radius: 0.5rem;
         border-top-left-radius: 0;
+        & .el-button .el-button--primary {
+            background-color: $clr1;
+            border: $clr1;
+            &:hover {
+                background-color: #bfea45;
+                border: #bfea45;
+            }
+        }
         & .el-input__inner,
         & .el-textarea__inner {
             text-align: left;
