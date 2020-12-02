@@ -1,5 +1,22 @@
 .eventi-filter {
-    & .el-input__inner {
+    & .el-input .el-input__suffix {
+        // margin: 0 rem(16px);
+        height: 50px;
+    }
+    & .el-input .el-input__inner {
         width: 200px;
+        border: 1px solid $clr1;
+        padding: 0;
+        margin: 5px;
+        // &:first-child {
+        // }
+    }
+    & .btns-tags {
+        & .el-button:hover,
+        .el-button:focus {
+            color: $clr2;
+            background-color: #bfea45;
+            border: 1px solid #bfea45;
+        }
     }
 }

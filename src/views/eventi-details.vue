@@ -120,7 +120,6 @@
             ></a>
           </section>
         </section>
-
         <section class="section-status-details">
           <section class="members flex column text-center align-center">
             <h3 class="title-members">Members</h3>
