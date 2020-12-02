@@ -13,6 +13,7 @@
         v-model="filterBy.byTags"
         @input="emitFilter"
         :items="tags"
+        placeholder="Select Category"
       />
     </form>
     <section class="btns-tags flex center mb10">

@@ -20,7 +20,7 @@ export default {
     eventisToShow() {
       const eventis = this.$store.getters.eventisForDisplay;
       if (!this.filterBy) return eventis;
-      let eventisFilter = [];
+      let eventisFilter = eventis;
       if (this.filterBy.byTitle != "") {
         const txt = this.filterBy.byTitle.toLowerCase();
 
@@ -52,6 +52,8 @@ export default {
       }
 
       if (this.filterBy.byTags.length) {
+        console.log('by tags');
+        
         var eventisfilterTags = [];
         this.filterBy.byTags.forEach((tag) => {
           var eventisfilterTag = [];
