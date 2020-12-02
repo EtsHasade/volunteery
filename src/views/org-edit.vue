@@ -5,8 +5,16 @@
       class="edit-page-title title flex-column center-all"
     >
       <h2>Need volunteers? join us!</h2>
-      <h3>It's free, quick And simple</h3>
+      <h3>It's free, quick and simple</h3>
     </div>
+    <div
+      v-else
+      class="edit-page-title title flex-column center-all"
+    >
+      <h2>Edit your organization</h2>
+      <h3>It's free, quick and simple</h3>
+    </div>
+
     <div class="side-tabs flex">
       <h2 v-if="!loggedinUser" class="title-tab active" to="/login">Login</h2>
       <h2 class="title-tab" :class="loggedinUser ? 'active' : ''">
