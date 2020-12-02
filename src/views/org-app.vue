@@ -1,27 +1,89 @@
 <template>
   <main>
-    <!-- <org-filter></org-filter> -->
+    <eventi-filter @doFilter="setFilter"></eventi-filter>
     <org-list :orgs="orgsToShow"></org-list>
   </main>
 </template>
  
 <script>
-// import orgFilter from "@/cmp/org-filter";
+import eventiFilter from "@/cmp/eventi-filter";
 import orgList from "@/cmp/org-list";
 
 export default {
   name: "orgApp",
+  data() {
+    return {
+      filterBy: null,
+    };
+  },
   computed: {
+    // orgsToShow() {
+    //   return this.$store.getters.orgsForDisplay;
+    // },
     orgsToShow() {
-      return this.$store.getters.orgsForDisplay;
+      const orgs = this.$store.getters.orgsForDisplay;
+      console.log("🚀 ~ file: org-app.vue ~ line 25 ~ orgsToShow ~ orgs", orgs)
+
+      if (!this.filterBy) return orgs;
+      let orgsFilter = orgs;
+      if (this.filterBy.byText != '') {
+        const txt = this.filterBy.byText.toLowerCase();
+        console.log("🚀 ~ file: org-app.vue ~ line 31 ~ orgsToShow ~ txt", txt)
+
+        orgsFilter = orgs.filter((org) => {
+          return (
+            org.name.toLowerCase().includes(txt) ||
+            org.desc.toLowerCase().includes(txt)
+          );
+        });
+
+        const terms = txt.split(" ");
+        const splitTermOrgs = orgs.filter((currOrg) => {
+          const match = terms.filter((term) => {
+            return (
+              currOrg.name.toLowerCase().includes(term) ||
+              currOrg.desc.toLowerCase().includes(term)
+            );
+          });
+          return match.length === terms.length;
+        });
+
+        orgsFilter = orgsFilter.concat(splitTermOrgs);
+        orgsFilter = orgsFilter.reduce((acc, currOrg) => {
+          if (!acc.includes(currOrg)) acc.push(currOrg);
+          return acc;
+        }, []);
+        orgsFilter = JSON.parse(JSON.stringify(orgsFilter));
+        console.log(
+          "🚀 ~ file: org-app.vue ~ line 48 ~ orgsFilter=orgsFilter.reduce ~ orgsFilter",
+          orgsFilter
+        );
+      }
+
+      if (this.filterBy.byTags.length) {
+        console.log("by tags");
+
+        var orgsfilterTags = [];
+        this.filterBy.byTags.forEach((tag) => {
+          var orgsfilterTag = [];
+          orgsFilter.forEach((org) => {
+            if (org.tags.includes(tag)) {
+              orgsfilterTag.push(org);
+            }
+          });
+          orgsfilterTags = orgsfilterTags.concat(orgsfilterTag);
+        });
+        orgsFilter = JSON.parse(JSON.stringify(orgsfilterTags));
+      }
+      return orgsFilter;
     },
   },
   async created() {
-    this.$store.dispatch({ type: "setEventis" });
-    // if(!resEventis.type) {
+    this.$store.dispatch({ type: "setOrgs" });
+    // if(!resOrgs.type) {
     //   this.$message({
     //     showClose: true,
-    //     message: `Events cant set, err ${resEventis.err.code}`,
+    //     message: `Events cant set, err ${resOrgs.err.code}`,
     //     type: 'warning',
     //     duration: 3000
     //   })
@@ -43,8 +105,13 @@ export default {
     //   })
     // }
   },
+  methods: {
+    setFilter(filterBy) {
+      this.filterBy = filterBy;
+    },
+  },
   components: {
-    // orgFilter,
+    eventiFilter,
     orgList,
   },
 };
