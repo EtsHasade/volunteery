@@ -44,7 +44,6 @@
     </section>
     <main>
       <section class="details">
-        <hr />
         <section class="mini-user flex align-center mb10">
     
           <avatar style="background-position: center; background-size:cover;"
