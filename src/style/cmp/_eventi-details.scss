@@ -183,6 +183,14 @@
     margin-right: 5px;
 }
 
+.needed-content {
+    grid-template-rows: repeat(auto, 1fr);
+}
+
+.need-txt {
+    color: $gray1;
+}
+
 .details-ev {
     color: $gray3;
 }

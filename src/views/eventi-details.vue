@@ -44,14 +44,14 @@
               <span><i class="fas fa-calendar-alt"></i> {{ moment(eventi.startAt).format("DD/MM/YYYY") }} - {{ moment(eventi.endAt).format("DD/MM/YYYY") }}</span>
             </section>
             <section class="neededs">
-              <span><i class="fas fa-list-ol"></i>We need for this eventi:</span>
-              <section class="needed-content clean-list flex wrap">
-                <span
-                  class="needed text-center mrg5"
+              <span class="need-txt">We need for this eventi:</span>
+              <section class="needed-content column flex wrap">
+                <section 
+                  class="needed text-center mrg5 "
                   v-for="(needed, idx) in eventi.neededs"
                   :key="idx">
                   <i :class="neededsIcon[needed]"></i> {{ needed }}
-                </span>
+                </section>
               </section>
             </section>
           </section>
@@ -69,9 +69,12 @@
           }}</el-button>
         </div>
         <section class="share-button flex center">
-          <section><a href="https://api.whatsapp.com/send?phone=972501122337&text=http://localhost:8080/#/eventi-details/5fc3c2f8b939f9e519ca2794" target="_blank"><i class="fab fa-whatsapp"></i></a></section>
-          <section class="fb-share-button" data-href="http://localhost:8080/#/eventi-details/5fc3c2f8b939f9e519ca2794" data-layout="button" data-size="large"><a target="_blank" href="https://www.facebook.com/sharer/sharer.php?u=http%3A%2F%2Flocalhost%3A8080%2F%23%2Feventi-details%2F5fc3c2f8b939f9e519ca2794&amp;src=sdkpreparse" class="fb-xfbml-parse-ignore"> <i class="fab fa-facebook"></i></a></section>
-         
+                    <!-- <section><a href="https://api.whatsapp.com/send?phone=972525903939&text=Can i get more details?" target="_blank"><i class="fab fa-whatsapp"></i></a></section> -->
+
+          <section><a href="https://api.whatsapp.com/send?text=http://localhost:8080/#/eventi-details/5fc3c2f8b939f9e519ca2795" target="_blank"><i class="fab fa-whatsapp"></i></a></section>
+          <!-- <section class="fb-share-button" data-href="http://localhost:8080/#/eventi-details/5fc3c2f8b939f9e519ca2794" data-layout="button" data-size="large"><a target="_blank" href="https://www.facebook.com/sharer/sharer.php?u=http%3A%2F%2Flocalhost%3A8080%2F%23%2Feventi-details%2F5fc3c2f8b939f9e519ca2794&amp;src=sdkpreparse" class="fb-xfbml-parse-ignore"><i class="fab fa-facebook"></i></a></section> -->
+          <div class="fb-share-button" data-href="https://www.facebook.com/HeroesforLifeIsrael" data-layout="button" data-size="large"><a target="_blank" href="https://www.facebook.com/sharer/sharer.php?u=https%3A%2F%2Fwww.facebook.com%2FHeroesforLifeIsrael&amp;src=sdkpreparse" class="fb-xfbml-parse-ignore">Share</a></div>
+
         </section>
         <div v-if="isUserOrgAdmin" class="edit-btns">
           <el-button type="danger" @click="removeEventi"
