@@ -17,22 +17,23 @@
           @click.stop="openOrgDetails"
         />
         <h3 class="mrg0 card-title">{{eventi.title}}</h3>
-      </section>
-
-        <!-- <section class="details-org flex column"> -->
-        <!-- </section> -->
-        <section class="mini-details flex space-between">
+    </section>
+    <section class="mini-details-top flex space-between">
             <h5 v-if="eventi.reviews.length">
               <i class="star fas fa-star"></i>
               {{ eventi.rate }} ({{ eventi.reviews.length }} reviews)
             </h5>
             <h5 v-else><i class="star fas fa-star"></i>New</h5> 
-            <!-- <h5 class="time">{{ moment(eventi.startAt).format("DD/MM/YYYY") }}</h5> -->
-        </section>
+            <h5 class="time">{{ moment(eventi.startAt).format("DD/MM/YYYY") }}</h5>
+    </section>
+    <section class="mini-details-main flex justify-center">
+      <section class="price mr16">
+        <p v-if="eventi.price > 0">${{eventi.price}} per week</p>
+        <p v-else>Free, just come!</p>
+      </section>
+      <p>Age +{{eventi.fromAge}}</p>
+    </section>
     <div class="preview-details flex-column">
-      <!-- <div class="card-label">
-        <h3 class="card-title">{{ eventi.title }}</h3>
-      </div> -->
       <p class="card-desc flex-g1">
         {{ eventi.previewDesc || eventi.desc }}
       </p>
