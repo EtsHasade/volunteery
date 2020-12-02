@@ -21,8 +21,8 @@ export default {
       const eventis = this.$store.getters.eventisForDisplay;
       if (!this.filterBy) return eventis;
       let eventisFilter = eventis;
-      if (this.filterBy.byTitle != "") {
-        const txt = this.filterBy.byTitle.toLowerCase();
+      if (this.filterBy.byText != "") {
+        const txt = this.filterBy.byText.toLowerCase();
 
         eventisFilter = eventis.filter((eventi) => {
           return (

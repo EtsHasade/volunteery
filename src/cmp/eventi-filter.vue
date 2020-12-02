@@ -6,7 +6,7 @@
         onfocus="this.placeholder = ''"
         onblur="this.placeholder = 'Free Search'"
         placeholder="Free Search"
-        v-model="filterBy.byTitle"
+        v-model="filterBy.byText"
         @input="emitFilter"
       />
       <select-multi
@@ -17,16 +17,16 @@
       />
     </form>
     <section class="btns-tags flex center mb10">
-      <el-button @click="changeFilter({ byTitle: '', byTags: ['COVID-19'] })"
+      <el-button @click="changeFilter({ byText: '', byTags: ['COVID-19'] })"
         >COVID-19</el-button
       >
-      <el-button @click="changeFilter({ byTitle: '', byTags: ['Animals'] })"
+      <el-button @click="changeFilter({ byText: '', byTags: ['Animals'] })"
         >Animals</el-button
       >
-      <el-button @click="changeFilter({ byTitle: '', byTags: ['Needy'] })"
+      <el-button @click="changeFilter({ byText: '', byTags: ['Needy'] })"
         >Needy</el-button
       >
-      <el-button @click="changeFilter({ byTitle: '', byTags: [] })"
+      <el-button @click="changeFilter({ byText: '', byTags: [] })"
         >Clear</el-button
       >
     </section>
@@ -39,7 +39,7 @@ export default {
   name: 'eventi-filter',
   data() {
     return {
-      filterBy: { byTitle: '', byTags: [] },
+      filterBy: { byText: '', byTags: [] },
       debounce: null,
       tags: this.$store.getters.tags
     }
