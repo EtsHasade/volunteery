@@ -46,12 +46,15 @@
       <section class="details">
         <hr />
         <section class="mini-user flex align-center mb10">
-          <avatar
+    
+          <avatar style="background-position: center; background-size:cover;"
             class="mr10"
             :src="org.admin.imgUrl"
-            :username="org.admin.fullName"
-          />
+            :username="org.admin.fullName"/>
           <span>{{ org.admin.fullName }}</span>
+          <span class="facebook-btn">
+            <div class="fb-like" data-href="https://www.facebook.com/HeroesforLifeIsrael" data-width="200px" data-layout="standard" data-action="like" data-size="large" data-share="true"></div>
+          </span>
         </section>
         <hr />
         <p class="org-goals">{{ org.goals }}</p>
@@ -124,7 +127,7 @@
               :key="review._id"
             >
               <section class="details-review flex align-center">
-                <avatar
+                <avatar style="background-position: center; background-size:cover;"
                   :src="review.author.imgUrl"
                   :username="review.author.fullName"
                 ></avatar>

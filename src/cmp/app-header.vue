@@ -9,13 +9,15 @@
           @click="$router.push('/')"
         />
       </div>
-      <navbar></navbar>
+      <navbar class="nav-bar-horizontal"></navbar>
+      <nav-bar-vertical class="nav-bar-vertical"></nav-bar-vertical>
     </div>
   </header>
 </template>
 
 <script>
 import navbar from "./element-ui/nav-bar";
+import navBarVertical from './element-ui/nav-bar-vertical.vue';
 
 export default {
   name: "app-header",
@@ -26,6 +28,7 @@ export default {
   },
   components: {
     navbar,
+    navBarVertical,
   },
   created() {
    document.addEventListener("scroll", this.getScroll);

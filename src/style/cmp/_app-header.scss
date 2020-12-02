@@ -8,7 +8,7 @@
     color           : $clr6;
 
     .logo {
-        width      : 220px;
+        width      : 165px;
         display    : inline-block;
         align-items: center;
         position   : relative;
@@ -76,6 +76,23 @@
 
     }
 
+
+    .nav-bar-vertical{
+        display: unset;
+        position: fixed;
+        right: 1rem;
+        @include for-small-narrow-layout {
+            display: none;
+        }
+    }
+
+    .nav-bar-horizontal{
+        display: none;
+        @include for-small-narrow-layout {
+            display: unset;
+        }
+    }
+
 }
 
 .hero-page .app-header:not(.scrolly) {
@@ -90,3 +107,4 @@
     }
     
 }
+
