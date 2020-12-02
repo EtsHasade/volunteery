@@ -1,4 +1,6 @@
 .eventi-filter {
+    background-color: $clr2;
+    background-color: $gray4;
     & .el-input .el-input__suffix {
         // margin: 0 rem(16px);
         height: 50px;
@@ -12,8 +14,10 @@
         // }
     }
     & .btns-tags {
+        transition: .4s;
         & .el-button:hover,
         .el-button:focus {
+            transition: .4s;
             color: $clr2;
             background-color: #bfea45;
             border: 1px solid #bfea45;

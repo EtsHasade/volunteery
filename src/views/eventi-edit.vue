@@ -102,11 +102,12 @@
       <section class="upload-img flex column center">
         <template v-if="!isLoading">
           <label for="imgUploader">
-            <img
+            <!-- <img
               class="img-uploader"
               src="http://www.pngall.com/wp-content/uploads/2/Upload-PNG-Image-File.png"
               alt=""
-            />
+            /> -->
+          <i class="fas fa-cloud-upload-alt"></i>
           </label>
           <input
             type="file"

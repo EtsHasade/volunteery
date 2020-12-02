@@ -1,10 +1,17 @@
 <template>
-  <el-select v-model="value" multiple onfocus="this.placeholder = ''" onblur="this.placeholder = 'Select'" placeholder="Select">
+  <el-select
+    v-model="value"
+    multiple
+    onfocus="this.placeholder = ''"
+    :onblur="`this.placeholder = '${placeholder}'`"
+    :placeholder="placeholder"
+  >
     <el-option
       v-for="item in options"
       :key="item.value"
       :label="item.label"
-      :value="item.value">
+      :value="item.value"
+    >
     </el-option>
   </el-select>
 
@@ -28,23 +35,27 @@
 <script>
 export default {
   props: {
-      items: Array
+    items: Array,
+    placeholder: {
+      type: String,
+      default: "Select",
+    },
   },
   data() {
     return {
       options: [],
-      value: []
-    }
+      value: [],
+    };
   },
   created() {
-      this.options = this.items.map(item=> {
-      return {value: item, label: item}
-      })
+    this.options = this.items.map((item) => {
+      return { value: item, label: item };
+    });
   },
   watch: {
     value: function (newValue) {
-      this.$emit('input', newValue)
-    }
-  }
-}
+      this.$emit("input", newValue);
+    },
+  },
+};
 </script>

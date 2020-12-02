@@ -22,23 +22,40 @@
             bottom: 0;
             right: 0;
         }
-        .preview-card-avatar {
-            width: 40px;
-            height: 40px;
+        .preview-card-country {
             z-index: 999;
             position: absolute;
-            bottom: 0;
-            background-color: #fff;
+            bottom: -12px;
+            right: 5px;
+            background-color: #aed63dc9;
+            border-radius: 0px;
+            color: white;
+            padding: 2px 7px;
             background-position: center;
             background-size: contain;
             background-repeat: no-repeat;
-            border-top-right-radius: 7px;
-            border-top: 3px solid #ffffff;
-            border-right: 3px solid #ffffff;
-            &:hover {
-                box-shadow: inset 20px 20px 20px #ffffff57;
-            }
         }
+    }
+}
+
+.card-title {
+    font-size: 1.2rem;
+    line-height: 1.2em;
+    color: $clr1;
+    width: 15ch;
+    font-family: hindBold;
+}
+
+.org-logo {
+    &:hover {
+        box-shadow: inset 20px 20px 20px #ffffff57;
+    }
+}
+
+.tag {
+    i {
+        font-size: 20px;
+        color: $clr1;
     }
 }
 
@@ -46,10 +63,16 @@
     height: 100%;
     margin-top: -5px;
     // padding   : 0.5rem;
+    .card-label {
+        & h3 {
+            height: 46px;
+        }
+    }
     .card-title {
         font-size: 1.2rem;
         line-height: 1.2em;
-        color: $gray1;
+        color: $clr1;
+        width: 15ch;
     }
     .card-desc {
         color: $gray2;

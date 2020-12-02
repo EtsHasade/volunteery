@@ -49,8 +49,14 @@
         }
     }
     & main {
-        & .details:not(:last-child) {
-            max-width: 80ch;
+        & .details {
+            margin: 16px 0;
+            &:not(:last-child) {
+                max-width: 80ch;
+            }
+            & .org-desc {
+                max-width: 80ch;
+            }
         }
         & .details-review {
             align-items: center;
@@ -58,6 +64,10 @@
         & .status-details {
             z-index: 1;
             position: relative;
+        }
+        & .i {
+            margin: 0;
+            padding: 0;
         }
     }
     & .reviews-section {

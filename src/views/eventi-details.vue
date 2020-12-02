@@ -154,7 +154,7 @@
         <rate-stars-enable class="mb10" v-model="reviewToEdit.rate" />
       </section>
       <span class="text-center mrg5">Reviews</span>
-      <section class="reviews flex wrap center">
+      <section class="reviews flex wrap align-center">
         <section
           class="review flex column mrg5"
           v-for="review in eventi.reviews"
