@@ -1,7 +1,7 @@
 <template>
   <main>
     <eventi-filter @doFilter="setFilter"></eventi-filter>
-    <section class="btns-tags flex center mb10">
+    <!-- <section class="btns-tags flex center mb10">
       <el-button @click="filterBy = { byTitle: '', byTags: ['COVID-19'] }"
         >COVID-19</el-button
       >
@@ -11,7 +11,7 @@
       <el-button @click="filterBy = { byTitle: '', byTags: ['Needy'] }"
         >Needy</el-button
       >
-    </section>
+    </section> -->
     <eventi-list :eventis="eventisToShow"></eventi-list>
   </main>
 </template>
