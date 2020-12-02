@@ -3,6 +3,7 @@
     <!-- <h2>Home page</h2> -->
     <!-- <img class="hero-img full" src="@/assets/img/hero.jpg" alt=""> -->
     <!-- <img class="hero-img full" src="https://ewscripps.brightspotcdn.com/dims4/default/61272c3/2147483647/strip/true/crop/640x360+0+34/resize/1280x720!/quality/90/?url=https%3A%2F%2Fmediaassets.10news.com%2Fphoto%2F2018%2F10%2F30%2Fvolunteer_900x600_1540924954704_101792658_ver1.0_640_480.jpg" alt=""> -->
+    <eventi-filter  />
     <section v-if="loggedinUser" class="suggested">
       <span>Suggest</span>
       <eventi-list :eventis="suggestEventis" />
@@ -16,6 +17,7 @@
 </template>
 
 <script>
+import eventiFilter from '../cmp/eventi-filter.vue';
 // @ is an alias to /src
 
 import eventiList from '../cmp/eventi-list'
@@ -83,6 +85,7 @@ export default {
   components: {
     eventiList,
     globalInfo,
+    eventiFilter,
     // orgPreview
   }
 }
