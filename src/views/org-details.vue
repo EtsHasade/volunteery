@@ -10,7 +10,7 @@
             }}
             reviews) | {{ org.country }}
           </span>
-          <span v-else><i class="star fas fa-star"></i> New</span>
+          <span v-else><i class="star fas fa-star"></i>New</span>
         </section>
       </section>
       <section
@@ -42,7 +42,7 @@
         :src="img"
       />
     </section>
-    <main class="">
+    <main>
       <section class="details">
         <hr />
         <section class="mini-user flex align-center mb10">

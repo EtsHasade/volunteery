@@ -8,7 +8,7 @@
             <i class="star fas fa-star"></i>
             {{ eventi.rate }} ({{ eventi.reviews.length }}reviews)
           </span>
-          <span v-else><i class="star fas fa-star"></i> New</span> |
+          <span v-else><i class="star fas fa-star"></i>New</span> |
           <span
             >{{ eventi.location.address }}, {{ eventi.location.country }}</span
           >

@@ -14,9 +14,9 @@
       <div class="card-label">
         <h3 class="card-title">{{ eventi.title }}</h3>
       </div>
-      <h4 class="card-desc flex-g1">
+      <p class="card-desc flex-g1">
         {{eventi.previewDesc || eventi.desc}}
-      </h4>
+      </p>
       <div class="eventi-floor card-footer flex">
           <h4 class="country">{{ eventi.location.country }}</h4>
           <h4 class="time">{{moment(eventi.startAt).format('DD/MM/YYYY') }}</h4>

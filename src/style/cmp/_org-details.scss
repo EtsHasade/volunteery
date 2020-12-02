@@ -49,6 +49,9 @@
         }
     }
     & main {
+        & .details:not(:last-child) {
+            max-width: 80ch;
+        }
         & .details-review {
             align-items: center;
         }
