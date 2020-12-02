@@ -49,9 +49,10 @@
     .card-title {
         font-size: 1.2rem;
         line-height: 1.2em;
+        color: $gray1;
     }
     .card-desc {
-        color: $gray3;
+        color: $gray2;
         line-height: 1.5;
         overflow: hidden;
         text-overflow: ellipsis;
@@ -62,7 +63,7 @@
         font-size: rem(14px);
     }
     .country {
-        font-weight: bold;
+        color: $gray1;
         font-size: 0.8rem;
         margin-right: 0.5em;
     }
