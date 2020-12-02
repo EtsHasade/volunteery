@@ -84,13 +84,13 @@
         }
     }
     & .reviews-section {
+        background-color: #a4ca38c9;
         & .add-review {
             &>* {
                 margin: 5px;
             }
         }
         & .review {
-            border: 2px solid $clr4;
             padding: rem(5px);
             border-radius: rem(8px);
             min-width: rem(310px);
@@ -100,6 +100,11 @@
             & .review-rate {
                 max-width: rem(95px);
                 margin-left: rem(7px);
+            }
+            @include for-mobile-layout {
+                .content-review {
+                    flex-direction: column;
+                }
             }
         }
     }

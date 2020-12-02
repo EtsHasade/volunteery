@@ -67,6 +67,9 @@ export const orgStore = {
             console.log(sortBy);
             const orgs = await orgService.getSortList(sortBy)
             commit({ type: 'setOrgs', orgs })
+        },
+        async getOrgById(context, { orgId }) {
+            return await orgService.getById(orgId);
         }
     }
 }

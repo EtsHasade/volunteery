@@ -14,19 +14,36 @@
       />
       <div v-if="!imgLoad" class="loading flex center">LOADING...</div>
     </div>
-    <div class="preview-details flex-column">
-      <div class="card-label">
-        <h3 class="card-title mb10">{{ org.name }}</h3>
-        <h6 class="org-mini-details country">{{ org.country }}</h6>
-      </div>
+    <section v-if="org" class="details-org-section flex align-center">
+      <avatar
+        style="background-position: center; background-size: cover"
+        class="org-logo hover-pointer mr10"
+        :username="org.name"
+        :src="org.logo"
+        :title="org.name"
+      />
+      <h3 class="mrg0 card-title">{{ org.name }}</h3>
+    </section>
+    <section class="mini-details-top flex space-between">
+      <h5 v-if="org.reviews.length">
+        <i class="star fas fa-star"></i>
+        {{ org.rate }} ({{ org.reviews.length }} reviews)
+      </h5>
+      <h5 v-else><i class="star fas fa-star"></i>New</h5>
+      <h5 class="org-eventis">{{ orgEventis.length }} Events</h5>
+    </section>
+    <h5 class="org-mini-details country">{{ org.country }}</h5>
+    <div class="preview-details flex column flex-g1">
       <p class="org-goals card-desc flex-g1">{{ org.goals }}</p>
-      <div class="card-footer flex align-center space-between">
-        <h5 v-if="org.reviews.length">
-          <i class="star fas fa-star"></i>
-          {{ org.rate }} ({{ org.reviews.length }} reviews)
-        </h5>
-        <h5 v-else><i class="star fas fa-star"></i>New</h5> 
-        <h5 class="org-eventis">{{ orgEventis.length }} Events</h5>
+      <div class="eventi-floor card-footer flex space-around">
+        <section
+          class="tag flex column center"
+          v-for="(tag, idx) in org.tags"
+          :key="idx"
+        >
+          <i :class="tagsIcon[tag]"></i>
+          <p>{{ tag }}</p>
+        </section>
       </div>
     </div>
   </li>
@@ -34,6 +51,7 @@
 
 <script>
 // import rateStars from "./element-ui/rate-stars";
+import avatar from "vue-avatar";
 
 export default {
   name: "orgPreview",
@@ -53,11 +71,10 @@ export default {
           return eventi.byOrg._id === this.org._id;
         }
       });
-      // console.log(
-      //   "🚀 ~ file: org-preview.vue ~ line 37 ~ orgEventis ~ eventis",
-      //   eventis
-      // );
       return eventis;
+    },
+    tagsIcon() {
+      return this.$store.getters.tagsIcon;
     },
   },
   created() {
@@ -65,7 +82,7 @@ export default {
     // console.log("org", this.org);
   },
   components: {
-    // rateStars,
+    avatar
   },
   // watch: {
   //   rate: function (newRate) {
