@@ -5,21 +5,21 @@
       <img v-show="imgLoad" @load="imgLoad = true" :src="org.imgUrls[0]" alt="" />
       <div v-if="!imgLoad" class="loading flex center">LOADING...</div>
     </div>
-    <div class="preview-details">
-      <div class="org-details">
-        <h4 class="org-name">{{ org.name }}</h4>
-        <div class="flex">
-          <h6 class="org-mini-details">{{ org.admin.fullName }}</h6>
-          <h6 class="org-mini-details">{{ org.country }}</h6>
-        </div>
-        <h6 class="org-goals">{{ org.goals }}</h6>
-      <span v-if="org.reviews.length"
-        ><i class="star fas fa-star"></i> {{ org.rate }} ({{ org.reviews.length }} reviews)</span
-      >
-      <span v-else><i class="star fas fa-star"></i> New</span>
-        <!-- <rate-stars v-model="org.rate"></rate-stars> -->
-        <h6 class="org-eventis">{{ orgEventis.length }} Eventiy events</h6>
+    <div class="preview-details flex-column">
+      <div class="card-label">
+        <h3 class="card-title">{{ org.name }}</h3>
+        <h6 class="org-mini-details">{{ org.country }}</h6>
       </div>
+        <h4 class="org-goals card-desc flex-g1">{{ org.goals }}</h4>
+        <div class="card-footer">
+
+      <span v-if="org.reviews.length">
+        <i class="star fas fa-star"></i>
+        {{ org.rate }} ({{ org.reviews.length }} reviews)
+      </span>
+      <span v-else><i class="star fas fa-star"></i> New</span>
+        <h6 class="org-eventis">{{ orgEventis.length }} Events</h6>
+        </div>
     </div>
   </li>
 </template>

@@ -1,27 +1,45 @@
 <template>
   <section v-if="eventi" class="eventi-details">
     <section class="main-details">
-      <h2 class="mb10">{{ eventi.title }}</h2>
-      <span v-if="eventi.reviews.length"
-        ><i class="star fas fa-star"></i> {{ eventi.rate }} ({{
-          eventi.reviews.length
-        }}
-        reviews)</span
-      >
-      <span v-else><i class="star fas fa-star"></i> New</span> |
-      <span>{{ eventi.location.address }}, {{ eventi.location.country }}</span>
-      <!-- <rate-stars v-if="eventi.reviews.length" v-model="eventi.rate" /> -->
-    </section>
-    <section class="eventi-imgs">
-      <img
-        class="eventi-img"
-        v-for="(img, idx) in eventi.imgUrls"
-        :key="idx"
-        :src="img"
-      />
+      <section class="top-page flex center space-between">
+        <div class="top-details">
+          <h2 class="mb10">{{ eventi.title }}</h2>
+          <span v-if="eventi.reviews.length">
+            <i class="star fas fa-star"></i>
+            {{ eventi.rate }} ({{ eventi.reviews.length }}reviews)
+          </span>
+          <span v-else><i class="star fas fa-star"></i> New</span> |
+          <span
+            >{{ eventi.location.address }}, {{ eventi.location.country }}</span
+          >
+        </div>
+        <div v-if="isUserOrgAdmin" class="edit-btns flex">
+          <el-button class="delete-btn" type="warning" @click="removeEventi"
+            >Delete Event</el-button
+          >
+          <router-link
+            type="success"
+            class="el-button el-button--success"
+            :to="'/eventi-edit/' + eventi._id"
+            >Edit</router-link
+          >
+        </div>
+      </section>
+      <section class="eventi-imgs">
+        <img
+          class="eventi-img"
+          v-for="(img, idx) in eventi.imgUrls"
+          :key="idx"
+          :src="img"
+        />
+      </section>
     </section>
     <section class="mini-org flex align-center" @click="openOrgDetails">
-      <avatar class="mr16 hover-pointer" :src="eventi.byOrg.imgUrl" :username="eventi.byOrg.name" />
+      <avatar
+        class="mr16 hover-pointer"
+        :src="eventi.byOrg.imgUrl"
+        :username="eventi.byOrg.name"
+      />
       <span>{{ eventi.byOrg.name }}</span>
     </section>
     <main class="flex justify-center">
@@ -29,29 +47,40 @@
         <section class="details-ev">
           <hr />
           <section class="tags flex wrap align-center">
-            <span >Tags:</span>
+            <span>Tags:</span>
             <span
               class="tag text-center mrg5"
               v-for="(tag, idx) in eventi.tags"
-              :key="idx"><i :class="tagsIcon[tag]"></i> {{ tag }}
+              :key="idx"
+              ><i :class="tagsIcon[tag]"></i> {{ tag }}
             </span>
           </section>
           <hr />
           <section class="tags-section flex align-center wrap">
-            <span><i class="fas fa-users"></i> {{eventi.members.length}} / {{ eventi.capacity }} members</span>
+            <span
+              ><i class="fas fa-users"></i> {{ eventi.members.length }} /
+              {{ eventi.capacity }} members</span
+            >
             <hr />
             <section class="dates flex column">
-              <span><i class="fas fa-calendar-alt"></i> {{ moment(eventi.startAt).format("DD/MM/YYYY") }} - {{ moment(eventi.endAt).format("DD/MM/YYYY") }}</span>
+              <span
+                ><i class="fas fa-calendar-alt"></i>
+                {{ moment(eventi.startAt).format("DD/MM/YYYY") }} -
+                {{ moment(eventi.endAt).format("DD/MM/YYYY") }}</span
+              >
             </section>
             <section class="neededs">
-              <span class="need-txt">We need for this eventi:</span>
-              <section class="needed-content column flex wrap">
-                <section 
-                  class="needed text-center mrg5 "
+              <span
+                ><i class="fas fa-list-ol"></i>We need for this eventi:</span
+              >
+              <section class="needed-content clean-list flex wrap">
+                <span
+                  class="needed text-center mrg5"
                   v-for="(needed, idx) in eventi.neededs"
-                  :key="idx">
+                  :key="idx"
+                >
                   <i :class="neededsIcon[needed]"></i> {{ needed }}
-                </section>
+                </span>
               </section>
             </section>
           </section>
@@ -69,29 +98,34 @@
           }}</el-button>
         </div>
         <section class="share-button flex center">
-                    <!-- <section><a href="https://api.whatsapp.com/send?phone=972525903939&text=Can i get more details?" target="_blank"><i class="fab fa-whatsapp"></i></a></section> -->
-
-          <section><a href="https://api.whatsapp.com/send?text=http://localhost:8080/#/eventi-details/5fc3c2f8b939f9e519ca2795" target="_blank"><i class="fab fa-whatsapp"></i></a></section>
-          <!-- <section class="fb-share-button" data-href="http://localhost:8080/#/eventi-details/5fc3c2f8b939f9e519ca2794" data-layout="button" data-size="large"><a target="_blank" href="https://www.facebook.com/sharer/sharer.php?u=http%3A%2F%2Flocalhost%3A8080%2F%23%2Feventi-details%2F5fc3c2f8b939f9e519ca2794&amp;src=sdkpreparse" class="fb-xfbml-parse-ignore"><i class="fab fa-facebook"></i></a></section> -->
-          <div class="fb-share-button" data-href="https://www.facebook.com/HeroesforLifeIsrael" data-layout="button" data-size="large"><a target="_blank" href="https://www.facebook.com/sharer/sharer.php?u=https%3A%2F%2Fwww.facebook.com%2FHeroesforLifeIsrael&amp;src=sdkpreparse" class="fb-xfbml-parse-ignore">Share</a></div>
-
+          <section>
+            <a
+              href="https://api.whatsapp.com/send?phone=972501122337&text=http://localhost:8080/#/eventi-details/5fc3c2f8b939f9e519ca2794"
+              target="_blank"
+              ><i class="fab fa-whatsapp"></i
+            ></a>
+          </section>
+          <section
+            class="fb-share-button"
+            data-href="http://localhost:8080/#/eventi-details/5fc3c2f8b939f9e519ca2794"
+            data-layout="button"
+            data-size="large"
+          >
+            <a
+              target="_blank"
+              href="https://www.facebook.com/sharer/sharer.php?u=http%3A%2F%2Flocalhost%3A8080%2F%23%2Feventi-details%2F5fc3c2f8b939f9e519ca2794&amp;src=sdkpreparse"
+              class="fb-xfbml-parse-ignore"
+            >
+              <i class="fab fa-facebook"></i
+            ></a>
+          </section>
         </section>
-        <div v-if="isUserOrgAdmin" class="edit-btns">
-          <el-button type="danger" @click="removeEventi"
-            >Delete Event</el-button
-          >
-          <router-link
-            type="success"
-            class="el-button el-button--success"
-            :to="'/eventi-edit/' + eventi._id"
-            >Edit</router-link
-          >
-        </div>
         <section class="section-status-details">
           <section class="members flex column text-center align-center">
             <h3 class="title-members">Members</h3>
             <section class="members-imgs flex center wrap">
-              <avatar style="background-position: center; background-size:cover;"
+              <avatar
+                style="background-position: center; background-size: cover"
                 class="member-img mrg5"
                 v-for="member in eventi.members"
                 :key="member._id"
@@ -108,11 +142,11 @@
             </section>
             <div slot="footer">
               <form @submit.prevent="sendMsg" class="flex align-center">
-                <el-input
-                  placeholder="Send Massage"
-                  v-model="msgChat.txt"
-                />
-                <i class="far fa-paper-plane fa-2x hover-pointer" @click="sendMsg"></i>
+                <el-input placeholder="Send Massage" v-model="msgChat.txt" />
+                <i
+                  class="far fa-paper-plane fa-2x hover-pointer"
+                  @click="sendMsg"
+                ></i>
               </form>
             </div>
           </chat-app>
@@ -133,7 +167,10 @@
           :key="review._id"
         >
           <section class="details-review flex align-center">
-            <avatar :src="review.author.imgUrl" :username="review.author.fullName"></avatar>
+            <avatar
+              :src="review.author.imgUrl"
+              :username="review.author.fullName"
+            ></avatar>
             <!-- <rate-stars v-model="review.rate" class="review-rate" /> -->
             <span class="review-rate"
               >{{ review.rate }}<i class="star fas fa-star"></i
@@ -212,7 +249,7 @@ export default {
         sum += review.rate;
       });
       this.eventi.rate = (sum / this.eventi.reviews.length).toFixed(2);
-      
+
       // return sum / this.eventi.reviews.length
     },
     async addMember() {

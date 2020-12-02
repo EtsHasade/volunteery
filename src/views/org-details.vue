@@ -17,7 +17,7 @@
         v-if="isUserOrgAdmin"
         class="status-details flex align-center text-center"
       >
-        <el-button type="warning" @click="removeOrg"
+        <el-button class="delete-btn" type="warning" @click="removeOrg"
           >Delete Organization</el-button
         >
         <router-link

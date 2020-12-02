@@ -6,8 +6,8 @@
     </div>
 
     <div class="side-tabs flex">
-      <h2 class="title-tab">Edit your orgaziation</h2>
-      <h2 class="title-tab active">Publish new event and invite volunteers</h2>
+      <h2 class="title-tab hover-pointer" @click="openOrgDetails">Edit your orgaziation</h2>
+      <h2 class="title-tab active" >Publish new event and invite volunteers</h2>
     </div>
     <form class="edit-form flex column center" @submit.prevent="saveEventi">
       <el-input
@@ -82,22 +82,54 @@
       <label class="img-list">
         Pictures:
         <section class="imgs flex center">
-          <section class="img-edit flex column center mrg5" v-for="(imgUrl, idx) in eventiToEdit.imgUrls" :key="idx">
-            <img class="border-radius mb10" :src="imgUrl" alt="img...">
-            <el-button type="danger" icon="el-icon-delete" circle class="remove-img" @click.stop.prevent="removeImg(idx)"></el-button> 
+          <section
+            class="img-edit flex column center mrg5"
+            v-for="(imgUrl, idx) in eventiToEdit.imgUrls"
+            :key="idx"
+          >
+            <img class="border-radius mb10" :src="imgUrl" alt="img..." />
+            <el-button
+              type="danger"
+              icon="el-icon-delete"
+              circle
+              class="remove-img"
+              @click.stop.prevent="removeImg(idx)"
+            ></el-button>
           </section>
         </section>
       </label>
 
       <section class="upload-img flex column center">
         <template v-if="!isLoading">
-          <label for="imgUploader"> <img class="img-uploader" src="http://www.pngall.com/wp-content/uploads/2/Upload-PNG-Image-File.png" alt=""> </label>
-          <input type="file" name="img-uploader" id="imgUploader" @change="onUploadImg">  
+          <label for="imgUploader">
+            <img
+              class="img-uploader"
+              src="http://www.pngall.com/wp-content/uploads/2/Upload-PNG-Image-File.png"
+              alt=""
+            />
+          </label>
+          <input
+            type="file"
+            name="img-uploader"
+            id="imgUploader"
+            @change="onUploadImg"
+          />
         </template>
-        <img class="loader" v-else src="https://i.pinimg.com/originals/65/ba/48/65ba488626025cff82f091336fbf94bb.gif" alt="">
+        <img
+          class="loader"
+          v-else
+          src="https://i.pinimg.com/originals/65/ba/48/65ba488626025cff82f091336fbf94bb.gif"
+          alt=""
+        />
         <div class="img-list">
           <section class="imgs flex center">
-            <img class="border-radius mrg5 " v-for="(imgUrl, idx) in imgUrls" :src="imgUrl" :key="idx" alt="img...">
+            <img
+              class="border-radius mrg5"
+              v-for="(imgUrl, idx) in imgUrls"
+              :src="imgUrl"
+              :key="idx"
+              alt="img..."
+            />
           </section>
         </div>
       </section>
@@ -111,7 +143,7 @@
 import { eventiService } from "../service/eventi-service.js";
 import { orgService } from "../service/org-service.js";
 import selectMulti from "../cmp/element-ui/select-multi.vue";
-import { uploadImg } from '../service/img-upload-service.js'
+import { uploadImg } from "../service/img-upload-service.js";
 
 export default {
   name: "eventi-edit",
@@ -156,32 +188,31 @@ export default {
       tags: this.$store.getters.tags,
       neededs: this.$store.getters.neededs,
       isLoading: false,
-      imgUrls: []
-
+      imgUrls: [],
     };
   },
   methods: {
     async onUploadImg(ev) {
       this.isLoading = true;
       const res = await uploadImg(ev);
-      this.imgUrls.push(res.url)
+      this.imgUrls.push(res.url);
       this.isLoading = false;
     },
     removeImg(idx) {
       console.log(idx);
-      this.eventiToEdit.imgUrls.splice(idx, 1)
+      this.eventiToEdit.imgUrls.splice(idx, 1);
     },
     saveEventi() {
-      if(!this.eventiToEdit.imgUrls) this.eventiToEdit.imgUrls = []
+      if (!this.eventiToEdit.imgUrls) this.eventiToEdit.imgUrls = [];
       this.eventiToEdit.imgUrls.push(...this.imgUrls);
       if (!this.$store.getters.loggedinUser.org) {
         this.$message({
           showClose: true,
           message: `create organization first`,
-          type: 'warning',
-          duration: 1500
-        })
-        return
+          type: "warning",
+          duration: 1500,
+        });
+        return;
       }
       if (!this.eventiToEdit._id) {
         if (!this.eventiToEdit.imgUrls.length) {
@@ -198,7 +229,7 @@ export default {
       }
       const res = this.$store.dispatch({
         type: "saveEventi",
-        eventi: JSON.parse(JSON.stringify(this.eventiToEdit))
+        eventi: JSON.parse(JSON.stringify(this.eventiToEdit)),
       });
       if (res.type) {
         this.$message({
@@ -220,7 +251,7 @@ export default {
       this.$router.go(-1);
     },
     async getEventiById() {
-      if (!this.$route.params._id) return
+      if (!this.$route.params._id) return;
       const eventiId = this.$route.params._id;
       if (eventiId) {
         this.eventiToEdit = await this.$store.dispatch({
@@ -230,7 +261,7 @@ export default {
       }
     },
     async getByOrg() {
-      if (!this.$store.getters.loggedinUser.org) return
+      if (!this.$store.getters.loggedinUser.org) return;
       const byOrgId = this.$store.getters.loggedinUser.org._id || { _id: null };
       if (byOrgId) {
         this.byOrg = await orgService.getById(byOrgId);
@@ -249,6 +280,9 @@ export default {
         eventiId: this.eventiToEdit._id,
       });
       this.$router.go(-2);
+    },
+    openOrgDetails() {
+      this.$router.push(`/org-edit/${this.byOrg._id}`);
     },
   },
   created() {
@@ -270,7 +304,7 @@ export default {
   height: 100px;
 }
 
-.img-uploader{
+.img-uploader {
   height: 50px;
 }
 .img-uploader:hover {
