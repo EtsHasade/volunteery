@@ -1,9 +1,10 @@
 .card-preview {
     cursor: pointer;
-    border-radius: 8px;
-    transition: .4s;
+    // border-radius: 8px;
+    border-bottom: 1px solid #ffffff00;
+    transition: .5s;
     &:hover {
-        box-shadow: 0 2px 3px #b9b9b9;
+        border-bottom: 1px solid $gray1;
     }
     .img-squer-container {
         width: 100%;
@@ -58,6 +59,7 @@
         -webkit-line-clamp: 4;
         /* number of lines to show */
         -webkit-box-orient: vertical;
+        font-size: rem(14px);
     }
     .country {
         font-weight: bold;

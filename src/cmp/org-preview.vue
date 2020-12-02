@@ -10,7 +10,7 @@
         <h3 class="card-title">{{ org.name }}</h3>
         <h6 class="org-mini-details">{{ org.country }}</h6>
       </div>
-        <h4 class="org-goals card-desc flex-g1">{{ org.goals }}</h4>
+        <p class="org-goals card-desc flex-g1">{{ org.goals }}</p>
         <div class="card-footer">
 
       <span v-if="org.reviews.length">
