@@ -79,8 +79,11 @@ form {
 .fas,
 .far {
     font-size: rem(25px);
-    padding: 0 rem(5px);
-    margin: 0 rem(10px);
+    // padding: 0 rem(5px);
+    // margin: 0 rem(10px);
+    margin-right: 16px;
+    padding: 5px;
+    margin-top: 6px;
 }
 
 .fab {
