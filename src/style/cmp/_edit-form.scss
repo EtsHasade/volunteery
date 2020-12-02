@@ -13,21 +13,27 @@
         }
         & .title-tab {
             padding: 0.5rem;
-            background-color: #cae0c5;
-            color: $clr6;
+            background-color: $gray4;
+            color: $gray3;
             border-top-left-radius: 5px;
             border-top-right-radius: 5px;
+            border: solid 1px $gray1;
+            border-bottom: none;
+            position: relative;
+            z-index: 99;
             // background-image: linear-gradient(-90deg, rgba(255,255,255,0) 92%, rgba(0,0,0,0.33143679835215334) 100%);
         }
         & .title-tab.active {
-            color: $clr6;
-            background-color: $clr2;
+            box-shadow: 0 1px 0px 0px $clr6;
+            color: $gray1;
+            background-color: $clr6;
             background-image: none;
         }
     }
     & .edit-form {
+        border: solid 1px $gray1;
         padding: 0.5rem;
-        background-color: $clr2;
+        background-color: $clr6;
         grid-row: 2;
         grid-column: 2;
         border-radius: 0.5rem;
@@ -45,7 +51,7 @@
             text-align: left;
             &:focus {
                 // border: 2px solid $clr7;
-                box-shadow: 0 0 0 1px $clr7;
+                box-shadow: 0 0 0 1px $gray1;
             }
         }
         & .slect-options-inputs {
