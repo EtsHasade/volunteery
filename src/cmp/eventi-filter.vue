@@ -4,8 +4,8 @@
     <form class="flex center" @click.prevent="emitFilter">
       <el-input
         onfocus="this.placeholder = ''"
-        onblur="this.placeholder = 'Search By Title'"
-        placeholder="Search By Title"
+        onblur="this.placeholder = 'Free Search'"
+        placeholder="Free Search"
         v-model="filterBy.byTitle"
         @input="emitFilter"
       />
