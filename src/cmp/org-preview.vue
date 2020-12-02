@@ -17,7 +17,7 @@
         <i class="star fas fa-star"></i>
         {{ org.rate }} ({{ org.reviews.length }} reviews)
       </span>
-      <span v-else><i class="star fas fa-star"></i> New</span>
+      <span v-else><i class="star fas fa-star"></i>New</span>
         <h6 class="org-eventis">{{ orgEventis.length }} Events</h6>
         </div>
     </div>
