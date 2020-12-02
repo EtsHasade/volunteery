@@ -1,8 +1,8 @@
 <template>
   <div id="app" class="main-container">
-      <app-header></app-header>
-      <hero/>
-      <main class="mb10">
+      <app-header ></app-header>
+      <hero @scrollToList="scrollMeTo('appList')" />
+      <main ref="appList" class="mb10">
         <router-view />
       </main>
     <app-footer></app-footer>
@@ -22,6 +22,13 @@ export default {
     appFooter,
     hero
   },
+  methods:{
+      scrollMeTo(refName) {
+      var element = this.$refs[refName];
+      var top = element.offsetTop;
+      window.scrollTo(0, top-80);
+    },
+  }
 };
 </script>
 
