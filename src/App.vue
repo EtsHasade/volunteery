@@ -33,9 +33,14 @@ export default {
 </script>
 
 <style lang="scss">
+// @font-face{
+//     font-family: regular;
+//     src: url(./assets/fonts/Hind/Hind-Regular.ttf);
+// }
+
 @font-face{
     font-family: regular;
-    src: url(./assets/fonts/Hind/Hind-Regular.ttf);
+    src: url(./assets/fonts/Hind/Hind-Light.ttf);
 }
 
 .hero{

@@ -10,10 +10,10 @@
     <div class="side-tabs flex">
       <h2 v-if="!loggedinUser" class="title-tab active" to="/login">Login</h2>
       <h2 class="title-tab" :class="loggedinUser ? 'active' : ''">
-        Add your orgaziation
+        {{(loggedinUser && loggedinUser.org)? 'Edit your organization' : 'Add your orgaziation'}}
       </h2>
       <!-- <h2 class="title-tab active">Add your orgaziation</h2> -->
-      <h2 class="title-tab">Publish new event and invite volunteers</h2>
+      <h2 class="title-tab" :class="{'hover-pointer': loggedinUser && loggedinUser.org}" @click="goToCreateEventi">Publish new event and invite volunteers</h2>
     </div>
     <keep-alive>
       <form
@@ -204,10 +204,14 @@ export default {
         });
       }
       this.orgCred = orgService.getEmptyOrg();
-      if (!this.loggedinUser || !this.loggedinUser.org)
-        this.$router.push("/eventi-edit/");
+      this.goToCreateEventi();
       this.$router.go(-1);
     },
+    goToCreateEventi(){
+      if (this.loggedinUser || this.loggedinUser.org){
+        this.$router.push('/eventi-edit/');
+      }
+    }
   },
   async created() {
     const id = this.$route.params.orgId;
