@@ -3,6 +3,7 @@
   <section class="eventi-filter flex column center mb10">
     <form class="flex center" @click.prevent="emitFilter">
       <el-input
+        ref="searchFild"
         onfocus="this.placeholder = ''"
         onblur="this.placeholder = 'Free Search'"
         placeholder="Free Search"

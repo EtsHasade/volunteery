@@ -1,7 +1,7 @@
 <template>
   <div id="app" class="main-container">
       <app-header ></app-header>
-      <hero @scrollToList="scrollMeTo('appList')" />
+      <hero @scrollToList="scrollMeTo('appList')" ref="heroCmp" />
       <main ref="appList" class="mb10">
         <router-view />
       </main>
