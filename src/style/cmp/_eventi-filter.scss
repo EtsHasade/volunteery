@@ -1,13 +1,13 @@
 .eventi-filter {
-    background-color     : $clr6;
-    border               : 1px solid $gray1;
-    padding              : 10px;
-    margin-bottom        : 1rem;
+    background-color        : $clr6;
+    border                  : 1px solid $gray1;
+    padding                 : 10px;
+    margin-bottom           : 1rem;
     // display              : grid;
-    display: flex;
-    flex-wrap: wrap;
+    display                 : flex;
+    flex-wrap               : wrap;
     // grid-template-columns: repeat(auto-fit, 1fr);
-    gap: 10px;
+    gap                     : 10px;
     // grid-gap: 8px;
     // grid-auto-flow: dense;
 
@@ -16,8 +16,9 @@
     }
 
     .search-container {
-        // grid-row: 1;
-        // max-width: 200px;
+        grid-row : 1;
+        width    : 100%;
+        max-width: 250px;
     }
 
     form .el-input__inner,
@@ -42,38 +43,40 @@
 
     .el-select {
         margin: 0;
+
         .el-input__icon {
             height: unset;
         }
     }
 
     & .btns-tags {
-        width: fit-content;
         transition     : .4s;
         justify-content: flex-start;
         gap            : 10px;
         flex-direction : row;
 
     }
-            .select-categories-container{
-                gap: 10px;
-            }
-            .see-all {
-                background-color: #bfea45;
-                border          : 1px solid $clr1;
-            }
-    
-            .el-button {
-                border    : 1px solid $clr1;
-                transition: .4s;
-                margin: 0;
-                flex-grow: 1;
-    
-                &.active,
-                &:hover {
-                    color              : $clr2;
-                    background-color   : #bfea45;
-                    // border          : 1px solid #bfea45;
-                }
-            }
+
+    .select-categories-container {
+        gap: 10px;
+    }
+
+    .see-all {
+        background-color: #bfea45;
+        border          : 1px solid $clr1;
+    }
+
+    .el-button {
+        border    : 1px solid $clr1;
+        transition: .4s;
+        margin    : 0;
+        flex-grow : 1;
+
+        &.active,
+        &:hover {
+            color              : $clr2;
+            background-color   : #bfea45;
+            // border          : 1px solid #bfea45;
+        }
+    }
 }
