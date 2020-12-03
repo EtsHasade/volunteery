@@ -14,7 +14,7 @@
 
     <el-submenu index="2" class="user-menu">
       <template slot="title" class="user-menu">
-        <span><i class="fas fa-user-circle"></i></span>
+        <span ><i class="fas fa-user-circle"></i></span>
       </template>
       <el-menu-item :index="`/user-details/${userId}`" :disabled="!loggedinUser"
         >User profile</el-menu-item
