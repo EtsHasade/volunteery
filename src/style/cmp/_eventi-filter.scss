@@ -1,8 +1,24 @@
 .eventi-filter {
-    background-color: $clr6;
-    border          : 1px solid $gray1;
-    padding         : 10px;
-    margin-bottom   : 1rem;
+    background-color     : $clr6;
+    border               : 1px solid $gray1;
+    padding              : 10px;
+    margin-bottom        : 1rem;
+    // display              : grid;
+    display: flex;
+    flex-wrap: wrap;
+    // grid-template-columns: repeat(auto-fit, 1fr);
+    gap: 10px;
+    // grid-gap: 8px;
+    // grid-auto-flow: dense;
+
+    .el-button+.el-button {
+        margin: 0;
+    }
+
+    .search-container {
+        // grid-row: 1;
+        // max-width: 200px;
+    }
 
     form .el-input__inner,
     form>* {
@@ -14,38 +30,50 @@
     }
 
     & .el-input .el-input__inner {
+        min-width : 150px;
         width     : 100%;
         border    : 1px solid $clr1;
-        padding   : 5px;
         flex-grow : 1;
         text-align: center;
+
         // &:first-child {
         // }
     }
 
-    .el-select .el-input__icon {
-        height: unset;
+    .el-select {
+        margin: 0;
+        .el-input__icon {
+            height: unset;
+        }
     }
 
     & .btns-tags {
-        margin-left: 10px;
-        transition : .4s;
+        width: fit-content;
+        transition     : .4s;
+        justify-content: flex-start;
+        gap            : 10px;
+        flex-direction : row;
 
-        .see-all {
-            background-color: #bfea45;
-            border          : 1px solid $clr1;
-        }
-
-        .el-button {
-            border    : 1px solid $clr1;
-            transition: .4s;
-
-            &.active,
-            &:hover {
-                color              : $clr2;
-                background-color   : #bfea45;
-                // border          : 1px solid #bfea45;
-            }
-        }
     }
+            .select-categories-container{
+                gap: 10px;
+            }
+            .see-all {
+                background-color: #bfea45;
+                border          : 1px solid $clr1;
+            }
+    
+            .el-button {
+                border    : 1px solid $clr1;
+                transition: .4s;
+                margin: 0;
+                flex-grow: 1;
+    
+                &.active,
+                &:hover {
+                    color              : $clr2;
+                    background-color   : #bfea45;
+                    // border          : 1px solid #bfea45;
+                }
+            }
 }
