@@ -47,7 +47,7 @@
         <section class="details-ev">
           <hr />
           <section class="tags flex wrap align-center">
-            <span>Tags:</span>
+            <span class="bold">Categories</span>
             <span
               class="tag text-center mrg5"
               v-for="(tag, idx) in eventi.tags"
@@ -57,20 +57,21 @@
           </section>
           <hr />
           <section class="tags-section flex align-center wrap">
+            <section>
             <span
               ><i class="fas fa-users"></i> {{ eventi.members.length }} /
               {{ eventi.capacity }} members</span
             >
-            <hr />
-            <section class="dates flex column">
-              <span
-                ><i class="fas fa-calendar-alt"></i>
-                {{ moment(eventi.startAt).format("DD/MM/YYYY") }} -
-                {{ moment(eventi.endAt).format("DD/MM/YYYY") }}</span
-              >
             </section>
+
+            <section class="dates flex column">
+              <span><i class="fas fa-calendar-alt"></i>
+                {{ moment(eventi.startAt).format("DD/MM/YYYY") }} -
+                {{ moment(eventi.endAt).format("DD/MM/YYYY") }}</span>
+            </section>
+            <!-- <hr /> -->
             <section class="neededs">
-              <span class="need-txt">We need for this eventi:</span>
+              <span class="bold need-txt">We need for this volunteering</span>
               <section class="needed-content clean-list flex wrap column">
                 <span
                   class="needed text-center mrg5"
@@ -116,18 +117,8 @@
               ><i class="fab fa-whatsapp"></i
             ></a>
           </section>
-          <div class="fb-share-button" data-href="https://www.facebook.com/ETGARIM" data-layout="button" data-size="large"><a target="_blank" href="https://www.facebook.com/sharer/sharer.php?u=https%3A%2F%2Fwww.facebook.com%2FETGARIM&amp;src=sdkpreparse" class="fb-xfbml-parse-ignore">Share</a></div>
-          <!-- <section
-            class="fb-share-button"
-            data-href="https://www.facebook.com/HeroesforLifeIsrael"
-            data-layout="button"
-            data-size="large"
-          >
-            <a
-              target="_blank"
-              href="https://www.facebook.com/sharer/sharer.php?u=http%3A%2F%2Flocalhost%3A8080%2F%23%2Feventi-details%2F5fc3c2f8b939f9e519ca2794&amp;src=sdkpreparse"
-              class="fb-xfbml-parse-ignore"><i class="fab fa-facebook"></i></a>
-          </section> -->
+          <iframe src="https://www.facebook.com/plugins/share_button.php?href=https%3A%2F%2Fwww.facebook.com%2FHeroesforLifeIsrael&layout=button&size=large&width=77&height=28&appId" width="77" height="28" style="border:none;overflow:hidden" scrolling="no" frameborder="0" allowfullscreen="true" allow="autoplay; clipboard-write; encrypted-media; picture-in-picture; web-share"></iframe>
+          <div class="fb-share-button" data-href="https://www.facebook.com/HeroesforLifeIsrael" data-layout="button" data-size="large"><a target="_blank" href="https://www.facebook.com/sharer/sharer.php?u=https%3A%2F%2Fwww.facebook.com%2FHeroesforLifeIsrael&amp;src=sdkpreparse" class="fb-xfbml-parse-ignore"></a></div>         
         </section>
         <section class="section-status-details">
           <section class="members flex column text-center align-center">
