@@ -1,40 +1,37 @@
 
 <template>
   <section class="eventi-filter">
-  <!-- <section class="eventi-filter flex space-between wrap"> -->
     <form class="search-container flex wrap" @click.prevent="emitFilter">
       <el-input
         ref="searchFild"
         onfocus="this.placeholder = ''"
         onblur="this.placeholder = 'Free Search'"
         placeholder="Free Search"
+        suffix-icon="el-icon-search"
         v-model="filterBy.byText"
         @input="emitFilter"
       />
     </form>
-    <section class="btns-tags flex wrap">
-    <!-- <section class="btns-tags flex wrap"> -->
       <el-button
         v-for="tag in showtags"
         :key="tag"
         @click="changeFilter({ byText: '', byTags: [tag] })"
         :class="{ active: filterBy.byTags.includes(tag) }"
-        >{{ tag }}</el-button
+        ><i class="small-icon" :class="$store.getters.tagsIcon[tag]"></i>{{ tag }}</el-button
       >
-    </section>
-      <div class="flex wrap select-categories-container">
       <select-multi
+        class="select-input"
         v-model="filterBy.byTags"
         @input="emitFilter"
         :items="tags"
         placeholder="More categories..."
       />
+
       <el-button
         @click="changeFilter({ byText: '', byTags: [] })"
         class="see-all"
         >See All</el-button
       >
-      </div>
   </section>
 </template>
 

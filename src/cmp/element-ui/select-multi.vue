@@ -6,7 +6,7 @@
     onfocus="this.placeholder = ''"
     :onblur="`this.placeholder = '${placeholder}'`"
     :placeholder="placeholder"
-    style="text-align: center"
+    style="text-align: center;"
   >
     <el-option
       v-for="item in options"
