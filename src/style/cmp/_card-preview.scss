@@ -34,6 +34,7 @@
             background-position: center;
             background-size: contain;
             background-repeat: no-repeat;
+            font-size: rem(16px)
         }
     }
 }
@@ -47,6 +48,7 @@
 }
 
 .org-logo {
+    margin-bottom: rem(10px);
     &:hover {
         box-shadow: inset 20px 20px 20px #ffffff57;
     }
@@ -80,7 +82,7 @@
         overflow: hidden;
         text-overflow: ellipsis;
         display: -webkit-box;
-        -webkit-line-clamp: 4;
+        -webkit-line-clamp: 2;
         /* number of lines to show */
         -webkit-box-orient: vertical;
         font-size: rem(14px);

@@ -42,10 +42,12 @@
       </section>
       <p>Age +{{ eventi.fromAge }}</p>
     </section>
-    <p>{{duration}}</p>
+    <section class="text-center">
+      <p>{{duration}}</p>
+    </section>
     <div class="preview-details flex-column">
       <p class="card-desc flex-g1">
-        {{ eventi.previewDesc || eventi.desc }}
+        {{ eventi.desc }}
       </p>
       <div class="eventi-floor card-footer flex space-around">
         <section
