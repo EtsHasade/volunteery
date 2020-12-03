@@ -1,6 +1,6 @@
 <template>
   <main>
-    <eventi-filter @doFilter="setFilter"></eventi-filter>
+    <eventi-filter @doFilter="setFilter" ref="thefilter"></eventi-filter>
     <eventi-list :eventis="eventisToShow"></eventi-list>
   </main>
 </template>
@@ -47,13 +47,16 @@ export default {
           if (!acc.includes(currEventi)) acc.push(currEventi);
           return acc;
         }, []);
-        eventisFilter = JSON.parse(JSON.stringify(eventisFilter))
-        console.log("🚀 ~ file: eventi-app.vue ~ line 48 ~ eventisFilter=eventisFilter.reduce ~ eventisFilter", eventisFilter)
+        eventisFilter = JSON.parse(JSON.stringify(eventisFilter));
+        console.log(
+          "🚀 ~ file: eventi-app.vue ~ line 48 ~ eventisFilter=eventisFilter.reduce ~ eventisFilter",
+          eventisFilter
+        );
       }
 
       if (this.filterBy.byTags.length) {
-        console.log('by tags');
-        
+        console.log("by tags");
+
         var eventisfilterTags = [];
         this.filterBy.byTags.forEach((tag) => {
           var eventisfilterTag = [];
@@ -77,6 +80,7 @@ export default {
   created() {},
   async mounted() {
     this.$store.dispatch({ type: "setEventis" });
+    this.$refs.thefilter.$refs.searchFild.focus();
   },
   components: {
     eventiFilter,

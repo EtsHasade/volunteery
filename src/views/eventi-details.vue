@@ -91,23 +91,38 @@
       <section class="status-details text-center flex column center">
         <div class="join-section flex column align-center">
           <p>We need speicals volunteer, if you are please join us!</p>
-          <el-button type="success" class="join-btn" @click="addMember">{{
-            textBtn
-          }}</el-button>
+          <el-button
+            v-if="!isMember"
+            type="success"
+            class="join-btn"
+            @click="updateMember"
+            >Join us</el-button
+          >
+          <el-button
+            v-else
+            type="warning"
+            class="join-btn"
+            @click="updateMember"
+            >Leave event</el-button
+          >
         </div>
         <section class="share-button flex center">
           <section>
             <!-- <a href="https://api.whatsapp.com/send?phone=972501122337&text=http://localhost:8080/#/eventi-details/5fc3c2f8b939f9e519ca2794"
               target="_blank"><i class="fab fa-whatsapp"></i></a> -->
-          <a href="https://api.whatsapp.com/send?text=http://localhost:8080/#/eventi-details/5fc3c2f8b939f9e519ca2794" 
-          target="_blank"><i class="fab fa-whatsapp"></i></a>
+            <a
+              href="https://api.whatsapp.com/send?text=http://localhost:8080/#/eventi-details/5fc3c2f8b939f9e519ca2794"
+              target="_blank"
+              ><i class="fab fa-whatsapp"></i
+            ></a>
           </section>
           <div class="fb-share-button" data-href="https://www.facebook.com/ETGARIM" data-layout="button" data-size="large"><a target="_blank" href="https://www.facebook.com/sharer/sharer.php?u=https%3A%2F%2Fwww.facebook.com%2FETGARIM&amp;src=sdkpreparse" class="fb-xfbml-parse-ignore">Share</a></div>
           <!-- <section
             class="fb-share-button"
             data-href="https://www.facebook.com/HeroesforLifeIsrael"
             data-layout="button"
-            data-size="large">
+            data-size="large"
+          >
             <a
               target="_blank"
               href="https://www.facebook.com/sharer/sharer.php?u=http%3A%2F%2Flocalhost%3A8080%2F%23%2Feventi-details%2F5fc3c2f8b939f9e519ca2794&amp;src=sdkpreparse"
@@ -232,6 +247,15 @@ export default {
         return false;
       else return true;
     },
+    isMember() {
+      const idx = this.eventi.members.findIndex((member) => {
+        return member._id === this.miniLoggedinUser._id;
+      });
+      if (idx != -1) {
+        return true
+      }
+      return false
+    }
   },
   methods: {
     avgRates() {
@@ -246,59 +270,106 @@ export default {
 
       // return sum / this.eventi.reviews.length
     },
-    async addMember() {
-      const idx = this.eventi.members.findIndex((member) => {
-        return member._id === this.miniLoggedinUser._id;
+    removeMember(member = this.miniLoggedinUser) {
+      console.log('member', member);
+      const idx = this.eventi.members.findIndex((miniMember) => {
+        return miniMember._id === member._id;
       });
-      if (idx != -1) {
-        this.eventi.members.splice(idx, 1);
-        const idxEvent = this.$store.getters.loggedinUser.events.findIndex(
-          (event) => {
-            return event._id === this.eventi._id;
-          }
-        );
-        const user = this.$store.getters.loggedinUser;
-        user.events.splice(idxEvent, 1);
-        this.$store.dispatch({
-          type: "updateUser",
-          user: JSON.parse(JSON.stringify(user)),
-        });
-        const res = await this.$store.dispatch({
-          type: "saveEventi",
-          eventi: JSON.parse(JSON.stringify(this.eventi)),
-        });
-        if (res.type) {
-          this.textBtn = "Join us";
-          this.$message({
-            showClose: true,
-            message: `You remove from this event`,
-            type: "success",
-            duration: 1500,
-          });
-        }
-        return;
-      }
-      const user = JSON.parse(JSON.stringify(this.$store.getters.loggedinUser));
-      this.eventi.members.push(this.miniLoggedinUser);
-      // eventiService.save(JSON.parse(JSON.stringify(this.eventi)))
+      this.eventi.members.splice(idx, 1);
+      const idxEvent = this.$store.getters.loggedinUser.events.findIndex(
+        (event) => {
+          return event._id === this.eventi._id;
+        })
+      const user = this.$store.getters.loggedinUser;
+      user.events.splice(idxEvent, 1);
+      this.$store.dispatch({
+        type: "updateUser",
+        user: JSON.parse(JSON.stringify(user)),
+      });
       this.$store.dispatch({
         type: "saveEventi",
         eventi: JSON.parse(JSON.stringify(this.eventi)),
       });
-      user.events.push(JSON.parse(JSON.stringify(this.miniEventi)));
-      const res = await this.$store.dispatch({
-        type: "updateUser",
-        user,
+    },
+    updateMember() {
+      // const idx = this.eventi.members.findIndex((member) => {
+      //   return member._id === this.miniLoggedinUser._id;
+      // });
+      // console.log(idx);
+      // if(idx != -1) socketService.emit('deleteMember', this.miniLoggedinUser);
+      // else socketService.emit('changeMember', this.miniLoggedinUser);
+      socketService.emit('changeMember', this.miniLoggedinUser);
+    },
+    async changesMember(member) {
+      console.log(member);
+      const idx = this.eventi.members.findIndex((miniMember) => {
+        return miniMember._id === member._id;
       });
-      if (res.type) {
-        this.$message({
-          showClose: true,
-          message: `You are a member!`,
-          type: "success",
-          duration: 1500,
+      if (idx != -1) {
+      this.eventi.members.splice(idx, 1);
+      const idxEvent = this.$store.getters.loggedinUser.events.findIndex(
+        (event) => {
+          return event._id === this.eventi._id;
+        })
+      const user = this.$store.getters.loggedinUser;
+      user.events.splice(idxEvent, 1);
+      this.$store.dispatch({
+        type: "updateUser",
+        user: JSON.parse(JSON.stringify(user)),
+      });
+      this.$store.dispatch({
+        type: "saveEventi",
+        eventi: JSON.parse(JSON.stringify(this.eventi)),
+      });
+        // this.eventi.members.splice(idx, 1);
+        // const idxEvent = this.$store.getters.loggedinUser.events.findIndex(
+        //   (event) => {
+        //     return event._id === this.eventi._id;
+        //   }
+        // );
+        // const user = this.$store.getters.loggedinUser;
+        // user.events.splice(idxEvent, 1);
+        // this.$store.dispatch({
+        //   type: "updateUser",
+        //   user: JSON.parse(JSON.stringify(user)),
+        // });
+        // const res = await this.$store.dispatch({
+        //   type: "saveEventi",
+        //   eventi: JSON.parse(JSON.stringify(this.eventi)),
+        // });
+        //   if (res.type) {
+        //     this.textBtn = "Join us";
+        //     this.$message({
+        //       showClose: true,
+        //       message: `You remove from this event`,
+        //       type: "success",
+        //       duration: 1500,
+        //     });
+        //   }
+        //   return;
+      } else {
+        console.log('member', member);
+        const user = JSON.parse(JSON.stringify(this.$store.getters.loggedinUser));
+        this.eventi.members.push(member);
+        this.$store.dispatch({
+          type: "saveEventi",
+          eventi: JSON.parse(JSON.stringify(this.eventi)),
         });
+        user.events.push(JSON.parse(JSON.stringify(this.miniEventi)));
+        const res = await this.$store.dispatch({
+          type: "updateUser",
+          user,
+        });
+        if (res.type) {
+          this.$message({
+            showClose: true,
+            message: `member just joined!`,
+            type: "success",
+            duration: 1500,
+          });
+        }
+        this.textBtn = "leave event";
       }
-      this.textBtn = "leave event";
     },
     addReview() {
       this.reviewToEdit.rate = Number(this.reviewToEdit.rate);
@@ -393,11 +464,7 @@ export default {
     const { _id, fullName, imgUrl } = user;
     this.miniLoggedinUser = { _id, fullName, imgUrl };
     this.avgRates();
-    if (
-      this.eventi.members.find(
-        (member) => member._id === this.miniLoggedinUser._id
-      )
-    ) {
+    if (this.eventi.members.find((member) => member._id === this.miniLoggedinUser._id)) {
       this.textBtn = "leave event";
     }
 
@@ -406,6 +473,7 @@ export default {
     socketService.setup();
     socketService.emit("chat topic", this.topic);
     socketService.on("chat addMsg", this.addMsg);
+    socketService.on("changesMember", this.changesMember);
   },
   destroyed() {
     this.msgs = [];
