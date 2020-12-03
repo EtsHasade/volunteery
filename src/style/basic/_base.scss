@@ -81,9 +81,12 @@ form {
     font-size: rem(25px);
     // padding: 0 rem(5px);
     // margin: 0 rem(10px);
+    padding: 5px;
+    margin: 4px 16px 4px 0;
+    //smae as:
+    // margin-top: 4px;
     // margin-right: 16px;
-    // padding: 5px;
-    // margin-top: 6px;
+    // margin-bottom: 4px;
 }
 
 .fab {
