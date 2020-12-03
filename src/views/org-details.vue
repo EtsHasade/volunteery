@@ -44,22 +44,24 @@
     </section>
     <main>
       <section class="details">
-        <section class="mini-user flex align-center mb10">
-    
-          <avatar style="background-position: center; background-size:cover;"
-            class="mr10"
-            :src="org.admin.imgUrl"
-            :username="org.admin.fullName"/>
-          <span>{{ org.admin.fullName }}</span>
+        <section class="top-details flex space-between align-center">
+          <section class="mini-user flex align-center mb10">
+            <avatar style="background-position: center; background-size:cover;"
+              class="mr10"
+              :src="org.admin.imgUrl"
+              :username="org.admin.fullName"/>
+            <span>{{ org.admin.fullName }}</span>
+          </section>
           <span class="facebook-btn">
-            <div class="fb-like" data-href="https://www.facebook.com/HeroesforLifeIsrael" data-width="100" data-layout="standard" data-action="like" data-size="small" data-share="true"></div>
+            <div class="fb-like" data-href="https://www.facebook.com/HeroesforLifeIsrael" data-width="200" data-layout="standard" data-action="like" data-size="large" data-share="true"></div>
+            <iframe src="https://www.facebook.com/plugins/like.php?href=https%3A%2F%2Fwww.facebook.com%2FHeroesforLifeIsrael&width=200&layout=standard&action=like&size=large&share=true&height=35&appId" width="350" height="35" style="border:none;overflow:hidden" scrolling="no" frameborder="0" allowfullscreen="true" allow="autoplay; clipboard-write; encrypted-media; picture-in-picture; web-share"></iframe>
           </span>
-        </section>
+        </section> 
         <hr />
         <p class="org-goals">{{ org.goals }}</p>
         <hr />
         <section class="tags-section flex align-center wrap">
-          <span class="bold mr16">Tags</span>
+          <span class="bold mr16">Categories</span>
           <section class="tags">
             <span
               class="tag text-center mrg5"
