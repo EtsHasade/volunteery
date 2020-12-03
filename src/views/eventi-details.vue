@@ -145,12 +145,12 @@
             </section>
           </section>
           <chat-app class="chat-app">
-            <h3 class="title-chat" slot="header">Event Chat</h3>
+            <h3 class="title-chat" slot="header">Members Chat</h3>
             <section v-for="(msg, idx) in msgs" class="mainChat" :key="idx">
               <span class="msg">{{ msg.from }}: {{ msg.txt }}</span>
             </section>
             <div slot="footer">
-              <form @submit.prevent="sendMsg" class="flex align-center">
+              <form @submit.prevent="sendMsg" class="flex">
                 <el-input placeholder="Send Massage" v-model="msgChat.txt" />
                 <i
                   class="far fa-paper-plane fa-2x hover-pointer"
@@ -292,12 +292,15 @@ export default {
       });
     },
     updateMember() {
-      // const idx = this.eventi.members.findIndex((member) => {
-      //   return member._id === this.miniLoggedinUser._id;
-      // });
-      // console.log(idx);
-      // if(idx != -1) socketService.emit('deleteMember', this.miniLoggedinUser);
-      // else socketService.emit('changeMember', this.miniLoggedinUser);
+      if(!this.$store.getters.loggedinUser) {
+        this.$message({
+            showClose: true,
+            message: `You need login first`,
+            type: "warning",
+            duration: 1500,
+          });
+        return
+      }
       socketService.emit('changeMember', this.miniLoggedinUser);
     },
     async changesMember(member) {
@@ -372,12 +375,20 @@ export default {
       }
     },
     addReview() {
+      if(!this.$store.getters.loggedinUser) {
+        this.$message({
+            showClose: true,
+            message: `You need login first`,
+            type: "warning",
+            duration: 1500,
+          });
+        this.reviewToEdit.txt = ''
+        return
+      }
       this.reviewToEdit.rate = Number(this.reviewToEdit.rate);
       this.reviewToEdit.createdAt = Date.now();
       this.reviewToEdit._id = eventiService.makeId();
-      this.reviewToEdit.author = JSON.parse(
-        JSON.stringify(this.miniLoggedinUser)
-      ) || { fullName: "Goust" };
+      this.reviewToEdit.author = JSON.parse(JSON.stringify(this.miniLoggedinUser));
       this.eventi.reviews.push(this.reviewToEdit);
       this.avgRates();
       this.$store.dispatch({
@@ -436,7 +447,16 @@ export default {
       this.msgs.push(msgChat);
     },
     sendMsg() {
-      if (!this.$store.getters.loggedinUser) return;
+      if (!this.$store.getters.loggedinUser) {
+        this.$message({
+            showClose: true,
+            message: `You need login first`,
+            type: "warning",
+            duration: 1500,
+          });
+        this.msgChat.txt = ''
+        return;
+      }
       this.msgChat.from = this.$store.getters.loggedinUser.fullName;
       console.log("Sending", this.msgChat);
       socketService.emit("chat newMsg", this.msgChat);

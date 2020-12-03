@@ -3,7 +3,7 @@
       <app-header ></app-header>
       <hero @scrollToList="scrollMeTo('appList')" ref="heroCmp" />
       <main ref="appList" class="mb10">
-        <router-view />
+          <router-view />
       </main>
     <app-footer></app-footer>
   </div>
@@ -51,4 +51,5 @@ export default {
     font-family: hindBold;
     src: url(./assets/fonts/Hind/Hind-Bold.ttf);
 }
+
 </style>
