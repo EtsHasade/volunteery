@@ -189,7 +189,7 @@
               {{ moment(review.createdAt).startOf("minute").fromNow() }}
             </span>
           </section>
-          <section class="content-review flex align-center text-center">
+          <section class="content-review flex text-center">
             <span class="name-review mrg5">{{ review.author.fullName }}: </span>
             <span class="txt-review">{{ review.txt }}</span>
           </section>
