@@ -8,6 +8,7 @@
 <script>
 import eventiFilter from "@/cmp/eventi-filter";
 import eventiList from "@/cmp/eventi-list";
+import socketService from "@/service/socket-service.js";
 
 export default {
   name: "voluteerApp",
@@ -81,6 +82,10 @@ export default {
   async mounted() {
     this.$store.dispatch({ type: "setEventis" });
     this.$refs.thefilter.$refs.searchFild.focus();
+    socketService.on("updatesEventi", () => {
+      this.$store.dispatch({ type: "setEventis" });
+    });
+
 
 
     // if (this.$route.query.term || this.$route.query.tag) {

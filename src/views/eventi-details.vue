@@ -395,14 +395,13 @@ export default {
         type: "saveEventi",
         eventi: JSON.parse(JSON.stringify(this.eventi)),
       });
-      // eventiService.save(JSON.parse(JSON.stringify(this.eventi)))
+      socketService.emit('updateEventi', this.eventi);
       this.$message({
         showClose: true,
         message: `Your review added sucessfully!`,
         type: "success",
         duration: 1500,
       });
-
       this.reviewToEdit = { author: {}, txt: "", rate: 5 };
     },
     async removeEventi() {
@@ -427,22 +426,6 @@ export default {
       }
       this.$router.go(-1);
     },
-    // closeChat() {
-    //   this.showChat = false;
-    //   this.msgs = [];
-    //   this.msgChat = "";
-    //   socketService.off('chat addMsg', this.addMsg)
-    //   socketService.terminate();
-    // },
-    // openChat() {
-    //   if (!this.$store.getters.loggedinUser) return
-    //   this.showChat = true;
-    //   this.msgChat.from = this.$store.getters.loggedinUser.fullName
-    //   this.topic = this.eventi._id
-    //   socketService.setup();
-    //   socketService.emit('chat topic', this.topic)
-    //   socketService.on('chat addMsg', this.addMsg)
-    // },
     addMsg(msgChat) {
       this.msgs.push(msgChat);
     },
@@ -490,16 +473,19 @@ export default {
 
     // this.msgChat.from = (this.$store.getters.loggedinUser)? this.$store.getters.loggedinUser.fullName : 'Goust';
     this.topic = this.eventi._id;
-    socketService.setup();
+    // socketService.setup();
     socketService.emit("chat topic", this.topic);
     socketService.on("chat addMsg", this.addMsg);
     socketService.on("changesMember", this.changesMember);
+    socketService.on("updatesEventi", (eventi) => {
+      this.eventi = JSON.parse(JSON.stringify(eventi))
+    });
   },
   destroyed() {
     this.msgs = [];
     this.msgChat = "";
     socketService.off("chat addMsg", this.addMsg);
-    socketService.terminate();
+    // socketService.terminate();
   },
   components: {
     avatar,
