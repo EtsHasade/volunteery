@@ -3,7 +3,7 @@
       <app-header ></app-header>
       <hero @scrollToList="scrollMeTo('appList')" ref="heroCmp" />
       <main ref="appList" class="mb10">
-        <router-view />
+          <router-view />
       </main>
     <app-footer></app-footer>
   </div>
@@ -14,6 +14,7 @@ import "@/style/main.scss";
 import appHeader from "@/cmp/app-header";
 import appFooter from "@/cmp/app-footer";
 import hero from "@/cmp/hero";
+import socketService from "../src/service/socket-service.js";
 
 export default {
   name: "eventiApp",
@@ -28,6 +29,16 @@ export default {
       var top = element.offsetTop;
       window.scrollTo(0, top-80);
     },
+  },
+  created() {
+    socketService.setup();
+    // socketService.on("updatesEventi", () => {
+    //   console.log('check from App');
+    //   this.$store.dispatch({ type: "setEventis" });
+    // });
+  },
+  destroyed() {
+    socketService.terminate();
   }
 };
 </script>
@@ -51,4 +62,5 @@ export default {
     font-family: hindBold;
     src: url(./assets/fonts/Hind/Hind-Bold.ttf);
 }
+
 </style>

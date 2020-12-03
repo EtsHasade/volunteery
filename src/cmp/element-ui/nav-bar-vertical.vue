@@ -21,7 +21,7 @@
       <el-menu-item v-if="!loggedinUser" index="/login">SignUp</el-menu-item>
     </el-submenu>
 
-      <el-menu-item index="/eventi-app">Events</el-menu-item>
+      <el-menu-item index="/eventi-app">Volunteerings</el-menu-item>
       <el-menu-item index="/org-app">Organizations</el-menu-item>
       <el-menu-item v-if="loggedinUser && loggedinUser.org" index="/eventi-edit">Publish new Event</el-menu-item>
       <el-menu-item v-else index="/org-edit">I need volunteers</el-menu-item>

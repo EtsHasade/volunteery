@@ -1,36 +1,37 @@
 
 <template>
-  <section class="eventi-filter flex space-between">
-    <form class="" @click.prevent="emitFilter">
+  <section class="eventi-filter">
+    <form class="search-container flex wrap" @click.prevent="emitFilter">
       <el-input
         ref="searchFild"
         onfocus="this.placeholder = ''"
         onblur="this.placeholder = 'Free Search'"
         placeholder="Free Search"
+        suffix-icon="el-icon-search"
         v-model="filterBy.byText"
         @input="emitFilter"
       />
     </form>
-    <section class="btns-tags flex">
       <el-button
         v-for="tag in showtags"
         :key="tag"
         @click="changeFilter({ byText: '', byTags: [tag] })"
         :class="{ active: filterBy.byTags.includes(tag) }"
-        >{{ tag }}</el-button
+        ><i class="small-icon" :class="$store.getters.tagsIcon[tag]"></i>{{ tag }}</el-button
       >
       <select-multi
+        class="select-input"
         v-model="filterBy.byTags"
         @input="emitFilter"
         :items="tags"
-        placeholder="More..."
+        placeholder="More categories..."
       />
+
       <el-button
         @click="changeFilter({ byText: '', byTags: [] })"
         class="see-all"
         >See All</el-button
       >
-    </section>
   </section>
 </template>
 
@@ -68,7 +69,7 @@ export default {
     },
   },
   created() {
-    // this.filterBy = this.initfilterBy || { 'byText': "", 'byTags': [] };
+    this.filterBy = this.initfilterBy || { 'byText': "", 'byTags': [] };
       if (this.$route.query.term || this.$route.query.tag) {
       this.filterBy.byText = this.$route.query.term;
       this.filterBy.byTags = this.$route.query.tag.split(',');

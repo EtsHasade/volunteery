@@ -214,10 +214,11 @@ export default {
       if (!this.$store.getters.loggedinUser) {
         this.$message({
           showClose: true,
-          message: `we really want your reviews but loggin first`,
+          message: `You need login first`,
           type: 'warning',
-          duration: 3000
+          duration: 1500
         })
+        this.reviewToEdit.txt = ''
         return
       }
       this.reviewToEdit.rate = Number(this.reviewToEdit.rate);
