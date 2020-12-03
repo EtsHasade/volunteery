@@ -1,6 +1,6 @@
 <template>
   <main>
-    <eventi-filter @doFilter="setFilter" ref="thefilter"></eventi-filter>
+    <eventi-filter @doFilter="setFilter" ref="thefilter" :initfilterBy="filterBy"></eventi-filter>
     <eventi-list :eventis="eventisToShow"></eventi-list>
   </main>
 </template>
@@ -82,19 +82,12 @@ export default {
     this.$store.dispatch({ type: "setEventis" });
     this.$refs.thefilter.$refs.searchFild.focus();
 
-    console.log(
-      "🚀 ~ file: eventi-app.vue ~ line 87 ~ mounted ~ this.filterBy",
-      this.filterBy
-    );
-    console.log(
-      "🚀 ~ file: eventi-app.vue ~ line 86 ~ mounted ~ this.$route",
-      this.$route
-    );
-    if (this.$route.query.term || this.$route.query.tag) {
-      this.filterBy = {};
-      this.filterBy.byText = this.$route.query.term;
-      this.filterBy.byTags = this.$route.query.tag.split(',');
-    }
+
+    // if (this.$route.query.term || this.$route.query.tag) {
+    //   this.filterBy = {};
+    //   this.filterBy.byText = this.$route.query.term;
+    //   this.filterBy.byTags = this.$route.query.tag.split(',');
+    // }
   },
   components: {
     eventiFilter,

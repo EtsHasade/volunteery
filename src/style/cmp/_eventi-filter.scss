@@ -1,10 +1,11 @@
 .eventi-filter {
     background-color: $clr6;
-    border: 1px solid $gray1;
-    padding: 10px;
-    margin-bottom: 1rem;
+    border          : 1px solid $gray1;
+    padding         : 10px;
+    margin-bottom   : 1rem;
 
-    form .el-input__inner, form > *{
+    form .el-input__inner,
+    form>* {
         margin-bottom: unset;
     }
 
@@ -21,22 +22,30 @@
         // &:first-child {
         // }
     }
-    
-    .el-select .el-input__icon{
+
+    .el-select .el-input__icon {
         height: unset;
     }
 
     & .btns-tags {
         margin-left: 10px;
-        transition: .4s;
-        .see-all{
+        transition : .4s;
+
+        .see-all {
             background-color: #bfea45;
+            border          : 1px solid $clr1;
         }
-        .el-button:focus {
-            transition      : .4s;
-            color           : $clr2;
-            background-color: #bfea45;
-            border          : 1px solid #bfea45;
+
+        .el-button {
+            border    : 1px solid $clr1;
+            transition: .4s;
+
+            &.active,
+            &:hover {
+                color              : $clr2;
+                background-color   : #bfea45;
+                // border          : 1px solid #bfea45;
+            }
         }
     }
 }

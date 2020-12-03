@@ -1,6 +1,6 @@
 
 <template>
-  <section class="eventi-filter flex  space-between">
+  <section class="eventi-filter flex space-between">
     <form class="" @click.prevent="emitFilter">
       <el-input
         ref="searchFild"
@@ -16,6 +16,7 @@
         v-for="tag in showtags"
         :key="tag"
         @click="changeFilter({ byText: '', byTags: [tag] })"
+        :class="{ active: filterBy.byTags.includes(tag) }"
         >{{ tag }}</el-button
       >
       <select-multi
@@ -24,8 +25,10 @@
         :items="tags"
         placeholder="More..."
       />
-      <el-button @click="changeFilter({ byText: '', byTags: [] })"
-        class="see-all" >See All</el-button
+      <el-button
+        @click="changeFilter({ byText: '', byTags: [] })"
+        class="see-all"
+        >See All</el-button
       >
     </section>
   </section>
@@ -36,6 +39,12 @@ import selectMulti from "../cmp/element-ui/select-multi";
 export default {
   name: "eventi-filter",
   props: {
+    initfilterBy: {
+      type: Object,
+      default: function () {
+        return { 'byText': "", 'byTags': [] };
+      },
+    },
     tags: {
       type: Array,
       default: function () {
@@ -57,6 +66,13 @@ export default {
     showtags() {
       return this.tags.filter((tag, idx) => idx < this.categorysNum);
     },
+  },
+  created() {
+    // this.filterBy = this.initfilterBy || { 'byText': "", 'byTags': [] };
+      if (this.$route.query.term || this.$route.query.tag) {
+      this.filterBy.byText = this.$route.query.term;
+      this.filterBy.byTags = this.$route.query.tag.split(',');
+    }
   },
   methods: {
     changeFilter(filterBy) {
