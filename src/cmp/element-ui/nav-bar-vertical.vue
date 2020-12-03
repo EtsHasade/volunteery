@@ -8,7 +8,7 @@
   >
     <!--  -->
     <el-submenu index="1" class="hamburger">
-      <template slot="title" class="hamburger"> ⩸ </template>
+      <template slot="title" class="hamburger"><i class="fas fa-bars"></i></template>
           <el-submenu index="2" class="user-menu">
       <template slot="title" class="user-menu">
         <span><i class="fas fa-user-circle"></i></span>
