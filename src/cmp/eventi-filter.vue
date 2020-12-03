@@ -1,7 +1,7 @@
 
 <template>
-  <section class="eventi-filter flex column center mb10">
-    <form class="flex center" @click.prevent="emitFilter">
+  <section class="eventi-filter flex  space-between">
+    <form class="" @click.prevent="emitFilter">
       <el-input
         ref="searchFild"
         onfocus="this.placeholder = ''"
@@ -10,30 +10,22 @@
         v-model="filterBy.byText"
         @input="emitFilter"
       />
-      <select-multi
-        v-model="filterBy.byTags"
-        @input="emitFilter"
-        :items="tags"
-        placeholder="Select Category"
-      />
     </form>
-    <section class="btns-tags flex center mb10">
+    <section class="btns-tags flex">
       <el-button
         v-for="tag in showtags"
         :key="tag"
         @click="changeFilter({ byText: '', byTags: [tag] })"
         >{{ tag }}</el-button
       >
-      <!-- <el-button @click="changeFilter({ byText: '', byTags: ['COVID-19'] })"
-        >COVID-19</el-button>
-      <el-button @click="changeFilter({ byText: '', byTags: ['Animals'] })"
-        >Animals</el-button
-      >
-      <el-button @click="changeFilter({ byText: '', byTags: ['Needy'] })"
-        >Needy</el-button
-      > -->
+      <select-multi
+        v-model="filterBy.byTags"
+        @input="emitFilter"
+        :items="tags"
+        placeholder="More..."
+      />
       <el-button @click="changeFilter({ byText: '', byTags: [] })"
-        >See All</el-button
+        class="see-all" >See All</el-button
       >
     </section>
   </section>
