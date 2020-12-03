@@ -3,7 +3,7 @@ import { eventiService } from '../../service/eventi-service.js'
 export const eventiStore = {
     state: {
         eventis: [],
-        tags: ['Animals', 'Children', 'Food', 'Needy', 'COVID-19', 'Fun', 'Baby'],
+        tags: ['Animals', 'Children', 'Food', 'Needy', 'COVID', 'Fun', 'Baby'],
         neededs: ['Doctors', 'Managers', 'Chefs', 'Teachers', 'Workers'],
         tagsIcon: {
             Animals: 'fas fa-paw',
@@ -11,7 +11,7 @@ export const eventiStore = {
             Food: 'fas fa-utensils',
             Needy: 'fas fa-hand-holding-heart',
             // ["COVID-19"]: 'fas fa-head-side-mask',
-            'COVID-19': 'fas fa-head-side-mask',
+            COVID: 'fas fa-head-side-mask',
             Fun: 'far fa-smile-beam',
             Baby: 'fas fa-baby'
         },

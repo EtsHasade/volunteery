@@ -52,7 +52,7 @@
             :username="org.admin.fullName"/>
           <span>{{ org.admin.fullName }}</span>
           <span class="facebook-btn">
-            <div class="fb-like" data-href="https://www.facebook.com/HeroesforLifeIsrael" data-width="200px" data-layout="standard" data-action="like" data-size="large" data-share="true"></div>
+            <div class="fb-like" data-href="https://www.facebook.com/HeroesforLifeIsrael" data-width="100" data-layout="standard" data-action="like" data-size="small" data-share="true"></div>
           </span>
         </section>
         <hr />

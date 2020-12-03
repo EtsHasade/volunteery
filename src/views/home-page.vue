@@ -73,8 +73,8 @@ export default {
     }
   },
   methods: {
-    routeToEventiFilter(){
-      this.$router.push('/eventi-app')
+    routeToEventiFilter(filterBy){
+      this.$router.push(`/eventi-app/?term=${filterBy.byText}&tag=${filterBy.byTags}`)
     }
   },
   created() {
