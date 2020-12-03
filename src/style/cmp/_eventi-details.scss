@@ -71,11 +71,16 @@
             & .section-status-details {
                 &>* {
                     margin-bottom: 25px;
+                    flex: 1;
                 }
                 @include for-normal-layout {
                     display: flex;
                     justify-content: space-around;
                     width: 100%;
+                }
+                @include for-mobile-layout {
+                    flex-direction: column;
+                    align-items: center;
                 }
                 & .title-members {
                     margin-bottom: 5px;
@@ -101,9 +106,13 @@
                 max-width: rem(95px);
                 margin-left: rem(7px);
             }
+            .content-review {
+                align-items: center;
+            }
             @include for-mobile-layout {
                 .content-review {
                     flex-direction: column;
+                    align-items: flex-start;
                 }
             }
         }
