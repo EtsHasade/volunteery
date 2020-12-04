@@ -84,15 +84,14 @@ export default {
     this.$refs.thefilter.$refs.searchFild.focus();
     socketService.on("updatesEventi", (eventi) => {
       if(this.$store.getters.loggedinUser.org._id === eventi.byOrg._id) {
-        this.$message({
-          showClose: true,
-          message: `someone review on ${eventi.name}`,
-          type: "success",
-          duration: 1500,
-        });      
+        const eventiToEdit = JSON.parse(JSON.stringify(eventi))
+        if(!eventiToEdit.notifications) {
+          eventiToEdit.notifications = 0
+        }
+        eventiToEdit.notifications++;
+        this.$store.dispatch({ type: "saveEventi", eventi: eventiToEdit})
       }
       this.$store.dispatch({ type: "setEventis" });
-
     });
 
 
