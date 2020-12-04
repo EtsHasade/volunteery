@@ -74,6 +74,9 @@
                     display: flex;
                     justify-content: space-around;
                     width: 100%;
+                    & .members {
+                        margin-right: rem(10px);
+                    }
                 }
                 @include for-mobile-layout {
                     flex-direction: column;
@@ -90,6 +93,20 @@
         & .add-review {
             &>* {
                 margin: 5px;
+            }
+            flex-direction: column-reverse;
+            align-items: center;
+            & .review-edit {
+                flex-direction: column;
+                & .rate-stars {
+                    margin-top: 5px;
+                }
+            }
+            @include for-small-narrow-layout {
+                flex-direction: row;
+                & .review-edit {
+                    flex-direction: row;
+                }
             }
         }
         & .review {
@@ -183,6 +200,11 @@
         padding: rem(5px) 0;
         &:nth-child(odd) {
             background-color: gainsboro;
+        }
+    }
+    & footer {
+        & .el-input {
+            margin-right: rem(5px);
         }
     }
 }
