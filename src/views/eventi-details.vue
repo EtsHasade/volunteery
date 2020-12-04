@@ -71,7 +71,7 @@
             <!-- <hr /> -->
             <section class="neededs">
               <span class="bold need-txt">We need for this volunteering</span>
-              <section class="needed-content clean-list flex wrap column">
+              <section class="needed-content flex wrap">
                 <!-- flex wrap column -->
                 <span
                   class="needed text-center mrg5"
@@ -83,17 +83,19 @@
               </section>
             </section>
           </section>
-          <hr />
-           <section class="accomodations">
-              <span class="bold mr16">Accomodations</span>
-              <!-- class="tag text-center mrg5 mb10" -->
-            <span
-              class="tag "
-              v-for="(tag, idx) in eventi.accommodation"
-              :key="idx"
-              ><i :class="accommodationIcon[tag]"></i> {{ tag }}
-            </span>
-           </section>
+          <section class="accomodations">
+                <span class="bold mr16">Accomodations</span>
+            <section class="aco-content flex wrap">
+                <!-- class="tag text-center mrg5 mb10" -->
+                
+              <span
+                class="tag text-center mrg5"
+                v-for="(tag, idx) in eventi.accommodation"
+                :key="idx"
+                ><i :class="accommodationIcon[tag]"></i> {{ tag }}
+              </span>
+            </section>
+          </section>
           <hr />
 
         </section>
