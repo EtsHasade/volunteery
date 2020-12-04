@@ -1,7 +1,7 @@
 <template>
   <section class="global-info full main-container text-center">
     <h2>Global info</h2>
-    <div class="flex wrap center mrg5 details-container">
+    <div class="flex center mrg5 details-container">
       <section class="orgs">
         <i class="far fa-building"></i>
         <h3>{{orgsNum}} Organization that work hard only to make good Volunteerings</h3>

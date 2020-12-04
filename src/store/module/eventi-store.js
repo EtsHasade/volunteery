@@ -5,6 +5,7 @@ export const eventiStore = {
         eventis: [],
         tags: ['Animals', 'Children', 'Food', 'Needy', 'COVID-19', 'Fun', 'Baby'],
         neededs: ['Doctors', 'Managers', 'Chefs', 'Teachers', 'Workers'],
+        accommodation: ['food', 'lodging'],
         tagsIcon: {
             Animals: 'fas fa-paw',
             Children: 'fas fa-child',
@@ -20,7 +21,11 @@ export const eventiStore = {
             Chefs: 'fas fa-bread-slice',
             Teachers: 'fas fa-graduation-cap',
             Workers: 'fas fa-tractor'
-        }
+        },
+        accommodationIcon: {
+            food: 'fas fa-utensils',
+            lodging: 'fas fa-bed',
+        },
     },
     getters: {
         eventisForDisplay(state) {
@@ -57,6 +62,9 @@ export const eventiStore = {
         },
         neededsIcon(state) {
             return state.neededsIcon;
+        },
+        accommodationIcon(state) {
+            return state.accommodationIcon;
         }
     },
     mutations: {

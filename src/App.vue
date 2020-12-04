@@ -32,10 +32,18 @@ export default {
   },
   created() {
     socketService.setup();
-    // socketService.on("updatesEventi", () => {
-    //   console.log('check from App');
-    //   this.$store.dispatch({ type: "setEventis" });
-    // });
+    socketService.on("updatesEventi", (eventi) => {
+      console.log('check');
+      if(this.$store.getters.loggedinUser.org._id === eventi.byOrg._id) {
+        this.$message({
+          showClose: true,
+          message: `someone review on ${eventi.title}`,
+          type: "success",
+          duration: 3000,
+        });      
+      }
+    })
+
   },
   destroyed() {
     socketService.terminate();

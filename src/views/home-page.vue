@@ -23,6 +23,7 @@ import eventiFilter from '../cmp/eventi-filter.vue';
 import eventiList from '../cmp/eventi-list'
 // import eventiPreview from '../cmp/eventi-preview';
 import globalInfo from '../cmp/global-info';
+// import socketService from '../service/socket-service.js'
 
 // import orgPreview from '../cmp/org-preview'
 // import { eventiService } from '../service/eventi-service.js'
@@ -80,6 +81,17 @@ export default {
   created() {
     this.$store.dispatch({ type: 'setEventis' });
     document.body.classList.add('hero-page');
+    // socketService.on("updatesEventi", (eventi) => {
+    //   console.log('check');
+    //   if(this.$store.getters.loggedinUser.org._id === eventi.byOrg._id) {
+    //     this.$message({
+    //       showClose: true,
+    //       message: `someone review on ${eventi.title}`,
+    //       type: "success",
+    //       duration: 3000,
+    //     });      
+    //   }
+    // })
   },
   destroyed() {
     document.body.classList.remove('hero-page');

@@ -47,32 +47,32 @@
         <section class="details-ev">
           <hr />
           <section class="tags flex wrap align-center">
-            <span class="bold">Categories</span>
+            <span class="bold mr16">Categories</span>
             <span
-              class="tag text-center mrg5"
+              class="tag text-center mrg5 mb10"
               v-for="(tag, idx) in eventi.tags"
               :key="idx"
               ><i :class="tagsIcon[tag]"></i> {{ tag }}
             </span>
           </section>
           <hr />
-          <section class="tags-section flex align-center wrap">
-            <section>
-            <span
-              ><i class="fas fa-users"></i> {{ eventi.members.length }} /
-              {{ eventi.capacity }} members</span
-            >
-            </section>
+          <section class="tags-section align-center">
+            <section class="">
+              <section>
+              <span><i class="fas fa-users"></i> {{ eventi.members.length }} /{{ eventi.capacity }} members</span>
+              </section>
 
-            <section class="dates flex column">
-              <span><i class="fas fa-calendar-alt"></i>
-                {{ moment(eventi.startAt).format("DD/MM/YYYY") }} -
-                {{ moment(eventi.endAt).format("DD/MM/YYYY") }}</span>
+              <section class="dates flex">
+                <span><i class="fas fa-calendar-alt"></i>
+                  {{ moment(eventi.startAt).format("DD/MM/YYYY") }} -
+                  {{ moment(eventi.endAt).format("DD/MM/YYYY") }}</span>
+             </section>
             </section>
             <!-- <hr /> -->
             <section class="neededs">
               <span class="bold need-txt">We need for this volunteering</span>
-              <section class="needed-content clean-list flex wrap column">
+              <section class="needed-content flex wrap">
+                <!-- flex wrap column -->
                 <span
                   class="needed text-center mrg5"
                   v-for="(needed, idx) in eventi.neededs"
@@ -83,7 +83,21 @@
               </section>
             </section>
           </section>
+          <section class="accomodations">
+                <span class="bold mr16">Accomodations</span>
+            <section class="aco-content flex wrap">
+                <!-- class="tag text-center mrg5 mb10" -->
+                
+              <span
+                class="tag text-center mrg5"
+                v-for="(tag, idx) in eventi.accommodation"
+                :key="idx"
+                ><i :class="accommodationIcon[tag]"></i> {{ tag }}
+              </span>
+            </section>
+          </section>
           <hr />
+
         </section>
         <section class="desc-ev">
           <span>{{ eventi.desc }}</span>
@@ -112,7 +126,7 @@
             <!-- <a href="https://api.whatsapp.com/send?phone=972501122337&text=http://localhost:8080/#/eventi-details/5fc3c2f8b939f9e519ca2794"
               target="_blank"><i class="fab fa-whatsapp"></i></a> -->
             <a
-              href="https://api.whatsapp.com/send?text=http://localhost:8080/#/eventi-details/5fc3c2f8b939f9e519ca2794"
+              href="https://api.whatsapp.com/send?text=https://world-volunteery.herokuapp.com/#/eventi-details/5fc3c2f8b939f9e519ca279a"
               target="_blank"
               ><i class="fab fa-whatsapp"></i
             ></a>
@@ -156,8 +170,10 @@
     <section class="reviews-section flex column center">
       <section class="add-review flex align-center text-center mb10">
         <el-input type="text" v-model="reviewToEdit.txt" name="review" />
-        <el-button type="success" @click="addReview">Add review</el-button>
-        <rate-stars-enable class="mb10" v-model="reviewToEdit.rate" />
+        <section class="review-edit flex align-center">
+          <el-button type="success" @click="addReview">Add review</el-button>
+          <rate-stars-enable v-model="reviewToEdit.rate" />
+        </section>
       </section>
       <span class="text-center mrg5">Reviews</span>
       <section class="reviews flex wrap align-center">
@@ -222,6 +238,9 @@ export default {
     },
     neededsIcon() {
       return this.$store.getters.neededsIcon;
+    },
+    accommodationIcon(){
+      return this.$store.getters.accommodationIcon;
     },
     isUserOrgAdmin() {
       const loggedinUser = this.$store.getters.loggedinUser;
