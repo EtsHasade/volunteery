@@ -82,7 +82,15 @@ export default {
   async mounted() {
     this.$store.dispatch({ type: "setEventis" });
     this.$refs.thefilter.$refs.searchFild.focus();
-    socketService.on("updatesEventi", () => {
+    socketService.on("updatesEventi", (eventi) => {
+      if(this.$store.getters.loggedinUser.org._id === eventi.byOrg._id) {
+        const eventiToEdit = JSON.parse(JSON.stringify(eventi))
+        if(!eventiToEdit.notifications) {
+          eventiToEdit.notifications = 0
+        }
+        eventiToEdit.notifications++;
+        this.$store.dispatch({ type: "saveEventi", eventi: eventiToEdit})
+      }
       this.$store.dispatch({ type: "setEventis" });
     });
 
