@@ -12,30 +12,49 @@
         @input="emitFilter"
       />
     </form>
-      <el-button
-        v-for="tag in showtags"
-        :key="tag"
-        @click="changeFilter({ byText: '', byTags: [tag] })"
-        :class="{ active: filterBy.byTags.includes(tag) }"
-        ><i class="small-icon" :class="$store.getters.tagsIcon[tag]"></i>{{ tag }}</el-button
-      >
+    <el-button
+      v-for="tag in showtags"
+      :key="tag"
+      @click="changeFilter({ byText: '', byTags: [tag] })"
+      :class="{ active: filterBy.byTags.includes(tag) }"
+      ><i class="small-icon" :class="$store.getters.tagsIcon[tag]"></i
+      >{{ tag }}</el-button
+    >
+    <select-multi
+      class="select-input"
+      v-model="filterBy.byTags"
+      @input="emitFilter"
+      :items="tags"
+      placeholder="More categories..."
+    />
+
+    <el-button @click="changeFilter({ byText: '', byTags: [] })" class="see-all"
+      >See All</el-button
+    >
+    <div class="advanced-filter" v-if="$store.getters.eventisForDisplay">
       <select-multi
         class="select-input"
-        v-model="filterBy.byTags"
+        v-model="filterBy.byNeededs"
         @input="emitFilter"
-        :items="tags"
-        placeholder="More categories..."
+        :items="neededs"
+        placeholder="They neededs"
       />
-
-      <el-button
-        @click="changeFilter({ byText: '', byTags: [] })"
-        class="see-all"
-        >See All</el-button
-      >
+      <select-multi v-if="allFildsKeys"
+        class="select-input"
+        v-model="filterBy.byKey"
+        @input="emitFilter"
+        :items="allFildsKeys"
+        placeholder="All filds"
+      />
+      {{allFildsKeys}}
+    </div>
+    <!-- <advanced-filter></advanced-filter> -->
   </section>
 </template>
 
 <script>
+// import advancedFilter from './recursiveCmp/advanced-filter';
+
 import selectMulti from "../cmp/element-ui/select-multi";
 export default {
   name: "eventi-filter",
@@ -43,14 +62,26 @@ export default {
     initfilterBy: {
       type: Object,
       default: function () {
-        return { 'byText': "", 'byTags': [] };
+        return { byText: "", byTags: [], byKey: ''};
       },
     },
     tags: {
       type: Array,
       default: function () {
         return this.$store.getters.tags;
-      },
+      }
+    },
+    neededs: {
+      type: Array,
+      default: function () {
+        return this.$store.getters.neededs;
+      }
+    },
+    countries: {
+      type: Array,
+      default: function () {
+        return this.$store.getters.countries;
+      }
     },
     categorysNum: {
       type: Number,
@@ -67,13 +98,18 @@ export default {
     showtags() {
       return this.tags.filter((tag, idx) => idx < this.categorysNum);
     },
+    allFildsKeys(){
+      const allFilds = JSON.parse(JSON.stringify(this.$store.getters.allFilds)) ;
+      return allFilds.keyList
+    }
   },
   created() {
-    this.filterBy = this.initfilterBy || { 'byText': "", 'byTags': [] };
-      if (this.$route.query.term || this.$route.query.tag) {
+    this.filterBy = this.initfilterBy || { byText: "", byTags: [] };
+    if (this.$route.query.term || this.$route.query.tag) {
       this.filterBy.byText = this.$route.query.term;
-      this.filterBy.byTags = this.$route.query.tag.split(',');
+      this.filterBy.byTags = this.$route.query.tag.split(",");
     }
+    
   },
   methods: {
     changeFilter(filterBy) {
@@ -88,9 +124,10 @@ export default {
     },
   },
   components: {
-    selectMulti,
-  },
-};
+    selectMulti
+    // advancedFilter
+  }
+}
 </script>
 
 <style>

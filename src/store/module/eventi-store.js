@@ -32,6 +32,26 @@ export const eventiStore = {
         neededs(state) {
             return state.neededs;
         },
+        allFilds(state) {
+            const filds = {};
+            filds.keyList = state.eventis.reduce((acc, eventi) => {
+                if (!acc.length) acc = Object.keys(eventi);
+                else Object.keys(eventi).forEach(key => {
+                    if (!acc.includes(key)) acc.push(key);
+                })
+                return acc;
+            }, []);
+            console.log("🚀 ~ file: eventi-store.js ~ line 38 ~ filds.keyList=state.eventis.reduce ~ filds.keyList", filds.keyList)
+            
+
+            filds.keyList.forEach(key=>{
+                filds[key] = state.eventis.map(eventi =>{
+                    return eventi[key]
+                })
+            })
+
+            return filds            
+        },
         tagsIcon(state) {
             return state.tagsIcon;
         },
