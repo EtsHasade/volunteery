@@ -82,8 +82,17 @@ export default {
   async mounted() {
     this.$store.dispatch({ type: "setEventis" });
     this.$refs.thefilter.$refs.searchFild.focus();
-    socketService.on("updatesEventi", () => {
+    socketService.on("updatesEventi", (eventi) => {
+      if(this.$store.getters.loggedinUser.org._id === eventi.byOrg._id) {
+        this.$message({
+          showClose: true,
+          message: `someone review on ${eventi.name}`,
+          type: "success",
+          duration: 1500,
+        });      
+      }
       this.$store.dispatch({ type: "setEventis" });
+
     });
 
 
