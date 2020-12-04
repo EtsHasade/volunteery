@@ -101,7 +101,7 @@ export default {
       return msg
     },
     isEventiAdmin() {
-      if(this.$store.getters.loggedinUser.org._id === this.eventi.byOrg._id) {
+      if(this.$store.getters.loggedinUser && this.$store.getters.loggedinUser.org._id === this.eventi.byOrg._id) {
         return true
       } return false
     }
@@ -112,7 +112,7 @@ export default {
       this.org = await this.$store.dispatch({ type: "getOrgById", orgId });
     },
     openDetails() {
-      if(this.$store.getters.loggedinUser.org._id === this.eventi.byOrg._id) {
+      if(this.$store.getters.loggedinUser && this.$store.getters.loggedinUser.org._id === this.eventi.byOrg._id) {
         const eventi = JSON.parse(JSON.stringify(this.eventi))
         eventi.notifications = 0
         this.$store.dispatch({ type: "saveEventi", eventi })
