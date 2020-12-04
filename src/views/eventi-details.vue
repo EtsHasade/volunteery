@@ -56,8 +56,8 @@
             </span>
           </section>
           <hr />
-          <section class="tags-section flex align-center flex-row">
-            <section>
+          <section class="tags-section align-center">
+            <section class="">
               <section>
               <span><i class="fas fa-users"></i> {{ eventi.members.length }} /{{ eventi.capacity }} members</span>
               </section>
@@ -72,6 +72,7 @@
             <section class="neededs">
               <span class="bold need-txt">We need for this volunteering</span>
               <section class="needed-content clean-list flex wrap column">
+                <!-- flex wrap column -->
                 <span
                   class="needed text-center mrg5"
                   v-for="(needed, idx) in eventi.neededs"
@@ -83,6 +84,18 @@
             </section>
           </section>
           <hr />
+           <section class="accomodations">
+              <span class="bold mr16">Accomodations</span>
+              <!-- class="tag text-center mrg5 mb10" -->
+            <span
+              class="tag "
+              v-for="(tag, idx) in eventi.accommodation"
+              :key="idx"
+              ><i :class="accommodationIcon[tag]"></i> {{ tag }}
+            </span>
+           </section>
+          <hr />
+
         </section>
         <section class="desc-ev">
           <span>{{ eventi.desc }}</span>
@@ -111,7 +124,7 @@
             <!-- <a href="https://api.whatsapp.com/send?phone=972501122337&text=http://localhost:8080/#/eventi-details/5fc3c2f8b939f9e519ca2794"
               target="_blank"><i class="fab fa-whatsapp"></i></a> -->
             <a
-              href="https://api.whatsapp.com/send?text=http://localhost:8080/#/eventi-details/5fc3c2f8b939f9e519ca2794"
+              href="https://api.whatsapp.com/send?text=https://world-volunteery.herokuapp.com/#/eventi-details/5fc3c2f8b939f9e519ca279a"
               target="_blank"
               ><i class="fab fa-whatsapp"></i
             ></a>
@@ -221,6 +234,9 @@ export default {
     },
     neededsIcon() {
       return this.$store.getters.neededsIcon;
+    },
+    accommodationIcon(){
+      return this.$store.getters.accommodationIcon;
     },
     isUserOrgAdmin() {
       const loggedinUser = this.$store.getters.loggedinUser;

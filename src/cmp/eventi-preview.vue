@@ -65,7 +65,6 @@
 
 <script>
 import avatar from "vue-avatar";
-// import rateStars from "./element-ui/rate-stars";
 var moment = require('moment')
 
 export default {
@@ -83,17 +82,10 @@ export default {
   },
   created() {
     this.getOrg()
-    // this.orgRate = JSON.parse(JSON.stringify(this.eventi.byOrg.rate));
   },
   components: {
-    // rateStars,
     avatar,
   },
-  // watch: {
-  //   orgRate: function (newRate) {
-  //     console.log("orgRate:", newRate);
-  //   },
-  // },
   computed: {
     tagsIcon() {
       return this.$store.getters.tagsIcon;
