@@ -123,8 +123,6 @@
         </div>
         <section class="share-button flex center">
           <section>
-            <!-- <a href="https://api.whatsapp.com/send?phone=972501122337&text=http://localhost:8080/#/eventi-details/5fc3c2f8b939f9e519ca2794"
-              target="_blank"><i class="fab fa-whatsapp"></i></a> -->
             <a
               href="https://api.whatsapp.com/send?text=https://world-volunteery.herokuapp.com/#/eventi-details/5fc3c2f8b939f9e519ca279a"
               target="_blank"
@@ -157,10 +155,7 @@
             <div slot="footer">
               <form @submit.prevent="sendMsg" class="flex">
                 <el-input placeholder="Send Massage" v-model="msgChat.txt" />
-                <i
-                  class="far fa-paper-plane fa-2x hover-pointer"
-                  @click="sendMsg"
-                ></i>
+                <i class="far fa-paper-plane fa-2x hover-pointer" @click="sendMsg"></i>
               </form>
             </div>
           </chat-app>

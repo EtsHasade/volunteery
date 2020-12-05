@@ -1,16 +1,27 @@
 <template>
-
+    <div class="img-squer-container">
+      <img @click="moveImg"
+        v-show="imgLoad"
+        @load="imgLoad = true"
+        :src="eventi.imgUrls[0]"
+        alt=""
+      />
 </template>
 
 <script>
 export default {
     name:"Imgscroll",
     props: {
-        imgs:Array
+        eventi:Object
     },
     data(){},
     computed: {},
-    methods: {}
+    methods: {
+        moveImg(){
+            
+
+        }
+    }
 
 
 

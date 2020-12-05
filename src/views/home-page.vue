@@ -46,6 +46,7 @@ export default {
       return eventis.splice(0, 4)
     },
     suggestEventis() {
+      // if(!this.loggedinUser || !this.loggedinUser.favs) return
       var suggestEventis = []
       var suggestEventisArrays = []
       const favs = this.$store.getters.loggedinUser.favs
