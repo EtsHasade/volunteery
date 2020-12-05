@@ -38,24 +38,26 @@ export const eventiStore = {
             return state.neededs;
         },
         allFilds(state) {
-            const filds = {};
-            filds.keyList = state.eventis.reduce((acc, eventi) => {
-                if (!acc.length) acc = Object.keys(eventi);
-                else Object.keys(eventi).forEach(key => {
-                    if (!acc.includes(key)) acc.push(key);
-                })
-                return acc;
-            }, []);
-            console.log("🚀 ~ file: eventi-store.js ~ line 38 ~ filds.keyList=state.eventis.reduce ~ filds.keyList", filds.keyList)
-            
+            // const filds = {};
+            // filds.keyList = state.eventis.reduce((acc, eventi) => {
+            //     if (!acc.length) acc = Object.keys(eventi);
+            //     else Object.keys(eventi).forEach(key => {
+            //         if (!acc.includes(key)) acc.push(key);
+            //     })
+            //     return acc;
+            // }, []);
+            // console.log("🚀 ~ file: eventi-store.js ~ line 38 ~ filds.keyList=state.eventis.reduce ~ filds.keyList", filds.keyList)
+            const optionFilds = {keyList:['country', 'organizatin', 'food', 'lodging']}
+                optionFilds.country = state.eventis.map(eventi =>{
+                    if (!optionFilds.organizatin.includes(eventi.location.countery)) return eventi.location.countery
+                });
+                optionFilds.organizatin = state.eventis.map(eventi =>{
+                    if (!optionFilds.organizatin.includes(eventi.byOrg.name)) return eventi.byOrg.name;
+                });
+                optionFilds.food = ['including food','excluding food', 'all'];
+                optionFilds.lodging = ['including lodging','excluding lodging', 'all'];
 
-            filds.keyList.forEach(key=>{
-                filds[key] = state.eventis.map(eventi =>{
-                    return eventi[key]
-                })
-            })
-
-            return filds            
+            return optionFilds            
         },
         tagsIcon(state) {
             return state.tagsIcon;
