@@ -31,7 +31,7 @@
     <el-button @click="changeFilter({ byText: '', byTags: [] })" class="see-all"
       >See All</el-button
     >
-    <div class="advanced-filter" v-if="$store.getters.eventisForDisplay">
+    <!-- <div class="advanced-filter flex" v-if="$store.getters.eventisForDisplay && allFildsKeys">
       <select-multi
         class="select-input"
         v-model="filterBy.byNeededs"
@@ -39,15 +39,25 @@
         :items="neededs"
         placeholder="They neededs"
       />
-      <select-multi v-if="allFildsKeys"
+      <select-multi v-if="allFildsKeys[0]"
         class="select-input"
         v-model="filterBy.byKey"
         @input="emitFilter"
         :items="allFildsKeys"
         placeholder="All filds"
       />
+
       {{allFildsKeys}}
-    </div>
+      
+      <select-multi v-for="(keyWord, idx) in filterBy.byKey"
+      :key="idx"
+      class="select-input"
+      v-model="filterBy.byKey[keyWord]"
+      @input="emitFilter"
+      :items="allTheFilds[keyWord]"
+      :placeholder="keyWord"
+      />
+    </div> -->
     <!-- <advanced-filter></advanced-filter> -->
   </section>
 </template>
@@ -101,6 +111,10 @@ export default {
     allFildsKeys(){
       const allFilds = JSON.parse(JSON.stringify(this.$store.getters.allFilds)) ;
       return allFilds.keyList
+    },
+    allTheFilds(){
+      const allFilds = JSON.parse(JSON.stringify(this.$store.getters.allFilds)) ;
+      return allFilds
     }
   },
   created() {
