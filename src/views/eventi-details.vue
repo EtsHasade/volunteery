@@ -165,8 +165,10 @@
     <section class="reviews-section flex column center">
       <section class="add-review flex align-center text-center mb10">
         <el-input type="text" v-model="reviewToEdit.txt" name="review" />
-        <el-button type="success" @click="addReview">Add review</el-button>
-        <rate-stars-enable class="mb10" v-model="reviewToEdit.rate" />
+        <section class="review-edit flex align-center">
+          <el-button type="success" @click="addReview">Add review</el-button>
+          <rate-stars-enable v-model="reviewToEdit.rate" />
+        </section>
       </section>
       <span class="text-center mrg5">Reviews</span>
       <section class="reviews flex wrap align-center">

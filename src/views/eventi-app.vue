@@ -1,6 +1,10 @@
 <template>
   <main>
-    <eventi-filter @doFilter="setFilter" ref="thefilter" :initfilterBy="filterBy"></eventi-filter>
+    <eventi-filter
+      @doFilter="setFilter"
+      ref="thefilter"
+      :initfilterBy="filterBy"
+    ></eventi-filter>
     <eventi-list :eventis="eventisToShow"></eventi-list>
   </main>
 </template>
@@ -28,7 +32,10 @@ export default {
         eventisFilter = eventis.filter((eventi) => {
           return (
             eventi.title.toLowerCase().includes(txt) ||
-            eventi.desc.toLowerCase().includes(txt)
+            eventi.desc.toLowerCase().includes(txt) ||
+            eventi.byOrg.name.toLowerCase().includes(txt) ||
+            eventi.location.country.toLowerCase().includes(txt) ||
+            eventi.location.address.toLowerCase().includes(txt)
           );
         });
 
@@ -37,7 +44,10 @@ export default {
           const match = terms.filter((term) => {
             return (
               currEventi.title.toLowerCase().includes(term) ||
-              currEventi.desc.toLowerCase().includes(term)
+              currEventi.desc.toLowerCase().includes(term) ||
+              currEventi.byOrg.name.toLowerCase().includes(txt) ||
+              currEventi.location.country.toLowerCase().includes(txt) ||
+              currEventi.location.address.toLowerCase().includes(txt)
             );
           });
           return match.length === terms.length;
@@ -55,7 +65,7 @@ export default {
         );
       }
 
-      if (this.filterBy.byTags.length && this.filterBy.byTags[0] !== '') {
+      if (this.filterBy.byTags.length && this.filterBy.byTags[0] !== "") {
         console.log("by tags");
 
         var eventisfilterTags = [];
@@ -83,18 +93,16 @@ export default {
     this.$store.dispatch({ type: "setEventis" });
     this.$refs.thefilter.$refs.searchFild.focus();
     socketService.on("updatesEventi", (eventi) => {
-      if(this.$store.getters.loggedinUser.org._id === eventi.byOrg._id) {
-        const eventiToEdit = JSON.parse(JSON.stringify(eventi))
-        if(!eventiToEdit.notifications) {
-          eventiToEdit.notifications = 0
+      if (this.$store.getters.loggedinUser.org._id === eventi.byOrg._id) {
+        const eventiToEdit = JSON.parse(JSON.stringify(eventi));
+        if (!eventiToEdit.notifications) {
+          eventiToEdit.notifications = 0;
         }
         eventiToEdit.notifications++;
-        this.$store.dispatch({ type: "saveEventi", eventi: eventiToEdit})
+        this.$store.dispatch({ type: "saveEventi", eventi: eventiToEdit });
       }
       this.$store.dispatch({ type: "setEventis" });
     });
-
-
 
     // if (this.$route.query.term || this.$route.query.tag) {
     //   this.filterBy = {};
