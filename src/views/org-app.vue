@@ -80,30 +80,7 @@ export default {
   },
   async created() {
     this.$store.dispatch({ type: "setOrgs" });
-    // if(!resOrgs.type) {
-    //   this.$message({
-    //     showClose: true,
-    //     message: `Events cant set, err ${resOrgs.err.code}`,
-    //     type: 'warning',
-    //     duration: 3000
-    //   })
-    // }
     this.$store.dispatch({ type: "setOrgs" });
-    // if (resOrgs.type) {
-    //   this.$message({
-    //     showClose: true,
-    //     message: `Organizations set sucessfully!`,
-    //     type: 'success',
-    //     duration: 3000
-    //   })
-    // } else {
-    //   this.$message({
-    //     showClose: true,
-    //     message: `Organizations cant set, err ${resOrgs.err.code}`,
-    //     type: 'warning',
-    //     duration: 3000
-    //   })
-    // }
   },
   methods: {
     setFilter(filterBy) {

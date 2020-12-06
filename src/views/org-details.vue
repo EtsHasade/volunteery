@@ -161,6 +161,8 @@ import avatar from "vue-avatar";
 // import rateStars from "../cmp/element-ui/rate-stars";
 import rateStarsEnable from "../cmp/element-ui/rate-stars-enable";
 import eventiList from "../cmp/eventi-list";
+import socketService from '../service/socket-service.js'
+
 var moment = require('moment')
 
 export default {
@@ -263,13 +265,18 @@ export default {
     const id = this.$route.params.orgId;
     const org = await orgService.getById(id);
     this.org = JSON.parse(JSON.stringify(org)) || {};
-
-    // const user = await userService.getById("u101");
     const user = JSON.parse(JSON.stringify(this.$store.getters.loggedinUser)) || { _id: '', fullName: 'Goust', imgUrl: '' }
     const { _id, fullName, imgUrl } = user;
     this.miniLoggedinUser = { _id, fullName, imgUrl };
     this.avgRates();
+    socketService.on("updatesEventi", () => {
+    //   // console.log(eventi);
+    //   this.org.events.findIndex()
+    //   this.eventi = eventi;
+        this.$store.dispatch({ type: "setEventis" });
+    });
   },
+
   components: {
     avatar,
     // rateStars,

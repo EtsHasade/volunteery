@@ -88,31 +88,13 @@ export default {
       this.filterBy = filterBy;
     },
   },
-  created() {},
   async mounted() {
     this.$store.dispatch({ type: "setEventis" });
     this.$refs.thefilter.$refs.searchFild.focus();
     socketService.on("updatesEventi", (eventi) => {
-    //   console.log('kore');
-    //   if (this.$store.getters.loggedinUser.org._id === eventi.byOrg._id) {
-    //     console.log(eventi.notifications);
-    //     const eventiToEdit = JSON.parse(JSON.stringify(eventi));
-    //     if (!eventiToEdit.notifications) {
-    //       eventiToEdit.notifications = 0;
-    //     }
-    //     eventiToEdit.notifications = eventiToEdit.notifications + 1;
-    //     console.log(eventiToEdit.notifications);
-    //     this.$store.dispatch({ type: "saveEventi", eventi: eventiToEdit });
-    //   }
       this.$store.dispatch({ type: "saveEventi", eventi});
       this.$store.dispatch({ type: "setEventis" });
     });
-
-    // if (this.$route.query.term || this.$route.query.tag) {
-    //   this.filterBy = {};
-    //   this.filterBy.byText = this.$route.query.term;
-    //   this.filterBy.byTags = this.$route.query.tag.split(',');
-    // }
   },
   components: {
     eventiFilter,
