@@ -6,13 +6,14 @@
     @click="openDetails"
   >
     <div class="img-squer-container">
-      <img
-        v-show="imgLoad"
-        @load="imgLoad = true"
-        :src="org.imgUrls[0]"
-        alt=""
-      />
+       <img v-show="imgLoad" @load="imgLoad = true" :src="imgUrl" alt="" />
       <div v-if="!imgLoad" class="loading flex center">LOADING...</div>
+      <button class="btn-img-nav next" @click.stop="nextImgUrl">
+        <i class="fas fa-arrow-circle-right"></i>
+      </button>
+      <button class="btn-img-nav prev" @click.stop="nextImgUrl">
+        <i class="fas fa-arrow-circle-left"></i>
+      </button>
     </div>
     <section v-if="org" class="details-org-section flex align-center">
       <avatar
@@ -62,9 +63,13 @@ export default {
     return {
       rate: 2,
       imgLoad: false,
+      idx: 0,
     };
   },
   computed: {
+     imgUrl() {
+      return this.org.imgUrls[this.idx];
+    },
     orgEventis() {
       const eventis = this.$store.getters.eventisForDisplay.filter((eventi) => {
         if (eventi.byOrg) {
@@ -90,6 +95,14 @@ export default {
   //   },
   // },
   methods: {
+    nextImgUrl() {
+      if (this.idx === this.org.imgUrls.length - 1) this.idx = 0;
+      else this.idx++;
+    },
+    prevImgUrl() {
+      if (this.idx === 0) this.idx = this.org.imgUrls.length - 1;
+      else this.idx--;
+    },
     openDetails() {
       this.$router.push(`/org-details/${this.org._id}`);
     },
