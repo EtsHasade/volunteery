@@ -28,7 +28,7 @@
     <section class="mini-details-top flex space-between">
       <h5 v-if="org.reviews.length">
         <i class="star fas fa-star"></i>
-        {{ org.rate }} ({{ org.reviews.length }} reviews)
+        {{ org.rate }} ({{ org.reviews.length }})
       </h5>
       <h5 v-else><i class="star fas fa-star"></i>New</h5>
       <h5 class="org-eventis">{{ orgEventis.length }} Events</h5>
