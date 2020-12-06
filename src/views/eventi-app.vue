@@ -26,6 +26,7 @@ export default {
       const eventis = this.$store.getters.eventisForDisplay;
       if (!this.filterBy) return eventis;
       let eventisFilter = eventis;
+
       if (this.filterBy.byText) {
         const txt = this.filterBy.byText.toLowerCase();
 
@@ -58,6 +59,7 @@ export default {
           if (!acc.includes(currEventi)) acc.push(currEventi);
           return acc;
         }, []);
+
         eventisFilter = JSON.parse(JSON.stringify(eventisFilter));
         console.log(
           "🚀 ~ file: eventi-app.vue ~ line 48 ~ eventisFilter=eventisFilter.reduce ~ eventisFilter",
@@ -68,9 +70,9 @@ export default {
       if (this.filterBy.byTags.length && this.filterBy.byTags[0] !== "") {
         console.log("by tags");
 
-        var eventisfilterTags = [];
+        let eventisfilterTags = [];
         this.filterBy.byTags.forEach((tag) => {
-          var eventisfilterTag = [];
+          let eventisfilterTag = [];
           eventisFilter.forEach((eventi) => {
             if (eventi.tags.includes(tag)) {
               eventisfilterTag.push(eventi);
@@ -80,6 +82,40 @@ export default {
         });
         eventisFilter = JSON.parse(JSON.stringify(eventisfilterTags));
       }
+
+      if (this.filterBy.byNeededs.length && this.filterBy.byNeededs[0] !== "") {
+        console.log("by Neededs");
+
+        let eventisfilterNeededs = [];
+        this.filterBy.byNeededs.forEach((needed) => {
+          let eventisfilterNeeded = [];
+          eventisFilter.forEach((eventi) => {
+            if (eventi.neededs.includes(needed)) {
+              eventisfilterNeeded.push(eventi);
+            }
+          });
+          eventisfilterNeededs = eventisfilterNeededs.concat(eventisfilterNeeded);
+        });
+        eventisFilter = JSON.parse(JSON.stringify(eventisfilterNeededs));
+      }
+///////
+      if (this.filterBy.byKeys && this.filterBy.byKeys.length && this.filterBy.byKeys[0] !== "") {
+        console.log("by Keys");
+
+        let eventisfilterKeys = [];
+        this.filterBy.byKeys.forEach((fild) => {
+          let eventisfilterKey = [];
+          eventisFilter.forEach((eventi) => {
+            if (eventi[fild.key].includes(fild.value)) {
+              eventisfilterKey.push(eventi);
+            }
+          });
+
+        eventisfilterKeys = eventisfilterKeys.concat(eventisfilterKey);
+        });
+        eventisFilter = JSON.parse(JSON.stringify(eventisfilterKeys));
+      }
+/////////////
       return eventisFilter;
     },
   },

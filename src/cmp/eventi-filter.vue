@@ -15,7 +15,7 @@
     <el-button
       v-for="tag in showtags"
       :key="tag"
-      @click="changeFilter({ byText: '', byTags: [tag] })"
+      @click="changeFilter({ byText: '', byTags: [tag], byKey: [], byNeededs: [] })"
       :class="{ active: filterBy.byTags.includes(tag) }"
       ><i class="small-icon" :class="$store.getters.tagsIcon[tag]"></i
       >{{ tag }}</el-button
@@ -28,10 +28,10 @@
       placeholder="More categories..."
     />
 
-    <el-button @click="changeFilter({ byText: '', byTags: [] })" class="see-all"
+    <el-button @click="changeFilter({ byText: '', byTags: [], byKey: [] , byNeededs: [] })" class="see-all"
       >See All</el-button
     >
-    <!-- <div class="advanced-filter flex" v-if="$store.getters.eventisForDisplay && allFildsKeys">
+    <!-- <div class="advanced-filter flex" v-if="$store.getters.eventisForDisplay && allFildsKeys"> -->
       <select-multi
         class="select-input"
         v-model="filterBy.byNeededs"
@@ -39,25 +39,25 @@
         :items="neededs"
         placeholder="They neededs"
       />
-      <select-multi v-if="allFildsKeys[0]"
+      <select-multi v-if="allFilds.keyList[0] && 1>1"
         class="select-input"
         v-model="filterBy.byKey"
         @input="emitFilter"
-        :items="allFildsKeys"
+        :items="allFilds.KeyList"
         placeholder="All filds"
       />
 
-      {{allFildsKeys}}
+      <!-- {{allFildsKeys}} -->
       
-      <select-multi v-for="(keyWord, idx) in filterBy.byKey"
+      <!-- <select-multi v-for="(keyWord, idx) in filterBy.byKey"
       :key="idx"
       class="select-input"
       v-model="filterBy.byKey[keyWord]"
       @input="emitFilter"
-      :items="allTheFilds[keyWord]"
+      :items="allFilds[keyWord]"
       :placeholder="keyWord"
-      />
-    </div> -->
+      /> -->
+    <!-- </div> -->
     <!-- <advanced-filter></advanced-filter> -->
   </section>
 </template>
@@ -72,7 +72,7 @@ export default {
     initfilterBy: {
       type: Object,
       default: function () {
-        return { byText: "", byTags: [], byKey: ''};
+        return { byText: "", byTags: [], byKey: [], byNeededs: []};
       },
     },
     tags: {
@@ -100,7 +100,7 @@ export default {
   },
   data() {
     return {
-      filterBy: { byText: "", byTags: [] },
+      filterBy: { byText: "", byTags: [], byKey: [], byNeededs: [] },
       debounce: null,
     };
   },
@@ -108,17 +108,17 @@ export default {
     showtags() {
       return this.tags.filter((tag, idx) => idx < this.categorysNum);
     },
-    allFildsKeys(){
-      const allFilds = JSON.parse(JSON.stringify(this.$store.getters.allFilds)) ;
-      return allFilds.keyList
-    },
-    allTheFilds(){
-      const allFilds = JSON.parse(JSON.stringify(this.$store.getters.allFilds)) ;
+    // allFildsKeys(){
+    //   const allFilds = JSON.parse(JSON.stringify(this.$store.getters.allFilds)) ;
+    //   return allFilds.keyList
+    // },
+    allFilds(){
+      const allFilds = this.$store.getters.allFilds;
       return allFilds
     }
   },
   created() {
-    this.filterBy = this.initfilterBy || { byText: "", byTags: [] };
+    this.filterBy = this.initfilterBy || { byText: "", byTags: [], byKey: [], byNeededs: [] };
     if (this.$route.query.term || this.$route.query.tag) {
       this.filterBy.byText = this.$route.query.term;
       this.filterBy.byTags = this.$route.query.tag.split(",");

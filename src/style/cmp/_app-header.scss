@@ -36,11 +36,11 @@
         }
     }
 
-    .el-menu--horizontal>.el-submenu:focus .el-submenu__title {
+    .el-menu>.el-submenu:focus .el-submenu__title {
         color: inherit;
     }
 
-    .el-menu.el-menu--horizontal {
+    .el-menu.el-menu {
         border-bottom   : none;
         background-color: inherit;
         color           : inherit;
@@ -102,13 +102,18 @@
         }
     }
 
+    .el-menu.el-menu--inline{
+        background-color: $clr1;
+
+    }
+
 }
 
 .hero-page .app-header:not(.scrolly) {
     background-color: rgba(255, 255, 255, 0);
     transition      : background-color 0.3s linear;
 
-    .el-menu--horizontal>.el-menu-item {
+    .el-menu>.el-menu-item {
 
         &.is-active,
         &:hover {
@@ -123,3 +128,4 @@
 li.user-menu.el-submenu > div.el-submenu__title{
     line-height: 53px;
 }
+
