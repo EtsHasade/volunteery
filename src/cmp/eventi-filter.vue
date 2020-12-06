@@ -39,13 +39,13 @@
         :items="neededs"
         placeholder="They neededs"
       />
-      <select-multi v-if="allFilds.keyList[0] && 1>1"
+      <!-- <select-multi v-if="allFilds.keyList[0] && "
         class="select-input"
         v-model="filterBy.byKey"
         @input="emitFilter"
         :items="allFilds.KeyList"
         placeholder="All filds"
-      />
+      /> -->
 
       <!-- {{allFildsKeys}} -->
       
