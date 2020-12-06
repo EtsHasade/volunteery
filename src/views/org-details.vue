@@ -3,14 +3,16 @@
     <section class="top-page flex center space-between">
       <section class="top-details">
         <h2 class="mb10">{{ org.name }}</h2>
-        <section class="rate-section">
-          <span v-if="org.reviews.length">
-            <i class="star fas fa-star"></i> {{ org.rate }} ({{
-              org.reviews.length
-            }}
-            reviews) | {{ org.country }}
-          </span>
-          <span v-else><i class="star fas fa-star"></i>New</span>
+        <section class="flex">
+          <section class="rate-section">
+            <span v-if="org.reviews.length">
+              <i class="star fas fa-star"></i> {{ org.rate }} ({{
+                org.reviews.length
+              }})
+            </span>
+            <span v-else><i class="star fas fa-star"></i>New</span>
+          </section>
+          <span>{{ org.country }}</span>
         </section>
       </section>
       <section
@@ -116,7 +118,7 @@
         </section> -->
         <section class="reviews-section flex column center">
           <section class="add-review flex align-center text-center mb10">
-            <el-input type="text" v-model="reviewToEdit.txt" name="review" />
+            <el-input type="text" placeholder="Enter your review" v-model="reviewToEdit.txt" name="review" />
             <el-button type="success" @click="addReview">Add review</el-button>
             <rate-stars-enable class="mb10" v-model="reviewToEdit.rate" />
           </section>

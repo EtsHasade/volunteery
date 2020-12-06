@@ -47,17 +47,17 @@ export const eventiStore = {
             //     return acc;
             // }, []);
             // console.log("🚀 ~ file: eventi-store.js ~ line 38 ~ filds.keyList=state.eventis.reduce ~ filds.keyList", filds.keyList)
-            const optionFilds = {keyList:['country', 'organizatin', 'food', 'lodging']}
-                optionFilds.country = state.eventis.map(eventi =>{
-                    if (!optionFilds.organizatin.includes(eventi.location.countery)) return eventi.location.countery
-                });
-                optionFilds.organizatin = state.eventis.map(eventi =>{
-                    if (!optionFilds.organizatin.includes(eventi.byOrg.name)) return eventi.byOrg.name;
-                });
-                optionFilds.food = ['including food','excluding food', 'all'];
-                optionFilds.lodging = ['including lodging','excluding lodging', 'all'];
+            const optionFilds = { keyList: ['country', 'organizatin', 'food', 'lodging'] }
+            optionFilds.country = state.eventis.map(eventi => {
+                if (!optionFilds.organizatin.includes(eventi.location.countery)) return eventi.location.countery
+            });
+            optionFilds.organizatin = state.eventis.map(eventi => {
+                if (!optionFilds.organizatin.includes(eventi.byOrg.name)) return eventi.byOrg.name;
+            });
+            optionFilds.food = ['including food', 'excluding food', 'all'];
+            optionFilds.lodging = ['including lodging', 'excluding lodging', 'all'];
 
-            return optionFilds            
+            return optionFilds
         },
         tagsIcon(state) {
             return state.tagsIcon;

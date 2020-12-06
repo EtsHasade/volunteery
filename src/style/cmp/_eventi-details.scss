@@ -9,6 +9,13 @@
             }
         }
     }
+    & .main-details {
+        & .rate-section {
+            border-right: 1px solid $gray3;
+            margin-right: 5px;
+            padding-right: 5px;
+        }
+    }
     & main {
         @include for-normal-layout {
             flex-direction: column;
@@ -59,6 +66,8 @@
                     height: rem(60px);
                     background-color: $clr1;
                     border: $clr1;
+                    text-transform: uppercase;
+                    font-size: rem(20px);
                     &:hover {
                         background-color: #bfea45;
                         border: #bfea45;
@@ -227,7 +236,7 @@
         font-size: rem(25px);
         // padding: 0 rem(5px);
         // margin: 0 rem(10px);
-        padding: rem(5px);
+        padding: rem(5px) 0;
         margin: 4px 0px 4px 0;
         color: $gray3;
     }

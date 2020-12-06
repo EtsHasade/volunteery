@@ -1,12 +1,11 @@
 .card-preview {
     cursor: pointer;
-    // border-radius: 8px;
     border-bottom: 1px solid #ffffff00;
     transition: .5s;
     &:hover {
         border-bottom: 1px solid $gray1;
     }
-    .img-squer-container {
+    & .img-squer-container {
         width: 100%;
         padding-top: 70%;
         position: relative;
@@ -22,7 +21,25 @@
             bottom: 0;
             right: 0;
         }
-        .preview-card-country {
+        & .btn-img-nav {
+            z-index: 999;
+            position: absolute;
+            border-radius: 50%;
+            border: unset;
+            font-size: 20px;
+            background-color: unset;
+            top: 50%;
+            &>i {
+                color: $clr1;
+            }
+            &.next {
+                right: 5px;
+            }
+            &.prev {
+                left: 5px;
+            }
+        }
+        & .preview-card-country {
             z-index: 999;
             position: absolute;
             bottom: -12px;
@@ -37,6 +54,16 @@
             font-size: rem(16px)
         }
     }
+    & .details-org-section {
+        & .org-logo {
+            margin-bottom: rem(10px);
+            width: 40px;
+            height: 40px;
+            &:hover {
+                box-shadow: inset 20px 20px 20px #ffffff57;
+            }
+        }
+    }
 }
 
 .card-title {
@@ -45,13 +72,6 @@
     color: $clr1;
     width: 15ch;
     font-family: hindBold;
-}
-
-.org-logo {
-    margin-bottom: rem(10px);
-    &:hover {
-        box-shadow: inset 20px 20px 20px #ffffff57;
-    }
 }
 
 .tag {

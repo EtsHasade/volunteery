@@ -1,7 +1,7 @@
 <template>
   <div class="hero full" ref="hero" >
     <div class="title flex-column">
-      <h1>Looking for something meaningful?</h1>
+      <h1 class="mb10">Looking for something meaningful?</h1>
       <p>volunteer your way and according to your unique talents</p>
       <!-- <p>
         Do you want to volunteer your way and according by your unique talents?

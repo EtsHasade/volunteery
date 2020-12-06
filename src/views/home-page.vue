@@ -5,12 +5,21 @@
     <!-- <img class="hero-img full" src="https://ewscripps.brightspotcdn.com/dims4/default/61272c3/2147483647/strip/true/crop/640x360+0+34/resize/1280x720!/quality/90/?url=https%3A%2F%2Fmediaassets.10news.com%2Fphoto%2F2018%2F10%2F30%2Fvolunteer_900x600_1540924954704_101792658_ver1.0_640_480.jpg" alt=""> -->
     <eventi-filter @doFilter="routeToEventiFilter" />
     <section v-if="loggedinUser && loggedinUser.favs" class="suggested">
-      <span>Suggest</span>
+      <section class="flex space-between">
+        <h3>Suggested for you</h3>
+        <h3 class="hover-pointer" @click="$router.push('/eventi-app')">Show All</h3>
+      </section>
       <eventi-list :eventis="suggestEventis" />
     </section>
-    <span>NEWS</span>
+      <section class="flex space-between">
+        <h3>Newest</h3>
+        <h3 class="hover-pointer" @click="$router.push('/eventi-app')">Show All</h3>
+      </section>
     <eventi-list :eventis="newestEventis" />
-    <span>POPULARS</span>
+      <section class="flex space-between">
+        <h3>Populars</h3>
+        <h3 class="hover-pointer" @click="$router.push('/eventi-app')">Show All</h3>
+      </section>
     <eventi-list :eventis="popularestEventis" />
     <global-info />
   </div>

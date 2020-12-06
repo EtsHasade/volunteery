@@ -4,14 +4,18 @@
       <section class="top-page flex center space-between">
         <div class="top-details">
           <h2 class="mb10">{{ eventi.title }}</h2>
-          <span v-if="eventi.reviews.length">
-            <i class="star fas fa-star"></i>
-            {{ eventi.rate }} ({{ eventi.reviews.length }}reviews)
-          </span>
-          <span v-else><i class="star fas fa-star"></i>New</span> |
-          <span
-            >{{ eventi.location.address }}, {{ eventi.location.country }}</span
-          >
+          <section class="flex align-center">
+            <section class="rate-section">
+              <span v-if="eventi.reviews.length">
+                <i class="star fas fa-star"></i>
+                {{ eventi.rate }} ({{ eventi.reviews.length }})
+              </span>
+              <span v-else><i class="star fas fa-star"></i>New</span>
+            </section>
+            <span
+              > {{ eventi.location.address }}, {{ eventi.location.country }}</span
+            >
+          </section>
         </div>
         <div v-if="isUserOrgAdmin" class="edit-btns flex">
           <el-button class="delete-btn" type="warning" @click="removeEventi"
@@ -164,7 +168,7 @@
     </main>
     <section class="reviews-section flex column center">
       <section class="add-review flex align-center text-center mb10">
-        <el-input type="text" v-model="reviewToEdit.txt" name="review" />
+        <el-input type="text" placeholder="Enter your review" v-model="reviewToEdit.txt" name="review" />
         <section class="review-edit flex align-center">
           <el-button type="success" @click="addReview">Add review</el-button>
           <rate-stars-enable v-model="reviewToEdit.rate" />

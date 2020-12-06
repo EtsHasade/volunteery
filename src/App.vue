@@ -58,15 +58,15 @@ export default {
 </script>
 
 <style lang="scss">
-// @font-face{
-//     font-family: regular;
-//     src: url(./assets/fonts/Hind/Hind-Regular.ttf);
-// }
-
-@font-face {
-  font-family: regular;
-  src: url(./assets/fonts/Hind/Hind-Light.ttf);
+@font-face{
+    font-family: regular;
+    src: url(./assets/fonts/VarelaRound/VarelaRound-Regular.ttf);
 }
+
+// @font-face {
+//   font-family: regular;
+//   src: url(./assets/fonts/Hind/Hind-Light.ttf);
+// }
 
 .hero {
   background-image: url(./assets/img/hero.jpg);

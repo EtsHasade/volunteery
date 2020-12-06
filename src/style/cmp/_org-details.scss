@@ -9,6 +9,13 @@
             }
         }
     }
+    & .top-page {
+        & .rate-section {
+            border-right: 1px solid $gray3;
+            margin-right: 5px;
+            padding-right: 5px;
+        }
+    }
     & .org-imgs {
         @include for-mobile-layout {
             display: flex;

@@ -14,7 +14,8 @@
 
     <el-submenu index="2" class="user-menu">
       <template slot="title" class="user-menu">
-        <span ><i class="fas fa-user-circle"></i></span>
+        <img v-if="loggedinUser && loggedinUser.imgUrl" :src="loggedinUser.imgUrl" alt="">
+        <span v-else ><i style="fontSize: 25px;" class="fas fa-user-circle"></i></span>
       </template>
       <el-menu-item :index="`/user-details/${userId}`" :disabled="!loggedinUser"
         >User profile</el-menu-item

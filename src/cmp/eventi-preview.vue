@@ -7,14 +7,15 @@
     @click="openDetails"
   >
     <div class="img-squer-container">
-      <img
-        v-show="imgLoad"
-        @load="imgLoad = true"
-        :src="eventi.imgUrls[0]"
-        alt=""
-      />
+      <img v-show="imgLoad" @load="imgLoad = true" :src="imgUrl" alt="" />
       <div v-if="!imgLoad" class="loading flex center">LOADING...</div>
       <p class="country preview-card-country">{{ eventi.location.country }}</p>
+      <button class="btn-img-nav next" @click.stop="nextImgUrl">
+        <i class="fas fa-arrow-circle-right"></i>
+      </button>
+      <button class="btn-img-nav prev" @click.stop="nextImgUrl">
+        <i class="fas fa-arrow-circle-left"></i>
+      </button>
     </div>
     <section v-if="org" class="details-org-section flex align-center">
       <avatar
@@ -26,7 +27,10 @@
         @click.stop="openOrgDetails"
       />
       <h3 class="mrg0 card-title">{{ eventi.title }}</h3>
-      <h4 v-if="eventi.notifications > 0 && isEventiAdmin "><i style="color: red" class="fas fa-circle"></i>{{eventi.notifications}} notifications</h4>
+      <h4 v-if="eventi.notifications > 0 && isEventiAdmin">
+        <i style="color: red" class="fas fa-circle"></i
+        >{{ eventi.notifications }} notifications
+      </h4>
     </section>
     <section class="mini-details-top flex space-between">
       <h5 v-if="eventi.reviews.length">
@@ -36,16 +40,16 @@
       <h5 v-else><i class="star fas fa-star"></i>New</h5>
       <h5 class="time">{{ moment(eventi.startAt).format("DD/MM/YYYY") }}</h5>
     </section>
-    <section class="mini-details-main flex justify-center">
+    <section class="mini-details-main flex space-between">
       <section class="price mr16">
         <p v-if="eventi.price > 0">${{ eventi.price }} per week</p>
         <p v-else>Free, just come!</p>
       </section>
       <p>Age +{{ eventi.fromAge }}</p>
     </section>
-    <section class="text-center">
+    <!-- <section class="text-center">
       <p>{{duration}}</p>
-    </section>
+    </section> -->
     <div class="preview-details flex-column">
       <p class="card-desc flex-g1">
         {{ eventi.desc }}
@@ -78,7 +82,8 @@ export default {
       org: null,
       orgRate: 2,
       imgLoad: false,
-      moment
+      moment,
+      idx: 0,
     };
   },
   created() {
@@ -88,6 +93,9 @@ export default {
     avatar,
   },
   computed: {
+    imgUrl() {
+      return this.eventi.imgUrls[this.idx]
+    },
     tagsIcon() {
       return this.$store.getters.tagsIcon;
     },
@@ -95,18 +103,26 @@ export default {
       const date1 = this.eventi.startAt;
       const date2 = this.eventi.endAt;
       const diffTime = Math.abs(date2 - date1);
-      const diffDays = Math.ceil(diffTime / (1000 * 60 * 60 * 24)); 
-      var msg = `${(diffDays/7).toFixed(0)} weeks` 
-      if(diffDays%7) msg += ` and ${diffDays%7} days`
+      const diffDays = Math.ceil(diffTime / (1000 * 60 * 60 * 24));
+      var msg = `${(diffDays / 7).toFixed(0)} weeks`
+      if (diffDays % 7) msg += ` and ${diffDays % 7} days`
       return msg
     },
     isEventiAdmin() {
-      if(this.$store.getters.loggedinUser && this.$store.getters.loggedinUser.org && this.$store.getters.loggedinUser.org._id === this.eventi.byOrg._id) {
+      if (this.$store.getters.loggedinUser && this.$store.getters.loggedinUser.org && this.$store.getters.loggedinUser.org._id === this.eventi.byOrg._id) {
         return true
       } return false
     }
   },
   methods: {
+    nextImgUrl() {
+      if (this.idx === this.eventi.imgUrls.length - 1) this.idx = 0
+      else this.idx++
+    },
+    prevImgUrl() {
+      if (this.idx === 0) this.idx = this.eventi.imgUrls.length - 1
+      else this.idx--
+    },
     async getOrg() {
       const orgId = this.eventi.byOrg._id
       this.org = await this.$store.dispatch({ type: "getOrgById", orgId });
@@ -122,7 +138,7 @@ export default {
     openOrgDetails() {
       this.$router.push(`/org-details/${this.eventi.byOrg._id}`)
     },
-   
+
   }
 };
 </script>
