@@ -93,14 +93,18 @@ export default {
     this.$store.dispatch({ type: "setEventis" });
     this.$refs.thefilter.$refs.searchFild.focus();
     socketService.on("updatesEventi", (eventi) => {
-      if (this.$store.getters.loggedinUser.org._id === eventi.byOrg._id) {
-        const eventiToEdit = JSON.parse(JSON.stringify(eventi));
-        if (!eventiToEdit.notifications) {
-          eventiToEdit.notifications = 0;
-        }
-        eventiToEdit.notifications++;
-        this.$store.dispatch({ type: "saveEventi", eventi: eventiToEdit });
-      }
+    //   console.log('kore');
+    //   if (this.$store.getters.loggedinUser.org._id === eventi.byOrg._id) {
+    //     console.log(eventi.notifications);
+    //     const eventiToEdit = JSON.parse(JSON.stringify(eventi));
+    //     if (!eventiToEdit.notifications) {
+    //       eventiToEdit.notifications = 0;
+    //     }
+    //     eventiToEdit.notifications = eventiToEdit.notifications + 1;
+    //     console.log(eventiToEdit.notifications);
+    //     this.$store.dispatch({ type: "saveEventi", eventi: eventiToEdit });
+    //   }
+      this.$store.dispatch({ type: "saveEventi", eventi});
       this.$store.dispatch({ type: "setEventis" });
     });
 

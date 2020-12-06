@@ -26,7 +26,7 @@
         @click.stop="openOrgDetails"
       />
       <h3 class="mrg0 card-title">{{ eventi.title }}</h3>
-      <h4 v-if="eventi.notifications > 0 && isEventiAdmin "><i style="color: red" class="fas fa-circle"></i>{{eventi.notifications}} unread reviews</h4>
+      <h4 v-if="eventi.notifications > 0 && isEventiAdmin "><i style="color: red" class="fas fa-circle"></i>{{eventi.notifications}} notifications</h4>
     </section>
     <section class="mini-details-top flex space-between">
       <h5 v-if="eventi.reviews.length">
@@ -112,11 +112,11 @@ export default {
       this.org = await this.$store.dispatch({ type: "getOrgById", orgId });
     },
     openDetails() {
-      if(this.$store.getters.loggedinUser && this.$store.getters.loggedinUser.org && this.$store.getters.loggedinUser.org._id === this.eventi.byOrg._id) {
-        const eventi = JSON.parse(JSON.stringify(this.eventi))
-        eventi.notifications = 0
-        this.$store.dispatch({ type: "saveEventi", eventi })
-      }
+      // if(this.$store.getters.loggedinUser && this.$store.getters.loggedinUser.org && this.$store.getters.loggedinUser.org._id === this.eventi.byOrg._id) {
+      //   const eventi = JSON.parse(JSON.stringify(this.eventi))
+      //   eventi.notifications = 0
+      //   this.$store.dispatch({ type: "saveEventi", eventi })
+      // }
       this.$router.push(`/eventi-details/${this.eventi._id}`)
     },
     openOrgDetails() {

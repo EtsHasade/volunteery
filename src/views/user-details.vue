@@ -31,6 +31,7 @@ import eventiList from '../cmp/eventi-list'
 import orgList from '../cmp/org-list'
 import avatar from 'vue-avatar'
 // import { userService } from '../service/user-service.js'
+
 export default {
   name: 'user-details',
   // data() {

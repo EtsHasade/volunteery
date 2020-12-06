@@ -329,32 +329,6 @@ export default {
         type: "saveEventi",
         eventi: JSON.parse(JSON.stringify(this.eventi)),
       });
-        // this.eventi.members.splice(idx, 1);
-        // const idxEvent = this.$store.getters.loggedinUser.events.findIndex(
-        //   (event) => {
-        //     return event._id === this.eventi._id;
-        //   }
-        // );
-        // const user = this.$store.getters.loggedinUser;
-        // user.events.splice(idxEvent, 1);
-        // this.$store.dispatch({
-        //   type: "updateUser",
-        //   user: JSON.parse(JSON.stringify(user)),
-        // });
-        // const res = await this.$store.dispatch({
-        //   type: "saveEventi",
-        //   eventi: JSON.parse(JSON.stringify(this.eventi)),
-        // });
-        //   if (res.type) {
-        //     this.textBtn = "Join us";
-        //     this.$message({
-        //       showClose: true,
-        //       message: `You remove from this event`,
-        //       type: "success",
-        //       duration: 1500,
-        //     });
-        //   }
-        //   return;
       } else {
         console.log('member', member);
         const user = JSON.parse(JSON.stringify(this.$store.getters.loggedinUser));
@@ -378,8 +352,10 @@ export default {
         }
         this.textBtn = "leave event";
       }
+      socketService.emit('updateEventi', this.eventi);
+
     },
-    addReview() {
+    async addReview() {
       if(!this.$store.getters.loggedinUser) {
         this.$message({
             showClose: true,
@@ -395,11 +371,16 @@ export default {
       this.reviewToEdit._id = eventiService.makeId();
       this.reviewToEdit.author = JSON.parse(JSON.stringify(this.miniLoggedinUser));
       this.eventi.reviews.push(this.reviewToEdit);
+      if (!this.eventi.notifications) {
+        this.eventi.notifications = 0;
+      }
+      this.eventi.notifications = this.eventi.notifications + 1;
       this.avgRates();
       this.$store.dispatch({
         type: "saveEventi",
-        eventi: JSON.parse(JSON.stringify(this.eventi)),
+        eventi: this.eventi,
       });
+      console.log(this.eventi);
       socketService.emit('updateEventi', this.eventi);
       this.$message({
         showClose: true,
@@ -483,13 +464,23 @@ export default {
     socketService.on("chat addMsg", this.addMsg);
     socketService.on("changesMember", this.changesMember);
     socketService.on("updatesEventi", (eventi) => {
-      this.eventi = JSON.parse(JSON.stringify(eventi))
+      // console.log(eventi);
+      this.eventi = eventi;
     });
+    if(this.$store.getters.loggedinUser && this.$store.getters.loggedinUser.org && this.$store.getters.loggedinUser.org._id === this.eventi.byOrg._id) {
+        // const eventi = JSON.parse(JSON.stringify(this.eventi))
+        this.eventi.notifications = 0
+        this.$store.dispatch({ type: "saveEventi", eventi: this.eventi })
+        socketService.emit('updateEventi', this.eventi);
+        console.log('admin 0 notification',this.eventi);
+    }
+
   },
   destroyed() {
     this.msgs = [];
     this.msgChat = "";
     socketService.off("chat addMsg", this.addMsg);
+    socketService.off("changesMember", this.changesMember);
     // socketService.terminate();
   },
   components: {

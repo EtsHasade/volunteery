@@ -1,10 +1,10 @@
 <template>
   <div id="app" class="main-container">
-      <app-header ></app-header>
-      <hero @scrollToList="scrollMeTo('appList')" ref="heroCmp" />
-      <main ref="appList" class="mb10">
-          <router-view />
-      </main>
+    <app-header></app-header>
+    <hero @scrollToList="scrollMeTo('appList')" ref="heroCmp" />
+    <main ref="appList" class="mb10">
+      <router-view />
+    </main>
     <app-footer></app-footer>
   </div>
 </template>
@@ -23,27 +23,33 @@ export default {
     appFooter,
     hero
   },
-  methods:{
-      scrollMeTo(refName) {
+  methods: {
+    scrollMeTo(refName) {
       var element = this.$refs[refName];
       var top = element.offsetTop;
-      window.scrollTo(0, top-80);
+      window.scrollTo(0, top - 80);
     },
   },
   created() {
     socketService.setup();
     socketService.on("updatesEventi", (eventi) => {
       console.log('check');
-      if(this.$store.getters.loggedinUser.org._id === eventi.byOrg._id) {
+      if (this.$store.getters.loggedinUser && this.$store.getters.loggedinUser.org && this.$store.getters.loggedinUser.org._id === eventi.byOrg._id) {
         this.$message({
           showClose: true,
-          message: `someone review on ${eventi.title}`,
+          message: `new notification in ${eventi.title}`,
           type: "success",
           duration: 3000,
-        });      
+        });
+        // const eventiToEdit = JSON.parse(JSON.stringify(eventi));
+        // if (!eventiToEdit.notifications >= 0) {
+        //   eventiToEdit.notifications = 0;
+        // }
+        // eventiToEdit.notifications++;
+        // this.$store.dispatch({ type: "saveEventi", eventi: eventiToEdit });
+        // this.$store.dispatch({ type: "setEventis" });
       }
     })
-
   },
   destroyed() {
     socketService.terminate();
@@ -57,18 +63,17 @@ export default {
 //     src: url(./assets/fonts/Hind/Hind-Regular.ttf);
 // }
 
-@font-face{
-    font-family: regular;
-    src: url(./assets/fonts/Hind/Hind-Light.ttf);
+@font-face {
+  font-family: regular;
+  src: url(./assets/fonts/Hind/Hind-Light.ttf);
 }
 
-.hero{
+.hero {
   background-image: url(./assets/img/hero.jpg);
 }
 
-@font-face{
-    font-family: hindBold;
-    src: url(./assets/fonts/Hind/Hind-Bold.ttf);
+@font-face {
+  font-family: hindBold;
+  src: url(./assets/fonts/Hind/Hind-Bold.ttf);
 }
-
 </style>
