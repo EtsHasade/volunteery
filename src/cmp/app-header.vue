@@ -1,19 +1,47 @@
 <template>
-  <header>
-    <div class="logo">
-      <img src="" alt="" class="logo-img" />
+  <header class="app-header full main-container" :class="{scrolly:(scrollYposition > 20)}">
+    <div class="hedear-container flex space-between">
+      <div class="logo">
+        <img
+          src="@/assets/logo.svg"
+          alt=""
+          class="logo-img hover-pointer"
+          @click="$router.push('/')"
+        />
+      </div>
+      <navbar class="nav-bar-horizontal"></navbar>
+      <nav-bar-vertical class="nav-bar-vertical"></nav-bar-vertical>
     </div>
-    <nav>
-      <router-link to="/">Home</router-link> |
-      <router-link to="/volunteer-app">Volunteers</router-link> |
-      <router-link to="/volunteer-edit">Create Volunteer</router-link> |
-      <router-link to="/login">Login</router-link> |
-    </nav>
   </header>
 </template>
 
 <script>
-export default {};
+import navbar from "./element-ui/nav-bar";
+import navBarVertical from './element-ui/nav-bar-vertical.vue';
+
+export default {
+  name: "app-header",
+  data(){
+    return{
+      scrollYposition: 0
+    }
+  },
+  components: {
+    navbar,
+    navBarVertical,
+  },
+  created() {
+   document.addEventListener("scroll", this.getScroll);
+  },
+  destroyed(){
+    Document.removeEventListener("scroll", this.getScroll);
+  },
+  methods:{
+    getScroll(){
+      this.scrollYposition = window.scrollY;
+    }
+  }
+};
 </script>
 
 <style>

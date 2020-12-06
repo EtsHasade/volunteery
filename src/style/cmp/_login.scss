@@ -1,0 +1,30 @@
+.login {
+    & .el-button {
+        background-color: $clr1;
+        border: $clr1;
+        color: $clr7;
+        &:hover {
+            color: $clr7;
+            background-color: #bfea45;
+            border: #bfea45;
+        }
+    }
+    & .img-list {
+        & .imgs {
+            & img {
+                object-fit: cover;
+                max-width: rem(300px);
+            }
+            @include for-normal-layout {
+                flex-direction: column;
+                align-items: center;
+            }
+        }
+    }
+    & .upload-img {
+        & .img-uploader {
+            max-width: rem(150px);
+            height: rem(100px);
+        }
+    }
+}
