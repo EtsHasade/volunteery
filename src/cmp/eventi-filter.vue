@@ -39,22 +39,22 @@
         :items="neededs"
         placeholder="They neededs"
       />
-      <!-- <select-multi v-if="allFildsKeys[0]"
+      <select-multi v-if="allFilds.keyList[0] && 1>1"
         class="select-input"
         v-model="filterBy.byKey"
         @input="emitFilter"
-        :items="allFildsKeys"
+        :items="allFilds.KeyList"
         placeholder="All filds"
       />
 
-      {{allFildsKeys}}
+      <!-- {{allFildsKeys}} -->
       
-      <select-multi v-for="(keyWord, idx) in filterBy.byKey"
+      <!-- <select-multi v-for="(keyWord, idx) in filterBy.byKey"
       :key="idx"
       class="select-input"
       v-model="filterBy.byKey[keyWord]"
       @input="emitFilter"
-      :items="allTheFilds[keyWord]"
+      :items="allFilds[keyWord]"
       :placeholder="keyWord"
       /> -->
     <!-- </div> -->
@@ -108,12 +108,12 @@ export default {
     showtags() {
       return this.tags.filter((tag, idx) => idx < this.categorysNum);
     },
-    allFildsKeys(){
-      const allFilds = JSON.parse(JSON.stringify(this.$store.getters.allFilds)) ;
-      return allFilds.keyList
-    },
-    allTheFilds(){
-      const allFilds = JSON.parse(JSON.stringify(this.$store.getters.allFilds)) ;
+    // allFildsKeys(){
+    //   const allFilds = JSON.parse(JSON.stringify(this.$store.getters.allFilds)) ;
+    //   return allFilds.keyList
+    // },
+    allFilds(){
+      const allFilds = this.$store.getters.allFilds;
       return allFilds
     }
   },
