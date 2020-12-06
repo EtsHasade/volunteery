@@ -352,6 +352,11 @@ export default {
         }
         this.textBtn = "leave event";
       }
+      if (!this.eventi.notifications) {
+        this.eventi.notifications = 0;
+      }
+      this.eventi.notifications = this.eventi.notifications + 1;
+      this.$store.dispatch({ type: "saveEventi", eventi: this.eventi })
       socketService.emit('updateEventi', this.eventi);
 
     },
