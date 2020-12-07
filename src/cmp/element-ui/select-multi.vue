@@ -45,14 +45,21 @@ export default {
   },
   data() {
     return {
-      options: [],
+      // options: [],
       value: [],
     };
   },
+  computed:{
+    options() {
+      return this.items.map((item) => {
+        return { value: item, label: item };
+      });
+    },
+  },
   created() {
-    this.options = this.items.map((item) => {
-      return { value: item, label: item };
-    });
+    // this.options = this.items.map((item) => {
+    //   return { value: item, label: item };
+    // });
   },
   watch: {
     value: function (newValue) {
