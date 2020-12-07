@@ -48,6 +48,7 @@
         margin    : 0;
 
         &.active,
+        &:focus,
         &:hover {
             border-color: unset;
             color              : $gray1;
