@@ -57,6 +57,7 @@ export const eventiStore = {
                 if (!acc.includes(currTag)) acc.push(currTag);
                 return acc;
             }, []);
+            optionFilds.options.tags = optionFilds.options.category;
 
             optionFilds.options.organization = [];
             optionFilds.options.organization = state.eventis.map(eventi => {

@@ -82,10 +82,12 @@ export default {
     console.log("🚀 ~ file: eventi-filter.vue ~ line 76 ~ created ~ this.allFilds", this.allFilds)
     this.filterBy = (this.initfilterBy)? this.initfilterBy : JSON.parse(JSON.stringify(this.emptyFilter));
     console.log("🚀 ~ file: eventi-filter.vue ~ line 76 ~ created ~ this.filterBy", this.filterBy)
-    if (this.$route.query.term || this.$route.query.tag) {
+    if (this.$route.query.term || this.$route.query.values) {
       this.filterBy.byText = this.$route.query.term;
-      this.filterBy.byKey.key = "categoty";
-      this.filterBy.byKey.values = this.$route.query.tag.split(",");
+      this.filterBy.byKey.key = this.$route.query.key;
+      this.filterBy.byKey.values = this.$route.query.values.split(",");
+      this.$emit("doFilter", this.filterToExport())
+      // this.filterBy.byKey.values = this.$route.query.tag;
     }
     console.log("🚀 ~ file: eventi-filter.vue ~ line 76 ~ created ~ this.filterBy tags?", this.filterBy)
   },
