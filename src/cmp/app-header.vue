@@ -3,7 +3,7 @@
     <div class="hedear-container flex space-between">
       <div class="logo">
         <img
-          src="@/assets/logo.svg"
+          src="@/assets/logo2.svg"
           alt=""
           class="logo-img hover-pointer"
           @click="$router.push('/')"

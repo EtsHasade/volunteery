@@ -31,7 +31,7 @@
         }
         .call-to-action {
             cursor: pointer;
-            background-color: $clr2;
+            background-color: #bfea45;
             color: #ffffff;
             display: block;
             width: fit-content;
@@ -43,8 +43,8 @@
                 margin: 0;
             }
             &:hover {
-                background-color: #bfea45;
-                color: whitesmoke;
+                color: #bfea45;
+                background-color: #ffffff;
             }
         }
     }
