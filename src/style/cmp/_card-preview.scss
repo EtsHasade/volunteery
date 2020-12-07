@@ -1,8 +1,12 @@
 .card-preview {
     cursor: pointer;
-    border-bottom: 1px solid #ffffff00;
+    border-bottom: 1px solid $gray2;
     transition: .5s;
     &:hover {
+        & .img-squer-container .btn-img-nav {
+            opacity: 1;
+            visibility: visible;
+        }
         border-bottom: 1px solid $gray1;
     }
     & .img-squer-container {
@@ -22,6 +26,8 @@
             right: 0;
         }
         & .btn-img-nav {
+            opacity: 0;
+            visibility: hidden;
             z-index: 999;
             position: absolute;
             border-radius: 50%;
@@ -29,6 +35,7 @@
             font-size: 20px;
             background-color: unset;
             top: 50%;
+            transition: 0.3s;
             &>i {
                 color: $clr1;
             }
@@ -64,14 +71,17 @@
             }
         }
     }
+    & .reviews-counter {
+        color: $gray3;
+    }
 }
 
 .card-title {
     font-size: 1.2rem;
     line-height: 1.2em;
-    color: $clr1;
+    color: $gray1;
     width: 15ch;
-    font-family: hindBold;
+    // font-family: hindBold;
 }
 
 .tag {
@@ -85,7 +95,6 @@
 .preview-details {
     height: 100%;
     margin-top: -5px;
-    // padding   : 0.5rem;
     .card-label {
         & h3 {
             height: 46px;
@@ -94,16 +103,16 @@
     .card-title {
         font-size: 1.2rem;
         line-height: 1.2em;
-        color: $clr1;
+        color: $gray1;
         width: 15ch;
     }
     .card-desc {
         color: $gray2;
-        line-height: 1.5;
+        line-height: 1.7;
         overflow: hidden;
         text-overflow: ellipsis;
         display: -webkit-box;
-        -webkit-line-clamp: 2;
+        -webkit-line-clamp: 3;
         /* number of lines to show */
         -webkit-box-orient: vertical;
         font-size: rem(14px);
