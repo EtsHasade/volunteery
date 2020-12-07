@@ -4,10 +4,10 @@
         flex-direction: row;
     }
     &>* {
-        width: rem(200px);
+        // width: rem(200px);
         height: rem(200px);
-        background-color: $clr2;
-        background-image: linear-gradient(to bottom, $clr1, $clr2);
+        // background-color: $clr2;
+        // background-image: linear-gradient(to bottom, $clr1, $clr2);
         margin: rem(10px);
         border-radius: 50%;
         padding: rem(10px);
