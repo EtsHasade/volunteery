@@ -5,15 +5,18 @@
     width: 100vw;
     z-index: 1999;
     background-color: $clr1;
+    // background-color: #8d1e56;
     color: #ffffff;
+    transition: background-color 0.3s linear;
     .logo {
-        width: 165px;
-        display: inline-block;
+        width: 275px;
+        display: flex;
         align-items: center;
+        justify-content: center;
         position: relative;
         .logo-img {
-            position: absolute;
-            top: 5.3px;
+            // position: absolute;
+            // top: 5.3px;
         }
     }
     .user-menu .el-submenu {
