@@ -46,7 +46,7 @@
     </section>
     <main>
       <section class="details">
-        <section class="top-details flex space-between align-center">
+        <section class="top-details flex space-between align-center wrap">
           <section class="mini-user flex align-center mb10">
             <avatar style="background-position: center; background-size:cover;"
               class="mr10"

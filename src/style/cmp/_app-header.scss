@@ -79,7 +79,7 @@
         .el-submenu__title {
             border-bottom: none;
             color        : inherit;
-            padding-right: 0;
+            // padding-right: 0;
 
             display: flex;
             align-items: center;
@@ -150,7 +150,9 @@
     }
 }
 
+
+
 li.user-menu.el-submenu>div.el-submenu__title {
     line-height: 53px;
-    padding-right: 0;
+    // padding-right: 0;
 }
