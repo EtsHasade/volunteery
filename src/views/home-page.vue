@@ -1,8 +1,5 @@
 <template>
   <div class="home-page">
-    <!-- <h2>Home page</h2> -->
-    <!-- <img class="hero-img full" src="@/assets/img/hero.jpg" alt=""> -->
-    <!-- <img class="hero-img full" src="https://ewscripps.brightspotcdn.com/dims4/default/61272c3/2147483647/strip/true/crop/640x360+0+34/resize/1280x720!/quality/90/?url=https%3A%2F%2Fmediaassets.10news.com%2Fphoto%2F2018%2F10%2F30%2Fvolunteer_900x600_1540924954704_101792658_ver1.0_640_480.jpg" alt=""> -->
     <eventi-filter @doFilter="routeToEventiFilter" />
     <section v-if="loggedinUser && loggedinUser.favs" class="suggested">
       <section class="flex space-between">
@@ -28,6 +25,32 @@
     </section>
     <eventi-list :eventis="popularestEventis" />
     <global-info />
+    <section>
+      <div class="articles-row main-a">
+        <a class="article a" href="#/eventi-app/?term=&key=tags&values=Children">
+          <div>
+            <h2 class="title">Children</h2>
+          </div>
+        </a>
+        <a class="article b" href="#/eventi-app/?term=&key=tags&values=Animals">
+          <div>
+            <h2 class="title">Animals</h2>
+          </div>
+        </a>
+      </div>
+      <div class="articles-row main-b">
+        <a class="article c" href="#/eventi-app/?term=&key=tags&values=Fun">
+          <div>
+            <h2 class="title">Fun</h2>
+          </div>
+        </a>
+        <a class="article d" href="#/eventi-app/?term=&key=tags&values=Needy">
+          <div>
+            <h2 class="title">Needy</h2>
+          </div>
+        </a>
+      </div>
+    </section>
   </div>
 </template>
 
