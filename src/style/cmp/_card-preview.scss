@@ -37,7 +37,8 @@
             top: 50%;
             transition: 0.3s;
             &>i {
-                color: $clr1;
+                // color: $clr1;
+                color: #ffffffa8;
                 font-size: rem(20px);
                 &:hover {
                     border-color: rgba(0, 0, 0, 0.08);
