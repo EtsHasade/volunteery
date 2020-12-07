@@ -33,21 +33,15 @@ export default {
   created() {
     socketService.setup();
     socketService.on("updatesEventi", (eventi) => {
-      console.log('check');
       if (this.$store.getters.loggedinUser && this.$store.getters.loggedinUser.org && this.$store.getters.loggedinUser.org._id === eventi.byOrg._id) {
-        this.$message({
-          showClose: true,
-          message: `new notification in ${eventi.title}`,
-          type: "success",
-          duration: 3000,
-        });
-        // const eventiToEdit = JSON.parse(JSON.stringify(eventi));
-        // if (!eventiToEdit.notifications >= 0) {
-        //   eventiToEdit.notifications = 0;
-        // }
-        // eventiToEdit.notifications++;
-        // this.$store.dispatch({ type: "saveEventi", eventi: eventiToEdit });
-        // this.$store.dispatch({ type: "setEventis" });
+        if(eventi.notifications > 0) {
+          this.$message({
+            showClose: true,
+            message: `new notification in ${eventi.title}`,
+            type: "success",
+            duration: 3000,
+          });
+        }
       }
     })
   },

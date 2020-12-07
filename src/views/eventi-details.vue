@@ -465,19 +465,14 @@ export default {
     if (this.eventi.members.find((member) => member._id === this.miniLoggedinUser._id)) {
       this.textBtn = "leave event";
     }
-
-    // this.msgChat.from = (this.$store.getters.loggedinUser)? this.$store.getters.loggedinUser.fullName : 'Goust';
     this.topic = this.eventi._id;
-    // socketService.setup();
     socketService.emit("chat topic", this.topic);
     socketService.on("chat addMsg", this.addMsg);
     socketService.on("changesMember", this.changesMember);
     socketService.on("updatesEventi", (eventi) => {
-      // console.log(eventi);
       this.eventi = eventi;
     });
     if(this.$store.getters.loggedinUser && this.$store.getters.loggedinUser.org && this.$store.getters.loggedinUser.org._id === this.eventi.byOrg._id) {
-        // const eventi = JSON.parse(JSON.stringify(this.eventi))
         this.eventi.notifications = 0
         this.$store.dispatch({ type: "saveEventi", eventi: this.eventi })
         socketService.emit('updateEventi', this.eventi);
