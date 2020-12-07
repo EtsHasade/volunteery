@@ -268,11 +268,6 @@ export default {
         this.byOrg = await orgService.getById(byOrgId);
         const { _id, name, rate } = this.byOrg;
         this.byOrg = { _id, name, rate, imgUrl: this.byOrg.imgUrls[0] };
-
-        console.log(
-          "🚀 ~ file: eventi-edit.vue ~ line 146 ~ created ~ this.byOrg",
-          this.byOrg
-        );
       }
     },
     removeEventi() {

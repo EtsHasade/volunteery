@@ -25,7 +25,6 @@ export default {
   computed: {
     eventisToShow() {
       const eventis = this.$store.getters.eventisForDisplay;
-      console.log("🚀 ~ file: eventi-app.vue ~ line 28 ~ eventisToShow ~ this.filterBy", this.filterBy)
       if (!this.filterBy) return eventis;
       let eventisFilter = eventis;
 
@@ -63,32 +62,12 @@ export default {
         }, []);
 
         eventisFilter = JSON.parse(JSON.stringify(eventisFilter));
-        console.log(
-          "🚀 ~ file: eventi-app.vue ~ line 66 ~ eventisFilter=eventisFilter.reduce ~ eventisFilter",
-          eventisFilter
-        );
       }
-
-      // if (this.filterBy.byTags.length && this.filterBy.byTags[0] !== "") {
-      //   console.log("by tags");
-
-        // let eventisfilterTags = [];
-        // this.filterBy.byTags.forEach((tag) => {
-        //   let eventisfilterTag = [];
-        //   eventisFilter.forEach((eventi) => {
-        //     if (eventi.tags.includes(tag)) {
-        //       eventisfilterTag.push(eventi);
-        //     }
-        //   });
-        //   eventisfilterTags = eventisfilterTags.concat(eventisfilterTag);
-        // });
-        
+       
         if (this.filterBy.byKey.values.length && !this.filterBy.byKey.values.includes('') && !this.filterBy.byKey.values.includes('all')) {
-        console.log("🚀 ~ file: eventi-app.vue ~ line 87 ~ eventisToShow ~ this.filterBy.byKey", this.filterBy.byKey)
           
           const eventisfilterKeys = eventisFilter.filter((eventi) => {
             if (eventi[this.filterBy.byKey.key]) {
-            console.log("🚀 ~ file: eventi-app.vue ~ line 91 ~ eventisfilterKeys ~ eventi[this.filterBy.byKey.key]", eventi[this.filterBy.byKey.key])
               
               const eventiValues = eventi[this.filterBy.byKey.key];
               return this.filterBy.byKey.values.filter(value =>{
@@ -102,31 +81,9 @@ export default {
             }
           });
 
-        console.log("🚀 ~ file: eventi-app.vue ~ line 105 ~ eventisfilterKeys ~ eventisfilterKeys", eventisfilterKeys)
         eventisFilter = JSON.parse(JSON.stringify(eventisfilterKeys));
         }
-        // eventisfilterTags = eventisfilterTags.concat(eventisfilterTag);
-      // if (
-      //   this.filterBy.byKeys &&
-      //   this.filterBy.byKeys.length &&
-      //   this.filterBy.byKeys[0] !== ""
-      // ) {
-      //   console.log("by Keys");
-
-      //   let eventisfilterKeys = [];
-      //   this.filterBy.byKeys.forEach((fild) => {
-      //     let eventisfilterKey = [];
-      //     eventisFilter.forEach((eventi) => {
-      //       if (eventi[fild.key].includes(fild.value)) {
-      //         eventisfilterKey.push(eventi);
-      //       }
-      //     });
-
-      //     eventisfilterKeys = eventisfilterKeys.concat(eventisfilterKey);
-      //   });
-      //   eventisFilter = JSON.parse(JSON.stringify(eventisfilterKeys));
-      // }
-      // /////////////
+ 
       return eventisFilter;
     },
   },

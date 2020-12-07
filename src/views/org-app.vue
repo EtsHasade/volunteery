@@ -22,13 +22,11 @@ export default {
     // },
     orgsToShow() {
       const orgs = this.$store.getters.orgsForDisplay;
-      console.log("🚀 ~ file: org-app.vue ~ line 25 ~ orgsToShow ~ orgs", orgs)
 
       if (!this.filterBy) return orgs;
       let orgsFilter = orgs;
       if (this.filterBy.byText != '') {
         const txt = this.filterBy.byText.toLowerCase();
-        console.log("🚀 ~ file: org-app.vue ~ line 31 ~ orgsToShow ~ txt", txt)
 
         orgsFilter = orgs.filter((org) => {
           return (
@@ -54,10 +52,7 @@ export default {
           return acc;
         }, []);
         orgsFilter = JSON.parse(JSON.stringify(orgsFilter));
-        console.log(
-          "🚀 ~ file: org-app.vue ~ line 48 ~ orgsFilter=orgsFilter.reduce ~ orgsFilter",
-          orgsFilter
-        );
+
       }
 
       if (this.filterBy.byTags.length) {

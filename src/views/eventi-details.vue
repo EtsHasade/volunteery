@@ -243,10 +243,6 @@ export default {
     },
     isUserOrgAdmin() {
       const loggedinUser = this.$store.getters.loggedinUser;
-      console.log(
-        "🚀 ~ file: eventi-details.vue ~ line 139 ~ isUserOrgAdmin ~ loggedinUser",
-        loggedinUser
-      );
       if (loggedinUser && loggedinUser.isAdmin) return true; // not secured!!
       if (
         !loggedinUser ||

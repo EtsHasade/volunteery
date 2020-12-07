@@ -79,9 +79,7 @@ export default {
     }
   },
   created() {
-    console.log("🚀 ~ file: eventi-filter.vue ~ line 76 ~ created ~ this.allFilds", this.allFilds)
     this.filterBy = (this.initfilterBy)? this.initfilterBy : JSON.parse(JSON.stringify(this.emptyFilter));
-    console.log("🚀 ~ file: eventi-filter.vue ~ line 76 ~ created ~ this.filterBy", this.filterBy)
     if (this.$route.query.term || this.$route.query.values) {
       this.filterBy.byText = this.$route.query.term;
       this.filterBy.byKey.key = this.$route.query.key;
@@ -89,14 +87,12 @@ export default {
       this.$emit("doFilter", this.filterToExport())
       // this.filterBy.byKey.values = this.$route.query.tag;
     }
-    console.log("🚀 ~ file: eventi-filter.vue ~ line 76 ~ created ~ this.filterBy tags?", this.filterBy)
   },
   methods: {
     changeFilter(filterBy) {
       this.filterBy = JSON.parse(JSON.stringify(filterBy));
       this.emitFilter();
       if (this.$router.history.current.name === 'Home') this.$router.push('/eventi-app/');
-      console.log("🚀 ~ file: eventi-filter.vue ~ line 99 ~ changeFilter ~ this.$router", this.$router)
     },
     filterToExport() {
       if (!this.filterBy) return this.emptyFilter;
@@ -113,14 +109,12 @@ export default {
         if (value.includes('excluding')) filter.byKey.values[idx] = "false";
       })
 
-      console.log("🚀 ~ file: eventi-filter.vue ~ line 113 ~ filterToExport ~  filter.byKey.values",  filter.byKey.values)
       return filter;
     },
     emitFilter() {
       if (this.debounce) clearTimeout(this.debounce);
       this.debounce = setTimeout(() => {
         this.$emit("doFilter", this.filterToExport());
-        console.log("🚀 ~ file: eventi-filter.vue ~ line 119 ~ this.debounce=setTimeout ~ this.filterToExport()", this.filterToExport())
       }, 1000);
     },
   },

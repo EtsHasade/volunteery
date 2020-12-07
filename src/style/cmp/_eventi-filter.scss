@@ -30,20 +30,25 @@
     }
     .el-select {
         margin: 0;
+        border-color: $gray1;
     }
+
     .see-all {
         background-color: #ffffff;
-        border: 1px solid $gray1;
     }
-    .el-button {
+
+    .el-button, form .el-input__inner, .el-select .el-input__inner , .see-all{
         transition: .4s;
         margin: 0;
+        border-color: $gray1;
         &.active,
         &:focus,
         &:hover {
-            border-color: unset;
+            border-color: $gray1;
             color: $gray1;
-            background-color: #eab045;
+            &.see-all {
+                background-color: #eab045;
+            }
             // border          : 1px solid #bfea45;
         }
         .small-icon {
