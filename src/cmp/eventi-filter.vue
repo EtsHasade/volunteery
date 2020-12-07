@@ -34,7 +34,7 @@
 
 
     <el-button  @click="changeFilter(emptyFilter)" class="see-all"
-      >See All</el-button
+      >Show All</el-button
     >
   </section>
 </template>

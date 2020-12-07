@@ -76,7 +76,10 @@
 
           <section class="upload-img flex column center">
             <template v-if="!isLoading">
-              <label for="imgUploader"> <img class="img-uploader" src="http://www.pngall.com/wp-content/uploads/2/Upload-PNG-Image-File.png" alt=""> </label>
+              <label for="imgUploader"> 
+                <!-- <img class="img-uploader" src="http://www.pngall.com/wp-content/uploads/2/Upload-PNG-Image-File.png" alt="">  -->
+                <i class="fas fa-cloud-upload-alt hover-pointer"></i>
+              </label>
               <input type="file" name="img-uploader" id="imgUploader" @change="onUploadImg">  
             </template>
             <img class="loader" v-else src="https://i.pinimg.com/originals/65/ba/48/65ba488626025cff82f091336fbf94bb.gif" alt="">

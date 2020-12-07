@@ -2,7 +2,7 @@
   <section class="edit-page">
     <div class="edit-page-title title flex-column center-all">
       <h2>Create new event</h2>
-      <h3>It's free, quick And simple</h3>
+      <h3>It's free, quick and simple</h3>
     </div>
 
     <div class="side-tabs flex">
@@ -107,7 +107,7 @@
               src="http://www.pngall.com/wp-content/uploads/2/Upload-PNG-Image-File.png"
               alt=""
             /> -->
-          <i class="fas fa-cloud-upload-alt"></i>
+          <i class="fas fa-cloud-upload-alt hover-pointer"></i>
           </label>
           <input
             type="file"
