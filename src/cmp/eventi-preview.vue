@@ -18,15 +18,15 @@
       </button>
     </div>
     <section v-if="org" class="details-org-section flex align-center">
-      <avatar
+      <!-- <avatar
         style="background-position: center; background-size: cover"
         class="org-logo hover-pointer mr10"
         :username="org.name"
         :src="org.logo"
         :title="org.name"
         @click.stop="openOrgDetails"
-      />
-      <h3 class="mrg0 card-title">{{ eventi.title }}</h3>
+      /> -->
+      <!-- <h3 class="mrg0 card-title">{{ eventi.title }}</h3> -->
       <h4 v-if="eventi.notifications > 0 && isEventiAdmin">
         <i style="color: red" class="fas fa-circle"></i
         >{{ eventi.notifications }} notifications
@@ -35,26 +35,22 @@
     <section class="mini-details-top flex space-between">
       <h5 v-if="eventi.reviews.length">
         <i class="star fas fa-star"></i>
-        {{ eventi.rate }} ({{ eventi.reviews.length }})
+        {{ eventi.rate }} <span class="reviews-counter">({{ eventi.reviews.length }})</span>
       </h5>
       <h5 v-else><i class="star fas fa-star"></i>New</h5>
       <h5 class="time">{{ moment(eventi.startAt).format("DD/MM/YYYY") }}</h5>
     </section>
-    <section class="mini-details-main flex space-between">
-      <section class="price mr16">
-        <p v-if="eventi.price > 0">${{ eventi.price }} per week</p>
-        <p v-else>Free, just come!</p>
-      </section>
+    <!-- <section class="mini-details-main flex space-between">
       <p>Age +{{ eventi.fromAge }}</p>
-    </section>
+    </section> -->
     <!-- <section class="text-center">
       <p>{{duration}}</p>
     </section> -->
     <div class="preview-details flex-column">
       <p class="card-desc flex-g1">
-        {{ eventi.desc }}
+        <span class="card-title">{{ eventi.title }}</span> <br /> {{ eventi.desc }}
       </p>
-      <div class="eventi-floor card-footer flex space-around">
+      <!-- <div class="eventi-floor card-footer flex space-around">
         <section
           class="tag flex column center"
           v-for="(tag, idx) in eventi.tags"
@@ -63,13 +59,17 @@
           <i :class="tagsIcon[tag]"></i>
           <p>{{ tag }}</p>
         </section>
-      </div>
+      </div> -->
     </div>
+    <section class="price mr16">
+        <p v-if="eventi.price > 0"><span class="bold">${{ eventi.price }}</span> / week</p>
+        <p v-else>Free, just come!</p>
+      </section>
   </li>
 </template>
 
 <script>
-import avatar from "vue-avatar";
+// import avatar from "vue-avatar";
 var moment = require('moment')
 
 export default {
@@ -90,7 +90,7 @@ export default {
     this.getOrg()
   },
   components: {
-    avatar,
+    // avatar,
   },
   computed: {
     imgUrl() {
