@@ -20,7 +20,6 @@
       <h2 class="title-tab" :class="loggedinUser ? 'active' : ''">
         {{(loggedinUser && loggedinUser.org)? 'Edit your organization' : 'Add your orgaziation'}}
       </h2>
-      <!-- <h2 class="title-tab active">Add your orgaziation</h2> -->
       <h2 class="title-tab" :class="{'hover-pointer': loggedinUser && loggedinUser.org}" @click="goToCreateEventi">Publish new event and invite volunteers</h2>
     </div>
     <keep-alive>
@@ -85,11 +84,12 @@
         <section class="upload-img flex column center">
           <template v-if="!isLoading">
             <label for="imgUploader">
-              <img
+              <!-- <img
                 class="img-uploader"
                 src="http://www.pngall.com/wp-content/uploads/2/Upload-PNG-Image-File.png"
                 alt=""
-              />
+              /> -->
+              <i class="fas fa-cloud-upload-alt hover-pointer"></i>
             </label>
             <input
               type="file"

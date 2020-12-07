@@ -24,7 +24,6 @@
       </h3>
     </section>
     <eventi-list :eventis="popularestEventis" />
-    <global-info />
     <section>
       <div class="articles-row main-a">
         <a class="article a" href="#/eventi-app/?term=&key=tags&values=Children">
@@ -51,6 +50,7 @@
         </a>
       </div>
     </section>
+    <global-info />
   </div>
 </template>
 

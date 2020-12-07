@@ -22,6 +22,10 @@
         }
     }
     & .upload-img {
+        & i {
+            font-size: 110px;
+            color: #e6a23c;
+        }
         & .img-uploader {
             max-width: rem(150px);
             height: rem(100px);
