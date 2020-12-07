@@ -63,6 +63,12 @@ export const eventiStore = {
             optionFilds.options.organization = state.eventis.map(eventi => {
                 if (!optionFilds.options.organization.includes(eventi.byOrg.name)) return eventi.byOrg.name;
             });
+            optionFilds.options.organization = optionFilds.options.organization.reduce((acc, currOrg) => {
+                if (!acc.includes(currOrg)) acc.push(currOrg);
+                return acc;
+            }, []);
+
+
             optionFilds.options.accommodation = [];
             state.eventis.forEach(eventi => {
                 optionFilds.options.accommodation.push(...eventi.accommodation);
