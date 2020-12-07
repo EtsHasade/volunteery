@@ -6,6 +6,12 @@
     }
 }
 
+@mixin for-narrow-navbar {
+    @media (max-width: 835px) {
+        @content;
+    }
+}
+
 @mixin for-mobile-layout {
     @media (max-width: $break-narrow) {
         @content;

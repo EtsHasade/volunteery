@@ -1,97 +1,123 @@
 .app-header {
-    min-height: $app-header-height;
-    position: fixed;
-    top: 0;
-    width: 100vw;
-    z-index: 1999;
-    background-color: $clr1;
+    min-height         : $app-header-height;
+    position           : fixed;
+    top                : 0;
+    width              : 100vw;
+    z-index            : 1999;
+    background-color   : $clr1;
     // background-color: #8d1e56;
-    color: #ffffff;
-    transition: background-color 0.3s linear;
+    color              : #ffffff;
+    transition         : background-color 0.3s linear;
+
     .logo {
-        width: 275px;
-        display: flex;
-        align-items: center;
+        width          : 275px;
+        display        : flex;
+        align-items    : center;
         justify-content: center;
-        position: relative;
+        position       : relative;
+
+        @include for-narrow-navbar {
+            width: 165px;
+        }
+
         .logo-img {
-            // position: absolute;
-            // top: 5.3px;
+            margin-bottom: 7px;
         }
     }
+
     .user-menu .el-submenu {
+
         &:focus,
         *:focus,
         * *:focus {
             color: inherit;
         }
+
         .el-submenu__title {
             margin-right: 17px;
+
             >span {
                 font-size: 2rem;
-                color: inherit;
+                color    : inherit;
             }
         }
     }
+
     .el-menu>.el-submenu:focus .el-submenu__title {
         color: inherit;
     }
+
     .el-menu--horizontal>.el-submenu .el-submenu__icon-arrow {
         display: none
     }
+
     .el-menu.el-menu {
-        border-right: unset;
-        border-bottom: none;
+        border-right    : unset;
+        border-bottom   : none;
         background-color: inherit;
-        color: inherit;
+        color           : inherit;
+
         .el-menu-item {
             border-bottom: none;
-            color: inherit;
+            color        : inherit;
+            @include for-narrow-navbar {
+                padding: 0 10px;;
+            }
+
             &.is-active,
             &:hover,
             &:focus {
-                box-shadow: inset 0 -3px 0 $clr2;
+                box-shadow      : inset 0 -3px 0 $clr2;
                 background-color: inherit;
-                border-bottom: unset;
-                color: inherit;
+                border-bottom   : unset;
+                color           : inherit;
             }
         }
+
         .el-submenu__title {
             border-bottom: none;
-            color: inherit;
+            color        : inherit;
+
             & img {
-                width: rem(30px);
-                height: rem(30px);
+                width        : rem(30px);
+                height       : rem(30px);
                 border-radius: 50%;
-                object-fit: cover;
+                object-fit   : cover;
             }
+
             &.is-active,
             &:hover,
             &:focus {
                 background-color: inherit;
-                border-bottom: unset;
-                color: inherit;
+                border-bottom   : unset;
+                color           : inherit;
             }
+
             i,
             i:focus {
                 color: inherit;
             }
         }
     }
+
     .nav-bar-vertical {
-        display: unset;
+        display : unset;
         position: fixed;
-        right: 1rem;
+        right   : 1rem;
+
         @include for-small-narrow-layout {
             display: none;
         }
     }
+
     .nav-bar-horizontal {
         display: none;
+
         @include for-small-narrow-layout {
             display: unset;
         }
     }
+
     .el-menu.el-menu--inline {
         background-color: $clr1;
     }
@@ -99,14 +125,17 @@
 
 .hero-page .app-header:not(.scrolly) {
     background-color: rgba(255, 255, 255, 0);
-    transition: background-color 0.3s linear;
+    transition      : background-color 0.3s linear;
+
     .el-menu>.el-menu-item {
+
         &.is-active,
         &:hover {
-            box-shadow: inset 0 -3px 0 $clr6;
+            box-shadow      : inset 0 -3px 0 $clr6;
             background-color: inherit;
         }
     }
+
     .el-menu-vertical-demo.nav-bar-vertical.el-menu {
         .el-icon-arrow-down:before {
             content: unset;
