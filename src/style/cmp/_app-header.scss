@@ -45,6 +45,7 @@
 
     .el-menu>.el-submenu:focus .el-submenu__title {
         color: inherit;
+
     }
 
     .el-menu>.el-submenu .el-submenu__icon-arrow {
@@ -77,6 +78,10 @@
         .el-submenu__title {
             border-bottom: none;
             color        : inherit;
+
+            display: flex;
+            align-items: center;
+            justify-content: flex-end;
 
             & img {
                 width        : rem(30px);
