@@ -1,10 +1,10 @@
 .eventi-filter {
     background-color: $clr6;
     background-color: #bfea45;
-    // border                  : 1px solid $gray1;
-    border-radius: 50px;
+    border-radius: 30px;
     padding: 10px 30px;
     margin-bottom: 1rem;
+
     &,
     &>* {
         display: grid;
@@ -15,6 +15,7 @@
         display: flex;
         flex-direction: column;
         justify-content: center;
+        border-radius: unset;
     }
     // .el-button+.el-button {
     //     margin: 0;
