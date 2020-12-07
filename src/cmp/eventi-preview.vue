@@ -35,7 +35,7 @@
     <section class="mini-details-top flex space-between">
       <h5 v-if="eventi.reviews.length">
         <i class="star fas fa-star"></i>
-        {{ eventi.rate }} ({{ eventi.reviews.length }} reviews)
+        {{ eventi.rate }} ({{ eventi.reviews.length }})
       </h5>
       <h5 v-else><i class="star fas fa-star"></i>New</h5>
       <h5 class="time">{{ moment(eventi.startAt).format("DD/MM/YYYY") }}</h5>
