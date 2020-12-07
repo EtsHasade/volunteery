@@ -28,7 +28,7 @@
       placeholder="More categories..."
     />
 
-    <el-button @click="changeFilter({ byText: '', byTags: [], byKey: [] , byNeededs: [] })" class="see-all"
+    <el-button @click="changeFilter" class="see-all"
       >See All</el-button
     >
     <!-- <div class="advanced-filter flex" v-if="$store.getters.eventisForDisplay && allFildsKeys"> -->

@@ -95,6 +95,8 @@ export default {
     changeFilter(filterBy) {
       this.filterBy = JSON.parse(JSON.stringify(filterBy));
       this.emitFilter();
+      if (this.$router.history.current.name === 'Home') this.$router.push('/eventi-app/');
+      console.log("🚀 ~ file: eventi-filter.vue ~ line 99 ~ changeFilter ~ this.$router", this.$router)
     },
     filterToExport() {
       if (!this.filterBy) return this.emptyFilter;
