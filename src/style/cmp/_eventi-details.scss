@@ -141,6 +141,10 @@
         }
     }
     & .eventi-imgs {
+        img{
+            background-color: $gray4;
+        }
+
         @include for-mobile-layout {
             display: flex;
             flex-direction: column;
