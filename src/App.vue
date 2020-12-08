@@ -33,6 +33,7 @@ export default {
   created() {
     socketService.setup();
     socketService.on("updatesEventi", (eventi) => {
+      console.log('updatesEventi');
       if (this.$store.getters.loggedinUser && this.$store.getters.loggedinUser.org && this.$store.getters.loggedinUser.org._id === eventi.byOrg._id) {
         if(eventi.notifications > 0) {
           this.$message({
