@@ -25,6 +25,7 @@ export default {
   computed: {
     eventisToShow() {
       const eventis = this.$store.getters.eventisForDisplay;
+      console.log("filterBy", this.filterBy);
       if (!this.filterBy) return eventis;
       let eventisFilter = eventis;
 
@@ -64,7 +65,7 @@ export default {
         eventisFilter = JSON.parse(JSON.stringify(eventisFilter));
       }
        
-        if (this.filterBy.byKey.values.length && !this.filterBy.byKey.values.includes('') && !this.filterBy.byKey.values.includes('all')) {
+        if (this.filterBy.byKey?.values.length && !this.filterBy.byKey?.values.includes('') && !this.filterBy.byKey?.values.includes('all')) {
           
           const eventisfilterKeys = eventisFilter.filter((eventi) => {
             if (eventi[this.filterBy.byKey.key]) {
@@ -90,6 +91,8 @@ export default {
   methods: {
     setFilter(filterBy) {
       this.filterBy = filterBy;
+      console.log('set filter', filterBy);
+      
     },
   },
   async mounted() {

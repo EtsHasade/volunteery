@@ -29,6 +29,7 @@ export const eventiStore = {
     },
     getters: {
         eventisForDisplay(state) {
+            console.log('eventisForDisplay', state.eventis);
             return state.eventis;
         },
         tags(state) {
@@ -38,47 +39,54 @@ export const eventiStore = {
             return state.neededs;
         },
         allFilds(state) {
-            const optionFilds = { keyList: ['country', 'category', 'organization', 'accommodation'] };
-            optionFilds.options = {};
-            optionFilds.options.country = [];
-            optionFilds.options.country = state.eventis.map(eventi => {
-                if (!optionFilds.options.country.includes(eventi.location.country)) return eventi.location.country
-            });
-            optionFilds.options.country = optionFilds.options.country.reduce((acc, currCountry) => {
-                if (!acc.includes(currCountry)) acc.push(currCountry);
-                return acc;
-            }, []);
+            try {
+                const optionFilds = { keyList: ['country', 'category', 'organization', 'accommodation'] };
+                optionFilds.options = {};
+                optionFilds.options.country = [];
+                optionFilds.options.country = state.eventis.map(eventi => {
+                    if (!optionFilds.options.country.includes(eventi.location.country)) return eventi.location.country
+                });
+                optionFilds.options.country = optionFilds.options.country.reduce((acc, currCountry) => {
+                    if (!acc.includes(currCountry)) acc.push(currCountry);
+                    return acc;
+                }, []);
 
-            optionFilds.options.category = [];
-            state.eventis.forEach(eventi => {
-                optionFilds.options.category.push(...eventi.tags);
-            });
-            optionFilds.options.category = optionFilds.options.category.reduce((acc, currTag) => {
-                if (!acc.includes(currTag)) acc.push(currTag);
-                return acc;
-            }, []);
-            optionFilds.options.tags = optionFilds.options.category;
+                optionFilds.options.category = [];
+                state.eventis.forEach(eventi => {
+                    optionFilds.options.category.push(...eventi.tags);
+                });
+                optionFilds.options.category = optionFilds.options.category.reduce((acc, currTag) => {
+                    if (!acc.includes(currTag)) acc.push(currTag);
+                    return acc;
+                }, []);
+                optionFilds.options.tags = optionFilds.options.category;
 
-            optionFilds.options.organization = [];
-            optionFilds.options.organization = state.eventis.map(eventi => {
-                if (!optionFilds.options.organization.includes(eventi.byOrg.name)) return eventi.byOrg.name;
-            });
-            optionFilds.options.organization = optionFilds.options.organization.reduce((acc, currOrg) => {
-                if (!acc.includes(currOrg)) acc.push(currOrg);
-                return acc;
-            }, []);
+                optionFilds.options.organization = [];
+                optionFilds.options.organization = state.eventis.map(eventi => {
+                    if (!optionFilds.options.organization.includes(eventi.byOrg.name)) return eventi.byOrg.name;
+                });
+                optionFilds.options.organization = optionFilds.options.organization.reduce((acc, currOrg) => {
+                    if (!acc.includes(currOrg)) acc.push(currOrg);
+                    return acc;
+                }, []);
 
 
-            optionFilds.options.accommodation = [];
-            state.eventis.forEach(eventi => {
-                optionFilds.options.accommodation.push(...eventi.accommodation);
-            });
-            optionFilds.options.accommodation = optionFilds.options.accommodation.reduce((acc, currTag) => {
-                if (!acc.includes(currTag)) acc.push(currTag);
-                return acc;
-            }, []);
+                optionFilds.options.accommodation = [];
+                state.eventis.forEach(eventi => {
+                    if (eventi.accommodation) {
+                        optionFilds.options.accommodation.push(...eventi.accommodation);
+                    }
+                });
+                optionFilds.options.accommodation = optionFilds.options.accommodation.reduce((acc, currTag) => {
+                    if (!acc.includes(currTag)) acc.push(currTag);
+                    return acc;
+                }, []);
+                console.log('optionFilds', optionFilds);
+                return optionFilds
+            } catch (error) {
+                console.log(error);
+            }
 
-            return optionFilds
         },
         tagsIcon(state) {
             return state.tagsIcon;

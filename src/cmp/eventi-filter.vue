@@ -13,8 +13,8 @@
         @input="emitFilter"
       />
     </form>
-     <el-select
-      v-if="filterBy.byKey.key && allFilds.keyList"
+    <el-select
+      v-if="filterBy.byKey?.key && allFilds.keyList"
       class="select-input"
       v-model="filterBy.byKey.key"
       :value="allFilds.keyList[0]"
@@ -23,7 +23,7 @@
       placeholder="filter by..."
     />
     <select-multi
-      v-if="filterBy.byKey.key && options"
+      v-if="filterBy.byKey?.key && options"
       class="select-input"
       v-model="filterBy.byKey.values"
       :value="['']"
@@ -32,8 +32,7 @@
       placeholder="Options"
     />
 
-
-    <el-button  @click="changeFilter(emptyFilter)" class="see-all"
+    <el-button @click="changeFilter(emptyFilter)" class="see-all"
       >Show All</el-button
     >
   </section>
@@ -74,17 +73,19 @@ export default {
       const allFilds = this.$store.getters.allFilds;
       return allFilds;
     },
-    options(){
+    options() {
       return this.allFilds.options[this.filterBy.byKey.key];
-    }
+    },
   },
   created() {
-    this.filterBy = (this.initfilterBy)? this.initfilterBy : JSON.parse(JSON.stringify(this.emptyFilter));
+    this.filterBy = this.initfilterBy
+      ? this.initfilterBy
+      : JSON.parse(JSON.stringify(this.emptyFilter));
     if (this.$route.query.term || this.$route.query.values) {
       this.filterBy.byText = this.$route.query.term;
       this.filterBy.byKey.key = this.$route.query.key;
       this.filterBy.byKey.values = this.$route.query.values.split(",");
-      this.$emit("doFilter", this.filterToExport())
+      this.$emit("doFilter", this.filterToExport());
       // this.filterBy.byKey.values = this.$route.query.tag;
     }
   },
@@ -92,22 +93,25 @@ export default {
     changeFilter(filterBy) {
       this.filterBy = JSON.parse(JSON.stringify(filterBy));
       this.emitFilter();
-      if (this.$router.history.current.name === 'Home') this.$router.push('/eventi-app/');
+      if (this.$router.history.current.name === "Home")
+        this.$router.push("/eventi-app/");
     },
     filterToExport() {
-      if (!this.filterBy) return this.emptyFilter;
+      if (!this.filterBy) {
+        return JSON.parse(JSON.stringify(this.emptyFilter));
+        // return this.filterBy;
+      }
       const filter = JSON.parse(JSON.stringify(this.filterBy));
-      
-      if (filter.byKey.key === "organization")
-        filter.byKey.key = "name";
+
+      if (filter.byKey.key === "organization") filter.byKey.key = "name";
       if (filter.byKey.key === "category") filter.byKey.key = "tags";
 
-      filter.byKey.values.forEach((value, idx)=>{
-        if (value.includes('including')) filter.byKey.values[idx] = "true";
-      })
-      filter.byKey.values.forEach((value, idx)=>{
-        if (value.includes('excluding')) filter.byKey.values[idx] = "false";
-      })
+      filter.byKey.values.forEach((value, idx) => {
+        if (value.includes("including")) filter.byKey.values[idx] = "true";
+      });
+      filter.byKey.values.forEach((value, idx) => {
+        if (value.includes("excluding")) filter.byKey.values[idx] = "false";
+      });
 
       return filter;
     },
@@ -120,7 +124,7 @@ export default {
   },
   components: {
     elSelect,
-    selectMulti
+    selectMulti,
   },
 };
 </script>
