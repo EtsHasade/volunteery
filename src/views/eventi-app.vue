@@ -98,6 +98,7 @@ export default {
   async mounted() {
     this.$store.dispatch({ type: "setEventis" });
     this.$refs.thefilter.$refs.searchFild.focus();
+    
     socketService.on("updatesEventi", (eventi) => {
       this.$store.dispatch({ type: "saveEventi", eventi});
       this.$store.dispatch({ type: "setEventis" });

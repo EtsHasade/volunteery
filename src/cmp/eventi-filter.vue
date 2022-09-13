@@ -1,4 +1,3 @@
-
 <template>
   <section class="eventi-filter">
     <!-- free search -->
@@ -14,7 +13,7 @@
       />
     </form>
     <el-select
-      v-if="filterBy.byKey?.key && allFilds.keyList"
+      v-if="filterBy.byKey.key && allFilds.keyList"
       class="select-input"
       v-model="filterBy.byKey.key"
       :value="allFilds.keyList[0]"
@@ -23,7 +22,7 @@
       placeholder="filter by..."
     />
     <select-multi
-      v-if="filterBy.byKey?.key && options"
+      v-if="filterBy.byKey.key && options"
       class="select-input"
       v-model="filterBy.byKey.values"
       :value="['']"

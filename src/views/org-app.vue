@@ -55,7 +55,7 @@ export default {
 
       }
 
-      if (this.filterBy.byTags.length) {
+      if (this.filterBy?.byTags?.length) {
         console.log("by tags");
 
         var orgsfilterTags = [];
