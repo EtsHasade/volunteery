@@ -37,8 +37,8 @@ export default {
             eventi.title.toLowerCase().includes(txt) ||
             eventi.desc.toLowerCase().includes(txt) ||
             eventi.byOrg.name.toLowerCase().includes(txt) ||
-            eventi.location.country.toLowerCase().includes(txt) ||
-            eventi.location.address.toLowerCase().includes(txt)
+            eventi.location?.country.toLowerCase().includes(txt) ||
+            eventi.location?.address.toLowerCase().includes(txt)
           );
         });
 
@@ -49,8 +49,8 @@ export default {
               currEventi.title.toLowerCase().includes(term) ||
               currEventi.desc.toLowerCase().includes(term) ||
               currEventi.byOrg.name.toLowerCase().includes(txt) ||
-              currEventi.location.country.toLowerCase().includes(txt) ||
-              currEventi.location.address.toLowerCase().includes(txt)
+              currEventi.location?.country.toLowerCase().includes(txt) ||
+              currEventi.location?.address.toLowerCase().includes(txt)
             );
           });
           return match.length === terms.length;
@@ -75,8 +75,11 @@ export default {
                 return eventiValues.includes(value)
               }).length;
             } else {
+              let eventiValue = ''
               const translateFilter = {country: 'location', name: 'byOrg', food: 'accommodation', lodging: 'accommodation'}
-              const eventiValue = eventi[translateFilter[this.filterBy.byKey.key]][this.filterBy.byKey.key];
+              if (typeof (eventi[translateFilter[this.filterBy.byKey.key]]) === 'object') {
+                eventiValue = eventi[translateFilter[this.filterBy.byKey.key]][this.filterBy.byKey.key];
+              }
               if(typeof eventiValue === 'string') return this.filterBy.byKey.values.includes(eventiValue);
               else if(typeof eventiValue === 'boolean') return this.filterBy.byKey.values.includes(JSON.stringify(eventiValue));
             }

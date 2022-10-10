@@ -7,6 +7,7 @@
     :onblur="`this.placeholder = '${placeholder}'`"
     :placeholder="placeholder"
     style="text-align: center;"
+    ref="select"
   >
     <el-option
       v-for="item in options"
@@ -64,6 +65,7 @@ export default {
   watch: {
     value: function (newValue) {
       this.$emit("input", newValue);
+      this.$refs.select.blur()
     },
   },
 };

@@ -6,7 +6,7 @@
     @click="openDetails"
   >
     <div class="img-squer-container">
-       <img v-show="imgLoad" @load="imgLoad = true" :src="imgUrl" alt="" />
+      <img v-show="imgLoad" @load="imgLoad = true" :src="imgUrl" alt="" />
       <div v-if="!imgLoad" class="loading flex center">LOADING...</div>
       <button class="btn-img-nav next" @click.stop="nextImgUrl">
         <i class="fas fa-arrow-circle-right"></i>
@@ -16,7 +16,7 @@
       </button>
     </div>
     <section class="mini-details-top flex space-between">
-      <h5 v-if="org.reviews.length">
+      <h5 v-if="org.reviews && org.reviews.length">
         <i class="star fas fa-star"></i>
         {{ org.rate }} ({{ org.reviews.length }})
       </h5>
@@ -25,15 +25,16 @@
     </section>
     <div class="preview-details flex column flex-g1">
       <p class="org-goals card-desc flex-g1">
-      <span class="mrg0 card-title">{{ org.name }}</span> <br />{{ org.goals }}</p>
+        <span class="mrg0 card-title">{{ org.name }}</span> <br />{{
+          org.goals
+        }}
+      </p>
     </div>
     <h5 class="org-mini-details country bold">{{ org.country }}</h5>
   </li>
 </template>
 
 <script>
-
-
 export default {
   name: "orgPreview",
   props: {
@@ -47,7 +48,8 @@ export default {
     };
   },
   computed: {
-     imgUrl() {
+    imgUrl() {
+      if (!this.org.imgUrls) return "";
       return this.org.imgUrls[this.idx];
     },
     orgEventis() {
@@ -68,11 +70,11 @@ export default {
   },
   methods: {
     nextImgUrl() {
-      if (this.idx === this.org.imgUrls.length - 1) this.idx = 0;
+      if (this.idx === this.org.imgUrls?.length - 1) this.idx = 0;
       else this.idx++;
     },
     prevImgUrl() {
-      if (this.idx === 0) this.idx = this.org.imgUrls.length - 1;
+      if (this.idx === 0) this.idx = this.org.imgUrls?.length - 1;
       else this.idx--;
     },
     openDetails() {

@@ -1,12 +1,12 @@
 <template>
   <main>
-    <eventi-filter @doFilter="setFilter"></eventi-filter>
+    <org-filter @doFilter="setFilter"></org-filter>
     <org-list :orgs="orgsToShow"></org-list>
   </main>
 </template>
  
 <script>
-import eventiFilter from "@/cmp/eventi-filter";
+import orgFilter from "@/cmp/org-filter";
 import orgList from "@/cmp/org-list";
 
 export default {
@@ -25,13 +25,13 @@ export default {
 
       if (!this.filterBy) return orgs;
       let orgsFilter = orgs;
-      if (this.filterBy.byText != '') {
+      if (this.filterBy.byText != "") {
         const txt = this.filterBy.byText.toLowerCase();
 
         orgsFilter = orgs.filter((org) => {
           return (
-            org.name.toLowerCase().includes(txt) ||
-            org.desc.toLowerCase().includes(txt)
+            org.name?.toLowerCase().includes(txt) ||
+            org.desc?.toLowerCase().includes(txt)
           );
         });
 
@@ -39,8 +39,8 @@ export default {
         const splitTermOrgs = orgs.filter((currOrg) => {
           const match = terms.filter((term) => {
             return (
-              currOrg.name.toLowerCase().includes(term) ||
-              currOrg.desc.toLowerCase().includes(term)
+              currOrg.name?.toLowerCase().includes(term) ||
+              currOrg.desc?.toLowerCase().includes(term)
             );
           });
           return match.length === terms.length;
@@ -52,24 +52,41 @@ export default {
           return acc;
         }, []);
         orgsFilter = JSON.parse(JSON.stringify(orgsFilter));
-
       }
 
-      if (this.filterBy?.byTags?.length) {
-        console.log("by tags");
+      // if (this.filterBy?.byTags?.length) {
+      //   console.log("by tags");
 
-        var orgsfilterTags = [];
-        this.filterBy.byTags.forEach((tag) => {
-          var orgsfilterTag = [];
-          orgsFilter.forEach((org) => {
-            if (org.tags.includes(tag)) {
-              orgsfilterTag.push(org);
-            }
-          });
-          orgsfilterTags = orgsfilterTags.concat(orgsfilterTag);
+      //   var orgsfilterTags = [];
+      //   this.filterBy.byTags.forEach((tag) => {
+      //     var orgsfilterTag = [];
+      //     orgsFilter.forEach((org) => {
+      //       if (org.tags.includes(tag)) {
+      //         orgsfilterTag.push(org);
+      //       }
+      //     });
+      //     orgsfilterTags = orgsfilterTags.concat(orgsfilterTag);
+      //   });
+      //   orgsFilter = JSON.parse(JSON.stringify(orgsfilterTags));
+      // }
+
+      if (
+        this.filterBy.byKey?.values.length &&
+        !this.filterBy.byKey?.values.includes("") &&
+        !this.filterBy.byKey?.values.includes("all")
+      ) {
+        const orgsfilterKeys = orgsFilter.filter((org) => {
+          if (org[this.filterBy.byKey.key]) {
+            const orgValues = org[this.filterBy.byKey.key];
+            return this.filterBy.byKey.values.filter((value) => {
+              return orgValues.includes(value);
+            }).length;
+          }
         });
-        orgsFilter = JSON.parse(JSON.stringify(orgsfilterTags));
+
+        orgsFilter = JSON.parse(JSON.stringify(orgsfilterKeys));
       }
+
       return orgsFilter;
     },
   },
@@ -79,11 +96,13 @@ export default {
   },
   methods: {
     setFilter(filterBy) {
+      console.log("filter", filterBy);
+
       this.filterBy = filterBy;
     },
   },
   components: {
-    eventiFilter,
+    orgFilter,
     orgList,
   },
 };

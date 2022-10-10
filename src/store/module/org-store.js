@@ -8,6 +8,54 @@ export const orgStore = {
         orgsForDisplay(state) {
             return state.orgs
         },
+        orgAllFilds(state) {
+            try {
+                const optionFields = {
+                    keyList: [
+                        'country',
+                        'category',
+                    ],
+                    options: {
+                        country: [],
+                        category: [],
+                        tags: []
+                    }
+                };
+
+                if (!state.orgs?.length) return optionFields
+
+                //get countries 
+                optionFields.options.country = state.orgs?.map(org => {
+                    if (!optionFields.options.country.includes(org.country)) return org.country
+                });
+                optionFields.options.country = optionFields.options.country.reduce((acc, currCountry) => {
+                    if (!currCountry) return acc
+                    if (!acc.includes(currCountry)) acc.push(currCountry);
+                    return acc;
+                }, []);
+
+                // get categories and tags
+                state.orgs.forEach(org => {
+                    if (org.tags) {
+                        optionFields.options.category.push(...org.tags);
+                    }
+                });
+                optionFields.options.category = optionFields.options.category.reduce((acc, currTag) => {
+                    if (!currTag) return acc
+                    if (!acc.includes(currTag)) acc.push(currTag);
+                    return acc;
+                }, []);
+                optionFields.options.tags = optionFields.options.category;
+
+              
+                console.log('Org Option Filds', optionFields);
+                return optionFields
+
+            } catch (error) {
+                console.log(error);
+            }
+
+        },
     },
     mutations: {
         setOrgs(state, { orgs }) {
@@ -55,7 +103,7 @@ export const orgStore = {
             try {
                 await orgService.remove(payload.orgId)
                 commit(payload)
-                payload.orgEventis.forEach(eventi => {
+                payload.orgorgs.forEach(eventi => {
                     dispatch({ type: 'removeEventiById', eventiId: eventi._id }, { root: true })
                 });
                 return { type: true, err: null }
